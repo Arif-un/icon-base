@@ -37,8 +37,6 @@ class Config
 
     public const ASSETS_FOLDER = 'assets';
 
-    public const PRO_PLUGIN_NAMESPACE = 'IconBasePro\\';
-
     public static function get($type, $default = null)
     {
         switch ($type) {

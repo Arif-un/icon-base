@@ -397,7 +397,6 @@ function update_config_constants(array $info): void
         'TITLE'                => $info['name'],
         'VAR_PREFIX'           => $upperPrefix,
         'CLASS_PREFIX'         => $info['namespace'],
-        'PRO_PLUGIN_NAMESPACE' => $info['namespace'] . 'Pro\\\\',
     ];
 
     foreach ($constants as $name => $value) {

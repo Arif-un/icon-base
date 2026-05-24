@@ -6,26 +6,11 @@
   "require": {
     "php": ">=7.4",
     "bitapps/wp-validator": "^1",
-    "bitapps/wp-database": "^1",
-    "bitapps/wp-telemetry": "^0",
     "bitapps/wp-kit": "^2.0",
     "typisttech/imposter-plugin": "^0.6.2"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3",
-    "sirbrillig/phpcs-variable-analysis": "^2",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "phpunit/phpunit": "^9",
-    "yoast/phpunit-polyfills": "^4",
-    "phpcompatibility/phpcompatibility-wp": "*",
-    "spatie/phpunit-watcher": "^1",
-    "nunomaduro/phpinsights": "^2",
-    "wp-cli/wp-cli-bundle": "^2",
-    "szepeviktor/phpstan-wordpress": "^2",
-    "phpstan/extension-installer": "^1",
-    "spaze/phpstan-disallowed-calls": "^4",
-    "rector/rector": "^2",
-    "wp-coding-standards/wpcs": "^3.1",
     "symfony/console": "^5.4 || ^6.0 || ^7.0"
   },
   "autoload": {
@@ -35,31 +20,23 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "IconBase\\CLI\\": "./cli",
-      "IconBase\\Fixers\\": "./custom-fixers"
+      "IconBase\\CLI\\": "./cli"
     }
   },
   "scripts": {
     "clean": "rm -rf ./vendor && rm composer.lock && rm -rf ./dependencies",
     "reset": "composer clean && composer install",
-    "code:analyze": "vendor/bin/phpstan analyse",
-    "test": "./vendor/bin/phpunit --testdox --colors=always tests/",
-    "test:watch": "./vendor/bin/phpunit-watcher watch",
-    "insights": "./vendor/bin/phpinsights",
     "phpcs": "phpcs -s",
-    "compat": "./vendor/bin/phpcs -p backend --standard=PHPCompatibilityWP --runtime-set testVersion 7.4-8.3",
     "lint": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php && composer phpcs",
     "phpcs:fix": "phpcbf",
-    "phpcs:report": "phpcs --report=summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
-    "rector": "./vendor/bin/rector process --dry-run",
-    "refactor": "./vendor/bin/rector process"
+    "phpcs:report": "phpcs --report=summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1"
+  
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "typisttech/imposter-plugin": true,
-      "phpstan/extension-installer": true
-    }
+      "typisttech/imposter-plugin": true   
+     }
   },
   "extra": {
     "imposter": {

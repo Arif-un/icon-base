@@ -204,15 +204,5 @@
   "engines": {
     "node": ">=20",
     "pnpm": ">=9"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild",
-      "fs-ext-extra-prebuilt",
-      "lefthook",
-      "msw",
-      "unrs-resolver"
-    ]
   }
 }
