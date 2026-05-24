@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["./frontend/src/types"],
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "importHelpers": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": false,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
+    "paths": {
+      "@common/*": ["./frontend/src/common/*"],
+      "@features/*": ["./frontend/src/components/features/*"],
+      "@utilities/*": ["./frontend/src/components/utilities/*"],
+      "@components/*": ["./frontend/src/components/*"],
+      "@icons/*": ["./frontend/src/icons/*"],
+      "@resource/*": ["./frontend/src/resource/*"],
+      "@pages/*": ["./frontend/src/pages/*"],
+      "@static/*": ["./frontend/src/static/*"],
+      "@config/*": ["./frontend/src/config/*"],
+      "@/*": ["./frontend/src/*"],
+      "@plugin-commons/*": ["./frontend/src/*"]
+    }
+  },
+  "include": [
+    "./frontend",
+    "./frontend/src/types",
+    "./scripts"
+  ],
+  "exclude": ["node_modules"],
+  "types": ["node", "vite/client"]
+}

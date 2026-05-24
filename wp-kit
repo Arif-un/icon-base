@@ -1,0 +1,721 @@
+#!/usr/bin/env php
+<?php
+
+define('KIT_ROOT', __DIR__);
+
+// ── CLI helpers ───────────────────────────────────────────────────────────────
+
+function cli_ask(string $prompt, string $default = ''): string
+{
+    $hint = $default !== '' ? " [{$default}]" : '';
+    echo cli_blue($prompt . $hint . ': ');
+    $line = trim(fgets(STDIN));
+    return $line !== '' ? $line : $default;
+}
+
+function cli_confirm(string $prompt): bool
+{
+    echo cli_blue($prompt . ' [y/N]: ');
+    return strtolower(trim(fgets(STDIN))) === 'y';
+}
+
+function cli_cyan(string $s): string   { return "\033[36m{$s}\033[0m"; }
+function cli_green(string $s): string  { return "\033[32m{$s}\033[0m"; }
+function cli_yellow(string $s): string { return "\033[33m{$s}\033[0m"; }
+function cli_red(string $s): string    { return "\033[31m{$s}\033[0m"; }
+function cli_blue(string $s): string   { return "\033[34m{$s}\033[0m"; }
+function cli_bold(string $s): string   { return "\033[1m{$s}\033[0m"; }
+
+function cli_ok(string $s): void   { echo cli_green("  ✓ ") . $s . "\n"; }
+function cli_err(string $s): void  { echo cli_red("  ✗ ") . $s . "\n"; }
+
+// ── Commands ──────────────────────────────────────────────────────────────────
+
+function cmd_plugin_init(): void
+{
+    echo cli_bold(cli_cyan("\nWP Starter Kit — Plugin Initializer\n\n"));
+
+    $info = collect_plugin_info();
+
+    echo "\n" . cli_bold(cli_green("Congratulations! Your plugin is ready to develop.\n"));
+    render_summary_table($info);
+
+    echo "\n";
+    if (!cli_confirm('Proceed and replace all placeholders?')) {
+        echo cli_yellow("Cancelled.\n");
+        exit(0);
+    }
+
+    echo "\n";
+    // Order matters: apply_replacements reads CURRENT values from Config.php as
+    // "from" keys, so it must run BEFORE Config.php is rewritten with new values.
+    process_all_files($info);
+    update_config_constants($info);
+    create_main_file($info);
+    run_composer_install();
+
+    echo "\n";
+    cli_ok('Run `php wp-kit --help` to see make:* commands.');
+}
+
+function cmd_plugin_info(): void
+{
+    $config = KIT_ROOT . '/backend/app/Config.php';
+    $src = file_exists($config) ? file_get_contents($config) : '';
+
+    preg_match("/const SLUG\s*=\s*'([^']+)'/", $src, $slug);
+    preg_match("/const TITLE\s*=\s*'([^']+)'/", $src, $title);
+    preg_match('/^namespace\s+([\w\\\\]+);/m', $src, $ns);
+
+    echo cli_cyan("\nPlugin Info\n");
+    echo '  Name      : ' . ($title[1] ?? '?') . "\n";
+    echo '  Slug      : ' . ($slug[1]  ?? '?') . "\n";
+    echo '  Namespace : ' . ($ns[1]    ?? '?') . "\n\n";
+}
+
+// ── Make commands ─────────────────────────────────────────────────────────────
+
+function cmd_make_controller(): void
+{
+    $name = require_make_name('make:controller', 'ExampleController');
+    $meta = read_plugin_meta();
+    $ns   = $meta['namespace'];
+
+    $dir  = KIT_ROOT . '/backend/app/HTTP/Controllers';
+    ensure_dir($dir);
+
+    $path = $dir . '/' . $name . '.php';
+    if (file_exists($path)) {
+        cli_err("Already exists: backend/app/HTTP/Controllers/{$name}.php");
+        exit(1);
+    }
+
+    $human = strtolower(preg_replace('/Controller$/', '', $name));
+    $tpl = <<<PHP
+<?php
+
+namespace {$ns}\\HTTP\\Controllers;
+
+if (!\\defined('ABSPATH')) {
+    exit;
+}
+
+class {$name}
+{
+    // This is {$human} controller
+}
+
+PHP;
+
+    file_put_contents($path, $tpl);
+    cli_ok("Created backend/app/HTTP/Controllers/{$name}.php");
+}
+
+function cmd_make_model(): void
+{
+    $name = require_make_name('make:model', 'Tag');
+    $meta = read_plugin_meta();
+    $ns   = $meta['namespace'];
+
+    $dir  = KIT_ROOT . '/backend/app/Models';
+    ensure_dir($dir);
+
+    $path = $dir . '/' . $name . '.php';
+    if (file_exists($path)) {
+        cli_err("Already exists: backend/app/Models/{$name}.php");
+        exit(1);
+    }
+
+    $tpl = <<<PHP
+<?php
+
+namespace {$ns}\\Models;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+use {$ns}\\Config;
+use {$ns}\\Deps\\BitApps\\WPDatabase\\Model;
+
+/**
+ * Undocumented class.
+ */
+class {$name} extends Model
+{
+    protected \$prefix = Config::VAR_PREFIX;
+
+    protected \$casts = [
+        // if need use casts
+    ];
+
+    protected \$fillable = [
+        // fields
+    ];
+}
+
+PHP;
+
+    file_put_contents($path, $tpl);
+    cli_ok("Created backend/app/Models/{$name}.php");
+}
+
+function cmd_make_migration(): void
+{
+    $name = require_make_name('make:migration', 'AppConnections');
+    $meta = read_plugin_meta();
+    $ns   = $meta['namespace'];
+
+    $className = $ns . $name . 'TableMigration';
+    $tableName = to_snake_case($name);
+
+    $dir  = KIT_ROOT . '/backend/db/Migrations';
+    ensure_dir($dir);
+
+    $path = $dir . '/' . $className . '.php';
+    if (file_exists($path)) {
+        cli_err("Already exists: backend/db/Migrations/{$className}.php");
+        exit(1);
+    }
+
+    $tpl = <<<PHP
+<?php
+
+use {$ns}\\Config;
+use {$ns}\\Deps\\BitApps\\WPDatabase\\Blueprint;
+use {$ns}\\Deps\\BitApps\\WPDatabase\\Connection;
+use {$ns}\\Deps\\BitApps\\WPDatabase\\Schema;
+use {$ns}\\Deps\\BitApps\\WPKit\\Migration\\Migration;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+final class {$className} extends Migration // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound
+{
+    public function up(): void
+    {
+        Schema::withPrefix(Connection::wpPrefix() . Config::VAR_PREFIX)->create(
+            '{$tableName}',
+            function (Blueprint \$table): void {
+                \$table->id();
+                \$table->timestamps();
+            }
+        );
+    }
+
+    public function down(): void
+    {
+        Schema::withPrefix(Connection::wpPrefix() . Config::VAR_PREFIX)->drop('{$tableName}');
+    }
+}
+
+PHP;
+
+    file_put_contents($path, $tpl);
+    cli_ok("Created backend/db/Migrations/{$className}.php");
+
+    register_migration_in_installer($className);
+}
+
+function require_make_name(string $cmd, string $exampleName): string
+{
+    global $argv;
+    $name = $argv[2] ?? '';
+    if ($name === '') {
+        cli_err("Missing name. Usage: php wp-kit {$cmd} {$exampleName}");
+        exit(1);
+    }
+    if (!preg_match('/^[A-Z][A-Za-z0-9]*$/', $name)) {
+        cli_err("Invalid name '{$name}'. Must be PascalCase (e.g. {$exampleName}).");
+        exit(1);
+    }
+    return $name;
+}
+
+function ensure_dir(string $dir): void
+{
+    if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
+        cli_err("Could not create directory: {$dir}");
+        exit(1);
+    }
+}
+
+function read_plugin_meta(): array
+{
+    $configFile = KIT_ROOT . '/backend/app/Config.php';
+    $src = file_exists($configFile) ? file_get_contents($configFile) : '';
+
+    preg_match('/^namespace\s+([\w\\\\]+);/m', $src, $nsMatch);
+    preg_match("/const SLUG\s*=\s*'([^']+)'/", $src, $slugMatch);
+    preg_match("/const VAR_PREFIX\s*=\s*'([^']+)'/", $src, $varPrefixMatch);
+    preg_match("/const CLASS_PREFIX\s*=\s*'([^']+)'/", $src, $classPrefixMatch);
+
+    // Prefer the actual `namespace ...;` declaration (first segment) over CLASS_PREFIX,
+    // so generators always match Config.php's real PSR-4 root.
+    $namespace = $nsMatch[1] ?? ($classPrefixMatch[1] ?? 'WPStarterKit');
+    $namespace = explode('\\', $namespace)[0];
+
+    return [
+        'namespace' => $namespace,
+        'slug'      => $slugMatch[1] ?? 'wp-starter-kit',
+        'varPrefix' => $varPrefixMatch[1] ?? 'WP_STARTER_KIT_',
+    ];
+}
+
+function to_snake_case(string $s): string
+{
+    $s = preg_replace('/(?<!^)([A-Z])/', '_$1', $s);
+    return strtolower($s);
+}
+
+function register_migration_in_installer(string $className): void
+{
+    $file = KIT_ROOT . '/backend/app/Providers/InstallerProvider.php';
+    if (!file_exists($file)) {
+        cli_err('InstallerProvider.php not found — skip registration.');
+        return;
+    }
+
+    $src      = file_get_contents($file);
+    $original = $src;
+
+    $src = preg_replace_callback(
+        "/('migrations'\s*=>\s*\[)([^\]]*)(\])/",
+        function ($m) use ($className) {
+            $entries = $m[2];
+            // Already present? leave untouched.
+            if (preg_match("/'" . preg_quote($className, '/') . "'/", $entries)) {
+                return $m[0];
+            }
+            // Insert before the closing bracket, preserving existing formatting.
+            $trimmed = rtrim($entries);
+            $needsComma = $trimmed !== '' && substr($trimmed, -1) !== ',';
+            $sep = $needsComma ? ', ' : ' ';
+            return $m[1] . $trimmed . $sep . "'{$className}'" . $m[3];
+        },
+        $src
+    );
+
+    if ($src === $original) {
+        cli_ok("Migration '{$className}' already registered in InstallerProvider.");
+        return;
+    }
+
+    file_put_contents($file, $src);
+    cli_ok("Registered '{$className}' in InstallerProvider migration() + drop().");
+}
+
+// ── Input collection ──────────────────────────────────────────────────────────
+
+function collect_plugin_info(): array
+{
+    $name = cli_ask('Enter the plugin name', 'WP Starter Kit');
+
+    $defaultSlug = to_slug($name);
+    $slug = cli_require_slug('Enter the plugin slug', $defaultSlug);
+
+    $defaultPrefix = rtrim(str_replace('-', '_', $slug), '_');
+    $rawPrefix = cli_ask('Enter the plugin prefix[space,hyphen will be converted to _]', $defaultPrefix);
+    $prefix = rtrim(strtolower(preg_replace('/[\s\-]+/', '_', trim($rawPrefix))), '_');
+
+    $defaultRest = to_pascal_case($name);
+    $rawRest = cli_ask('Enter the REST API namespace[space,hyphen will be converted to _]', $defaultRest);
+    $restNs  = preg_replace('/[\s\-]+/', '_', trim($rawRest));
+
+    $defaultNs = to_pascal_case($name);
+    $namespace = cli_ask('Enter the app root namespace', $defaultNs);
+    $namespace = $namespace !== '' ? $namespace : $defaultNs;
+
+    return compact('name', 'slug', 'prefix', 'restNs', 'namespace');
+}
+
+function cli_require_slug(string $prompt, string $default): string
+{
+    while (true) {
+        $val  = cli_ask($prompt, $default);
+        $slug = to_slug($val);
+        if ($slug !== '') return $slug;
+        echo cli_red("  Invalid slug.\n");
+    }
+}
+
+// ── Summary table ─────────────────────────────────────────────────────────────
+
+function render_summary_table(array $info): void
+{
+    $rows = [
+        ['Plugin Name',        $info['name']],
+        ['Plugin Slug',        $info['slug']],
+        ['Plugin Prefix',      $info['prefix']],
+        ['REST API Namespace', $info['restNs']],
+        ['Root Namespace',     $info['namespace']],
+    ];
+
+    $autoload = KIT_ROOT . '/vendor/autoload.php';
+    if (file_exists($autoload)) {
+        require_once $autoload;
+    }
+
+    if (class_exists(\Symfony\Component\Console\Helper\Table::class)) {
+        $output = new \Symfony\Component\Console\Output\ConsoleOutput();
+        $table  = new \Symfony\Component\Console\Helper\Table($output);
+        $table->setHeaderTitle('Info');
+        $table->setRows($rows);
+        $table->render();
+        return;
+    }
+
+    $labelWidth = max(array_map(fn ($r) => strlen($r[0]), $rows));
+    $valueWidth = max(array_map(fn ($r) => strlen($r[1]), $rows));
+    $line       = '+' . str_repeat('-', $labelWidth + 2) . '+' . str_repeat('-', $valueWidth + 2) . '+';
+    echo $line . "\n";
+    foreach ($rows as [$k, $v]) {
+        printf("| %-{$labelWidth}s | %-{$valueWidth}s |\n", $k, $v);
+    }
+    echo $line . "\n";
+}
+
+// ── File processing ───────────────────────────────────────────────────────────
+
+const SKIP_DIRS = ['node_modules', '.git', 'vendor', 'assets', 'dependencies', 'build', 'dist'];
+const SKIP_EXTS = ['png','jpg','jpeg','gif','svg','ico','woff','woff2','ttf','eot','map','lock'];
+
+function update_config_constants(array $info): void
+{
+    $configFile = KIT_ROOT . '/backend/app/Config.php';
+    if (!file_exists($configFile)) return;
+
+    $src = file_get_contents($configFile);
+
+    $upperPrefix = strtoupper($info['prefix']) . '_';
+
+    $constants = [
+        'SLUG'                 => $info['slug'],
+        'REST_NAMESPACE'       => $info['restNs'],
+        'PRO_PLUGIN_SLUG'      => $info['slug'] . '-pro',
+        'TITLE'                => $info['name'],
+        'VAR_PREFIX'           => $upperPrefix,
+        'CLASS_PREFIX'         => $info['namespace'],
+        'PRO_PLUGIN_NAMESPACE' => $info['namespace'] . 'Pro\\\\',
+    ];
+
+    foreach ($constants as $name => $value) {
+        $pattern     = "/(const {$name}\s*=\s*)'[^']*'/";
+        $replacement = "$1'" . addslashes($value) . "'";
+        $src = preg_replace($pattern, $replacement, $src);
+    }
+
+    file_put_contents($configFile, $src);
+    cli_ok('Updated Config.php constants.');
+}
+
+function create_main_file(array $info): void
+{
+    $name = $info['name'];
+    $slug = $info['slug'];
+
+    $tpl = <<<PHP
+<?php
+/**
+ * Plugin Name:  {$name}
+ * Plugin URI:   https://example.com/{$slug}
+ * Description:  {$name} plugin.
+ * Version:      1.0.0
+ * Author:       Your Name
+ * Author URI:   https://example.com
+ * Text Domain:  {$slug}
+ * Requires PHP: 7.4
+ * Requires WP:  5.0
+ * Domain Path:  /languages
+ * License:      GPL-2.0-or-later
+ */
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+require_once plugin_dir_path(__FILE__) . 'backend/bootstrap.php';
+
+PHP;
+
+    // Remove any stale main file at root before writing the new one.
+    foreach (glob(KIT_ROOT . '/*.php') as $f) {
+        if ($f === KIT_ROOT . "/{$slug}.php") continue;
+        $contents = @file_get_contents($f);
+        if ($contents !== false && strpos($contents, 'Plugin Name:') !== false) {
+            @unlink($f);
+            cli_ok('Removed stale ' . basename($f) . '.');
+        }
+    }
+
+    $path = KIT_ROOT . "/{$slug}.php";
+    file_put_contents($path, $tpl)
+        ? cli_ok("Created {$slug}.php")
+        : cli_err("Could not create {$slug}.php");
+}
+
+function self_delete_cli(): void
+{
+    $path = KIT_ROOT . '/wp-kit';
+    if (@unlink($path)) {
+        cli_ok('Removed wp-kit CLI (no longer needed).');
+    } else {
+        cli_err('Could not delete wp-kit. Remove manually: rm wp-kit');
+    }
+}
+
+function process_all_files(array $info): void
+{
+    $count = 0;
+    walk_dir(KIT_ROOT, $info, $count);
+    echo "\n";
+    cli_ok("Updated {$count} file(s).");
+}
+
+function run_composer_install(): void
+{
+    echo "\n" . cli_cyan("Removing vendor/ for clean Imposter transform...\n");
+    delete_dir(KIT_ROOT . '/vendor');
+    cli_ok('vendor/ removed.');
+
+    echo cli_cyan("Running composer install...\n");
+    $cmd = 'composer install --working-dir=' . escapeshellarg(KIT_ROOT) . ' 2>&1';
+    $proc = popen($cmd, 'r');
+    while (!feof($proc)) {
+        echo fgets($proc);
+    }
+    $exit = pclose($proc);
+    echo "\n";
+    $exit === 0
+        ? cli_ok('composer install completed.')
+        : cli_err("composer install failed (exit {$exit}).");
+}
+
+function delete_dir(string $dir): void
+{
+    if (!is_dir($dir)) return;
+    foreach (scandir($dir) as $item) {
+        if ($item === '.' || $item === '..') continue;
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+        is_dir($path) ? delete_dir($path) : unlink($path);
+    }
+    rmdir($dir);
+}
+
+function walk_dir(string $dir, array $info, int &$count): void
+{
+    foreach (scandir($dir) as $item) {
+        if ($item === '.' || $item === '..') continue;
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+
+        if (is_dir($path)) {
+            if (!in_array($item, SKIP_DIRS)) walk_dir($path, $info, $count);
+            continue;
+        }
+
+        if ($path === KIT_ROOT . DIRECTORY_SEPARATOR . 'wp-kit') continue;
+
+        if (in_array(strtolower(pathinfo($item, PATHINFO_EXTENSION)), SKIP_EXTS)) continue;
+
+        if (process_file($path, $info)) {
+            cli_ok(str_replace(KIT_ROOT . '/', '', $path));
+            $count++;
+        }
+    }
+}
+
+function process_file(string $path, array $info): bool
+{
+    $original = @file_get_contents($path);
+    if ($original === false) return false;
+
+    $replaced = apply_replacements($original, $info);
+    if ($replaced === $original) return false;
+
+    file_put_contents($path, $replaced);
+    return true;
+}
+
+// ── Replacement ───────────────────────────────────────────────────────────────
+
+function discover_namespace_roots(): array
+{
+    // Scan backend/ for actual `namespace X[\Y];` declarations + composer.json
+    // autoload PSR-4 keys. Returns ['Root' => 'doubled'|'flat'] per distinct first segment.
+    $roots = [];
+    $backend = KIT_ROOT . '/backend';
+    if (is_dir($backend)) {
+        $rdi = new RecursiveDirectoryIterator($backend, RecursiveDirectoryIterator::SKIP_DOTS);
+        $it  = new RecursiveIteratorIterator($rdi);
+        foreach ($it as $f) {
+            if (!$f->isFile() || strtolower($f->getExtension()) !== 'php') continue;
+            $src = @file_get_contents($f->getPathname());
+            if ($src === false) continue;
+            if (!preg_match_all('/^namespace\s+([\w\\\\]+);/m', $src, $matches)) continue;
+            foreach ($matches[1] as $nsDecl) {
+                $parts = explode('\\', $nsDecl);
+                $root  = $parts[0];
+                $doubled = isset($parts[1]) && $parts[1] === $root;
+                if (!isset($roots[$root]) || $doubled) {
+                    $roots[$root] = $doubled ? 'doubled' : 'flat';
+                }
+            }
+        }
+    }
+
+    $composerFile = KIT_ROOT . '/composer.json';
+    if (file_exists($composerFile)) {
+        $json = json_decode(file_get_contents($composerFile), true) ?: [];
+        $psr4Keys = array_merge(
+            array_keys($json['autoload']['psr-4'] ?? []),
+            array_keys($json['autoload-dev']['psr-4'] ?? [])
+        );
+        foreach ($psr4Keys as $key) {
+            $segs = array_values(array_filter(explode('\\', rtrim($key, '\\'))));
+            if (!$segs) continue;
+            $root = $segs[0];
+            $doubled = isset($segs[1]) && $segs[1] === $root;
+            if (!isset($roots[$root]) || $doubled) {
+                $roots[$root] = $doubled ? 'doubled' : 'flat';
+            }
+        }
+    }
+
+    return $roots;
+}
+
+function read_current_simple_values(): array
+{
+    $configFile   = KIT_ROOT . '/backend/app/Config.php';
+    $composerFile = KIT_ROOT . '/composer.json';
+
+    $src = file_exists($configFile) ? file_get_contents($configFile) : '';
+
+    preg_match("/const SLUG\s*=\s*'([^']+)'/", $src, $slugMatch);
+    $slug = $slugMatch[1] ?? 'wp-starter-kit';
+
+    preg_match("/const VAR_PREFIX\s*=\s*'([^']+)'/", $src, $varPrefixMatch);
+    $varPrefix   = $varPrefixMatch[1] ?? 'WP_STARTER_KIT_';
+    $funcPrefix  = strtolower($varPrefix);                   // e.g. wp_starter_kit_
+    $constPrefix = rtrim($varPrefix, '_');                    // e.g. WP_STARTER_KIT
+
+    preg_match("/const TITLE\s*=\s*'([^']+)'/", $src, $titleMatch);
+    $name = $titleMatch[1] ?? 'WP Starter Kit';
+
+    preg_match("/const REST_NAMESPACE\s*=\s*'([^']+)'/", $src, $restMatch);
+    $restNs = $restMatch[1] ?? $slug;
+
+    $composer = 'john-doe/wp-starter-kit';
+    if (file_exists($composerFile)) {
+        $json = json_decode(file_get_contents($composerFile), true);
+        $composer = $json['name'] ?? $composer;
+    }
+
+    return compact('slug', 'funcPrefix', 'constPrefix', 'name', 'restNs', 'composer');
+}
+
+function apply_replacements(string $content, array $info): string
+{
+    $name      = $info['name'];
+    $slug      = $info['slug'];
+    $prefix    = $info['prefix'];                    // e.g. wp_starter_kit
+    $funcPref  = $prefix . '_';                       // e.g. wp_starter_kit_
+    $constPref = strtoupper($prefix);                 // e.g. WP_STARTER_KIT
+    $restNs    = $info['restNs'];
+    $ns        = $info['namespace'];
+
+    $cur = read_current_simple_values();
+    [$curVendor] = explode('/', $cur['composer'], 2) + ['john-doe'];
+
+    $map = [
+        $cur['composer'] => "{$curVendor}/{$slug}",
+    ];
+
+    // Namespace roots: for every distinct legacy root in backend/ or composer.json,
+    // produce doubled→flat OR flat→flat replacement entries.
+    $roots = discover_namespace_roots();
+    foreach ($roots as $cNs => $cNsForm) {
+        if ($cNs === $ns && $cNsForm === 'flat') continue;
+        if ($cNsForm === 'doubled') {
+            $map["{$cNs}\\\\{$cNs}\\\\Deps\\\\"] = "{$ns}\\\\Deps\\\\";
+            $map["{$cNs}\\\\{$cNs}\\\\"]         = "{$ns}\\\\";
+            $map["{$cNs}\\{$cNs}\\Deps\\"]       = "{$ns}\\Deps\\";
+            $map["{$cNs}\\{$cNs}\\"]             = "{$ns}\\";
+            $map["{$cNs}\\{$cNs}"]               = "{$ns}";
+        }
+        $map["{$cNs}Pro"] = "{$ns}Pro";
+        $map[$cNs]        = $ns;
+    }
+
+    // Const prefix (uppercase, longest first)
+    $map["{$cur['constPrefix']}_PRO_"] = "{$constPref}_PRO_";
+    $map["{$cur['constPrefix']}_"]     = "{$constPref}_";
+    $map[$cur['constPrefix']]          = $constPref;
+
+    // Function prefix (lowercase + _)
+    $map[$cur['funcPrefix']] = $funcPref;
+
+    // Slug variants
+    $map["{$cur['slug']}-pro"] = "{$slug}-pro";
+    $map[$cur['slug']]         = $slug;
+
+    // Display name (longest first)
+    $map["{$cur['name']} Pro"] = "{$name} Pro";
+    $map[$cur['name']]         = $name;
+
+    return str_replace(array_keys($map), array_values($map), $content);
+}
+
+// ── String helpers ────────────────────────────────────────────────────────────
+
+function to_slug(string $s): string
+{
+    return trim(preg_replace('/-+/', '-', preg_replace('/[^a-z0-9-]/', '-', strtolower($s))), '-');
+}
+
+function to_pascal_case(string $s): string
+{
+    return str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9 ]/', ' ', $s)));
+}
+
+// ── Router ────────────────────────────────────────────────────────────────────
+
+$commands = [
+    'plugin:init'     => 'cmd_plugin_init',
+    'plugin:info'     => 'cmd_plugin_info',
+    'make:controller' => 'cmd_make_controller',
+    'make:model'      => 'cmd_make_model',
+    'make:migration'  => 'cmd_make_migration',
+];
+
+$usage = [
+    'plugin:init'     => 'Interactive plugin initializer (namespace + composer install).',
+    'plugin:info'     => 'Show current plugin name, slug, and namespace.',
+    'make:controller' => 'php wp-kit make:controller <Name>   e.g. ExampleController',
+    'make:model'      => 'php wp-kit make:model <Name>        e.g. Tag',
+    'make:migration'  => 'php wp-kit make:migration <Name>    e.g. AppConnections',
+];
+
+$cmd = $argv[1] ?? null;
+
+if (!$cmd || in_array($cmd, ['--help', '-h'])) {
+    echo cli_cyan("WP Starter Kit CLI\n\n");
+    echo cli_bold("Plugin:\n");
+    foreach (['plugin:init', 'plugin:info'] as $name) {
+        echo '  ' . cli_green(str_pad($name, 17)) . $usage[$name] . "\n";
+    }
+    echo "\n" . cli_bold("Make:\n");
+    foreach (['make:controller', 'make:model', 'make:migration'] as $name) {
+        echo '  ' . cli_green(str_pad($name, 17)) . $usage[$name] . "\n";
+    }
+    echo "\nUsage: php wp-kit <command> [args]\n";
+    exit(0);
+}
+
+if (!isset($commands[$cmd])) {
+    echo cli_red("Unknown command: {$cmd}\n");
+    echo "Run php wp-kit --help for available commands.\n";
+    exit(1);
+}
+
+$commands[$cmd]();
