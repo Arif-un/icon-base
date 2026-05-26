@@ -1,11 +1,10 @@
 {
-  "name": "ra",
-  "version": "1.0.0",
+  "name": "icon-base",
+  "version": "0.1.0",
   "license": "ISC",
   "author": "ra",
   "type": "module",
   "scripts": {
-    "all:test": "pnpm ts && pnpm lint",
     "build": "tsc && vite build",
     "clean": "rm -rf node_modules",
     "dev": "vite",
