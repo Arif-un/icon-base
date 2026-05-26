@@ -26,7 +26,6 @@
 
     /* JSX */
     "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
 
     /* Types */
     "types": ["node", "vite/client"],

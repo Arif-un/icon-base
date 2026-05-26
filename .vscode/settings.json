@@ -1,0 +1,6 @@
+{
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "tailwindCSS.experimental.configFile": "frontend/src/resource/styles/global.css"
+}

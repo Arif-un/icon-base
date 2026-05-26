@@ -32,3 +32,4 @@ build
 
 gha-creds-*.json
 CLAUDE.local.md
+/.tanstack/tmp

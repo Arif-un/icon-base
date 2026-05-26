@@ -1,18 +1,18 @@
-import { type Edge, type Node, type SetViewport, type Viewport } from 'reactflow'
+import { type Edge, type Node, type SetViewport, type Viewport } from "reactflow";
 
 interface AppStateType {
   flowState: {
-    edges: Edge[]
-    nodes: Node[]
-    setViewport: SetViewport
-    viewport: Viewport
-  }
+    edges: Edge[];
+    nodes: Node[];
+    setViewport: SetViewport;
+    viewport: Viewport;
+  };
 }
 
 declare global {
   interface Window {
-    appState: AppStateType
+    appState: AppStateType;
   }
 }
 
-export {}
+export {};

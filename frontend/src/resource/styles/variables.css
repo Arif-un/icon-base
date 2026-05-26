@@ -55,7 +55,7 @@
   --border-10: hsl(0deg, 0%, 88%);
   --border-20: hsl(0deg, 0%, 88%);
   --border-40: hsl(274deg, 13%, 57%);
-  --font-family: 'Outfit', sans-serif !important;
+  --font-family: "Outfit", sans-serif !important;
   --border-rad: 0.8125rem;
 
   /* Transistions */
@@ -82,7 +82,7 @@
     0 3px 5px 0 rgba(0, 0, 0, 10%), 0 5px 8px 0 rgba(0, 0, 0, 10%), 0 8px 12px 0 rgba(0, 0, 0, 10%);
 }
 
-:root [color-scheme='dark'] {
+:root [color-scheme="dark"] {
   /* --accent-color: hsl(347deg, 88%, 54%); 
   --accent-color: hsl(339, 67%, 62%); 
   --accent-color: hsl(221deg, 100%, 62%); */
