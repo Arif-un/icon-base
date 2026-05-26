@@ -1,26 +1,24 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./frontend/src/types"],
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
     "target": "ES2022",
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2022"],
     "module": "ESNext",
-    "skipLibCheck": true,
-    /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
-    /* Linting */
-    "strict": true,
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "vite.config.ts",
-    "./frontend/src/common/helpers"
+    "vite.config.ts"
   ]
 }

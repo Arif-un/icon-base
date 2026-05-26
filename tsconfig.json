@@ -1,31 +1,45 @@
 {
   "compilerOptions": {
-    "typeRoots": ["./frontend/src/types"],
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
-    "importHelpers": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": false,
+
+    /* Strictness */
+    "strict": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+
+    /* Module */
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowJs": true,
+
+    /* Emit */
     "noEmit": true,
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+
+    /* JSX */
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    /* Types */
+    "types": ["node", "vite/client"],
+    "typeRoots": ["./frontend/src/types", "./node_modules/@types"],
+
+    /* Plugins */
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ],
+
+    /* Paths */
     "paths": {
       "@common/*": ["./frontend/src/common/*"],
       "@features/*": ["./frontend/src/components/features/*"],
@@ -45,6 +59,5 @@
     "./frontend/src/types",
     "./scripts"
   ],
-  "exclude": ["node_modules"],
-  "types": ["node", "vite/client"]
+  "exclude": ["node_modules"]
 }
