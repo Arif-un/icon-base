@@ -31,7 +31,7 @@ function Dashboard() {
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Modal>
-      Click Me
+      
       <h1>Dashboard</h1>
       <p>Welcome to Icon Base Plugin. Your plugin is active and running successfully.</p>
     </div >
