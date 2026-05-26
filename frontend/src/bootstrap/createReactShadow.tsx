@@ -21,9 +21,6 @@ export function useShadowRoot(): ShadowRoot | undefined {
 export function createReactShadow(host: Element, { children, css }: Options): Handle {
   const shadow = host.shadowRoot ?? host.attachShadow({ mode: "open" });
 
-  // Inline <style> in the shadow. Its `@layer ...;` declaration on line 1 of
-  // global.css is the first @layer mention the cascade sees, locking the order
-  // before antd's later cssinjs injections register `antd` at position 0.
   const styleEl = ensureChild(shadow, "style[data-app-styles]", () => {
     const el = document.createElement("style");
     el.dataset.appStyles = "";
