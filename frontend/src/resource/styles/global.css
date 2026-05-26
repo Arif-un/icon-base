@@ -1,6 +1,8 @@
 @layer theme, base, antd, components, utilities;
 
-@import "tailwindcss";
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
 
 @custom-variant dark (&:where([color-scheme='dark'], [color-scheme='dark'] *));
 
@@ -140,7 +142,7 @@ a:focus {
   --scrollbar-width-legacy: 0.5rem;
 }
 
-[color-scheme="dark"] .scroller {
+[color-scheme='dark'] .scroller {
   --scrollbar-color-thumb: #686868;
 }
 
@@ -181,7 +183,7 @@ a:focus {
 }
 
 .drawer-decoration::before {
-  content: "";
+  content: '';
   background: transparent;
   height: calc(100% - 42px);
   width: 2em;
@@ -196,7 +198,7 @@ a:focus {
 }
 
 .drawer-decoration::after {
-  content: "";
+  content: '';
   background: transparent;
   height: calc(100% - 28px);
   width: 2em;
