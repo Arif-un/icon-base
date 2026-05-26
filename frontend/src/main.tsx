@@ -1,3 +1,4 @@
+import { StyleProvider } from '@ant-design/cssinjs'
 import { createRoot } from 'react-dom/client'
 
 import Welcome from './Welcome'
@@ -5,5 +6,9 @@ import './resource/styles/global.css'
 
 const elm = document.querySelector('#wp-starter-kit-root')
 if (elm) {
-  createRoot(elm).render(<Welcome />)
+  createRoot(elm).render(
+    <StyleProvider layer>
+      <Welcome />
+    </StyleProvider>
+  )
 }

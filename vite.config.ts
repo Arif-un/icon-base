@@ -1,4 +1,5 @@
 import babel from '@rolldown/plugin-babel'
+import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { humanId } from 'human-id'
 import path from 'node:path'
@@ -52,6 +53,7 @@ export default defineConfig(({ mode }) => {
       ...(!isTest && { SERVER_VARIABLES: `window.${SERVER_VARIABLES}` })
     },
     plugins: [
+      tailwindcss(),
       react({
         jsxImportSource: '@emotion/react',
       }),
