@@ -1,6 +1,5 @@
 // export { default } from './.config/_plugin-commons/vite-config'
 import react from '@vitejs/plugin-react'
-import { checkSubmoduleUpdatesPlugin, generateBuildCodeNamePlugin } from 'bitapps-dev-utils'
 import { humanId } from 'human-id'
 import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
@@ -75,8 +74,6 @@ export default defineConfig(({ mode }) => {
         jsxRuntime: 'automatic'
       }),
       tsconfigPaths(),
-      generateBuildCodeNamePlugin({ codeName, dir: ASSETS_DIR }),
-      checkSubmoduleUpdatesPlugin()
       // viteStaticCopy({
       //   targets: [
       //     {

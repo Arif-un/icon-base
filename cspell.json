@@ -10,8 +10,6 @@
     "antd",
     "arif",
     "autoload",
-    "bitapp",
-    "bitapps",
     "btcd",
     "camelcase",
     "commitlint",
@@ -80,7 +78,10 @@
     "wpdb",
     "yoast"
   ],
-  "ignoreWords": ["lorem", "ipsum"],
+  "ignoreWords": [
+    "lorem",
+    "ipsum"
+  ],
   "ignorePaths": [
     "node_modules/**",
     "dist/**",
@@ -113,6 +114,21 @@
     "filetypes",
     "git"
   ],
-  "enableFiletypes": ["js", "ts", "jsx", "tsx", "html", "css", "md", "php", "json", "yaml", "yml"],
-  "flagWords": ["teh", "funciton"]
+  "enableFiletypes": [
+    "js",
+    "ts",
+    "jsx",
+    "tsx",
+    "html",
+    "css",
+    "md",
+    "php",
+    "json",
+    "yaml",
+    "yml"
+  ],
+  "flagWords": [
+    "teh",
+    "funciton"
+  ]
 }

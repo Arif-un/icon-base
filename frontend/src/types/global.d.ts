@@ -8,7 +8,6 @@ declare module '*.svg'
 declare module '*.png'
 declare module '*.json'
 
-declare module 'bitapps-dev-utils'
 
 declare let wp
 declare const VITE_PLUGIN_HAS_SUBMODULE_UPDATES: boolean
@@ -59,22 +58,22 @@ type CommonObjectValue =
 type DeepReadonly<T> = T extends Builtin
   ? T
   : T extends Map<infer K, infer V>
-    ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
-    : T extends ReadonlyMap<infer K, infer V>
-      ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
-      : T extends WeakMap<infer K, infer V>
-        ? WeakMap<DeepReadonly<K>, DeepReadonly<V>>
-        : T extends Set<infer U>
-          ? ReadonlySet<DeepReadonly<U>>
-          : T extends ReadonlySet<infer U>
-            ? ReadonlySet<DeepReadonly<U>>
-            : T extends WeakSet<infer U>
-              ? WeakSet<DeepReadonly<U>>
-              : T extends WPStarterKitPromise<infer U>
-                ? WPStarterKitPromise<DeepReadonly<U>>
-                : T extends object
-                  ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
-                  : T
+  ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
+  : T extends ReadonlyMap<infer K, infer V>
+  ? ReadonlyMap<DeepReadonly<K>, DeepReadonly<V>>
+  : T extends WeakMap<infer K, infer V>
+  ? WeakMap<DeepReadonly<K>, DeepReadonly<V>>
+  : T extends Set<infer U>
+  ? ReadonlySet<DeepReadonly<U>>
+  : T extends ReadonlySet<infer U>
+  ? ReadonlySet<DeepReadonly<U>>
+  : T extends WeakSet<infer U>
+  ? WeakSet<DeepReadonly<U>>
+  : T extends WPStarterKitPromise<infer U>
+  ? WPStarterKitPromise<DeepReadonly<U>>
+  : T extends object
+  ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+  : T
 
 type KeyedValueHandler<T> = <K extends keyof T>(key: K, value: T[K]) => void
 
