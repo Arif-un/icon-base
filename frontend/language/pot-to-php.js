@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-/* eslint-disable import/no-extraneous-dependencies */
+ 
 // This file is from wp-i18n tools
+
+import fs from 'node:fs'
 
 import gettextParser from 'gettext-parser'
 import _ from 'lodash'
 /**
  * External dependencies
  */
-import fs from 'node:fs'
 
 const TAB = '    '
 const NEWLINE = 'WPStarterKit\WPStarterKitn'

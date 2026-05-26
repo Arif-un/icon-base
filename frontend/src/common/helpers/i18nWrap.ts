@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-imports */
+ 
 /* eslint-disable unicorn/no-typeof-undefined */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { __ as i18n_, sprintf as i18nSprintf } from '@wordpress/i18n'
@@ -26,6 +26,7 @@ const sprintf = (text: string, ...vars: any) => {
     vars.map((val: any, idx: number) => {
       str = str.replace(matches[idx], val)
     })
+
     return str
   }
 

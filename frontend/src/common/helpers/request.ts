@@ -44,7 +44,7 @@ interface RequestOptions {
 
 // Helpers
 
-// eslint-disable-next-line unicorn/no-null
+ 
 const replaceUndefined = (_: string, value: unknown) => (value === undefined ? null : value)
 
 const createUrl = (action: string, queryParams?: QueryParam): URL => {

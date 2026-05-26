@@ -15,6 +15,7 @@ type Result<T, E = Error> = Failure<E> | Success<T>
 export async function tryCatch<T, E = Error>(promise: WPStarterKitPromise<T>): WPStarterKitPromise<Result<T, E>> {
   try {
     const data = await promise
+
     return { data, error: undefined }
   } catch (error) {
     return { data: undefined, error: error as E }
