@@ -1,13 +1,8 @@
-// export { default } from './.config/_plugin-commons/vite-config'
+import babel from '@rolldown/plugin-babel'
 import react from '@vitejs/plugin-react'
 import { humanId } from 'human-id'
 import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
-
-// import csso from 'postcss-csso'
-// import { viteStaticCopy } from 'vite-plugin-static-copy'
-// import incstr from 'incstr'
 
 export default defineConfig(({ mode }) => {
   const { DEV_SSL, DEV_SSL_CERT_PATH, DEV_SSL_KEY_PATH, PLUGIN_SLUG, SERVER_VARIABLES } = loadEnv(
@@ -23,12 +18,11 @@ export default defineConfig(({ mode }) => {
   const codeName = humanId({ capitalize: false, separator: '-' })
 
   return {
-    assetsDir: 'assets',
     base: isDevelopment ? `/wp-content/plugins/${folderName}/frontend/` : '',
     build: {
       emptyOutDir: true,
       outDir: `../${ASSETS_DIR}`,
-      rollupOptions: {
+      rolldownOptions: {
         input: path.resolve(import.meta.dirname, 'frontend/src/main.tsx'),
         output: {
           assetFileNames: fInfo => {
@@ -51,12 +45,6 @@ export default defineConfig(({ mode }) => {
             return chunkName
           },
           entryFileNames: `main-${codeName}.js`,
-          generatedCode: {
-            arrowFunctions: true,
-            constBindings: true,
-            objectShorthand: true,
-            preset: 'es2015'
-          },
         }
       },
     },
@@ -65,23 +53,16 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react({
-        babel: {
-          plugins: ['@emotion/babel-plugin'],
-          presets: ['jotai/babel/preset']
-        },
         jsxImportSource: '@emotion/react',
-        jsxRuntime: 'automatic'
       }),
-      tsconfigPaths(),
-      // viteStaticCopy({
-      //   targets: [
-      //     {
-      //       src: normalizePath(path.resolve(__dirname, './frontend/_plugin-commons/resources/css/antd-reset.css')),
-      //       dest: `../${ASSETS_DIR}/`
-      //     }
-      //   ]
-      // })
+      babel({
+        plugins: ['@emotion/babel-plugin'],
+        presets: ['jotai-babel/preset'],
+      }),
     ],
+    resolve: {
+      tsconfigPaths: true,
+    },
     root: 'frontend',
     server: {
       ...(DEV_SSL === 'true' && {
@@ -94,9 +75,6 @@ export default defineConfig(({ mode }) => {
       hmr: { host: 'localhost' },
       port: 3000,
       strictPort: true // strict port to match on PHP side
-    },
-    ssr: {
-      noExternal: isTest ? ['@vitejs/plugin-react'] : []
     },
     test: {
       environment: 'happy-dom',
