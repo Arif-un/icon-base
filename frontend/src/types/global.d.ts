@@ -20,15 +20,11 @@ declare const SERVER_VARIABLES: {
   }
   assetsURL: string
   dateFormat: string
-  isWPStarterKitPro: string
-  isWPStarterKitProExist?: string
   key?: string
   loggedInUserName: string
   nonce: string
   pluginAdminURL: string
   pluginSlug: string
-  proPluginVersion: string
-  proSlug: string
   redirectUri: string
   restNonce: string
   rootURL: string

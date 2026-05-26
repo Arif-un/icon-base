@@ -15,8 +15,6 @@ class Config
 
     public const REST_NAMESPACE = 'IconBase';
 
-    public const PRO_PLUGIN_SLUG = 'icon-base-pro';
-
     public const TITLE = 'Icon Base';
 
     public const VAR_PREFIX = 'ICON_BASE_';
@@ -76,10 +74,6 @@ class Config
                 return set_url_scheme(plugins_url('', self::get('MAIN_FILE')), wp_parse_url(home_url())['scheme']);
 
             case 'ASSET_URI':
-                if (self::isProActivated()) {
-                    return ProConfig::get('ASSET_URI');
-                }
-
                 return self::get('ROOT_URI') . '/' . self::ASSETS_FOLDER;
 
             case 'PLUGIN_PAGE_LINKS':
@@ -151,14 +145,5 @@ class Config
     public static function getEnv($keyName)
     {
         return isset($_ENV[Config::VAR_PREFIX . $keyName]) ? sanitize_text_field($_ENV[Config::VAR_PREFIX . $keyName]) : false;
-    }
-
-    public static function isProActivated()
-    {
-        if (class_exists(ProConfig::class)) {
-            return ProConfig::isPro();
-        }
-
-        return false;
     }
 }
