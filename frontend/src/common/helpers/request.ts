@@ -42,6 +42,15 @@ interface RequestOptions {
   signal?: AbortSignal;
 }
 
+export class RequestError<T> extends Error {
+  response: Response<T>;
+
+  constructor(response: Response<T>) {
+    super(String(response.data));
+    this.response = response;
+  }
+}
+
 // Helpers
 
 const replaceUndefined = (_: string, value: unknown) => (value === undefined ? null : value);
@@ -101,7 +110,12 @@ export default async function queryRequest<T>(
     return responseData as Response<T>;
   } catch (error) {
     if (error instanceof Error) {
-      throw { code: "ERROR", data: error.message, status: "error" } as Response<T>;
+      const errorResponse: Response<T> = {
+        code: "ERROR",
+        data: error.message as T,
+        status: "error",
+      };
+      throw new RequestError(errorResponse);
     }
     throw error;
   }
@@ -115,10 +129,14 @@ export async function request<T>(
   options?: RequestOptions,
 ): WPStarterKitPromise<Response<T>> {
   return queryRequest<T>(action, data, queryParam, method, options).catch(
-    (error) => error as Response<T>,
+    (error: unknown) =>
+      error instanceof RequestError ? error.response : (error as Response<T>),
   );
 }
 
 export async function proxyRequest<T>(data: EndpointType): WPStarterKitPromise<Response<T>> {
-  return queryRequest<T>("proxy/route", data).catch((error) => error as Response<T>);
+  return queryRequest<T>("proxy/route", data).catch(
+    (error: unknown) =>
+      error instanceof RequestError ? error.response : (error as Response<T>),
+  );
 }
