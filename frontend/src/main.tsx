@@ -1,10 +1,9 @@
-import { StyleProvider } from "@ant-design/cssinjs";
 import { RouterProvider, createHashHistory, createRouter } from "@tanstack/react-router";
-import { createRoot } from "react-dom/client";
 
+import { createReactShadow } from "./bootstrap/createReactShadow";
 import { routeTree } from "./routeTree.gen";
 
-import "./resource/styles/global.css";
+import globalCss from "./resource/styles/global.css?inline";
 
 const hashHistory = createHashHistory();
 
@@ -19,11 +18,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
-const elm = document.querySelector("#wp-starter-kit-root");
-if (elm) {
-  createRoot(elm).render(
-    <StyleProvider layer>
-      <RouterProvider router={router} />
-    </StyleProvider>,
-  );
+const host = document.querySelector("#wp-starter-kit-root");
+if (host) {
+  const { replaceCss } = createReactShadow(host, {
+    css: globalCss,
+    children: <RouterProvider router={router} />,
+  });
+
+  if (import.meta.hot) {
+    import.meta.hot.accept("./resource/styles/global.css?inline", (mod) => {
+      if (typeof mod?.default === "string") replaceCss(mod.default);
+    });
+  }
 }
