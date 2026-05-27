@@ -5,6 +5,7 @@ export const antdTheme: ThemeConfig = {
     fontFamily: '"Inter", sans-serif',
     borderRadius: 4,
     colorPrimary: "#3858e9",
+    controlHeight: 40,
   },
   components: {
     Button: {
