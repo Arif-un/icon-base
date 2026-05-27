@@ -12,12 +12,6 @@ const router = createRouter({
   history: hashHistory,
 });
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
 const host = document.querySelector("#wp-starter-kit-root");
 if (host) {
   const { replaceCss } = createReactShadow(host, {
