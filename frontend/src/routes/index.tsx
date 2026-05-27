@@ -23,7 +23,7 @@ function Dashboard() {
 
   return (
     <div className="">
-      <Button type="primary" className="bg-slate-700" onClick={showModal}>
+      <Button type="primary" onClick={showModal}>
         Click Me
       </Button>
       <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

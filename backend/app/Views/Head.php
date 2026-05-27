@@ -11,7 +11,7 @@ use IconBase\Deps\BitApps\WPKit\Helpers\DateTimeHelper;
 
 class Head
 {
-    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap';
+    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
 
     public function addHeadScripts($currentScreen)
     {

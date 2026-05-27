@@ -11,7 +11,7 @@ function RootLayout() {
   const shadowRoot = useShadowRoot();
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div style={{ display: "flex", }}>
       <nav style={{ width: 200, padding: 16, borderRight: "1px solid #e0e0e0" }}>
         <h3 style={{ margin: "0 0 16px" }}>Icon Base</h3>
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>

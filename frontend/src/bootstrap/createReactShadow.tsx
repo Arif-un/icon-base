@@ -1,6 +1,7 @@
 import { StyleProvider } from "@ant-design/cssinjs";
 import { App, ConfigProvider } from "antd";
 import { createContext, useContext, type ReactNode } from "react";
+import { antdTheme } from "../config/antdTheme";
 import { createRoot } from "react-dom/client";
 
 type Options = {
@@ -39,7 +40,7 @@ export function createReactShadow(host: Element, { children, css }: Options): Ha
   createRoot(mount).render(
     <ShadowRootContext.Provider value={shadow}>
       <StyleProvider container={shadow} layer>
-        <ConfigProvider getPopupContainer={() => mount}>
+        <ConfigProvider getPopupContainer={() => mount} theme={antdTheme}>
           <App>{children}</App>
         </ConfigProvider>
       </StyleProvider>
