@@ -15,6 +15,7 @@ use IconBase\HTTP\Middleware\AdminCheckerMiddleware;
 use IconBase\HTTP\Middleware\NonceCheckerMiddleware;
 use IconBase\Providers\HookProvider;
 use IconBase\Providers\InstallerProvider;
+use IconBase\Views\BlockProvider;
 use IconBase\Views\HtmlTagModifier;
 use IconBase\Views\Layout;
 use IconBase\Views\PluginPageActions;
@@ -81,6 +82,7 @@ final class Plugin
             new HtmlTagModifier();
         }
 
+        new BlockProvider();
         new HookProvider();
     }
 

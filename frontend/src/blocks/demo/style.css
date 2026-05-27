@@ -1,0 +1,12 @@
+.wp-block-icon-base-demo {
+  padding: 20px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.wp-block-icon-base-demo p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
