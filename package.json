@@ -7,6 +7,8 @@
   "scripts": {
     "build": "tsc && vite build",
     "clean": "rm -rf node_modules",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx backend/db/seed.ts",
     "db:studio": "drizzle-kit studio",
     "dev": "vite",
     "env:clean": "wp-env clean",
@@ -145,6 +147,7 @@
     "rimraf": "^6.0.1",
     "storybook": "^8.6.4",
     "tailwindcss": "^4.3.0",
+    "tsx": "^4.22.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.26.0",
     "typescript-plugin-css-modules": "^5.1.0",

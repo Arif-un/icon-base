@@ -1,0 +1,4982 @@
+[
+  {
+    "name": "account book",
+    "type": "filled",
+    "tags": "accounting, ledger, finance",
+    "fileName": "001-account-book-filled.svg"
+  },
+  {
+    "name": "account book",
+    "type": "outlined",
+    "tags": "accounting, ledger, finance",
+    "fileName": "001-account-book-outlined.svg"
+  },
+  {
+    "name": "account book",
+    "type": "twotone",
+    "tags": "accounting, ledger, finance",
+    "fileName": "001-account-book-twotone.svg"
+  },
+  {
+    "name": "aim",
+    "type": "outlined",
+    "tags": "target, focus, crosshair",
+    "fileName": "001-aim-outlined.svg"
+  },
+  {
+    "name": "alert",
+    "type": "filled",
+    "tags": "warning, notification, attention",
+    "fileName": "001-alert-filled.svg"
+  },
+  {
+    "name": "alert",
+    "type": "outlined",
+    "tags": "warning, notification, attention",
+    "fileName": "001-alert-outlined.svg"
+  },
+  {
+    "name": "alert",
+    "type": "twotone",
+    "tags": "warning, notification, attention",
+    "fileName": "001-alert-twotone.svg"
+  },
+  {
+    "name": "alibaba",
+    "type": "outlined",
+    "tags": "ecommerce, marketplace, shopping",
+    "fileName": "001-alibaba-outlined.svg"
+  },
+  {
+    "name": "align center",
+    "type": "outlined",
+    "tags": "align, center, format",
+    "fileName": "001-align-center-outlined.svg"
+  },
+  {
+    "name": "align left",
+    "type": "outlined",
+    "tags": "align, left, format",
+    "fileName": "001-align-left-outlined.svg"
+  },
+  {
+    "name": "align right",
+    "type": "outlined",
+    "tags": "align, right, format",
+    "fileName": "001-align-right-outlined.svg"
+  },
+  {
+    "name": "alipay circle",
+    "type": "filled",
+    "tags": "payment, wallet",
+    "fileName": "001-alipay-circle-filled.svg"
+  },
+  {
+    "name": "alipay circle",
+    "type": "outlined",
+    "tags": "payment, wallet",
+    "fileName": "001-alipay-circle-outlined.svg"
+  },
+  {
+    "name": "alipay",
+    "type": "outlined",
+    "tags": "payment, wallet",
+    "fileName": "001-alipay-outlined.svg"
+  },
+  {
+    "name": "alipay square",
+    "type": "filled",
+    "tags": "payment, wallet",
+    "fileName": "001-alipay-square-filled.svg"
+  },
+  {
+    "name": "aliwangwang",
+    "type": "filled",
+    "tags": "messaging, chat, communication",
+    "fileName": "001-aliwangwang-filled.svg"
+  },
+  {
+    "name": "aliwangwang",
+    "type": "outlined",
+    "tags": "messaging, chat, communication",
+    "fileName": "001-aliwangwang-outlined.svg"
+  },
+  {
+    "name": "aliyun",
+    "type": "outlined",
+    "tags": "cloud, hosting, infrastructure",
+    "fileName": "001-aliyun-outlined.svg"
+  },
+  {
+    "name": "amazon circle",
+    "type": "filled",
+    "tags": "shopping, retail, ecommerce",
+    "fileName": "001-amazon-circle-filled.svg"
+  },
+  {
+    "name": "amazon",
+    "type": "outlined",
+    "tags": "shopping, retail, ecommerce",
+    "fileName": "001-amazon-outlined.svg"
+  },
+  {
+    "name": "amazon square",
+    "type": "filled",
+    "tags": "shopping, retail, ecommerce",
+    "fileName": "001-amazon-square-filled.svg"
+  },
+  {
+    "name": "android",
+    "type": "filled",
+    "tags": "mobile, os",
+    "fileName": "001-android-filled.svg"
+  },
+  {
+    "name": "android",
+    "type": "outlined",
+    "tags": "mobile, os",
+    "fileName": "001-android-outlined.svg"
+  },
+  {
+    "name": "ant cloud",
+    "type": "outlined",
+    "tags": "cloud, service",
+    "fileName": "001-ant-cloud-outlined.svg"
+  },
+  {
+    "name": "ant design",
+    "type": "outlined",
+    "tags": "design, ui",
+    "fileName": "001-ant-design-outlined.svg"
+  },
+  {
+    "name": "apartment",
+    "type": "outlined",
+    "tags": "building, housing",
+    "fileName": "001-apartment-outlined.svg"
+  },
+  {
+    "name": "api",
+    "type": "filled",
+    "tags": "programming, integration",
+    "fileName": "001-api-filled.svg"
+  },
+  {
+    "name": "api",
+    "type": "outlined",
+    "tags": "programming, integration",
+    "fileName": "001-api-outlined.svg"
+  },
+  {
+    "name": "api",
+    "type": "twotone",
+    "tags": "programming, integration",
+    "fileName": "001-api-twotone.svg"
+  },
+  {
+    "name": "apple",
+    "type": "filled",
+    "tags": "fruit, food",
+    "fileName": "001-apple-filled.svg"
+  },
+  {
+    "name": "apple",
+    "type": "outlined",
+    "tags": "fruit, food",
+    "fileName": "001-apple-outlined.svg"
+  },
+  {
+    "name": "appstore add",
+    "type": "outlined",
+    "tags": "install, app",
+    "fileName": "001-appstore-add-outlined.svg"
+  },
+  {
+    "name": "appstore",
+    "type": "filled",
+    "tags": "store, app",
+    "fileName": "001-appstore-filled.svg"
+  },
+  {
+    "name": "appstore",
+    "type": "outlined",
+    "tags": "store, app",
+    "fileName": "001-appstore-outlined.svg"
+  },
+  {
+    "name": "appstore",
+    "type": "twotone",
+    "tags": "store, app",
+    "fileName": "001-appstore-twotone.svg"
+  },
+  {
+    "name": "area chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-area-chart-outlined.svg"
+  },
+  {
+    "name": "arrow down",
+    "type": "outlined",
+    "tags": "down, navigate",
+    "fileName": "001-arrow-down-outlined.svg"
+  },
+  {
+    "name": "arrow left",
+    "type": "outlined",
+    "tags": "left, navigate",
+    "fileName": "001-arrow-left-outlined.svg"
+  },
+  {
+    "name": "arrow right",
+    "type": "outlined",
+    "tags": "right, navigate",
+    "fileName": "001-arrow-right-outlined.svg"
+  },
+  {
+    "name": "arrow up",
+    "type": "outlined",
+    "tags": "up, navigate",
+    "fileName": "001-arrow-up-outlined.svg"
+  },
+  {
+    "name": "arrows alt",
+    "type": "outlined",
+    "tags": "expand, fullscreen",
+    "fileName": "001-arrows-alt-outlined.svg"
+  },
+  {
+    "name": "audio",
+    "type": "filled",
+    "tags": "sound, speaker",
+    "fileName": "001-audio-filled.svg"
+  },
+  {
+    "name": "audio muted",
+    "type": "outlined",
+    "tags": "mute, sound",
+    "fileName": "001-audio-muted-outlined.svg"
+  },
+  {
+    "name": "audio",
+    "type": "outlined",
+    "tags": "sound, speaker",
+    "fileName": "001-audio-outlined.svg"
+  },
+  {
+    "name": "audio",
+    "type": "twotone",
+    "tags": "sound, speaker",
+    "fileName": "001-audio-twotone.svg"
+  },
+  {
+    "name": "audit",
+    "type": "outlined",
+    "tags": "review, compliance",
+    "fileName": "001-audit-outlined.svg"
+  },
+  {
+    "name": "backward",
+    "type": "filled",
+    "tags": "back, previous",
+    "fileName": "001-backward-filled.svg"
+  },
+  {
+    "name": "backward",
+    "type": "outlined",
+    "tags": "back, previous",
+    "fileName": "001-backward-outlined.svg"
+  },
+  {
+    "name": "baidu",
+    "type": "outlined",
+    "tags": "search, ecommerce",
+    "fileName": "001-baidu-outlined.svg"
+  },
+  {
+    "name": "bank",
+    "type": "filled",
+    "tags": "finance, institution",
+    "fileName": "001-bank-filled.svg"
+  },
+  {
+    "name": "bank",
+    "type": "outlined",
+    "tags": "finance, institution",
+    "fileName": "001-bank-outlined.svg"
+  },
+  {
+    "name": "bank",
+    "type": "twotone",
+    "tags": "finance, institution",
+    "fileName": "001-bank-twotone.svg"
+  },
+  {
+    "name": "bar chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-bar-chart-outlined.svg"
+  },
+  {
+    "name": "barcode",
+    "type": "outlined",
+    "tags": "scan, product",
+    "fileName": "001-barcode-outlined.svg"
+  },
+  {
+    "name": "bars",
+    "type": "outlined",
+    "tags": "menu, navigation",
+    "fileName": "001-bars-outlined.svg"
+  },
+  {
+    "name": "behance circle",
+    "type": "filled",
+    "tags": "design, portfolio",
+    "fileName": "001-behance-circle-filled.svg"
+  },
+  {
+    "name": "behance",
+    "type": "outlined",
+    "tags": "design, portfolio",
+    "fileName": "001-behance-outlined.svg"
+  },
+  {
+    "name": "behance square",
+    "type": "filled",
+    "tags": "design, portfolio",
+    "fileName": "001-behance-square-filled.svg"
+  },
+  {
+    "name": "behance square",
+    "type": "outlined",
+    "tags": "design, portfolio",
+    "fileName": "001-behance-square-outlined.svg"
+  },
+  {
+    "name": "bell",
+    "type": "filled",
+    "tags": "notification, alert",
+    "fileName": "001-bell-filled.svg"
+  },
+  {
+    "name": "bell",
+    "type": "outlined",
+    "tags": "notification, alert",
+    "fileName": "001-bell-outlined.svg"
+  },
+  {
+    "name": "bell",
+    "type": "twotone",
+    "tags": "notification, alert",
+    "fileName": "001-bell-twotone.svg"
+  },
+  {
+    "name": "bg colors",
+    "type": "outlined",
+    "tags": "color, background",
+    "fileName": "001-bg-colors-outlined.svg"
+  },
+  {
+    "name": "bilibili",
+    "type": "filled",
+    "tags": "video, media",
+    "fileName": "001-bilibili-filled.svg"
+  },
+  {
+    "name": "bilibili",
+    "type": "outlined",
+    "tags": "video, media",
+    "fileName": "001-bilibili-outlined.svg"
+  },
+  {
+    "name": "block",
+    "type": "outlined",
+    "tags": "disable, prevent",
+    "fileName": "001-block-outlined.svg"
+  },
+  {
+    "name": "bold",
+    "type": "outlined",
+    "tags": "text, formatting",
+    "fileName": "001-bold-outlined.svg"
+  },
+  {
+    "name": "book",
+    "type": "filled",
+    "tags": "documentation, reading",
+    "fileName": "001-book-filled.svg"
+  },
+  {
+    "name": "book",
+    "type": "outlined",
+    "tags": "documentation, reading",
+    "fileName": "001-book-outlined.svg"
+  },
+  {
+    "name": "book",
+    "type": "twotone",
+    "tags": "documentation, reading",
+    "fileName": "001-book-twotone.svg"
+  },
+  {
+    "name": "border bottom",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-bottom-outlined.svg"
+  },
+  {
+    "name": "border horizontal",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-horizontal-outlined.svg"
+  },
+  {
+    "name": "border inner",
+    "type": "outlined",
+    "tags": "border, cell",
+    "fileName": "001-border-inner-outlined.svg"
+  },
+  {
+    "name": "border left",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-left-outlined.svg"
+  },
+  {
+    "name": "border outer",
+    "type": "outlined",
+    "tags": "border, frame",
+    "fileName": "001-border-outer-outlined.svg"
+  },
+  {
+    "name": "border",
+    "type": "outlined",
+    "tags": "border, divider",
+    "fileName": "001-border-outlined.svg"
+  },
+  {
+    "name": "border right",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-right-outlined.svg"
+  },
+  {
+    "name": "border top",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-top-outlined.svg"
+  },
+  {
+    "name": "border verticle",
+    "type": "outlined",
+    "tags": "border, line",
+    "fileName": "001-border-verticle-outlined.svg"
+  },
+  {
+    "name": "borderless table",
+    "type": "outlined",
+    "tags": "table, data",
+    "fileName": "001-borderless-table-outlined.svg"
+  },
+  {
+    "name": "box plot",
+    "type": "filled",
+    "tags": "chart, graph",
+    "fileName": "001-box-plot-filled.svg"
+  },
+  {
+    "name": "box plot",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-box-plot-outlined.svg"
+  },
+  {
+    "name": "box plot",
+    "type": "twotone",
+    "tags": "chart, graph",
+    "fileName": "001-box-plot-twotone.svg"
+  },
+  {
+    "name": "branches",
+    "type": "outlined",
+    "tags": "git, version control",
+    "fileName": "001-branches-outlined.svg"
+  },
+  {
+    "name": "bug",
+    "type": "filled",
+    "tags": "issue, error",
+    "fileName": "001-bug-filled.svg"
+  },
+  {
+    "name": "bug",
+    "type": "outlined",
+    "tags": "issue, error",
+    "fileName": "001-bug-outlined.svg"
+  },
+  {
+    "name": "bug",
+    "type": "twotone",
+    "tags": "issue, error",
+    "fileName": "001-bug-twotone.svg"
+  },
+  {
+    "name": "build",
+    "type": "filled",
+    "tags": "compile, development",
+    "fileName": "001-build-filled.svg"
+  },
+  {
+    "name": "build",
+    "type": "outlined",
+    "tags": "compile, development",
+    "fileName": "001-build-outlined.svg"
+  },
+  {
+    "name": "build",
+    "type": "twotone",
+    "tags": "compile, development",
+    "fileName": "001-build-twotone.svg"
+  },
+  {
+    "name": "bulb",
+    "type": "filled",
+    "tags": "idea, light",
+    "fileName": "001-bulb-filled.svg"
+  },
+  {
+    "name": "bulb",
+    "type": "outlined",
+    "tags": "idea, light",
+    "fileName": "001-bulb-outlined.svg"
+  },
+  {
+    "name": "bulb",
+    "type": "twotone",
+    "tags": "idea, light",
+    "fileName": "001-bulb-twotone.svg"
+  },
+  {
+    "name": "calculator",
+    "type": "filled",
+    "tags": "math, compute",
+    "fileName": "001-calculator-filled.svg"
+  },
+  {
+    "name": "calculator",
+    "type": "outlined",
+    "tags": "math, compute",
+    "fileName": "001-calculator-outlined.svg"
+  },
+  {
+    "name": "calculator",
+    "type": "twotone",
+    "tags": "math, compute",
+    "fileName": "001-calculator-twotone.svg"
+  },
+  {
+    "name": "calendar",
+    "type": "filled",
+    "tags": "date, schedule",
+    "fileName": "001-calendar-filled.svg"
+  },
+  {
+    "name": "calendar",
+    "type": "outlined",
+    "tags": "date, schedule",
+    "fileName": "001-calendar-outlined.svg"
+  },
+  {
+    "name": "calendar",
+    "type": "twotone",
+    "tags": "date, schedule",
+    "fileName": "001-calendar-twotone.svg"
+  },
+  {
+    "name": "camera",
+    "type": "filled",
+    "tags": "photo, image",
+    "fileName": "001-camera-filled.svg"
+  },
+  {
+    "name": "camera",
+    "type": "outlined",
+    "tags": "photo, image",
+    "fileName": "001-camera-outlined.svg"
+  },
+  {
+    "name": "camera",
+    "type": "twotone",
+    "tags": "photo, image",
+    "fileName": "001-camera-twotone.svg"
+  },
+  {
+    "name": "car",
+    "type": "filled",
+    "tags": "vehicle, transport",
+    "fileName": "001-car-filled.svg"
+  },
+  {
+    "name": "car",
+    "type": "outlined",
+    "tags": "vehicle, transport",
+    "fileName": "001-car-outlined.svg"
+  },
+  {
+    "name": "car",
+    "type": "twotone",
+    "tags": "vehicle, transport",
+    "fileName": "001-car-twotone.svg"
+  },
+  {
+    "name": "caret down",
+    "type": "filled",
+    "tags": "expand, dropdown",
+    "fileName": "001-caret-down-filled.svg"
+  },
+  {
+    "name": "caret down",
+    "type": "outlined",
+    "tags": "expand, dropdown",
+    "fileName": "001-caret-down-outlined.svg"
+  },
+  {
+    "name": "caret left",
+    "type": "filled",
+    "tags": "back, chevron",
+    "fileName": "001-caret-left-filled.svg"
+  },
+  {
+    "name": "caret left",
+    "type": "outlined",
+    "tags": "back, chevron",
+    "fileName": "001-caret-left-outlined.svg"
+  },
+  {
+    "name": "caret right",
+    "type": "filled",
+    "tags": "forward, chevron",
+    "fileName": "001-caret-right-filled.svg"
+  },
+  {
+    "name": "caret right",
+    "type": "outlined",
+    "tags": "forward, chevron",
+    "fileName": "001-caret-right-outlined.svg"
+  },
+  {
+    "name": "caret up",
+    "type": "filled",
+    "tags": "collapse, chevron",
+    "fileName": "001-caret-up-filled.svg"
+  },
+  {
+    "name": "caret up",
+    "type": "outlined",
+    "tags": "collapse, chevron",
+    "fileName": "001-caret-up-outlined.svg"
+  },
+  {
+    "name": "carry out",
+    "type": "filled",
+    "tags": "execute, process",
+    "fileName": "001-carry-out-filled.svg"
+  },
+  {
+    "name": "carry out",
+    "type": "outlined",
+    "tags": "execute, process",
+    "fileName": "001-carry-out-outlined.svg"
+  },
+  {
+    "name": "carry out",
+    "type": "twotone",
+    "tags": "execute, process",
+    "fileName": "001-carry-out-twotone.svg"
+  },
+  {
+    "name": "check circle",
+    "type": "filled",
+    "tags": "success, confirm",
+    "fileName": "001-check-circle-filled.svg"
+  },
+  {
+    "name": "check circle",
+    "type": "outlined",
+    "tags": "success, confirm",
+    "fileName": "001-check-circle-outlined.svg"
+  },
+  {
+    "name": "check circle",
+    "type": "twotone",
+    "tags": "success, confirm",
+    "fileName": "001-check-circle-twotone.svg"
+  },
+  {
+    "name": "check",
+    "type": "outlined",
+    "tags": "confirm, checkmark",
+    "fileName": "001-check-outlined.svg"
+  },
+  {
+    "name": "check square",
+    "type": "filled",
+    "tags": "select, checkbox",
+    "fileName": "001-check-square-filled.svg"
+  },
+  {
+    "name": "check square",
+    "type": "outlined",
+    "tags": "select, checkbox",
+    "fileName": "001-check-square-outlined.svg"
+  },
+  {
+    "name": "check square",
+    "type": "twotone",
+    "tags": "select, checkbox",
+    "fileName": "001-check-square-twotone.svg"
+  },
+  {
+    "name": "chrome",
+    "type": "filled",
+    "tags": "browser, web",
+    "fileName": "001-chrome-filled.svg"
+  },
+  {
+    "name": "chrome",
+    "type": "outlined",
+    "tags": "browser, web",
+    "fileName": "001-chrome-outlined.svg"
+  },
+  {
+    "name": "ci circle",
+    "type": "filled",
+    "tags": "integration, automation",
+    "fileName": "001-ci-circle-filled.svg"
+  },
+  {
+    "name": "ci circle",
+    "type": "outlined",
+    "tags": "integration, automation",
+    "fileName": "001-ci-circle-outlined.svg"
+  },
+  {
+    "name": "ci circle",
+    "type": "twotone",
+    "tags": "integration, automation",
+    "fileName": "001-ci-circle-twotone.svg"
+  },
+  {
+    "name": "ci",
+    "type": "outlined",
+    "tags": "integration, automation",
+    "fileName": "001-ci-outlined.svg"
+  },
+  {
+    "name": "ci",
+    "type": "twotone",
+    "tags": "integration, automation",
+    "fileName": "001-ci-twotone.svg"
+  },
+  {
+    "name": "clear",
+    "type": "outlined",
+    "tags": "reset, erase",
+    "fileName": "001-clear-outlined.svg"
+  },
+  {
+    "name": "clock circle",
+    "type": "filled",
+    "tags": "time, timer",
+    "fileName": "001-clock-circle-filled.svg"
+  },
+  {
+    "name": "clock circle",
+    "type": "outlined",
+    "tags": "time, timer",
+    "fileName": "001-clock-circle-outlined.svg"
+  },
+  {
+    "name": "clock circle",
+    "type": "twotone",
+    "tags": "time, timer",
+    "fileName": "001-clock-circle-twotone.svg"
+  },
+  {
+    "name": "close circle",
+    "type": "filled",
+    "tags": "close, dismiss",
+    "fileName": "001-close-circle-filled.svg"
+  },
+  {
+    "name": "close circle",
+    "type": "outlined",
+    "tags": "close, dismiss",
+    "fileName": "001-close-circle-outlined.svg"
+  },
+  {
+    "name": "close circle",
+    "type": "twotone",
+    "tags": "close, dismiss",
+    "fileName": "001-close-circle-twotone.svg"
+  },
+  {
+    "name": "close",
+    "type": "outlined",
+    "tags": "close, exit",
+    "fileName": "001-close-outlined.svg"
+  },
+  {
+    "name": "close square",
+    "type": "filled",
+    "tags": "close, exit",
+    "fileName": "001-close-square-filled.svg"
+  },
+  {
+    "name": "close square",
+    "type": "outlined",
+    "tags": "close, exit",
+    "fileName": "001-close-square-outlined.svg"
+  },
+  {
+    "name": "close square",
+    "type": "twotone",
+    "tags": "close, exit",
+    "fileName": "001-close-square-twotone.svg"
+  },
+  {
+    "name": "cloud download",
+    "type": "outlined",
+    "tags": "download, cloud",
+    "fileName": "001-cloud-download-outlined.svg"
+  },
+  {
+    "name": "cloud",
+    "type": "filled",
+    "tags": "storage, backup",
+    "fileName": "001-cloud-filled.svg"
+  },
+  {
+    "name": "cloud",
+    "type": "outlined",
+    "tags": "storage, backup",
+    "fileName": "001-cloud-outlined.svg"
+  },
+  {
+    "name": "cloud server",
+    "type": "outlined",
+    "tags": "server, hosting",
+    "fileName": "001-cloud-server-outlined.svg"
+  },
+  {
+    "name": "cloud sync",
+    "type": "outlined",
+    "tags": "sync, backup",
+    "fileName": "001-cloud-sync-outlined.svg"
+  },
+  {
+    "name": "cloud",
+    "type": "twotone",
+    "tags": "storage, backup",
+    "fileName": "001-cloud-twotone.svg"
+  },
+  {
+    "name": "cloud upload",
+    "type": "outlined",
+    "tags": "upload, cloud",
+    "fileName": "001-cloud-upload-outlined.svg"
+  },
+  {
+    "name": "cluster",
+    "type": "outlined",
+    "tags": "nodes, grouping",
+    "fileName": "001-cluster-outlined.svg"
+  },
+  {
+    "name": "code",
+    "type": "filled",
+    "tags": "programming, development",
+    "fileName": "001-code-filled.svg"
+  },
+  {
+    "name": "code",
+    "type": "outlined",
+    "tags": "programming, development",
+    "fileName": "001-code-outlined.svg"
+  },
+  {
+    "name": "code sandbox circle",
+    "type": "filled",
+    "tags": "sandbox, testing",
+    "fileName": "001-code-sandbox-circle-filled.svg"
+  },
+  {
+    "name": "code sandbox",
+    "type": "outlined",
+    "tags": "sandbox, testing",
+    "fileName": "001-code-sandbox-outlined.svg"
+  },
+  {
+    "name": "code sandbox square",
+    "type": "filled",
+    "tags": "sandbox, testing",
+    "fileName": "001-code-sandbox-square-filled.svg"
+  },
+  {
+    "name": "code",
+    "type": "twotone",
+    "tags": "programming, development",
+    "fileName": "001-code-twotone.svg"
+  },
+  {
+    "name": "codepen circle",
+    "type": "filled",
+    "tags": "code, design",
+    "fileName": "001-codepen-circle-filled.svg"
+  },
+  {
+    "name": "codepen circle",
+    "type": "outlined",
+    "tags": "code, design",
+    "fileName": "001-codepen-circle-outlined.svg"
+  },
+  {
+    "name": "codepen",
+    "type": "outlined",
+    "tags": "code, design",
+    "fileName": "001-codepen-outlined.svg"
+  },
+  {
+    "name": "codepen square",
+    "type": "filled",
+    "tags": "code, design",
+    "fileName": "001-codepen-square-filled.svg"
+  },
+  {
+    "name": "coffee",
+    "type": "outlined",
+    "tags": "break, cafe",
+    "fileName": "001-coffee-outlined.svg"
+  },
+  {
+    "name": "column height",
+    "type": "outlined",
+    "tags": "resize, adjust",
+    "fileName": "001-column-height-outlined.svg"
+  },
+  {
+    "name": "column width",
+    "type": "outlined",
+    "tags": "resize, adjust",
+    "fileName": "001-column-width-outlined.svg"
+  },
+  {
+    "name": "comment",
+    "type": "outlined",
+    "tags": "message, feedback",
+    "fileName": "001-comment-outlined.svg"
+  },
+  {
+    "name": "compass",
+    "type": "filled",
+    "tags": "navigation, direction",
+    "fileName": "001-compass-filled.svg"
+  },
+  {
+    "name": "compass",
+    "type": "outlined",
+    "tags": "navigation, direction",
+    "fileName": "001-compass-outlined.svg"
+  },
+  {
+    "name": "compass",
+    "type": "twotone",
+    "tags": "navigation, direction",
+    "fileName": "001-compass-twotone.svg"
+  },
+  {
+    "name": "compress",
+    "type": "outlined",
+    "tags": "collapse, shrink",
+    "fileName": "001-compress-outlined.svg"
+  },
+  {
+    "name": "console sql",
+    "type": "outlined",
+    "tags": "database, sql",
+    "fileName": "001-console-sql-outlined.svg"
+  },
+  {
+    "name": "contacts",
+    "type": "filled",
+    "tags": "people, directory",
+    "fileName": "001-contacts-filled.svg"
+  },
+  {
+    "name": "contacts",
+    "type": "outlined",
+    "tags": "people, directory",
+    "fileName": "001-contacts-outlined.svg"
+  },
+  {
+    "name": "contacts",
+    "type": "twotone",
+    "tags": "people, directory",
+    "fileName": "001-contacts-twotone.svg"
+  },
+  {
+    "name": "container",
+    "type": "filled",
+    "tags": "component, box",
+    "fileName": "001-container-filled.svg"
+  },
+  {
+    "name": "container",
+    "type": "outlined",
+    "tags": "component, box",
+    "fileName": "001-container-outlined.svg"
+  },
+  {
+    "name": "container",
+    "type": "twotone",
+    "tags": "component, box",
+    "fileName": "001-container-twotone.svg"
+  },
+  {
+    "name": "control",
+    "type": "filled",
+    "tags": "settings, management",
+    "fileName": "001-control-filled.svg"
+  },
+  {
+    "name": "control",
+    "type": "outlined",
+    "tags": "settings, management",
+    "fileName": "001-control-outlined.svg"
+  },
+  {
+    "name": "control",
+    "type": "twotone",
+    "tags": "settings, management",
+    "fileName": "001-control-twotone.svg"
+  },
+  {
+    "name": "copy",
+    "type": "filled",
+    "tags": "duplicate, clone",
+    "fileName": "001-copy-filled.svg"
+  },
+  {
+    "name": "copy",
+    "type": "outlined",
+    "tags": "duplicate, clone",
+    "fileName": "001-copy-outlined.svg"
+  },
+  {
+    "name": "copy",
+    "type": "twotone",
+    "tags": "duplicate, clone",
+    "fileName": "001-copy-twotone.svg"
+  },
+  {
+    "name": "copyright circle",
+    "type": "filled",
+    "tags": "copyright, license",
+    "fileName": "001-copyright-circle-filled.svg"
+  },
+  {
+    "name": "copyright circle",
+    "type": "outlined",
+    "tags": "copyright, license",
+    "fileName": "001-copyright-circle-outlined.svg"
+  },
+  {
+    "name": "copyright circle",
+    "type": "twotone",
+    "tags": "copyright, license",
+    "fileName": "001-copyright-circle-twotone.svg"
+  },
+  {
+    "name": "copyright",
+    "type": "outlined",
+    "tags": "copyright, license",
+    "fileName": "001-copyright-outlined.svg"
+  },
+  {
+    "name": "copyright",
+    "type": "twotone",
+    "tags": "copyright, license",
+    "fileName": "001-copyright-twotone.svg"
+  },
+  {
+    "name": "credit card",
+    "type": "filled",
+    "tags": "payment, finance",
+    "fileName": "001-credit-card-filled.svg"
+  },
+  {
+    "name": "credit card",
+    "type": "outlined",
+    "tags": "payment, finance",
+    "fileName": "001-credit-card-outlined.svg"
+  },
+  {
+    "name": "credit card",
+    "type": "twotone",
+    "tags": "payment, finance",
+    "fileName": "001-credit-card-twotone.svg"
+  },
+  {
+    "name": "crown",
+    "type": "filled",
+    "tags": "award, achievement",
+    "fileName": "001-crown-filled.svg"
+  },
+  {
+    "name": "crown",
+    "type": "outlined",
+    "tags": "award, achievement",
+    "fileName": "001-crown-outlined.svg"
+  },
+  {
+    "name": "crown",
+    "type": "twotone",
+    "tags": "award, achievement",
+    "fileName": "001-crown-twotone.svg"
+  },
+  {
+    "name": "customer service",
+    "type": "filled",
+    "tags": "support, help",
+    "fileName": "001-customer-service-filled.svg"
+  },
+  {
+    "name": "customer service",
+    "type": "outlined",
+    "tags": "support, help",
+    "fileName": "001-customer-service-outlined.svg"
+  },
+  {
+    "name": "customer service",
+    "type": "twotone",
+    "tags": "support, help",
+    "fileName": "001-customer-service-twotone.svg"
+  },
+  {
+    "name": "dash",
+    "type": "outlined",
+    "tags": "separator, divider",
+    "fileName": "001-dash-outlined.svg"
+  },
+  {
+    "name": "dashboard",
+    "type": "filled",
+    "tags": "analytics, overview",
+    "fileName": "001-dashboard-filled.svg"
+  },
+  {
+    "name": "dashboard",
+    "type": "outlined",
+    "tags": "analytics, overview",
+    "fileName": "001-dashboard-outlined.svg"
+  },
+  {
+    "name": "dashboard",
+    "type": "twotone",
+    "tags": "analytics, overview",
+    "fileName": "001-dashboard-twotone.svg"
+  },
+  {
+    "name": "database",
+    "type": "filled",
+    "tags": "storage, data",
+    "fileName": "001-database-filled.svg"
+  },
+  {
+    "name": "database",
+    "type": "outlined",
+    "tags": "storage, data",
+    "fileName": "001-database-outlined.svg"
+  },
+  {
+    "name": "database",
+    "type": "twotone",
+    "tags": "storage, data",
+    "fileName": "001-database-twotone.svg"
+  },
+  {
+    "name": "delete column",
+    "type": "outlined",
+    "tags": "delete, remove",
+    "fileName": "001-delete-column-outlined.svg"
+  },
+  {
+    "name": "delete",
+    "type": "filled",
+    "tags": "remove, trash",
+    "fileName": "001-delete-filled.svg"
+  },
+  {
+    "name": "delete",
+    "type": "outlined",
+    "tags": "remove, trash",
+    "fileName": "001-delete-outlined.svg"
+  },
+  {
+    "name": "delete row",
+    "type": "outlined",
+    "tags": "delete, remove",
+    "fileName": "001-delete-row-outlined.svg"
+  },
+  {
+    "name": "delete",
+    "type": "twotone",
+    "tags": "remove, trash",
+    "fileName": "001-delete-twotone.svg"
+  },
+  {
+    "name": "delivered procedure",
+    "type": "outlined",
+    "tags": "completion, delivery",
+    "fileName": "001-delivered-procedure-outlined.svg"
+  },
+  {
+    "name": "deployment unit",
+    "type": "outlined",
+    "tags": "deployment, release",
+    "fileName": "001-deployment-unit-outlined.svg"
+  },
+  {
+    "name": "desktop",
+    "type": "outlined",
+    "tags": "computer, workstation",
+    "fileName": "001-desktop-outlined.svg"
+  },
+  {
+    "name": "diff",
+    "type": "filled",
+    "tags": "compare, changes",
+    "fileName": "001-diff-filled.svg"
+  },
+  {
+    "name": "diff",
+    "type": "outlined",
+    "tags": "compare, changes",
+    "fileName": "001-diff-outlined.svg"
+  },
+  {
+    "name": "diff",
+    "type": "twotone",
+    "tags": "compare, changes",
+    "fileName": "001-diff-twotone.svg"
+  },
+  {
+    "name": "dingding",
+    "type": "outlined",
+    "tags": "messaging, communication",
+    "fileName": "001-dingding-outlined.svg"
+  },
+  {
+    "name": "dingtalk circle",
+    "type": "filled",
+    "tags": "messaging, chat",
+    "fileName": "001-dingtalk-circle-filled.svg"
+  },
+  {
+    "name": "dingtalk",
+    "type": "outlined",
+    "tags": "messaging, chat",
+    "fileName": "001-dingtalk-outlined.svg"
+  },
+  {
+    "name": "dingtalk square",
+    "type": "filled",
+    "tags": "messaging, chat",
+    "fileName": "001-dingtalk-square-filled.svg"
+  },
+  {
+    "name": "disconnect",
+    "type": "outlined",
+    "tags": "separate, network",
+    "fileName": "001-disconnect-outlined.svg"
+  },
+  {
+    "name": "discord",
+    "type": "filled",
+    "tags": "chat, community",
+    "fileName": "001-discord-filled.svg"
+  },
+  {
+    "name": "discord",
+    "type": "outlined",
+    "tags": "chat, community",
+    "fileName": "001-discord-outlined.svg"
+  },
+  {
+    "name": "dislike",
+    "type": "filled",
+    "tags": "thumbs down, rating",
+    "fileName": "001-dislike-filled.svg"
+  },
+  {
+    "name": "dislike",
+    "type": "outlined",
+    "tags": "thumbs down, rating",
+    "fileName": "001-dislike-outlined.svg"
+  },
+  {
+    "name": "dislike",
+    "type": "twotone",
+    "tags": "thumbs down, rating",
+    "fileName": "001-dislike-twotone.svg"
+  },
+  {
+    "name": "docker",
+    "type": "outlined",
+    "tags": "container, devops",
+    "fileName": "001-docker-outlined.svg"
+  },
+  {
+    "name": "dollar circle",
+    "type": "filled",
+    "tags": "currency, money",
+    "fileName": "001-dollar-circle-filled.svg"
+  },
+  {
+    "name": "dollar circle",
+    "type": "outlined",
+    "tags": "currency, money",
+    "fileName": "001-dollar-circle-outlined.svg"
+  },
+  {
+    "name": "dollar circle",
+    "type": "twotone",
+    "tags": "currency, money",
+    "fileName": "001-dollar-circle-twotone.svg"
+  },
+  {
+    "name": "dollar",
+    "type": "outlined",
+    "tags": "currency, price",
+    "fileName": "001-dollar-outlined.svg"
+  },
+  {
+    "name": "dollar",
+    "type": "twotone",
+    "tags": "currency, price",
+    "fileName": "001-dollar-twotone.svg"
+  },
+  {
+    "name": "dot chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-dot-chart-outlined.svg"
+  },
+  {
+    "name": "dot net",
+    "type": "outlined",
+    "tags": "framework, development",
+    "fileName": "001-dot-net-outlined.svg"
+  },
+  {
+    "name": "double left",
+    "type": "outlined",
+    "tags": "back, navigate",
+    "fileName": "001-double-left-outlined.svg"
+  },
+  {
+    "name": "double right",
+    "type": "outlined",
+    "tags": "forward, navigate",
+    "fileName": "001-double-right-outlined.svg"
+  },
+  {
+    "name": "down circle",
+    "type": "filled",
+    "tags": "down, navigate",
+    "fileName": "001-down-circle-filled.svg"
+  },
+  {
+    "name": "down circle",
+    "type": "outlined",
+    "tags": "down, navigate",
+    "fileName": "001-down-circle-outlined.svg"
+  },
+  {
+    "name": "down circle",
+    "type": "twotone",
+    "tags": "down, navigate",
+    "fileName": "001-down-circle-twotone.svg"
+  },
+  {
+    "name": "down",
+    "type": "outlined",
+    "tags": "down, navigate",
+    "fileName": "001-down-outlined.svg"
+  },
+  {
+    "name": "down square",
+    "type": "filled",
+    "tags": "down, navigate",
+    "fileName": "001-down-square-filled.svg"
+  },
+  {
+    "name": "down square",
+    "type": "outlined",
+    "tags": "down, navigate",
+    "fileName": "001-down-square-outlined.svg"
+  },
+  {
+    "name": "down square",
+    "type": "twotone",
+    "tags": "down, navigate",
+    "fileName": "001-down-square-twotone.svg"
+  },
+  {
+    "name": "download",
+    "type": "outlined",
+    "tags": "download, transfer",
+    "fileName": "001-download-outlined.svg"
+  },
+  {
+    "name": "drag",
+    "type": "outlined",
+    "tags": "drag, move",
+    "fileName": "001-drag-outlined.svg"
+  },
+  {
+    "name": "dribbble circle",
+    "type": "filled",
+    "tags": "design, portfolio",
+    "fileName": "001-dribbble-circle-filled.svg"
+  },
+  {
+    "name": "dribbble",
+    "type": "outlined",
+    "tags": "design, portfolio",
+    "fileName": "001-dribbble-outlined.svg"
+  },
+  {
+    "name": "dribbble square",
+    "type": "filled",
+    "tags": "design, portfolio",
+    "fileName": "001-dribbble-square-filled.svg"
+  },
+  {
+    "name": "dribbble square",
+    "type": "outlined",
+    "tags": "design, portfolio",
+    "fileName": "001-dribbble-square-outlined.svg"
+  },
+  {
+    "name": "dropbox circle",
+    "type": "filled",
+    "tags": "storage, cloud",
+    "fileName": "001-dropbox-circle-filled.svg"
+  },
+  {
+    "name": "dropbox",
+    "type": "outlined",
+    "tags": "storage, cloud",
+    "fileName": "001-dropbox-outlined.svg"
+  },
+  {
+    "name": "dropbox square",
+    "type": "filled",
+    "tags": "storage, cloud",
+    "fileName": "001-dropbox-square-filled.svg"
+  },
+  {
+    "name": "edit",
+    "type": "filled",
+    "tags": "modify, pencil",
+    "fileName": "001-edit-filled.svg"
+  },
+  {
+    "name": "edit",
+    "type": "outlined",
+    "tags": "modify, pencil",
+    "fileName": "001-edit-outlined.svg"
+  },
+  {
+    "name": "edit",
+    "type": "twotone",
+    "tags": "modify, pencil",
+    "fileName": "001-edit-twotone.svg"
+  },
+  {
+    "name": "ellipsis",
+    "type": "outlined",
+    "tags": "more, options",
+    "fileName": "001-ellipsis-outlined.svg"
+  },
+  {
+    "name": "enter",
+    "type": "outlined",
+    "tags": "submit, key",
+    "fileName": "001-enter-outlined.svg"
+  },
+  {
+    "name": "environment",
+    "type": "filled",
+    "tags": "config, settings",
+    "fileName": "001-environment-filled.svg"
+  },
+  {
+    "name": "environment",
+    "type": "outlined",
+    "tags": "config, settings",
+    "fileName": "001-environment-outlined.svg"
+  },
+  {
+    "name": "environment",
+    "type": "twotone",
+    "tags": "config, settings",
+    "fileName": "001-environment-twotone.svg"
+  },
+  {
+    "name": "euro circle",
+    "type": "filled",
+    "tags": "currency, money",
+    "fileName": "001-euro-circle-filled.svg"
+  },
+  {
+    "name": "euro circle",
+    "type": "outlined",
+    "tags": "currency, money",
+    "fileName": "001-euro-circle-outlined.svg"
+  },
+  {
+    "name": "euro circle",
+    "type": "twotone",
+    "tags": "currency, money",
+    "fileName": "001-euro-circle-twotone.svg"
+  },
+  {
+    "name": "euro",
+    "type": "outlined",
+    "tags": "currency, money",
+    "fileName": "001-euro-outlined.svg"
+  },
+  {
+    "name": "euro",
+    "type": "twotone",
+    "tags": "currency, money",
+    "fileName": "001-euro-twotone.svg"
+  },
+  {
+    "name": "exception",
+    "type": "outlined",
+    "tags": "error, alert",
+    "fileName": "001-exception-outlined.svg"
+  },
+  {
+    "name": "exclamation circle",
+    "type": "filled",
+    "tags": "warning, alert",
+    "fileName": "001-exclamation-circle-filled.svg"
+  },
+  {
+    "name": "exclamation circle",
+    "type": "outlined",
+    "tags": "warning, alert",
+    "fileName": "001-exclamation-circle-outlined.svg"
+  },
+  {
+    "name": "exclamation circle",
+    "type": "twotone",
+    "tags": "warning, alert",
+    "fileName": "001-exclamation-circle-twotone.svg"
+  },
+  {
+    "name": "exclamation",
+    "type": "outlined",
+    "tags": "warning, alert",
+    "fileName": "001-exclamation-outlined.svg"
+  },
+  {
+    "name": "expand alt",
+    "type": "outlined",
+    "tags": "expand, fullscreen",
+    "fileName": "001-expand-alt-outlined.svg"
+  },
+  {
+    "name": "expand",
+    "type": "outlined",
+    "tags": "expand, fullscreen",
+    "fileName": "001-expand-outlined.svg"
+  },
+  {
+    "name": "experiment",
+    "type": "filled",
+    "tags": "test, research",
+    "fileName": "001-experiment-filled.svg"
+  },
+  {
+    "name": "experiment",
+    "type": "outlined",
+    "tags": "test, research",
+    "fileName": "001-experiment-outlined.svg"
+  },
+  {
+    "name": "experiment",
+    "type": "twotone",
+    "tags": "test, research",
+    "fileName": "001-experiment-twotone.svg"
+  },
+  {
+    "name": "export",
+    "type": "outlined",
+    "tags": "download, output",
+    "fileName": "001-export-outlined.svg"
+  },
+  {
+    "name": "eye",
+    "type": "filled",
+    "tags": "view, show",
+    "fileName": "001-eye-filled.svg"
+  },
+  {
+    "name": "eye invisible",
+    "type": "filled",
+    "tags": "hide, invisible",
+    "fileName": "001-eye-invisible-filled.svg"
+  },
+  {
+    "name": "eye invisible",
+    "type": "outlined",
+    "tags": "hide, invisible",
+    "fileName": "001-eye-invisible-outlined.svg"
+  },
+  {
+    "name": "eye invisible",
+    "type": "twotone",
+    "tags": "hide, invisible",
+    "fileName": "001-eye-invisible-twotone.svg"
+  },
+  {
+    "name": "eye",
+    "type": "outlined",
+    "tags": "view, show",
+    "fileName": "001-eye-outlined.svg"
+  },
+  {
+    "name": "eye",
+    "type": "twotone",
+    "tags": "view, show",
+    "fileName": "001-eye-twotone.svg"
+  },
+  {
+    "name": "facebook",
+    "type": "filled",
+    "tags": "social, messaging",
+    "fileName": "001-facebook-filled.svg"
+  },
+  {
+    "name": "facebook",
+    "type": "outlined",
+    "tags": "social, messaging",
+    "fileName": "001-facebook-outlined.svg"
+  },
+  {
+    "name": "fall",
+    "type": "outlined",
+    "tags": "down, collapse",
+    "fileName": "001-fall-outlined.svg"
+  },
+  {
+    "name": "fast backward",
+    "type": "filled",
+    "tags": "rewind, back",
+    "fileName": "001-fast-backward-filled.svg"
+  },
+  {
+    "name": "fast backward",
+    "type": "outlined",
+    "tags": "rewind, back",
+    "fileName": "001-fast-backward-outlined.svg"
+  },
+  {
+    "name": "fast forward",
+    "type": "filled",
+    "tags": "forward, skip",
+    "fileName": "001-fast-forward-filled.svg"
+  },
+  {
+    "name": "fast forward",
+    "type": "outlined",
+    "tags": "forward, skip",
+    "fileName": "001-fast-forward-outlined.svg"
+  },
+  {
+    "name": "field binary",
+    "type": "outlined",
+    "tags": "binary, data",
+    "fileName": "001-field-binary-outlined.svg"
+  },
+  {
+    "name": "field number",
+    "type": "outlined",
+    "tags": "numeric, data",
+    "fileName": "001-field-number-outlined.svg"
+  },
+  {
+    "name": "field string",
+    "type": "outlined",
+    "tags": "text, data",
+    "fileName": "001-field-string-outlined.svg"
+  },
+  {
+    "name": "field time",
+    "type": "outlined",
+    "tags": "time, data",
+    "fileName": "001-field-time-outlined.svg"
+  },
+  {
+    "name": "file add",
+    "type": "filled",
+    "tags": "create, file",
+    "fileName": "001-file-add-filled.svg"
+  },
+  {
+    "name": "file add",
+    "type": "outlined",
+    "tags": "create, file",
+    "fileName": "001-file-add-outlined.svg"
+  },
+  {
+    "name": "file add",
+    "type": "twotone",
+    "tags": "create, file",
+    "fileName": "001-file-add-twotone.svg"
+  },
+  {
+    "name": "file done",
+    "type": "outlined",
+    "tags": "complete, file",
+    "fileName": "001-file-done-outlined.svg"
+  },
+  {
+    "name": "file excel",
+    "type": "filled",
+    "tags": "spreadsheet, file",
+    "fileName": "001-file-excel-filled.svg"
+  },
+  {
+    "name": "file excel",
+    "type": "outlined",
+    "tags": "spreadsheet, file",
+    "fileName": "001-file-excel-outlined.svg"
+  },
+  {
+    "name": "file excel",
+    "type": "twotone",
+    "tags": "spreadsheet, file",
+    "fileName": "001-file-excel-twotone.svg"
+  },
+  {
+    "name": "file exclamation",
+    "type": "filled",
+    "tags": "warning, file",
+    "fileName": "001-file-exclamation-filled.svg"
+  },
+  {
+    "name": "file exclamation",
+    "type": "outlined",
+    "tags": "warning, file",
+    "fileName": "001-file-exclamation-outlined.svg"
+  },
+  {
+    "name": "file exclamation",
+    "type": "twotone",
+    "tags": "warning, file",
+    "fileName": "001-file-exclamation-twotone.svg"
+  },
+  {
+    "name": "file",
+    "type": "filled",
+    "tags": "document",
+    "fileName": "001-file-filled.svg"
+  },
+  {
+    "name": "file gif",
+    "type": "outlined",
+    "tags": "animation, image",
+    "fileName": "001-file-gif-outlined.svg"
+  },
+  {
+    "name": "file image",
+    "type": "filled",
+    "tags": "image, file",
+    "fileName": "001-file-image-filled.svg"
+  },
+  {
+    "name": "file image",
+    "type": "outlined",
+    "tags": "image, file",
+    "fileName": "001-file-image-outlined.svg"
+  },
+  {
+    "name": "file image",
+    "type": "twotone",
+    "tags": "image, file",
+    "fileName": "001-file-image-twotone.svg"
+  },
+  {
+    "name": "file jpg",
+    "type": "outlined",
+    "tags": "image, photo",
+    "fileName": "001-file-jpg-outlined.svg"
+  },
+  {
+    "name": "file markdown",
+    "type": "filled",
+    "tags": "markdown, documentation",
+    "fileName": "001-file-markdown-filled.svg"
+  },
+  {
+    "name": "file markdown",
+    "type": "outlined",
+    "tags": "markdown, documentation",
+    "fileName": "001-file-markdown-outlined.svg"
+  },
+  {
+    "name": "file markdown",
+    "type": "twotone",
+    "tags": "markdown, documentation",
+    "fileName": "001-file-markdown-twotone.svg"
+  },
+  {
+    "name": "file",
+    "type": "outlined",
+    "tags": "document",
+    "fileName": "001-file-outlined.svg"
+  },
+  {
+    "name": "file pdf",
+    "type": "filled",
+    "tags": "document, pdf",
+    "fileName": "001-file-pdf-filled.svg"
+  },
+  {
+    "name": "file pdf",
+    "type": "outlined",
+    "tags": "document, pdf",
+    "fileName": "001-file-pdf-outlined.svg"
+  },
+  {
+    "name": "file pdf",
+    "type": "twotone",
+    "tags": "document, pdf",
+    "fileName": "001-file-pdf-twotone.svg"
+  },
+  {
+    "name": "file ppt",
+    "type": "filled",
+    "tags": "presentation, file",
+    "fileName": "001-file-ppt-filled.svg"
+  },
+  {
+    "name": "file ppt",
+    "type": "outlined",
+    "tags": "presentation, file",
+    "fileName": "001-file-ppt-outlined.svg"
+  },
+  {
+    "name": "file ppt",
+    "type": "twotone",
+    "tags": "presentation, file",
+    "fileName": "001-file-ppt-twotone.svg"
+  },
+  {
+    "name": "file protect",
+    "type": "outlined",
+    "tags": "protect, security",
+    "fileName": "001-file-protect-outlined.svg"
+  },
+  {
+    "name": "file search",
+    "type": "outlined",
+    "tags": "search, file",
+    "fileName": "001-file-search-outlined.svg"
+  },
+  {
+    "name": "file sync",
+    "type": "outlined",
+    "tags": "sync, file",
+    "fileName": "001-file-sync-outlined.svg"
+  },
+  {
+    "name": "file text",
+    "type": "filled",
+    "tags": "text, document",
+    "fileName": "001-file-text-filled.svg"
+  },
+  {
+    "name": "file text",
+    "type": "outlined",
+    "tags": "text, document",
+    "fileName": "001-file-text-outlined.svg"
+  },
+  {
+    "name": "file text",
+    "type": "twotone",
+    "tags": "text, document",
+    "fileName": "001-file-text-twotone.svg"
+  },
+  {
+    "name": "file",
+    "type": "twotone",
+    "tags": "document",
+    "fileName": "001-file-twotone.svg"
+  },
+  {
+    "name": "file unknown",
+    "type": "filled",
+    "tags": "unknown, file",
+    "fileName": "001-file-unknown-filled.svg"
+  },
+  {
+    "name": "file unknown",
+    "type": "outlined",
+    "tags": "unknown, file",
+    "fileName": "001-file-unknown-outlined.svg"
+  },
+  {
+    "name": "file unknown",
+    "type": "twotone",
+    "tags": "unknown, file",
+    "fileName": "001-file-unknown-twotone.svg"
+  },
+  {
+    "name": "file word",
+    "type": "filled",
+    "tags": "document, word",
+    "fileName": "001-file-word-filled.svg"
+  },
+  {
+    "name": "file word",
+    "type": "outlined",
+    "tags": "document, word",
+    "fileName": "001-file-word-outlined.svg"
+  },
+  {
+    "name": "file word",
+    "type": "twotone",
+    "tags": "document, word",
+    "fileName": "001-file-word-twotone.svg"
+  },
+  {
+    "name": "file zip",
+    "type": "filled",
+    "tags": "archive, file",
+    "fileName": "001-file-zip-filled.svg"
+  },
+  {
+    "name": "file zip",
+    "type": "outlined",
+    "tags": "archive, file",
+    "fileName": "001-file-zip-outlined.svg"
+  },
+  {
+    "name": "file zip",
+    "type": "twotone",
+    "tags": "archive, file",
+    "fileName": "001-file-zip-twotone.svg"
+  },
+  {
+    "name": "filter",
+    "type": "filled",
+    "tags": "search, filter",
+    "fileName": "001-filter-filled.svg"
+  },
+  {
+    "name": "filter",
+    "type": "outlined",
+    "tags": "search, filter",
+    "fileName": "001-filter-outlined.svg"
+  },
+  {
+    "name": "filter",
+    "type": "twotone",
+    "tags": "search, filter",
+    "fileName": "001-filter-twotone.svg"
+  },
+  {
+    "name": "fire",
+    "type": "filled",
+    "tags": "hot, trending",
+    "fileName": "001-fire-filled.svg"
+  },
+  {
+    "name": "fire",
+    "type": "outlined",
+    "tags": "hot, trending",
+    "fileName": "001-fire-outlined.svg"
+  },
+  {
+    "name": "fire",
+    "type": "twotone",
+    "tags": "hot, trending",
+    "fileName": "001-fire-twotone.svg"
+  },
+  {
+    "name": "flag",
+    "type": "filled",
+    "tags": "bookmark, marker",
+    "fileName": "001-flag-filled.svg"
+  },
+  {
+    "name": "flag",
+    "type": "outlined",
+    "tags": "bookmark, marker",
+    "fileName": "001-flag-outlined.svg"
+  },
+  {
+    "name": "flag",
+    "type": "twotone",
+    "tags": "bookmark, marker",
+    "fileName": "001-flag-twotone.svg"
+  },
+  {
+    "name": "folder add",
+    "type": "filled",
+    "tags": "create, folder",
+    "fileName": "001-folder-add-filled.svg"
+  },
+  {
+    "name": "folder add",
+    "type": "outlined",
+    "tags": "create, folder",
+    "fileName": "001-folder-add-outlined.svg"
+  },
+  {
+    "name": "folder add",
+    "type": "twotone",
+    "tags": "create, folder",
+    "fileName": "001-folder-add-twotone.svg"
+  },
+  {
+    "name": "folder",
+    "type": "filled",
+    "tags": "directory, storage",
+    "fileName": "001-folder-filled.svg"
+  },
+  {
+    "name": "folder open",
+    "type": "filled",
+    "tags": "open, directory",
+    "fileName": "001-folder-open-filled.svg"
+  },
+  {
+    "name": "folder open",
+    "type": "outlined",
+    "tags": "open, directory",
+    "fileName": "001-folder-open-outlined.svg"
+  },
+  {
+    "name": "folder open",
+    "type": "twotone",
+    "tags": "open, directory",
+    "fileName": "001-folder-open-twotone.svg"
+  },
+  {
+    "name": "folder",
+    "type": "outlined",
+    "tags": "directory, storage",
+    "fileName": "001-folder-outlined.svg"
+  },
+  {
+    "name": "folder",
+    "type": "twotone",
+    "tags": "directory, storage",
+    "fileName": "001-folder-twotone.svg"
+  },
+  {
+    "name": "folder view",
+    "type": "outlined",
+    "tags": "view, folder",
+    "fileName": "001-folder-view-outlined.svg"
+  },
+  {
+    "name": "font colors",
+    "type": "outlined",
+    "tags": "color, text",
+    "fileName": "001-font-colors-outlined.svg"
+  },
+  {
+    "name": "font size",
+    "type": "outlined",
+    "tags": "size, text",
+    "fileName": "001-font-size-outlined.svg"
+  },
+  {
+    "name": "fork",
+    "type": "outlined",
+    "tags": "branch, version",
+    "fileName": "001-fork-outlined.svg"
+  },
+  {
+    "name": "form",
+    "type": "outlined",
+    "tags": "input, survey",
+    "fileName": "001-form-outlined.svg"
+  },
+  {
+    "name": "format painter",
+    "type": "filled",
+    "tags": "copy, style",
+    "fileName": "001-format-painter-filled.svg"
+  },
+  {
+    "name": "format painter",
+    "type": "outlined",
+    "tags": "copy, style",
+    "fileName": "001-format-painter-outlined.svg"
+  },
+  {
+    "name": "forward",
+    "type": "filled",
+    "tags": "play, next",
+    "fileName": "001-forward-filled.svg"
+  },
+  {
+    "name": "forward",
+    "type": "outlined",
+    "tags": "play, next",
+    "fileName": "001-forward-outlined.svg"
+  },
+  {
+    "name": "frown",
+    "type": "filled",
+    "tags": "sad, emoji",
+    "fileName": "001-frown-filled.svg"
+  },
+  {
+    "name": "frown",
+    "type": "outlined",
+    "tags": "sad, emoji",
+    "fileName": "001-frown-outlined.svg"
+  },
+  {
+    "name": "frown",
+    "type": "twotone",
+    "tags": "sad, emoji",
+    "fileName": "001-frown-twotone.svg"
+  },
+  {
+    "name": "fullscreen exit",
+    "type": "outlined",
+    "tags": "close, exit",
+    "fileName": "001-fullscreen-exit-outlined.svg"
+  },
+  {
+    "name": "fullscreen",
+    "type": "outlined",
+    "tags": "maximize, expand",
+    "fileName": "001-fullscreen-outlined.svg"
+  },
+  {
+    "name": "function",
+    "type": "outlined",
+    "tags": "code, math",
+    "fileName": "001-function-outlined.svg"
+  },
+  {
+    "name": "fund",
+    "type": "filled",
+    "tags": "investment, money",
+    "fileName": "001-fund-filled.svg"
+  },
+  {
+    "name": "fund",
+    "type": "outlined",
+    "tags": "investment, money",
+    "fileName": "001-fund-outlined.svg"
+  },
+  {
+    "name": "fund projection screen",
+    "type": "outlined",
+    "tags": "projection, chart",
+    "fileName": "001-fund-projection-screen-outlined.svg"
+  },
+  {
+    "name": "fund",
+    "type": "twotone",
+    "tags": "investment, money",
+    "fileName": "001-fund-twotone.svg"
+  },
+  {
+    "name": "fund view",
+    "type": "outlined",
+    "tags": "investment, view",
+    "fileName": "001-fund-view-outlined.svg"
+  },
+  {
+    "name": "funnel plot",
+    "type": "filled",
+    "tags": "chart, analysis",
+    "fileName": "001-funnel-plot-filled.svg"
+  },
+  {
+    "name": "funnel plot",
+    "type": "outlined",
+    "tags": "chart, analysis",
+    "fileName": "001-funnel-plot-outlined.svg"
+  },
+  {
+    "name": "funnel plot",
+    "type": "twotone",
+    "tags": "chart, analysis",
+    "fileName": "001-funnel-plot-twotone.svg"
+  },
+  {
+    "name": "gateway",
+    "type": "outlined",
+    "tags": "network, api",
+    "fileName": "001-gateway-outlined.svg"
+  },
+  {
+    "name": "gif",
+    "type": "outlined",
+    "tags": "animation, image",
+    "fileName": "001-gif-outlined.svg"
+  },
+  {
+    "name": "gift",
+    "type": "filled",
+    "tags": "present, reward",
+    "fileName": "001-gift-filled.svg"
+  },
+  {
+    "name": "gift",
+    "type": "outlined",
+    "tags": "present, reward",
+    "fileName": "001-gift-outlined.svg"
+  },
+  {
+    "name": "gift",
+    "type": "twotone",
+    "tags": "present, reward",
+    "fileName": "001-gift-twotone.svg"
+  },
+  {
+    "name": "github",
+    "type": "filled",
+    "tags": "code, repository",
+    "fileName": "001-github-filled.svg"
+  },
+  {
+    "name": "github",
+    "type": "outlined",
+    "tags": "code, repository",
+    "fileName": "001-github-outlined.svg"
+  },
+  {
+    "name": "gitlab",
+    "type": "filled",
+    "tags": "code, repository",
+    "fileName": "001-gitlab-filled.svg"
+  },
+  {
+    "name": "gitlab",
+    "type": "outlined",
+    "tags": "code, repository",
+    "fileName": "001-gitlab-outlined.svg"
+  },
+  {
+    "name": "global",
+    "type": "outlined",
+    "tags": "worldwide, settings",
+    "fileName": "001-global-outlined.svg"
+  },
+  {
+    "name": "gold",
+    "type": "filled",
+    "tags": "color, premium",
+    "fileName": "001-gold-filled.svg"
+  },
+  {
+    "name": "gold",
+    "type": "outlined",
+    "tags": "color, premium",
+    "fileName": "001-gold-outlined.svg"
+  },
+  {
+    "name": "gold",
+    "type": "twotone",
+    "tags": "color, premium",
+    "fileName": "001-gold-twotone.svg"
+  },
+  {
+    "name": "golden",
+    "type": "filled",
+    "tags": "color, award",
+    "fileName": "001-golden-filled.svg"
+  },
+  {
+    "name": "google circle",
+    "type": "filled",
+    "tags": "search, web",
+    "fileName": "001-google-circle-filled.svg"
+  },
+  {
+    "name": "google",
+    "type": "outlined",
+    "tags": "search, web",
+    "fileName": "001-google-outlined.svg"
+  },
+  {
+    "name": "google plus circle",
+    "type": "filled",
+    "tags": "social, network",
+    "fileName": "001-google-plus-circle-filled.svg"
+  },
+  {
+    "name": "google plus",
+    "type": "outlined",
+    "tags": "social, network",
+    "fileName": "001-google-plus-outlined.svg"
+  },
+  {
+    "name": "google plus square",
+    "type": "filled",
+    "tags": "social, network",
+    "fileName": "001-google-plus-square-filled.svg"
+  },
+  {
+    "name": "google square",
+    "type": "filled",
+    "tags": "search, web",
+    "fileName": "001-google-square-filled.svg"
+  },
+  {
+    "name": "group",
+    "type": "outlined",
+    "tags": "people, team",
+    "fileName": "001-group-outlined.svg"
+  },
+  {
+    "name": "harmony o s",
+    "type": "outlined",
+    "tags": "operating system, macos",
+    "fileName": "001-harmony-o-s-outlined.svg"
+  },
+  {
+    "name": "hdd",
+    "type": "filled",
+    "tags": "storage, drive",
+    "fileName": "001-hdd-filled.svg"
+  },
+  {
+    "name": "hdd",
+    "type": "outlined",
+    "tags": "storage, drive",
+    "fileName": "001-hdd-outlined.svg"
+  },
+  {
+    "name": "hdd",
+    "type": "twotone",
+    "tags": "storage, drive",
+    "fileName": "001-hdd-twotone.svg"
+  },
+  {
+    "name": "heart",
+    "type": "filled",
+    "tags": "favorite, love",
+    "fileName": "001-heart-filled.svg"
+  },
+  {
+    "name": "heart",
+    "type": "outlined",
+    "tags": "favorite, love",
+    "fileName": "001-heart-outlined.svg"
+  },
+  {
+    "name": "heart",
+    "type": "twotone",
+    "tags": "favorite, love",
+    "fileName": "001-heart-twotone.svg"
+  },
+  {
+    "name": "heat map",
+    "type": "outlined",
+    "tags": "chart, analysis",
+    "fileName": "001-heat-map-outlined.svg"
+  },
+  {
+    "name": "highlight",
+    "type": "filled",
+    "tags": "mark, select",
+    "fileName": "001-highlight-filled.svg"
+  },
+  {
+    "name": "highlight",
+    "type": "outlined",
+    "tags": "mark, select",
+    "fileName": "001-highlight-outlined.svg"
+  },
+  {
+    "name": "highlight",
+    "type": "twotone",
+    "tags": "mark, select",
+    "fileName": "001-highlight-twotone.svg"
+  },
+  {
+    "name": "history",
+    "type": "outlined",
+    "tags": "time, log",
+    "fileName": "001-history-outlined.svg"
+  },
+  {
+    "name": "holder",
+    "type": "outlined",
+    "tags": "container, frame",
+    "fileName": "001-holder-outlined.svg"
+  },
+  {
+    "name": "home",
+    "type": "filled",
+    "tags": "house, dashboard",
+    "fileName": "001-home-filled.svg"
+  },
+  {
+    "name": "home",
+    "type": "outlined",
+    "tags": "house, dashboard",
+    "fileName": "001-home-outlined.svg"
+  },
+  {
+    "name": "home",
+    "type": "twotone",
+    "tags": "house, dashboard",
+    "fileName": "001-home-twotone.svg"
+  },
+  {
+    "name": "hourglass",
+    "type": "filled",
+    "tags": "time, wait",
+    "fileName": "001-hourglass-filled.svg"
+  },
+  {
+    "name": "hourglass",
+    "type": "outlined",
+    "tags": "time, wait",
+    "fileName": "001-hourglass-outlined.svg"
+  },
+  {
+    "name": "hourglass",
+    "type": "twotone",
+    "tags": "time, wait",
+    "fileName": "001-hourglass-twotone.svg"
+  },
+  {
+    "name": "html5",
+    "type": "filled",
+    "tags": "markup, code",
+    "fileName": "001-html5-filled.svg"
+  },
+  {
+    "name": "html5",
+    "type": "outlined",
+    "tags": "markup, code",
+    "fileName": "001-html5-outlined.svg"
+  },
+  {
+    "name": "html5",
+    "type": "twotone",
+    "tags": "markup, code",
+    "fileName": "001-html5-twotone.svg"
+  },
+  {
+    "name": "idcard",
+    "type": "filled",
+    "tags": "identity, card",
+    "fileName": "001-idcard-filled.svg"
+  },
+  {
+    "name": "idcard",
+    "type": "outlined",
+    "tags": "identity, card",
+    "fileName": "001-idcard-outlined.svg"
+  },
+  {
+    "name": "idcard",
+    "type": "twotone",
+    "tags": "identity, card",
+    "fileName": "001-idcard-twotone.svg"
+  },
+  {
+    "name": "ie circle",
+    "type": "filled",
+    "tags": "browser, internet",
+    "fileName": "001-ie-circle-filled.svg"
+  },
+  {
+    "name": "ie",
+    "type": "outlined",
+    "tags": "browser, internet",
+    "fileName": "001-ie-outlined.svg"
+  },
+  {
+    "name": "ie square",
+    "type": "filled",
+    "tags": "browser, internet",
+    "fileName": "001-ie-square-filled.svg"
+  },
+  {
+    "name": "import",
+    "type": "outlined",
+    "tags": "upload, input",
+    "fileName": "001-import-outlined.svg"
+  },
+  {
+    "name": "inbox",
+    "type": "outlined",
+    "tags": "email, message",
+    "fileName": "001-inbox-outlined.svg"
+  },
+  {
+    "name": "info circle",
+    "type": "filled",
+    "tags": "information, help",
+    "fileName": "001-info-circle-filled.svg"
+  },
+  {
+    "name": "info circle",
+    "type": "outlined",
+    "tags": "information, help",
+    "fileName": "001-info-circle-outlined.svg"
+  },
+  {
+    "name": "info circle",
+    "type": "twotone",
+    "tags": "information, help",
+    "fileName": "001-info-circle-twotone.svg"
+  },
+  {
+    "name": "info",
+    "type": "outlined",
+    "tags": "information, help",
+    "fileName": "001-info-outlined.svg"
+  },
+  {
+    "name": "insert row above",
+    "type": "outlined",
+    "tags": "add, table",
+    "fileName": "001-insert-row-above-outlined.svg"
+  },
+  {
+    "name": "insert row below",
+    "type": "outlined",
+    "tags": "add, table",
+    "fileName": "001-insert-row-below-outlined.svg"
+  },
+  {
+    "name": "insert row left",
+    "type": "outlined",
+    "tags": "add, table",
+    "fileName": "001-insert-row-left-outlined.svg"
+  },
+  {
+    "name": "insert row right",
+    "type": "outlined",
+    "tags": "add, table",
+    "fileName": "001-insert-row-right-outlined.svg"
+  },
+  {
+    "name": "instagram",
+    "type": "filled",
+    "tags": "social, photo",
+    "fileName": "001-instagram-filled.svg"
+  },
+  {
+    "name": "instagram",
+    "type": "outlined",
+    "tags": "social, photo",
+    "fileName": "001-instagram-outlined.svg"
+  },
+  {
+    "name": "insurance",
+    "type": "filled",
+    "tags": "protection, health",
+    "fileName": "001-insurance-filled.svg"
+  },
+  {
+    "name": "insurance",
+    "type": "outlined",
+    "tags": "protection, health",
+    "fileName": "001-insurance-outlined.svg"
+  },
+  {
+    "name": "insurance",
+    "type": "twotone",
+    "tags": "protection, health",
+    "fileName": "001-insurance-twotone.svg"
+  },
+  {
+    "name": "interaction",
+    "type": "filled",
+    "tags": "connect, engage",
+    "fileName": "001-interaction-filled.svg"
+  },
+  {
+    "name": "interaction",
+    "type": "outlined",
+    "tags": "connect, engage",
+    "fileName": "001-interaction-outlined.svg"
+  },
+  {
+    "name": "interaction",
+    "type": "twotone",
+    "tags": "connect, engage",
+    "fileName": "001-interaction-twotone.svg"
+  },
+  {
+    "name": "issues close",
+    "type": "outlined",
+    "tags": "close, resolved",
+    "fileName": "001-issues-close-outlined.svg"
+  },
+  {
+    "name": "italic",
+    "type": "outlined",
+    "tags": "text, formatting",
+    "fileName": "001-italic-outlined.svg"
+  },
+  {
+    "name": "java",
+    "type": "outlined",
+    "tags": "programming, language",
+    "fileName": "001-java-outlined.svg"
+  },
+  {
+    "name": "java script",
+    "type": "outlined",
+    "tags": "programming, language",
+    "fileName": "001-java-script-outlined.svg"
+  },
+  {
+    "name": "key",
+    "type": "outlined",
+    "tags": "password, secure",
+    "fileName": "001-key-outlined.svg"
+  },
+  {
+    "name": "kubernetes",
+    "type": "outlined",
+    "tags": "devops, container",
+    "fileName": "001-kubernetes-outlined.svg"
+  },
+  {
+    "name": "laptop",
+    "type": "outlined",
+    "tags": "computer, device",
+    "fileName": "001-laptop-outlined.svg"
+  },
+  {
+    "name": "layout",
+    "type": "filled",
+    "tags": "design, template",
+    "fileName": "001-layout-filled.svg"
+  },
+  {
+    "name": "layout",
+    "type": "outlined",
+    "tags": "design, template",
+    "fileName": "001-layout-outlined.svg"
+  },
+  {
+    "name": "layout",
+    "type": "twotone",
+    "tags": "design, template",
+    "fileName": "001-layout-twotone.svg"
+  },
+  {
+    "name": "left circle",
+    "type": "filled",
+    "tags": "navigate, left",
+    "fileName": "001-left-circle-filled.svg"
+  },
+  {
+    "name": "left circle",
+    "type": "outlined",
+    "tags": "navigate, left",
+    "fileName": "001-left-circle-outlined.svg"
+  },
+  {
+    "name": "left circle",
+    "type": "twotone",
+    "tags": "navigate, left",
+    "fileName": "001-left-circle-twotone.svg"
+  },
+  {
+    "name": "left",
+    "type": "outlined",
+    "tags": "navigate, left",
+    "fileName": "001-left-outlined.svg"
+  },
+  {
+    "name": "left square",
+    "type": "filled",
+    "tags": "navigate, left",
+    "fileName": "001-left-square-filled.svg"
+  },
+  {
+    "name": "left square",
+    "type": "outlined",
+    "tags": "navigate, left",
+    "fileName": "001-left-square-outlined.svg"
+  },
+  {
+    "name": "left square",
+    "type": "twotone",
+    "tags": "navigate, left",
+    "fileName": "001-left-square-twotone.svg"
+  },
+  {
+    "name": "like",
+    "type": "filled",
+    "tags": "favorite, heart",
+    "fileName": "001-like-filled.svg"
+  },
+  {
+    "name": "like",
+    "type": "outlined",
+    "tags": "favorite, heart",
+    "fileName": "001-like-outlined.svg"
+  },
+  {
+    "name": "like",
+    "type": "twotone",
+    "tags": "favorite, heart",
+    "fileName": "001-like-twotone.svg"
+  },
+  {
+    "name": "line chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-line-chart-outlined.svg"
+  },
+  {
+    "name": "line height",
+    "type": "outlined",
+    "tags": "text, spacing",
+    "fileName": "001-line-height-outlined.svg"
+  },
+  {
+    "name": "line",
+    "type": "outlined",
+    "tags": "shape, divider",
+    "fileName": "001-line-outlined.svg"
+  },
+  {
+    "name": "link",
+    "type": "outlined",
+    "tags": "url, connection",
+    "fileName": "001-link-outlined.svg"
+  },
+  {
+    "name": "linkedin",
+    "type": "filled",
+    "tags": "social, professional",
+    "fileName": "001-linkedin-filled.svg"
+  },
+  {
+    "name": "linkedin",
+    "type": "outlined",
+    "tags": "social, professional",
+    "fileName": "001-linkedin-outlined.svg"
+  },
+  {
+    "name": "linux",
+    "type": "outlined",
+    "tags": "operating system",
+    "fileName": "001-linux-outlined.svg"
+  },
+  {
+    "name": "loading 3 quarters",
+    "type": "outlined",
+    "tags": "progress, loading",
+    "fileName": "001-loading-3-quarters-outlined.svg"
+  },
+  {
+    "name": "loading",
+    "type": "outlined",
+    "tags": "progress, loading",
+    "fileName": "001-loading-outlined.svg"
+  },
+  {
+    "name": "lock",
+    "type": "filled",
+    "tags": "secure, password",
+    "fileName": "001-lock-filled.svg"
+  },
+  {
+    "name": "lock",
+    "type": "outlined",
+    "tags": "secure, password",
+    "fileName": "001-lock-outlined.svg"
+  },
+  {
+    "name": "lock",
+    "type": "twotone",
+    "tags": "secure, password",
+    "fileName": "001-lock-twotone.svg"
+  },
+  {
+    "name": "login",
+    "type": "outlined",
+    "tags": "authenticate, access",
+    "fileName": "001-login-outlined.svg"
+  },
+  {
+    "name": "logout",
+    "type": "outlined",
+    "tags": "exit, session",
+    "fileName": "001-logout-outlined.svg"
+  },
+  {
+    "name": "mac command",
+    "type": "filled",
+    "tags": "keyboard, mac",
+    "fileName": "001-mac-command-filled.svg"
+  },
+  {
+    "name": "mac command",
+    "type": "outlined",
+    "tags": "keyboard, mac",
+    "fileName": "001-mac-command-outlined.svg"
+  },
+  {
+    "name": "mail",
+    "type": "filled",
+    "tags": "email, inbox",
+    "fileName": "001-mail-filled.svg"
+  },
+  {
+    "name": "mail",
+    "type": "outlined",
+    "tags": "email, inbox",
+    "fileName": "001-mail-outlined.svg"
+  },
+  {
+    "name": "mail",
+    "type": "twotone",
+    "tags": "email, inbox",
+    "fileName": "001-mail-twotone.svg"
+  },
+  {
+    "name": "man",
+    "type": "outlined",
+    "tags": "person, user",
+    "fileName": "001-man-outlined.svg"
+  },
+  {
+    "name": "medicine box",
+    "type": "filled",
+    "tags": "health, treatment",
+    "fileName": "001-medicine-box-filled.svg"
+  },
+  {
+    "name": "medicine box",
+    "type": "outlined",
+    "tags": "health, treatment",
+    "fileName": "001-medicine-box-outlined.svg"
+  },
+  {
+    "name": "medicine box",
+    "type": "twotone",
+    "tags": "health, treatment",
+    "fileName": "001-medicine-box-twotone.svg"
+  },
+  {
+    "name": "medium circle",
+    "type": "filled",
+    "tags": "social, platform",
+    "fileName": "001-medium-circle-filled.svg"
+  },
+  {
+    "name": "medium",
+    "type": "outlined",
+    "tags": "social, platform",
+    "fileName": "001-medium-outlined.svg"
+  },
+  {
+    "name": "medium square",
+    "type": "filled",
+    "tags": "social, platform",
+    "fileName": "001-medium-square-filled.svg"
+  },
+  {
+    "name": "medium workmark",
+    "type": "outlined",
+    "tags": "social, platform",
+    "fileName": "001-medium-workmark-outlined.svg"
+  },
+  {
+    "name": "meh",
+    "type": "filled",
+    "tags": "neutral, emoji",
+    "fileName": "001-meh-filled.svg"
+  },
+  {
+    "name": "meh",
+    "type": "outlined",
+    "tags": "neutral, emoji",
+    "fileName": "001-meh-outlined.svg"
+  },
+  {
+    "name": "meh",
+    "type": "twotone",
+    "tags": "neutral, emoji",
+    "fileName": "001-meh-twotone.svg"
+  },
+  {
+    "name": "menu fold",
+    "type": "outlined",
+    "tags": "collapse, menu",
+    "fileName": "001-menu-fold-outlined.svg"
+  },
+  {
+    "name": "menu",
+    "type": "outlined",
+    "tags": "navigation, list",
+    "fileName": "001-menu-outlined.svg"
+  },
+  {
+    "name": "menu unfold",
+    "type": "outlined",
+    "tags": "expand, menu",
+    "fileName": "001-menu-unfold-outlined.svg"
+  },
+  {
+    "name": "merge cells",
+    "type": "outlined",
+    "tags": "combine, table",
+    "fileName": "001-merge-cells-outlined.svg"
+  },
+  {
+    "name": "merge",
+    "type": "filled",
+    "tags": "combine, integration",
+    "fileName": "001-merge-filled.svg"
+  },
+  {
+    "name": "merge",
+    "type": "outlined",
+    "tags": "combine, integration",
+    "fileName": "001-merge-outlined.svg"
+  },
+  {
+    "name": "message",
+    "type": "filled",
+    "tags": "chat, communication",
+    "fileName": "001-message-filled.svg"
+  },
+  {
+    "name": "message",
+    "type": "outlined",
+    "tags": "chat, communication",
+    "fileName": "001-message-outlined.svg"
+  },
+  {
+    "name": "message",
+    "type": "twotone",
+    "tags": "chat, communication",
+    "fileName": "001-message-twotone.svg"
+  },
+  {
+    "name": "minus circle",
+    "type": "filled",
+    "tags": "delete, button",
+    "fileName": "001-minus-circle-filled.svg"
+  },
+  {
+    "name": "minus circle",
+    "type": "outlined",
+    "tags": "delete, button",
+    "fileName": "001-minus-circle-outlined.svg"
+  },
+  {
+    "name": "minus circle",
+    "type": "twotone",
+    "tags": "delete, button",
+    "fileName": "001-minus-circle-twotone.svg"
+  },
+  {
+    "name": "minus",
+    "type": "outlined",
+    "tags": "remove, subtract",
+    "fileName": "001-minus-outlined.svg"
+  },
+  {
+    "name": "minus square",
+    "type": "filled",
+    "tags": "delete, button",
+    "fileName": "001-minus-square-filled.svg"
+  },
+  {
+    "name": "minus square",
+    "type": "outlined",
+    "tags": "delete, button",
+    "fileName": "001-minus-square-outlined.svg"
+  },
+  {
+    "name": "minus square",
+    "type": "twotone",
+    "tags": "delete, button",
+    "fileName": "001-minus-square-twotone.svg"
+  },
+  {
+    "name": "mobile",
+    "type": "filled",
+    "tags": "phone, device",
+    "fileName": "001-mobile-filled.svg"
+  },
+  {
+    "name": "mobile",
+    "type": "outlined",
+    "tags": "phone, device",
+    "fileName": "001-mobile-outlined.svg"
+  },
+  {
+    "name": "mobile",
+    "type": "twotone",
+    "tags": "phone, device",
+    "fileName": "001-mobile-twotone.svg"
+  },
+  {
+    "name": "money collect",
+    "type": "filled",
+    "tags": "payment, collection",
+    "fileName": "001-money-collect-filled.svg"
+  },
+  {
+    "name": "money collect",
+    "type": "outlined",
+    "tags": "payment, collection",
+    "fileName": "001-money-collect-outlined.svg"
+  },
+  {
+    "name": "money collect",
+    "type": "twotone",
+    "tags": "payment, collection",
+    "fileName": "001-money-collect-twotone.svg"
+  },
+  {
+    "name": "monitor",
+    "type": "outlined",
+    "tags": "display, screen",
+    "fileName": "001-monitor-outlined.svg"
+  },
+  {
+    "name": "moon",
+    "type": "filled",
+    "tags": "night, dark",
+    "fileName": "001-moon-filled.svg"
+  },
+  {
+    "name": "moon",
+    "type": "outlined",
+    "tags": "night, dark",
+    "fileName": "001-moon-outlined.svg"
+  },
+  {
+    "name": "more",
+    "type": "outlined",
+    "tags": "options, menu",
+    "fileName": "001-more-outlined.svg"
+  },
+  {
+    "name": "muted",
+    "type": "filled",
+    "tags": "mute, silence",
+    "fileName": "001-muted-filled.svg"
+  },
+  {
+    "name": "muted",
+    "type": "outlined",
+    "tags": "mute, silence",
+    "fileName": "001-muted-outlined.svg"
+  },
+  {
+    "name": "node collapse",
+    "type": "outlined",
+    "tags": "collapse, tree",
+    "fileName": "001-node-collapse-outlined.svg"
+  },
+  {
+    "name": "node expand",
+    "type": "outlined",
+    "tags": "expand, tree",
+    "fileName": "001-node-expand-outlined.svg"
+  },
+  {
+    "name": "node index",
+    "type": "outlined",
+    "tags": "index, tree",
+    "fileName": "001-node-index-outlined.svg"
+  },
+  {
+    "name": "notification",
+    "type": "filled",
+    "tags": "alert, message",
+    "fileName": "001-notification-filled.svg"
+  },
+  {
+    "name": "notification",
+    "type": "outlined",
+    "tags": "alert, message",
+    "fileName": "001-notification-outlined.svg"
+  },
+  {
+    "name": "notification",
+    "type": "twotone",
+    "tags": "alert, message",
+    "fileName": "001-notification-twotone.svg"
+  },
+  {
+    "name": "number",
+    "type": "outlined",
+    "tags": "numeric, count",
+    "fileName": "001-number-outlined.svg"
+  },
+  {
+    "name": "one to one",
+    "type": "outlined",
+    "tags": "messaging, connect",
+    "fileName": "001-one-to-one-outlined.svg"
+  },
+  {
+    "name": "open a i",
+    "type": "filled",
+    "tags": "ai, api",
+    "fileName": "001-open-a-i-filled.svg"
+  },
+  {
+    "name": "open a i",
+    "type": "outlined",
+    "tags": "ai, api",
+    "fileName": "001-open-a-i-outlined.svg"
+  },
+  {
+    "name": "ordered list",
+    "type": "outlined",
+    "tags": "list, order",
+    "fileName": "001-ordered-list-outlined.svg"
+  },
+  {
+    "name": "paper clip",
+    "type": "outlined",
+    "tags": "attach, clip",
+    "fileName": "001-paper-clip-outlined.svg"
+  },
+  {
+    "name": "partition",
+    "type": "outlined",
+    "tags": "divide, segment",
+    "fileName": "001-partition-outlined.svg"
+  },
+  {
+    "name": "pause circle",
+    "type": "filled",
+    "tags": "pause, control",
+    "fileName": "001-pause-circle-filled.svg"
+  },
+  {
+    "name": "pause circle",
+    "type": "outlined",
+    "tags": "pause, control",
+    "fileName": "001-pause-circle-outlined.svg"
+  },
+  {
+    "name": "pause circle",
+    "type": "twotone",
+    "tags": "pause, control",
+    "fileName": "001-pause-circle-twotone.svg"
+  },
+  {
+    "name": "pause",
+    "type": "outlined",
+    "tags": "pause, control",
+    "fileName": "001-pause-outlined.svg"
+  },
+  {
+    "name": "pay circle",
+    "type": "filled",
+    "tags": "payment, wallet",
+    "fileName": "001-pay-circle-filled.svg"
+  },
+  {
+    "name": "pay circle",
+    "type": "outlined",
+    "tags": "payment, wallet",
+    "fileName": "001-pay-circle-outlined.svg"
+  },
+  {
+    "name": "percentage",
+    "type": "outlined",
+    "tags": "math, ratio",
+    "fileName": "001-percentage-outlined.svg"
+  },
+  {
+    "name": "phone",
+    "type": "filled",
+    "tags": "call, contact",
+    "fileName": "001-phone-filled.svg"
+  },
+  {
+    "name": "phone",
+    "type": "outlined",
+    "tags": "call, contact",
+    "fileName": "001-phone-outlined.svg"
+  },
+  {
+    "name": "phone",
+    "type": "twotone",
+    "tags": "call, contact",
+    "fileName": "001-phone-twotone.svg"
+  },
+  {
+    "name": "pic center",
+    "type": "outlined",
+    "tags": "center, image",
+    "fileName": "001-pic-center-outlined.svg"
+  },
+  {
+    "name": "pic left",
+    "type": "outlined",
+    "tags": "left, image",
+    "fileName": "001-pic-left-outlined.svg"
+  },
+  {
+    "name": "pic right",
+    "type": "outlined",
+    "tags": "right, image",
+    "fileName": "001-pic-right-outlined.svg"
+  },
+  {
+    "name": "picture",
+    "type": "filled",
+    "tags": "image, photo",
+    "fileName": "001-picture-filled.svg"
+  },
+  {
+    "name": "picture",
+    "type": "outlined",
+    "tags": "image, photo",
+    "fileName": "001-picture-outlined.svg"
+  },
+  {
+    "name": "picture",
+    "type": "twotone",
+    "tags": "image, photo",
+    "fileName": "001-picture-twotone.svg"
+  },
+  {
+    "name": "pie chart",
+    "type": "filled",
+    "tags": "chart, graph",
+    "fileName": "001-pie-chart-filled.svg"
+  },
+  {
+    "name": "pie chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-pie-chart-outlined.svg"
+  },
+  {
+    "name": "pie chart",
+    "type": "twotone",
+    "tags": "chart, graph",
+    "fileName": "001-pie-chart-twotone.svg"
+  },
+  {
+    "name": "pinterest",
+    "type": "filled",
+    "tags": "social, design",
+    "fileName": "001-pinterest-filled.svg"
+  },
+  {
+    "name": "pinterest",
+    "type": "outlined",
+    "tags": "social, design",
+    "fileName": "001-pinterest-outlined.svg"
+  },
+  {
+    "name": "play circle",
+    "type": "filled",
+    "tags": "play, control",
+    "fileName": "001-play-circle-filled.svg"
+  },
+  {
+    "name": "play circle",
+    "type": "outlined",
+    "tags": "play, control",
+    "fileName": "001-play-circle-outlined.svg"
+  },
+  {
+    "name": "play circle",
+    "type": "twotone",
+    "tags": "play, control",
+    "fileName": "001-play-circle-twotone.svg"
+  },
+  {
+    "name": "play square",
+    "type": "filled",
+    "tags": "play, control",
+    "fileName": "001-play-square-filled.svg"
+  },
+  {
+    "name": "play square",
+    "type": "outlined",
+    "tags": "play, control",
+    "fileName": "001-play-square-outlined.svg"
+  },
+  {
+    "name": "play square",
+    "type": "twotone",
+    "tags": "play, control",
+    "fileName": "001-play-square-twotone.svg"
+  },
+  {
+    "name": "plus circle",
+    "type": "filled",
+    "tags": "add, create",
+    "fileName": "001-plus-circle-filled.svg"
+  },
+  {
+    "name": "plus circle",
+    "type": "outlined",
+    "tags": "add, create",
+    "fileName": "001-plus-circle-outlined.svg"
+  },
+  {
+    "name": "plus circle",
+    "type": "twotone",
+    "tags": "add, create",
+    "fileName": "001-plus-circle-twotone.svg"
+  },
+  {
+    "name": "plus",
+    "type": "outlined",
+    "tags": "add, create",
+    "fileName": "001-plus-outlined.svg"
+  },
+  {
+    "name": "plus square",
+    "type": "filled",
+    "tags": "add, create",
+    "fileName": "001-plus-square-filled.svg"
+  },
+  {
+    "name": "plus square",
+    "type": "outlined",
+    "tags": "add, create",
+    "fileName": "001-plus-square-outlined.svg"
+  },
+  {
+    "name": "plus square",
+    "type": "twotone",
+    "tags": "add, create",
+    "fileName": "001-plus-square-twotone.svg"
+  },
+  {
+    "name": "pound circle",
+    "type": "filled",
+    "tags": "currency, money",
+    "fileName": "001-pound-circle-filled.svg"
+  },
+  {
+    "name": "pound circle",
+    "type": "outlined",
+    "tags": "currency, money",
+    "fileName": "001-pound-circle-outlined.svg"
+  },
+  {
+    "name": "pound circle",
+    "type": "twotone",
+    "tags": "currency, money",
+    "fileName": "001-pound-circle-twotone.svg"
+  },
+  {
+    "name": "pound",
+    "type": "outlined",
+    "tags": "currency, money",
+    "fileName": "001-pound-outlined.svg"
+  },
+  {
+    "name": "poweroff",
+    "type": "outlined",
+    "tags": "shutdown, power",
+    "fileName": "001-poweroff-outlined.svg"
+  },
+  {
+    "name": "printer",
+    "type": "filled",
+    "tags": "print, device",
+    "fileName": "001-printer-filled.svg"
+  },
+  {
+    "name": "printer",
+    "type": "outlined",
+    "tags": "print, device",
+    "fileName": "001-printer-outlined.svg"
+  },
+  {
+    "name": "printer",
+    "type": "twotone",
+    "tags": "print, device",
+    "fileName": "001-printer-twotone.svg"
+  },
+  {
+    "name": "product",
+    "type": "filled",
+    "tags": "item, catalog",
+    "fileName": "001-product-filled.svg"
+  },
+  {
+    "name": "product",
+    "type": "outlined",
+    "tags": "item, catalog",
+    "fileName": "001-product-outlined.svg"
+  },
+  {
+    "name": "profile",
+    "type": "filled",
+    "tags": "user, account",
+    "fileName": "001-profile-filled.svg"
+  },
+  {
+    "name": "profile",
+    "type": "outlined",
+    "tags": "user, account",
+    "fileName": "001-profile-outlined.svg"
+  },
+  {
+    "name": "profile",
+    "type": "twotone",
+    "tags": "user, account",
+    "fileName": "001-profile-twotone.svg"
+  },
+  {
+    "name": "project",
+    "type": "filled",
+    "tags": "task, management",
+    "fileName": "001-project-filled.svg"
+  },
+  {
+    "name": "project",
+    "type": "outlined",
+    "tags": "task, management",
+    "fileName": "001-project-outlined.svg"
+  },
+  {
+    "name": "project",
+    "type": "twotone",
+    "tags": "task, management",
+    "fileName": "001-project-twotone.svg"
+  },
+  {
+    "name": "property safety",
+    "type": "filled",
+    "tags": "security, insurance",
+    "fileName": "001-property-safety-filled.svg"
+  },
+  {
+    "name": "property safety",
+    "type": "outlined",
+    "tags": "security, insurance",
+    "fileName": "001-property-safety-outlined.svg"
+  },
+  {
+    "name": "property safety",
+    "type": "twotone",
+    "tags": "security, insurance",
+    "fileName": "001-property-safety-twotone.svg"
+  },
+  {
+    "name": "pull request",
+    "type": "outlined",
+    "tags": "git, merge",
+    "fileName": "001-pull-request-outlined.svg"
+  },
+  {
+    "name": "pushpin",
+    "type": "filled",
+    "tags": "pin, location",
+    "fileName": "001-pushpin-filled.svg"
+  },
+  {
+    "name": "pushpin",
+    "type": "outlined",
+    "tags": "pin, location",
+    "fileName": "001-pushpin-outlined.svg"
+  },
+  {
+    "name": "pushpin",
+    "type": "twotone",
+    "tags": "pin, location",
+    "fileName": "001-pushpin-twotone.svg"
+  },
+  {
+    "name": "python",
+    "type": "outlined",
+    "tags": "programming, language",
+    "fileName": "001-python-outlined.svg"
+  },
+  {
+    "name": "qq circle",
+    "type": "filled",
+    "tags": "messaging, chat",
+    "fileName": "001-qq-circle-filled.svg"
+  },
+  {
+    "name": "qq",
+    "type": "outlined",
+    "tags": "messaging, chat",
+    "fileName": "001-qq-outlined.svg"
+  },
+  {
+    "name": "qq square",
+    "type": "filled",
+    "tags": "messaging, chat",
+    "fileName": "001-qq-square-filled.svg"
+  },
+  {
+    "name": "qrcode",
+    "type": "outlined",
+    "tags": "scan, barcode",
+    "fileName": "001-qrcode-outlined.svg"
+  },
+  {
+    "name": "question circle",
+    "type": "filled",
+    "tags": "help, support",
+    "fileName": "001-question-circle-filled.svg"
+  },
+  {
+    "name": "question circle",
+    "type": "outlined",
+    "tags": "help, support",
+    "fileName": "001-question-circle-outlined.svg"
+  },
+  {
+    "name": "question circle",
+    "type": "twotone",
+    "tags": "help, support",
+    "fileName": "001-question-circle-twotone.svg"
+  },
+  {
+    "name": "question",
+    "type": "outlined",
+    "tags": "help, support",
+    "fileName": "001-question-outlined.svg"
+  },
+  {
+    "name": "radar chart",
+    "type": "outlined",
+    "tags": "chart, graph",
+    "fileName": "001-radar-chart-outlined.svg"
+  },
+  {
+    "name": "radius bottomleft",
+    "type": "outlined",
+    "tags": "corner, border",
+    "fileName": "001-radius-bottomleft-outlined.svg"
+  },
+  {
+    "name": "radius bottomright",
+    "type": "outlined",
+    "tags": "corner, border",
+    "fileName": "001-radius-bottomright-outlined.svg"
+  },
+  {
+    "name": "radius setting",
+    "type": "outlined",
+    "tags": "corner, border",
+    "fileName": "001-radius-setting-outlined.svg"
+  },
+  {
+    "name": "radius upleft",
+    "type": "outlined",
+    "tags": "corner, border",
+    "fileName": "001-radius-upleft-outlined.svg"
+  },
+  {
+    "name": "radius upright",
+    "type": "outlined",
+    "tags": "corner, border",
+    "fileName": "001-radius-upright-outlined.svg"
+  },
+  {
+    "name": "read",
+    "type": "filled",
+    "tags": "document, view",
+    "fileName": "001-read-filled.svg"
+  },
+  {
+    "name": "read",
+    "type": "outlined",
+    "tags": "document, view",
+    "fileName": "001-read-outlined.svg"
+  },
+  {
+    "name": "reconciliation",
+    "type": "filled",
+    "tags": "audit, verify",
+    "fileName": "001-reconciliation-filled.svg"
+  },
+  {
+    "name": "reconciliation",
+    "type": "outlined",
+    "tags": "audit, verify",
+    "fileName": "001-reconciliation-outlined.svg"
+  },
+  {
+    "name": "reconciliation",
+    "type": "twotone",
+    "tags": "audit, verify",
+    "fileName": "001-reconciliation-twotone.svg"
+  },
+  {
+    "name": "red envelope",
+    "type": "filled",
+    "tags": "gift, money",
+    "fileName": "001-red-envelope-filled.svg"
+  },
+  {
+    "name": "red envelope",
+    "type": "outlined",
+    "tags": "gift, money",
+    "fileName": "001-red-envelope-outlined.svg"
+  },
+  {
+    "name": "red envelope",
+    "type": "twotone",
+    "tags": "gift, money",
+    "fileName": "001-red-envelope-twotone.svg"
+  },
+  {
+    "name": "reddit circle",
+    "type": "filled",
+    "tags": "social, community",
+    "fileName": "001-reddit-circle-filled.svg"
+  },
+  {
+    "name": "reddit",
+    "type": "outlined",
+    "tags": "social, community",
+    "fileName": "001-reddit-outlined.svg"
+  },
+  {
+    "name": "reddit square",
+    "type": "filled",
+    "tags": "social, community",
+    "fileName": "001-reddit-square-filled.svg"
+  },
+  {
+    "name": "redo",
+    "type": "outlined",
+    "tags": "repeat, undo",
+    "fileName": "001-redo-outlined.svg"
+  },
+  {
+    "name": "reload",
+    "type": "outlined",
+    "tags": "refresh, restart",
+    "fileName": "001-reload-outlined.svg"
+  },
+  {
+    "name": "rest",
+    "type": "filled",
+    "tags": "pause, break",
+    "fileName": "001-rest-filled.svg"
+  },
+  {
+    "name": "rest",
+    "type": "outlined",
+    "tags": "pause, break",
+    "fileName": "001-rest-outlined.svg"
+  },
+  {
+    "name": "rest",
+    "type": "twotone",
+    "tags": "pause, break",
+    "fileName": "001-rest-twotone.svg"
+  },
+  {
+    "name": "retweet",
+    "type": "outlined",
+    "tags": "share, social",
+    "fileName": "001-retweet-outlined.svg"
+  },
+  {
+    "name": "right circle",
+    "type": "filled",
+    "tags": "navigate, right",
+    "fileName": "001-right-circle-filled.svg"
+  },
+  {
+    "name": "right circle",
+    "type": "outlined",
+    "tags": "navigate, right",
+    "fileName": "001-right-circle-outlined.svg"
+  },
+  {
+    "name": "right circle",
+    "type": "twotone",
+    "tags": "navigate, right",
+    "fileName": "001-right-circle-twotone.svg"
+  },
+  {
+    "name": "right",
+    "type": "outlined",
+    "tags": "navigate, right",
+    "fileName": "001-right-outlined.svg"
+  },
+  {
+    "name": "right square",
+    "type": "filled",
+    "tags": "navigate, right",
+    "fileName": "001-right-square-filled.svg"
+  },
+  {
+    "name": "right square",
+    "type": "outlined",
+    "tags": "navigate, right",
+    "fileName": "001-right-square-outlined.svg"
+  },
+  {
+    "name": "right square",
+    "type": "twotone",
+    "tags": "navigate, right",
+    "fileName": "001-right-square-twotone.svg"
+  },
+  {
+    "name": "rise",
+    "type": "outlined",
+    "tags": "growth, increase",
+    "fileName": "001-rise-outlined.svg"
+  },
+  {
+    "name": "robot",
+    "type": "filled",
+    "tags": "automation, ai",
+    "fileName": "001-robot-filled.svg"
+  },
+  {
+    "name": "robot",
+    "type": "outlined",
+    "tags": "automation, ai",
+    "fileName": "001-robot-outlined.svg"
+  },
+  {
+    "name": "rocket",
+    "type": "filled",
+    "tags": "launch, speed",
+    "fileName": "001-rocket-filled.svg"
+  },
+  {
+    "name": "rocket",
+    "type": "outlined",
+    "tags": "launch, speed",
+    "fileName": "001-rocket-outlined.svg"
+  },
+  {
+    "name": "rocket",
+    "type": "twotone",
+    "tags": "launch, speed",
+    "fileName": "001-rocket-twotone.svg"
+  },
+  {
+    "name": "rollback",
+    "type": "outlined",
+    "tags": "undo, revert",
+    "fileName": "001-rollback-outlined.svg"
+  },
+  {
+    "name": "rotate left",
+    "type": "outlined",
+    "tags": "rotate, transform",
+    "fileName": "001-rotate-left-outlined.svg"
+  },
+  {
+    "name": "rotate right",
+    "type": "outlined",
+    "tags": "rotate, transform",
+    "fileName": "001-rotate-right-outlined.svg"
+  },
+  {
+    "name": "ruby",
+    "type": "outlined",
+    "tags": "programming, language",
+    "fileName": "001-ruby-outlined.svg"
+  },
+  {
+    "name": "safety certificate",
+    "type": "filled",
+    "tags": "security, verify",
+    "fileName": "001-safety-certificate-filled.svg"
+  },
+  {
+    "name": "safety certificate",
+    "type": "outlined",
+    "tags": "security, verify",
+    "fileName": "001-safety-certificate-outlined.svg"
+  },
+  {
+    "name": "safety certificate",
+    "type": "twotone",
+    "tags": "security, verify",
+    "fileName": "001-safety-certificate-twotone.svg"
+  },
+  {
+    "name": "safety",
+    "type": "outlined",
+    "tags": "security, protection",
+    "fileName": "001-safety-outlined.svg"
+  },
+  {
+    "name": "save",
+    "type": "filled",
+    "tags": "store, backup",
+    "fileName": "001-save-filled.svg"
+  },
+  {
+    "name": "save",
+    "type": "outlined",
+    "tags": "store, backup",
+    "fileName": "001-save-outlined.svg"
+  },
+  {
+    "name": "save",
+    "type": "twotone",
+    "tags": "store, backup",
+    "fileName": "001-save-twotone.svg"
+  },
+  {
+    "name": "scan",
+    "type": "outlined",
+    "tags": "barcode, read",
+    "fileName": "001-scan-outlined.svg"
+  },
+  {
+    "name": "schedule",
+    "type": "filled",
+    "tags": "calendar, plan",
+    "fileName": "001-schedule-filled.svg"
+  },
+  {
+    "name": "schedule",
+    "type": "outlined",
+    "tags": "calendar, plan",
+    "fileName": "001-schedule-outlined.svg"
+  },
+  {
+    "name": "schedule",
+    "type": "twotone",
+    "tags": "calendar, plan",
+    "fileName": "001-schedule-twotone.svg"
+  },
+  {
+    "name": "scissor",
+    "type": "outlined",
+    "tags": "cut, edit",
+    "fileName": "001-scissor-outlined.svg"
+  },
+  {
+    "name": "search",
+    "type": "outlined",
+    "tags": "find, magnify",
+    "fileName": "001-search-outlined.svg"
+  },
+  {
+    "name": "security scan",
+    "type": "filled",
+    "tags": "scan, security",
+    "fileName": "001-security-scan-filled.svg"
+  },
+  {
+    "name": "security scan",
+    "type": "outlined",
+    "tags": "scan, security",
+    "fileName": "001-security-scan-outlined.svg"
+  },
+  {
+    "name": "security scan",
+    "type": "twotone",
+    "tags": "scan, security",
+    "fileName": "001-security-scan-twotone.svg"
+  },
+  {
+    "name": "select",
+    "type": "outlined",
+    "tags": "choose, checkbox",
+    "fileName": "001-select-outlined.svg"
+  },
+  {
+    "name": "send",
+    "type": "outlined",
+    "tags": "submit, forward",
+    "fileName": "001-send-outlined.svg"
+  },
+  {
+    "name": "setting",
+    "type": "filled",
+    "tags": "settings, gear",
+    "fileName": "001-setting-filled.svg"
+  },
+  {
+    "name": "setting",
+    "type": "outlined",
+    "tags": "settings, gear",
+    "fileName": "001-setting-outlined.svg"
+  },
+  {
+    "name": "setting",
+    "type": "twotone",
+    "tags": "settings, gear",
+    "fileName": "001-setting-twotone.svg"
+  },
+  {
+    "name": "shake",
+    "type": "outlined",
+    "tags": "vibrate, alert",
+    "fileName": "001-shake-outlined.svg"
+  },
+  {
+    "name": "share alt",
+    "type": "outlined",
+    "tags": "share, social",
+    "fileName": "001-share-alt-outlined.svg"
+  },
+  {
+    "name": "shop",
+    "type": "filled",
+    "tags": "store, retail",
+    "fileName": "001-shop-filled.svg"
+  },
+  {
+    "name": "shop",
+    "type": "outlined",
+    "tags": "store, retail",
+    "fileName": "001-shop-outlined.svg"
+  },
+  {
+    "name": "shop",
+    "type": "twotone",
+    "tags": "store, retail",
+    "fileName": "001-shop-twotone.svg"
+  },
+  {
+    "name": "shopping cart",
+    "type": "outlined",
+    "tags": "cart, purchase",
+    "fileName": "001-shopping-cart-outlined.svg"
+  },
+  {
+    "name": "shopping",
+    "type": "filled",
+    "tags": "shop, ecommerce",
+    "fileName": "001-shopping-filled.svg"
+  },
+  {
+    "name": "shopping",
+    "type": "outlined",
+    "tags": "shop, ecommerce",
+    "fileName": "001-shopping-outlined.svg"
+  },
+  {
+    "name": "shopping",
+    "type": "twotone",
+    "tags": "shop, ecommerce",
+    "fileName": "001-shopping-twotone.svg"
+  },
+  {
+    "name": "shrink",
+    "type": "outlined",
+    "tags": "collapse, minimize",
+    "fileName": "001-shrink-outlined.svg"
+  },
+  {
+    "name": "signal",
+    "type": "filled",
+    "tags": "strength, signal",
+    "fileName": "001-signal-filled.svg"
+  },
+  {
+    "name": "signature",
+    "type": "filled",
+    "tags": "sign, approve",
+    "fileName": "001-signature-filled.svg"
+  },
+  {
+    "name": "signature",
+    "type": "outlined",
+    "tags": "sign, approve",
+    "fileName": "001-signature-outlined.svg"
+  },
+  {
+    "name": "sisternode",
+    "type": "outlined",
+    "tags": "node, tree",
+    "fileName": "001-sisternode-outlined.svg"
+  },
+  {
+    "name": "sketch circle",
+    "type": "filled",
+    "tags": "design, sketch",
+    "fileName": "001-sketch-circle-filled.svg"
+  },
+  {
+    "name": "sketch",
+    "type": "outlined",
+    "tags": "design, sketch",
+    "fileName": "001-sketch-outlined.svg"
+  },
+  {
+    "name": "sketch square",
+    "type": "filled",
+    "tags": "design, sketch",
+    "fileName": "001-sketch-square-filled.svg"
+  },
+  {
+    "name": "skin",
+    "type": "filled",
+    "tags": "appearance, theme",
+    "fileName": "001-skin-filled.svg"
+  },
+  {
+    "name": "skin",
+    "type": "outlined",
+    "tags": "appearance, theme",
+    "fileName": "001-skin-outlined.svg"
+  },
+  {
+    "name": "skin",
+    "type": "twotone",
+    "tags": "appearance, theme",
+    "fileName": "001-skin-twotone.svg"
+  },
+  {
+    "name": "skype",
+    "type": "filled",
+    "tags": "messaging, call",
+    "fileName": "001-skype-filled.svg"
+  },
+  {
+    "name": "skype",
+    "type": "outlined",
+    "tags": "messaging, call",
+    "fileName": "001-skype-outlined.svg"
+  },
+  {
+    "name": "slack circle",
+    "type": "filled",
+    "tags": "messaging, team",
+    "fileName": "001-slack-circle-filled.svg"
+  },
+  {
+    "name": "slack",
+    "type": "outlined",
+    "tags": "messaging, team",
+    "fileName": "001-slack-outlined.svg"
+  },
+  {
+    "name": "slack square",
+    "type": "filled",
+    "tags": "messaging, team",
+    "fileName": "001-slack-square-filled.svg"
+  },
+  {
+    "name": "slack square",
+    "type": "outlined",
+    "tags": "messaging, team",
+    "fileName": "001-slack-square-outlined.svg"
+  },
+  {
+    "name": "sliders",
+    "type": "filled",
+    "tags": "adjust, settings",
+    "fileName": "001-sliders-filled.svg"
+  },
+  {
+    "name": "sliders",
+    "type": "outlined",
+    "tags": "adjust, settings",
+    "fileName": "001-sliders-outlined.svg"
+  },
+  {
+    "name": "sliders",
+    "type": "twotone",
+    "tags": "adjust, settings",
+    "fileName": "001-sliders-twotone.svg"
+  },
+  {
+    "name": "small dash",
+    "type": "outlined",
+    "tags": "separator, divider",
+    "fileName": "001-small-dash-outlined.svg"
+  },
+  {
+    "name": "smile",
+    "type": "filled",
+    "tags": "happy, emoji",
+    "fileName": "001-smile-filled.svg"
+  },
+  {
+    "name": "smile",
+    "type": "outlined",
+    "tags": "happy, emoji",
+    "fileName": "001-smile-outlined.svg"
+  },
+  {
+    "name": "smile",
+    "type": "twotone",
+    "tags": "happy, emoji",
+    "fileName": "001-smile-twotone.svg"
+  },
+  {
+    "name": "snippets",
+    "type": "filled",
+    "tags": "code, template",
+    "fileName": "001-snippets-filled.svg"
+  },
+  {
+    "name": "snippets",
+    "type": "outlined",
+    "tags": "code, template",
+    "fileName": "001-snippets-outlined.svg"
+  },
+  {
+    "name": "snippets",
+    "type": "twotone",
+    "tags": "code, template",
+    "fileName": "001-snippets-twotone.svg"
+  },
+  {
+    "name": "solution",
+    "type": "outlined",
+    "tags": "resolve, answer",
+    "fileName": "001-solution-outlined.svg"
+  },
+  {
+    "name": "sort ascending",
+    "type": "outlined",
+    "tags": "sort, order",
+    "fileName": "001-sort-ascending-outlined.svg"
+  },
+  {
+    "name": "sort descending",
+    "type": "outlined",
+    "tags": "sort, order",
+    "fileName": "001-sort-descending-outlined.svg"
+  },
+  {
+    "name": "sound",
+    "type": "filled",
+    "tags": "audio, volume",
+    "fileName": "001-sound-filled.svg"
+  },
+  {
+    "name": "sound",
+    "type": "outlined",
+    "tags": "audio, volume",
+    "fileName": "001-sound-outlined.svg"
+  },
+  {
+    "name": "sound",
+    "type": "twotone",
+    "tags": "audio, volume",
+    "fileName": "001-sound-twotone.svg"
+  },
+  {
+    "name": "split cells",
+    "type": "outlined",
+    "tags": "divide, table, cell",
+    "fileName": "001-split-cells-outlined.svg"
+  },
+  {
+    "name": "spotify",
+    "type": "filled",
+    "tags": "music, audio, streaming",
+    "fileName": "001-spotify-filled.svg"
+  },
+  {
+    "name": "spotify",
+    "type": "outlined",
+    "tags": "music, audio, streaming",
+    "fileName": "001-spotify-outlined.svg"
+  },
+  {
+    "name": "star",
+    "type": "filled",
+    "tags": "favorite, rating, highlight",
+    "fileName": "001-star-filled.svg"
+  },
+  {
+    "name": "star",
+    "type": "outlined",
+    "tags": "favorite, rating, highlight",
+    "fileName": "001-star-outlined.svg"
+  },
+  {
+    "name": "star",
+    "type": "twotone",
+    "tags": "favorite, rating, highlight",
+    "fileName": "001-star-twotone.svg"
+  },
+  {
+    "name": "step backward",
+    "type": "filled",
+    "tags": "rewind, previous, frame",
+    "fileName": "001-step-backward-filled.svg"
+  },
+  {
+    "name": "step backward",
+    "type": "outlined",
+    "tags": "rewind, previous, frame",
+    "fileName": "001-step-backward-outlined.svg"
+  },
+  {
+    "name": "step forward",
+    "type": "filled",
+    "tags": "forward, next, frame",
+    "fileName": "001-step-forward-filled.svg"
+  },
+  {
+    "name": "step forward",
+    "type": "outlined",
+    "tags": "forward, next, frame",
+    "fileName": "001-step-forward-outlined.svg"
+  },
+  {
+    "name": "stock",
+    "type": "outlined",
+    "tags": "market, finance, trading",
+    "fileName": "001-stock-outlined.svg"
+  },
+  {
+    "name": "stop",
+    "type": "filled",
+    "tags": "halt, control, pause",
+    "fileName": "001-stop-filled.svg"
+  },
+  {
+    "name": "stop",
+    "type": "outlined",
+    "tags": "halt, control, pause",
+    "fileName": "001-stop-outlined.svg"
+  },
+  {
+    "name": "stop",
+    "type": "twotone",
+    "tags": "halt, control, pause",
+    "fileName": "001-stop-twotone.svg"
+  },
+  {
+    "name": "strikethrough",
+    "type": "outlined",
+    "tags": "delete, text, formatting",
+    "fileName": "001-strikethrough-outlined.svg"
+  },
+  {
+    "name": "subnode",
+    "type": "outlined",
+    "tags": "tree, node, hierarchy",
+    "fileName": "001-subnode-outlined.svg"
+  },
+  {
+    "name": "sun",
+    "type": "filled",
+    "tags": "light, day, bright",
+    "fileName": "001-sun-filled.svg"
+  },
+  {
+    "name": "sun",
+    "type": "outlined",
+    "tags": "light, day, bright",
+    "fileName": "001-sun-outlined.svg"
+  },
+  {
+    "name": "swap left",
+    "type": "outlined",
+    "tags": "exchange, reverse, left",
+    "fileName": "001-swap-left-outlined.svg"
+  },
+  {
+    "name": "swap",
+    "type": "outlined",
+    "tags": "exchange, switch, reverse",
+    "fileName": "001-swap-outlined.svg"
+  },
+  {
+    "name": "swap right",
+    "type": "outlined",
+    "tags": "exchange, reverse, right",
+    "fileName": "001-swap-right-outlined.svg"
+  },
+  {
+    "name": "switcher",
+    "type": "filled",
+    "tags": "toggle, switch, select",
+    "fileName": "001-switcher-filled.svg"
+  },
+  {
+    "name": "switcher",
+    "type": "outlined",
+    "tags": "toggle, switch, select",
+    "fileName": "001-switcher-outlined.svg"
+  },
+  {
+    "name": "switcher",
+    "type": "twotone",
+    "tags": "toggle, switch, select",
+    "fileName": "001-switcher-twotone.svg"
+  },
+  {
+    "name": "sync",
+    "type": "outlined",
+    "tags": "refresh, backup, update",
+    "fileName": "001-sync-outlined.svg"
+  },
+  {
+    "name": "table",
+    "type": "outlined",
+    "tags": "grid, data, spreadsheet",
+    "fileName": "001-table-outlined.svg"
+  },
+  {
+    "name": "tablet",
+    "type": "filled",
+    "tags": "device, mobile, screen",
+    "fileName": "001-tablet-filled.svg"
+  },
+  {
+    "name": "tablet",
+    "type": "outlined",
+    "tags": "device, mobile, screen",
+    "fileName": "001-tablet-outlined.svg"
+  },
+  {
+    "name": "tablet",
+    "type": "twotone",
+    "tags": "device, mobile, screen",
+    "fileName": "001-tablet-twotone.svg"
+  },
+  {
+    "name": "tag",
+    "type": "filled",
+    "tags": "label, category, keyword",
+    "fileName": "001-tag-filled.svg"
+  },
+  {
+    "name": "tag",
+    "type": "outlined",
+    "tags": "label, category, keyword",
+    "fileName": "001-tag-outlined.svg"
+  },
+  {
+    "name": "tag",
+    "type": "twotone",
+    "tags": "label, category, keyword",
+    "fileName": "001-tag-twotone.svg"
+  },
+  {
+    "name": "tags",
+    "type": "filled",
+    "tags": "label, category, keyword",
+    "fileName": "001-tags-filled.svg"
+  },
+  {
+    "name": "tags",
+    "type": "outlined",
+    "tags": "label, category, keyword",
+    "fileName": "001-tags-outlined.svg"
+  },
+  {
+    "name": "tags",
+    "type": "twotone",
+    "tags": "label, category, keyword",
+    "fileName": "001-tags-twotone.svg"
+  },
+  {
+    "name": "taobao circle",
+    "type": "filled",
+    "tags": "shopping, ecommerce, marketplace",
+    "fileName": "001-taobao-circle-filled.svg"
+  },
+  {
+    "name": "taobao circle",
+    "type": "outlined",
+    "tags": "shopping, ecommerce, marketplace",
+    "fileName": "001-taobao-circle-outlined.svg"
+  },
+  {
+    "name": "taobao",
+    "type": "outlined",
+    "tags": "shopping, ecommerce, marketplace",
+    "fileName": "001-taobao-outlined.svg"
+  },
+  {
+    "name": "taobao square",
+    "type": "filled",
+    "tags": "shopping, ecommerce, marketplace",
+    "fileName": "001-taobao-square-filled.svg"
+  },
+  {
+    "name": "team",
+    "type": "outlined",
+    "tags": "people, group, collaboration",
+    "fileName": "001-team-outlined.svg"
+  },
+  {
+    "name": "thunderbolt",
+    "type": "filled",
+    "tags": "lightning, bolt, fast",
+    "fileName": "001-thunderbolt-filled.svg"
+  },
+  {
+    "name": "thunderbolt",
+    "type": "outlined",
+    "tags": "lightning, bolt, fast",
+    "fileName": "001-thunderbolt-outlined.svg"
+  },
+  {
+    "name": "thunderbolt",
+    "type": "twotone",
+    "tags": "lightning, bolt, fast",
+    "fileName": "001-thunderbolt-twotone.svg"
+  },
+  {
+    "name": "tik tok",
+    "type": "filled",
+    "tags": "social, video, app",
+    "fileName": "001-tik-tok-filled.svg"
+  },
+  {
+    "name": "tik tok",
+    "type": "outlined",
+    "tags": "social, video, app",
+    "fileName": "001-tik-tok-outlined.svg"
+  },
+  {
+    "name": "to top",
+    "type": "outlined",
+    "tags": "scroll, navigate, top",
+    "fileName": "001-to-top-outlined.svg"
+  },
+  {
+    "name": "tool",
+    "type": "filled",
+    "tags": "utility, wrench, settings",
+    "fileName": "001-tool-filled.svg"
+  },
+  {
+    "name": "tool",
+    "type": "outlined",
+    "tags": "utility, wrench, settings",
+    "fileName": "001-tool-outlined.svg"
+  },
+  {
+    "name": "tool",
+    "type": "twotone",
+    "tags": "utility, wrench, settings",
+    "fileName": "001-tool-twotone.svg"
+  },
+  {
+    "name": "trademark circle",
+    "type": "filled",
+    "tags": "brand, legal, mark",
+    "fileName": "001-trademark-circle-filled.svg"
+  },
+  {
+    "name": "trademark circle",
+    "type": "outlined",
+    "tags": "brand, legal, mark",
+    "fileName": "001-trademark-circle-outlined.svg"
+  },
+  {
+    "name": "trademark circle",
+    "type": "twotone",
+    "tags": "brand, legal, mark",
+    "fileName": "001-trademark-circle-twotone.svg"
+  },
+  {
+    "name": "trademark",
+    "type": "outlined",
+    "tags": "brand, legal, mark",
+    "fileName": "001-trademark-outlined.svg"
+  },
+  {
+    "name": "transaction",
+    "type": "outlined",
+    "tags": "payment, transfer, exchange",
+    "fileName": "001-transaction-outlined.svg"
+  },
+  {
+    "name": "translation",
+    "type": "outlined",
+    "tags": "language, translate, global",
+    "fileName": "001-translation-outlined.svg"
+  },
+  {
+    "name": "trophy",
+    "type": "filled",
+    "tags": "award, achievement, win",
+    "fileName": "001-trophy-filled.svg"
+  },
+  {
+    "name": "trophy",
+    "type": "outlined",
+    "tags": "award, achievement, win",
+    "fileName": "001-trophy-outlined.svg"
+  },
+  {
+    "name": "trophy",
+    "type": "twotone",
+    "tags": "award, achievement, win",
+    "fileName": "001-trophy-twotone.svg"
+  },
+  {
+    "name": "truck",
+    "type": "filled",
+    "tags": "delivery, shipping, transport",
+    "fileName": "001-truck-filled.svg"
+  },
+  {
+    "name": "truck",
+    "type": "outlined",
+    "tags": "delivery, shipping, transport",
+    "fileName": "001-truck-outlined.svg"
+  },
+  {
+    "name": "twitch",
+    "type": "outlined",
+    "tags": "social, streaming, broadcast",
+    "fileName": "001-twitch-outlined.svg"
+  },
+  {
+    "name": "twitter circle",
+    "type": "filled",
+    "tags": "social, messaging, platform",
+    "fileName": "001-twitter-circle-filled.svg"
+  },
+  {
+    "name": "twitter",
+    "type": "outlined",
+    "tags": "social, messaging, platform",
+    "fileName": "001-twitter-outlined.svg"
+  },
+  {
+    "name": "twitter square",
+    "type": "filled",
+    "tags": "social, messaging, platform",
+    "fileName": "001-twitter-square-filled.svg"
+  },
+  {
+    "name": "underline",
+    "type": "outlined",
+    "tags": "text, formatting, decoration",
+    "fileName": "001-underline-outlined.svg"
+  },
+  {
+    "name": "undo",
+    "type": "outlined",
+    "tags": "revert, undo, back",
+    "fileName": "001-undo-outlined.svg"
+  },
+  {
+    "name": "ungroup",
+    "type": "outlined",
+    "tags": "separate, dissolve, split",
+    "fileName": "001-ungroup-outlined.svg"
+  },
+  {
+    "name": "unlock",
+    "type": "filled",
+    "tags": "secure, password, access",
+    "fileName": "001-unlock-filled.svg"
+  },
+  {
+    "name": "unlock",
+    "type": "outlined",
+    "tags": "secure, password, access",
+    "fileName": "001-unlock-outlined.svg"
+  },
+  {
+    "name": "unlock",
+    "type": "twotone",
+    "tags": "secure, password, access",
+    "fileName": "001-unlock-twotone.svg"
+  },
+  {
+    "name": "unordered list",
+    "type": "outlined",
+    "tags": "list, bullet, format",
+    "fileName": "001-unordered-list-outlined.svg"
+  },
+  {
+    "name": "up circle",
+    "type": "filled",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-circle-filled.svg"
+  },
+  {
+    "name": "up circle",
+    "type": "outlined",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-circle-outlined.svg"
+  },
+  {
+    "name": "up circle",
+    "type": "twotone",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-circle-twotone.svg"
+  },
+  {
+    "name": "up",
+    "type": "outlined",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-outlined.svg"
+  },
+  {
+    "name": "up square",
+    "type": "filled",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-square-filled.svg"
+  },
+  {
+    "name": "up square",
+    "type": "outlined",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-square-outlined.svg"
+  },
+  {
+    "name": "up square",
+    "type": "twotone",
+    "tags": "navigate, up, direction",
+    "fileName": "001-up-square-twotone.svg"
+  },
+  {
+    "name": "upload",
+    "type": "outlined",
+    "tags": "transfer, cloud, send",
+    "fileName": "001-upload-outlined.svg"
+  },
+  {
+    "name": "usb",
+    "type": "filled",
+    "tags": "device, connection, port",
+    "fileName": "001-usb-filled.svg"
+  },
+  {
+    "name": "usb",
+    "type": "outlined",
+    "tags": "device, connection, port",
+    "fileName": "001-usb-outlined.svg"
+  },
+  {
+    "name": "usb",
+    "type": "twotone",
+    "tags": "device, connection, port",
+    "fileName": "001-usb-twotone.svg"
+  },
+  {
+    "name": "user add",
+    "type": "outlined",
+    "tags": "create, people, add",
+    "fileName": "001-user-add-outlined.svg"
+  },
+  {
+    "name": "user delete",
+    "type": "outlined",
+    "tags": "remove, people, delete",
+    "fileName": "001-user-delete-outlined.svg"
+  },
+  {
+    "name": "user",
+    "type": "outlined",
+    "tags": "person, account, profile",
+    "fileName": "001-user-outlined.svg"
+  },
+  {
+    "name": "user switch",
+    "type": "outlined",
+    "tags": "change, people, swap",
+    "fileName": "001-user-switch-outlined.svg"
+  },
+  {
+    "name": "usergroup add",
+    "type": "outlined",
+    "tags": "team, group, add",
+    "fileName": "001-usergroup-add-outlined.svg"
+  },
+  {
+    "name": "usergroup delete",
+    "type": "outlined",
+    "tags": "team, group, remove",
+    "fileName": "001-usergroup-delete-outlined.svg"
+  },
+  {
+    "name": "verified",
+    "type": "outlined",
+    "tags": "check, confirm, authentic",
+    "fileName": "001-verified-outlined.svg"
+  },
+  {
+    "name": "vertical align bottom",
+    "type": "outlined",
+    "tags": "align, position, bottom",
+    "fileName": "001-vertical-align-bottom-outlined.svg"
+  },
+  {
+    "name": "vertical align middle",
+    "type": "outlined",
+    "tags": "align, position, center",
+    "fileName": "001-vertical-align-middle-outlined.svg"
+  },
+  {
+    "name": "vertical align top",
+    "type": "outlined",
+    "tags": "align, position, top",
+    "fileName": "001-vertical-align-top-outlined.svg"
+  },
+  {
+    "name": "vertical left",
+    "type": "outlined",
+    "tags": "divider, line, separator",
+    "fileName": "001-vertical-left-outlined.svg"
+  },
+  {
+    "name": "vertical right",
+    "type": "outlined",
+    "tags": "divider, line, separator",
+    "fileName": "001-vertical-right-outlined.svg"
+  },
+  {
+    "name": "video camera add",
+    "type": "outlined",
+    "tags": "create, video, add",
+    "fileName": "001-video-camera-add-outlined.svg"
+  },
+  {
+    "name": "video camera",
+    "type": "filled",
+    "tags": "video, record, camera",
+    "fileName": "001-video-camera-filled.svg"
+  },
+  {
+    "name": "video camera",
+    "type": "outlined",
+    "tags": "video, record, camera",
+    "fileName": "001-video-camera-outlined.svg"
+  },
+  {
+    "name": "video camera",
+    "type": "twotone",
+    "tags": "video, record, camera",
+    "fileName": "001-video-camera-twotone.svg"
+  },
+  {
+    "name": "wallet",
+    "type": "filled",
+    "tags": "payment, money, finance",
+    "fileName": "001-wallet-filled.svg"
+  },
+  {
+    "name": "wallet",
+    "type": "outlined",
+    "tags": "payment, money, finance",
+    "fileName": "001-wallet-outlined.svg"
+  },
+  {
+    "name": "wallet",
+    "type": "twotone",
+    "tags": "payment, money, finance",
+    "fileName": "001-wallet-twotone.svg"
+  },
+  {
+    "name": "warning",
+    "type": "filled",
+    "tags": "alert, caution, danger",
+    "fileName": "001-warning-filled.svg"
+  },
+  {
+    "name": "warning",
+    "type": "outlined",
+    "tags": "alert, caution, danger",
+    "fileName": "001-warning-outlined.svg"
+  },
+  {
+    "name": "warning",
+    "type": "twotone",
+    "tags": "alert, caution, danger",
+    "fileName": "001-warning-twotone.svg"
+  },
+  {
+    "name": "wechat",
+    "type": "filled",
+    "tags": "messaging, chat, social",
+    "fileName": "001-wechat-filled.svg"
+  },
+  {
+    "name": "wechat",
+    "type": "outlined",
+    "tags": "messaging, chat, social",
+    "fileName": "001-wechat-outlined.svg"
+  },
+  {
+    "name": "wechat work",
+    "type": "filled",
+    "tags": "messaging, chat, team",
+    "fileName": "001-wechat-work-filled.svg"
+  },
+  {
+    "name": "wechat work",
+    "type": "outlined",
+    "tags": "messaging, chat, team",
+    "fileName": "001-wechat-work-outlined.svg"
+  },
+  {
+    "name": "weibo circle",
+    "type": "filled",
+    "tags": "social, messaging, platform",
+    "fileName": "001-weibo-circle-filled.svg"
+  },
+  {
+    "name": "weibo circle",
+    "type": "outlined",
+    "tags": "social, messaging, platform",
+    "fileName": "001-weibo-circle-outlined.svg"
+  },
+  {
+    "name": "weibo",
+    "type": "outlined",
+    "tags": "social, messaging, platform",
+    "fileName": "001-weibo-outlined.svg"
+  },
+  {
+    "name": "weibo square",
+    "type": "filled",
+    "tags": "social, messaging, platform",
+    "fileName": "001-weibo-square-filled.svg"
+  },
+  {
+    "name": "weibo square",
+    "type": "outlined",
+    "tags": "social, messaging, platform",
+    "fileName": "001-weibo-square-outlined.svg"
+  },
+  {
+    "name": "whats app",
+    "type": "outlined",
+    "tags": "messaging, chat, social",
+    "fileName": "001-whats-app-outlined.svg"
+  },
+  {
+    "name": "wifi",
+    "type": "outlined",
+    "tags": "network, connection, internet",
+    "fileName": "001-wifi-outlined.svg"
+  },
+  {
+    "name": "windows",
+    "type": "filled",
+    "tags": "operating system, app",
+    "fileName": "001-windows-filled.svg"
+  },
+  {
+    "name": "windows",
+    "type": "outlined",
+    "tags": "operating system, app",
+    "fileName": "001-windows-outlined.svg"
+  },
+  {
+    "name": "woman",
+    "type": "outlined",
+    "tags": "person, user, gender",
+    "fileName": "001-woman-outlined.svg"
+  },
+  {
+    "name": "x",
+    "type": "filled",
+    "tags": "close, delete, remove",
+    "fileName": "001-x-filled.svg"
+  },
+  {
+    "name": "x",
+    "type": "outlined",
+    "tags": "close, delete, remove",
+    "fileName": "001-x-outlined.svg"
+  },
+  {
+    "name": "yahoo",
+    "type": "filled",
+    "tags": "search, web, email",
+    "fileName": "001-yahoo-filled.svg"
+  },
+  {
+    "name": "yahoo",
+    "type": "outlined",
+    "tags": "search, web, email",
+    "fileName": "001-yahoo-outlined.svg"
+  },
+  {
+    "name": "youtube",
+    "type": "filled",
+    "tags": "video, social, streaming",
+    "fileName": "001-youtube-filled.svg"
+  },
+  {
+    "name": "youtube",
+    "type": "outlined",
+    "tags": "video, social, streaming",
+    "fileName": "001-youtube-outlined.svg"
+  },
+  {
+    "name": "yuque",
+    "type": "filled",
+    "tags": "documentation, knowledge, notes",
+    "fileName": "001-yuque-filled.svg"
+  },
+  {
+    "name": "yuque",
+    "type": "outlined",
+    "tags": "documentation, knowledge, notes",
+    "fileName": "001-yuque-outlined.svg"
+  },
+  {
+    "name": "zhihu circle",
+    "type": "filled",
+    "tags": "social, knowledge, community",
+    "fileName": "001-zhihu-circle-filled.svg"
+  },
+  {
+    "name": "zhihu",
+    "type": "outlined",
+    "tags": "social, knowledge, community",
+    "fileName": "001-zhihu-outlined.svg"
+  },
+  {
+    "name": "zhihu square",
+    "type": "filled",
+    "tags": "social, knowledge, community",
+    "fileName": "001-zhihu-square-filled.svg"
+  },
+  {
+    "name": "zoom in",
+    "type": "outlined",
+    "tags": "magnify, enlarge, view",
+    "fileName": "001-zoom-in-outlined.svg"
+  },
+  {
+    "name": "zoom out",
+    "type": "outlined",
+    "tags": "shrink, reduce, view",
+    "fileName": "001-zoom-out-outlined.svg"
+  }
+]
