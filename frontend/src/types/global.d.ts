@@ -1,6 +1,3 @@
-declare module "i18nwrap";
-declare module "incstr";
-declare module "postcss-csso";
 declare module "*.module.css";
 declare module "*.module.scss";
 declare module "*.module.sass";
