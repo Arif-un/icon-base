@@ -1,15 +1,13 @@
 import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import type React from "react";
 
-import { useShadowRoot } from "../bootstrap/createReactShadow";
+import { DevtoolsPortal } from "../components/DevtoolsPortal";
 
 export const Route = createRootRoute({
   component: RootLayout,
 });
 
 function RootLayout() {
-  const shadowRoot = useShadowRoot();
-
   return (
     <div style={{ display: "flex" }}>
       <nav style={{ width: 200, padding: 16, borderRight: "1px solid #e0e0e0" }}>
@@ -24,7 +22,7 @@ function RootLayout() {
       <main style={{ flex: 1, padding: 24 }}>
         <Outlet />
       </main>
-      <TanStackRouterDevtools position="bottom-right" shadowDOMTarget={shadowRoot} />
+      <DevtoolsPortal />
     </div>
   );
 }
