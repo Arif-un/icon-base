@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="BitApps/wpp">
+<ruleset name="IconBase/wpp">
   <description>Coding standard used for wp plugin dev.</description>
   <file>./backend</file>
   <exclude-pattern>*/tests/*</exclude-pattern>
@@ -22,7 +22,9 @@
   <config name="minimum_supported_wp_version" value="5.8" />
   <rule ref="WordPress.WP.I18n">
     <properties>
-      <property name="text_domain" type="array" value="wp-starter-kit" />
+      <property name="text_domain" type="array">
+        <element value="icon-base" />
+      </property>
     </properties>
   </rule>
 
