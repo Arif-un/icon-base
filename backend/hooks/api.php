@@ -4,6 +4,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use IconBase\Deps\BitApps\WPKit\Http\Router\Route;
+use IconBase\HTTP\Controllers\IconController;
 
-// example route
-//Route::post('test_route', [TestController::class, 'handle']);
+Route::group(
+    static function (): void {
+        Route::get('icons', [IconController::class, 'index']);
+        Route::post('icons', [IconController::class, 'store']);
+        Route::post('icons/update', [IconController::class, 'update']);
+        Route::post('icons/delete', [IconController::class, 'destroy']);
+    }
+)->middleware('nonce', 'isAdmin');
