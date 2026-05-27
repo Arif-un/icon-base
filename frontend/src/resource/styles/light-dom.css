@@ -1,0 +1,39 @@
+body,
+html {
+  font-optical-sizing: auto;
+  height: 100%;
+}
+
+html body #wpcontent {
+  padding-left: 0;
+  transition: margin 100ms ease;
+}
+#adminmenuback,
+#adminmenuwrap {
+  transition: width 100ms ease;
+}
+
+#wp-starter-kit-root {
+  direction: ltr;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  font-size: 16px;
+  overflow: auto;
+  isolation: isolate;
+}
+
+a:focus {
+  box-shadow: initial;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100vw;
+  background-color: #a9a9a9b8;
+}
+
+::-webkit-scrollbar {
+  width: 0.4em;
+  padding: 20px;
+}
