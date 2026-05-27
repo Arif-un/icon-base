@@ -1,4 +1,5 @@
 <?php
+
 namespace IconBase;
 
 use IconBase\src\Menu;

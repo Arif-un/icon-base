@@ -6,12 +6,12 @@ if (!\defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
 
 class Body
 {
     public function render()
     {
+        // phpcs:ignore Generic.PHP.ForbiddenFunctions.FoundWithAlternative
         echo '<div id="wp-starter-kit-root"></div>';
     }
 }

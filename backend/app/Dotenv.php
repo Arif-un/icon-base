@@ -1,7 +1,7 @@
 <?php
+
 namespace IconBase;
 
-use IconBase\Config;
 use WP_CLI;
 
 if (! \defined('ABSPATH')) {

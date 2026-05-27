@@ -13,7 +13,9 @@ use IconBase\Deps\BitApps\WPKit\Installer;
 final class InstallerProvider
 {
     private $_activateHook;
+
     private $_deactivateHook;
+
     private static $_uninstallHook;
 
     public function __construct()
