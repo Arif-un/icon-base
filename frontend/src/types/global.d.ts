@@ -5,8 +5,11 @@ declare module "*.svg";
 declare module "*.png";
 declare module "*.json";
 
-declare let wp;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let wp: any;
 declare const VITE_PLUGIN_HAS_SUBMODULE_UPDATES: boolean;
+
+type WPStarterKitPromise<T> = Promise<T>;
 
 declare const SERVER_VARIABLES: {
   ajaxURL: string;

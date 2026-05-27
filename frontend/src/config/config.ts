@@ -4,8 +4,7 @@ type GetServerVariableType = <K extends keyof typeof SERVER_VARIABLES>(
 ) => (typeof SERVER_VARIABLES)[K];
 
 const getServerVariable: GetServerVariableType = (key, fallback) => {
-  if (!key && fallback) return fallback;
-  if (!(key in SERVER_VARIABLES) || !SERVER_VARIABLES?.[key]) {
+  if (!(key in SERVER_VARIABLES) || !SERVER_VARIABLES[key]) {
     if (import.meta.env.MODE !== "test") {
       console.error("🚥 Missing server variable:", key);
     }

@@ -1,8 +1,9 @@
 import { StyleProvider } from "@ant-design/cssinjs";
 import { App, ConfigProvider } from "antd";
 import { createContext, useContext, type ReactNode } from "react";
-import { antdTheme } from "../config/antdTheme";
 import { createRoot } from "react-dom/client";
+
+import { antdTheme } from "../config/antdTheme";
 
 type Options = {
   children: ReactNode;

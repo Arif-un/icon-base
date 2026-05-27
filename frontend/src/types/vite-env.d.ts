@@ -4,6 +4,5 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-interface ImportMetaEnv {
-  // more env variables...
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface ImportMetaEnv {}
