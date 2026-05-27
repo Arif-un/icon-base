@@ -18,7 +18,7 @@ interface IconEntry {
   name: string
   fileName: string
   type?: string
-  tags?: string
+  tags?: string | string[]
 }
 
 const data: IconEntry[] = JSON.parse(readFileSync(resolve(jsonPath), 'utf-8'))
@@ -53,7 +53,7 @@ for (const entry of data) {
       name: entry.name,
       filename: entry.fileName,
       typeId,
-      tags: entry.tags,
+      tags: Array.isArray(entry.tags) ? entry.tags.join(', ') : entry.tags,
       libraryId,
     })
     .onConflictDoNothing()
