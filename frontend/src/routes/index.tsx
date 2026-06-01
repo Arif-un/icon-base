@@ -1,39 +1,75 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Button, Modal } from "antd";
-import { useState } from "react";
+import { Pagination, Spin } from "antd";
+import { useMemo, useState } from "react";
+
+import { useIcons } from "@/common/hooks/useIcons";
+import { useLibraries } from "@/common/hooks/useLibraries";
+import IconRender from "@/components/IconRender";
 
 export const Route = createFileRoute("/")({
-  component: Dashboard,
+  component: Icons,
 });
 
-function Dashboard() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const PAGE_SIZE = 100;
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+function Icons() {
+  const [page, setPage] = useState(1);
+  const { data: icons, isLoading, error } = useIcons(page, PAGE_SIZE);
+  const { data: libraries } = useLibraries();
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+  const libraryDirMap = useMemo(() => {
+    const map: Record<number, string> = {};
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+    if (!libraries) return map;
+
+    for (let i = 0; i < libraries.length; i++) {
+      const id = libraries[i].id;
+      const slug = libraries[i].slug;
+
+      map[id] = `${String(id).padStart(3, "0")}-${slug}`;
+    }
+
+    return map;
+  }, [libraries]);
 
   return (
-    <div className="">
-      <Button type="primary" onClick={showModal}>
-        Click Me
-      </Button>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
-
-      <h1>Dashboard</h1>
-      <p>Welcome to Icon Base Plugin. Your plugin is active and running successfully.</p>
+    <div>
+      {isLoading && <Spin />}
+      {error ? <p>Failed to load icons</p> : null}
+      <div className="mx-2 flex flex-wrap justify-center gap-1">
+        {icons?.items.map(
+          (icon: { id: number; name: string; filename: string; library_id: number }) => (
+            <div
+              key={icon.id}
+              className="flex w-20 flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
+              title={icon.name}
+            >
+              <IconRender
+                fileName={icon.filename}
+                libraryDir={libraryDirMap[icon.library_id] ?? ""}
+                size={32}
+              />
+              <span className="max-w-[95%] truncate text-[10px] text-gray-500 capitalize">
+                {icon.name}
+              </span>
+            </div>
+          ),
+        )}
+      </div>
+      {icons && icons.total > PAGE_SIZE && (
+        <div className="mt-4 flex justify-center">
+          <Pagination
+            current={icons.page}
+            pageSize={PAGE_SIZE}
+            total={icons.total}
+            onChange={setPage}
+            showSizeChanger={false}
+            showTotal={(total: number, range: [number, number]) =>
+              `${range[0]}-${range[1]} of ${total}`
+            }
+          />
+        </div>
+      )}
     </div>
   );
 }

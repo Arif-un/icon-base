@@ -12,12 +12,15 @@ use IconBase\Models\Icons;
 
 class IconController
 {
-    // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- framework signature
     public function index(Request $request)
     {
-        $icons = Icons::getAll();
+        $page = absint($request->get('page')) ?: 1;
+        $perPage = absint($request->get('per_page')) ?: 100;
+        $perPage = min($perPage, 200);
 
-        return Response::success($icons);
+        $result = Icons::getPaginated($page, $perPage);
+
+        return Response::success($result);
     }
 
     public function store(Request $request)

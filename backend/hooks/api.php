@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 
 use IconBase\Deps\BitApps\WPKit\Http\Router\Route;
 use IconBase\HTTP\Controllers\IconController;
+use IconBase\HTTP\Controllers\LibraryController;
 
 Route::group(
     static function (): void {
@@ -13,5 +14,7 @@ Route::group(
         Route::post('icons', [IconController::class, 'store']);
         Route::post('icons/update', [IconController::class, 'update']);
         Route::post('icons/delete', [IconController::class, 'destroy']);
+
+        Route::get('libraries', [LibraryController::class, 'index']);
     }
 )->middleware('nonce', 'isAdmin');

@@ -1,4 +1,4 @@
-import config from "@config/config";
+import config from "@/config/config";
 
 // Types
 export type ApiResponseType = Record<string, number | string>;
@@ -128,15 +128,13 @@ export async function request<T>(
   method: MethodType = "POST",
   options?: RequestOptions,
 ): WPStarterKitPromise<Response<T>> {
-  return queryRequest<T>(action, data, queryParam, method, options).catch(
-    (error: unknown) =>
-      error instanceof RequestError ? error.response : (error as Response<T>),
+  return queryRequest<T>(action, data, queryParam, method, options).catch((error: unknown) =>
+    error instanceof RequestError ? error.response : (error as Response<T>),
   );
 }
 
 export async function proxyRequest<T>(data: EndpointType): WPStarterKitPromise<Response<T>> {
-  return queryRequest<T>("proxy/route", data).catch(
-    (error: unknown) =>
-      error instanceof RequestError ? error.response : (error as Response<T>),
+  return queryRequest<T>("proxy/route", data).catch((error: unknown) =>
+    error instanceof RequestError ? error.response : (error as Response<T>),
   );
 }

@@ -1,4 +1,4 @@
-import config from "@config/config";
+import config from "@/config/config";
 
 interface RestRequestOptions {
   method?: "DELETE" | "GET" | "POST" | "PUT";
@@ -40,9 +40,7 @@ export async function restRequest<T>(
     const params = new URLSearchParams();
     for (const [key, value] of Object.entries(options.body)) {
       if (value != null) {
-        const strValue =
-          typeof value === "object" ? JSON.stringify(value) : String(value);
-        params.append(key, strValue);
+        params.append(key, typeof value === "string" ? value : JSON.stringify(value));
       }
     }
     fetchOptions.body = params;

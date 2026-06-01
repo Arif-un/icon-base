@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "bundler",
-
     /* Strictness */
     "strict": true,
     "noUnusedParameters": true,
@@ -12,45 +15,37 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": true,
-
     /* Module */
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowJs": true,
-
     /* Emit */
     "noEmit": true,
     "useDefineForClassFields": true,
     "skipLibCheck": true,
-
     /* JSX */
     "jsx": "react-jsx",
-
     /* Types */
-    "types": ["node", "vite/client"],
-    "typeRoots": ["./frontend/src/types", "./node_modules/@types"],
-
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "typeRoots": [
+      "./frontend/src/types",
+      "./node_modules/@types"
+    ],
     /* Plugins */
     "plugins": [
       {
         "name": "typescript-plugin-css-modules"
       }
     ],
-
     /* Paths */
     "paths": {
-      "@common/*": ["./frontend/src/common/*"],
-      "@features/*": ["./frontend/src/components/features/*"],
-      "@utilities/*": ["./frontend/src/components/utilities/*"],
-      "@components/*": ["./frontend/src/components/*"],
-      "@icons/*": ["./frontend/src/icons/*"],
-      "@resource/*": ["./frontend/src/resource/*"],
-      "@pages/*": ["./frontend/src/pages/*"],
-      "@static/*": ["./frontend/src/static/*"],
-      "@config/*": ["./frontend/src/config/*"],
-      "@/*": ["./frontend/src/*"],
-      "@plugin-commons/*": ["./frontend/src/*"]
+      "@/*": [
+        "./frontend/src/*"
+      ],
     }
   },
   "include": [
@@ -58,5 +53,7 @@
     "./frontend/src/types",
     "./scripts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

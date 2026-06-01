@@ -20,6 +20,31 @@ class Icons
         return $stmt->fetchAll();
     }
 
+    public static function getPaginated(int $page = 1, int $perPage = 100): array
+    {
+        $pdo = SQLiteDB::instance()->pdo();
+
+        $countStmt = $pdo->query('SELECT COUNT(*) FROM ' . self::TABLE);
+        $total = (int) $countStmt->fetchColumn();
+
+        $totalPages = (int) ceil($total / $perPage);
+        $page = max(1, min($page, max(1, $totalPages)));
+        $offset = ($page - 1) * $perPage;
+
+        $stmt = $pdo->prepare('SELECT * FROM ' . self::TABLE . ' ORDER BY id ASC LIMIT :limit OFFSET :offset');
+        $stmt->bindValue(':limit', $perPage, \PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return [
+            'items'      => $stmt->fetchAll(),
+            'total'      => $total,
+            'page'       => $page,
+            'per_page'   => $perPage,
+            'total_pages' => $totalPages,
+        ];
+    }
+
     public static function getById(int $id): ?array
     {
         $pdo = SQLiteDB::instance()->pdo();
