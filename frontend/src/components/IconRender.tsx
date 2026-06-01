@@ -1,7 +1,7 @@
+import DOMPurify from "dompurify";
 import { useEffect, useState } from "react";
 
 import config from "@/config/config";
-import DOMPurify from "dompurify";
 
 const svgCache: Record<string, string> = {};
 
@@ -23,10 +23,14 @@ export default function IconRender({
   fileName,
   libraryDir,
   size = 24,
+  iconWidth,
+  iconHeight,
 }: {
   fileName: string;
   libraryDir: string;
   size?: number;
+  iconWidth?: number;
+  iconHeight?: number;
 }) {
   const path = `${sanitizePathSegment(libraryDir)}/${sanitizePathSegment(fileName)}`;
   const [svgContent, setSvgContent] = useState<string | null>(svgCache[path] ?? null);
@@ -66,7 +70,7 @@ export default function IconRender({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1024 1024"
+      viewBox={`0 0 ${String(iconWidth ?? 1024)} ${String(iconHeight ?? 1024)}`}
       width={size}
       height={size}
       fill="currentColor"

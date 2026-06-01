@@ -17,16 +17,19 @@ function Icons() {
   const { data: icons, isLoading, error } = useIcons(page, PAGE_SIZE);
   const { data: libraries } = useLibraries();
 
-  const libraryDirMap = useMemo(() => {
-    const map: Record<number, string> = {};
+  const libraryMap = useMemo(() => {
+    const map: Record<number, { dir: string; w?: number; h?: number }> = {};
 
     if (!libraries) return map;
 
     for (let i = 0; i < libraries.length; i++) {
-      const id = libraries[i].id;
-      const slug = libraries[i].slug;
+      const { id, slug, meta } = libraries[i];
 
-      map[id] = `${String(id).padStart(3, "0")}-${slug}`;
+      map[id] = {
+        dir: `${String(id).padStart(3, "0")}-${slug}`,
+        w: meta?.w,
+        h: meta?.h,
+      };
     }
 
     return map;
@@ -38,22 +41,30 @@ function Icons() {
       {error ? <p>Failed to load icons</p> : null}
       <div className="mx-2 flex flex-wrap justify-center gap-1">
         {icons?.items.map(
-          (icon: { id: number; name: string; filename: string; library_id: number }) => (
-            <div
-              key={icon.id}
-              className="flex w-20 flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
-              title={icon.name}
-            >
-              <IconRender
-                fileName={icon.filename}
-                libraryDir={libraryDirMap[icon.library_id] ?? ""}
-                size={32}
-              />
-              <span className="max-w-[95%] truncate text-[10px] text-gray-500 capitalize">
-                {icon.name}
-              </span>
-            </div>
-          ),
+          (icon: { id: number; name: string; filename: string; library_id: number }) => {
+            const lib = libraryMap[icon.library_id] as
+              | { dir: string; w?: number; h?: number }
+              | undefined;
+
+            return (
+              <div
+                key={icon.id}
+                className="flex w-20 flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
+                title={icon.name}
+              >
+                <IconRender
+                  fileName={icon.filename}
+                  libraryDir={lib?.dir ?? ""}
+                  iconWidth={lib?.w}
+                  iconHeight={lib?.h}
+                  size={32}
+                />
+                <span className="max-w-[95%] truncate text-[10px] text-gray-500 capitalize">
+                  {icon.name}
+                </span>
+              </div>
+            );
+          },
         )}
       </div>
       {icons && icons.total > PAGE_SIZE && (
