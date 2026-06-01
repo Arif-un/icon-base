@@ -9,7 +9,7 @@ export const library = sqliteTable('library', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   slug: text('slug').unique().notNull(),
   name: text('name').notNull(),
-  meta: text('meta'),
+  meta: text('meta', { mode: 'json' }),
 })
 
 export const icons = sqliteTable('icons', {
