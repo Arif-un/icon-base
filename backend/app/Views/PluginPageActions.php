@@ -15,11 +15,11 @@ class PluginPageActions
         return [
             [
                 'url'   => admin_url('admin.php?page=' . Config::SLUG),
-                'title' => __('Settings', 'wp-starter-kit'),
+                'title' => __('Settings', 'icon-base'),
             ],
             [
                 'url'   => 'https://johndoe.com/support',
-                'title' => __('Support', 'wp-starter-kit'),
+                'title' => __('Support', 'icon-base'),
             ],
         ];
     }
