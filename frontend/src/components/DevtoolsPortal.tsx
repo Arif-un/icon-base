@@ -5,30 +5,30 @@ const TanStackRouterDevtools = import.meta.env.DEV
   ? React.lazy(() =>
       import("@tanstack/react-router-devtools").then((mod) => ({
         default: mod.TanStackRouterDevtools,
-      }))
+      })),
     )
   : () => null;
 
 export function DevtoolsPortal() {
-  const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
-
-  React.useEffect(() => {
+  const container = React.useMemo(() => {
     const el = document.createElement("div");
     el.id = "tanstack-router-devtools";
-    document.body.prepend(el);
-    setContainer(el);
 
-    return () => {
-      el.remove();
-    };
+    return el;
   }, []);
 
-  if (!container) return null;
+  React.useEffect(() => {
+    document.body.prepend(container);
+
+    return () => {
+      container.remove();
+    };
+  }, [container]);
 
   return ReactDOM.createPortal(
     <React.Suspense>
       <TanStackRouterDevtools position="bottom-right" />
     </React.Suspense>,
-    container
+    container,
   );
 }
