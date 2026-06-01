@@ -20,7 +20,6 @@ html body #wpcontent {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   font-size: 16px;
-  overflow: auto;
   isolation: isolate;
 }
 
@@ -28,7 +27,7 @@ a:focus {
   box-shadow: initial;
 }
 
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   border-radius: 100vw;
   background-color: #a9a9a9b8;
 }
@@ -36,4 +35,19 @@ a:focus {
 ::-webkit-scrollbar {
   width: 0.4em;
   padding: 20px;
+} */
+
+body #wpwrap {
+  background: black;
+  display: flex;
+  flex-direction: column;
+}
+body #wpcontent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background: white;
+  margin-right: 4px;
+  margin-bottom: 4px;
 }
