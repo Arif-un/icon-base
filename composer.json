@@ -16,7 +16,9 @@
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "wp-coding-standards/wpcs": "^3.3",
     "sirbrillig/phpcs-variable-analysis": "^2.13",
-    "slevomat/coding-standard": "^8.22"
+    "slevomat/coding-standard": "^8.22",
+    "pestphp/pest": "^4.7",
+    "brain/monkey": "^2.7"
   },
   "autoload": {
     "psr-4": {
@@ -26,7 +28,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "IconBase\\CLI\\": "./cli"
+      "IconBase\\CLI\\": "./cli",
+      "Tests\\": "./tests"
     }
   },
   "scripts": {
@@ -35,14 +38,18 @@
     "phpcs": "phpcs -s",
     "lint": "./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php && composer phpcs",
     "phpcs:fix": "phpcbf",
-    "phpcs:report": "phpcs --report=summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1"
-  
+    "phpcs:report": "phpcs --report=summary --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1",
+    "test": "./vendor/bin/pest",
+    "test:unit": "./vendor/bin/pest --testsuite=Unit",
+    "test:integration": "./vendor/bin/pest --testsuite=Integration",
+    "test:coverage": "./vendor/bin/pest --coverage"
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "typisttech/imposter-plugin": true   
-     }
+      "typisttech/imposter-plugin": true,
+      "pestphp/pest-plugin": true
+    }
   },
   "extra": {
     "imposter": {

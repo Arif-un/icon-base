@@ -20,5 +20,7 @@
 pre-push:
   parallel: true
   jobs:
-    - run: yarn lint
-
+    - name: lint
+      run: yarn lint
+    - name: pest
+      run: composer test
