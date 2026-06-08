@@ -22,6 +22,10 @@
   stroke: #fff;
 }
 
+.icon-render :is(path, line, polyline, polygon, circle, rect, ellipse)[stroke] {
+  stroke-width: var(--icon-stroke-width, inherit) !important;
+}
+
 .h-full-wp {
   height: calc(100vh - 50px);
 }

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Input, Pagination, Select, Spin } from "antd";
+import { ColorPicker, Input, Pagination, Select, Slider, Spin } from "antd";
+import type { Color } from "antd/es/color-picker";
 import { useMemo, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
@@ -20,6 +21,9 @@ function Icons() {
   const [searchInput, setSearchInput] = useState("");
   const [libraryIds, setLibraryIds] = useState<number[]>([]);
   const [typeIds, setTypeIds] = useState<number[]>([]);
+  const [iconSize, setIconSize] = useState(32);
+  const [strokeWidth, setStrokeWidth] = useState(1.5);
+  const [iconColor, setIconColor] = useState<string | undefined>(undefined);
 
   const debouncedSearch = useDebounce(searchInput, 300);
 
@@ -104,6 +108,40 @@ function Icons() {
           className="min-w-36! capitalize"
           options={typeOptions}
         />
+
+        <div className="ml-auto flex items-center gap-3">
+          <span className="flex items-center gap-1 text-xs text-gray-500">
+            Size
+            <Slider
+              min={16}
+              max={64}
+              value={iconSize}
+              onChange={setIconSize}
+              className="w-24!"
+            />
+          </span>
+          <span className="flex items-center gap-1 text-xs text-gray-500">
+            Stroke
+            <Slider
+              min={0.5}
+              max={4}
+              step={0.25}
+              value={strokeWidth}
+              onChange={setStrokeWidth}
+              className="w-24!"
+            />
+          </span>
+          <span className="flex items-center gap-1 text-xs text-gray-500">
+            Color
+            <ColorPicker
+              value={iconColor}
+              onChange={(_: Color, hex: string) => setIconColor(hex)}
+              size="small"
+              allowClear
+              onClear={() => setIconColor(undefined)}
+            />
+          </span>
+        </div>
       </div>
       {isLoading && <Spin />}
       {error ? <p>Failed to load icons</p> : null}
@@ -120,7 +158,8 @@ function Icons() {
               return (
                 <div
                   key={icon.id}
-                  className="flex w-20 flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
+                  className="flex flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
+                  style={{ width: Math.max(80, iconSize + 48) }}
                   title={icon.name}
                 >
                   <IconRender
@@ -128,7 +167,9 @@ function Icons() {
                     libraryDir={lib?.dir ?? ""}
                     iconWidth={lib?.w}
                     iconHeight={lib?.h}
-                    size={32}
+                    size={iconSize}
+                    strokeWidth={strokeWidth}
+                    color={iconColor}
                   />
                   <span className="max-w-[95%] truncate text-[10px] text-gray-500 capitalize">
                     {icon.name}

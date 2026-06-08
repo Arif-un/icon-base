@@ -25,12 +25,16 @@ export default function IconRender({
   size = 24,
   iconWidth,
   iconHeight,
+  strokeWidth,
+  color,
 }: {
   fileName: string;
   libraryDir: string;
   size?: number;
   iconWidth?: number;
   iconHeight?: number;
+  strokeWidth?: number;
+  color?: string;
 }) {
   const path = `${sanitizePathSegment(libraryDir)}/${sanitizePathSegment(fileName)}`;
   const [svgContent, setSvgContent] = useState<string | null>(svgCache[path] ?? null);
@@ -69,11 +73,16 @@ export default function IconRender({
 
   return (
     <svg
+      className="icon-render"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${String(iconWidth ?? 1024)} ${String(iconHeight ?? 1024)}`}
       width={size}
       height={size}
       fill="currentColor"
+      style={{
+        color,
+        ["--icon-stroke-width" as string]: strokeWidth,
+      }}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   );
