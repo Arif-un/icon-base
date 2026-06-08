@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Input, Pagination, Select, Spin } from "antd";
-import { FiSearch } from "react-icons/fi";
 import { useMemo, useState } from "react";
+import { FiSearch } from "react-icons/fi";
 
 import { useDebounce } from "@/common/hooks/useDebounce";
 import { useIcons } from "@/common/hooks/useIcons";
@@ -68,7 +68,7 @@ function Icons() {
 
   return (
     <div>
-      <div className="mx-4 ml-10 mb-4 flex flex-wrap items-center gap-3">
+      <div className="mx-4 mb-4 ml-10 flex flex-wrap items-center gap-3">
         <Input
           prefix={<FiSearch />}
           placeholder="Search icons..."
@@ -100,7 +100,6 @@ function Icons() {
             setTypeIds(values);
             setPage(1);
           }}
-
           allowClear
           className="min-w-36! capitalize"
           options={typeOptions}
