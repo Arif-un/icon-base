@@ -17,10 +17,26 @@ class IconController
         $page = absint($request->get('page')) ?: 1;
         $perPage = absint($request->get('per_page')) ?: 100;
         $perPage = min($perPage, 200);
+        $search = sanitize_text_field((string) $request->get('search', ''));
+        $libraryIds = self::parseIds((string) $request->get('library_ids', ''));
+        $typeIds = self::parseIds((string) $request->get('type_ids', ''));
 
-        $result = Icons::getPaginated($page, $perPage);
+        if (mb_strlen($search) >= Icons::MIN_SEARCH_LENGTH) {
+            $result = Icons::search($search, $page, $perPage, $libraryIds, $typeIds);
+        } else {
+            $result = Icons::getPaginated($page, $perPage, $libraryIds, $typeIds);
+        }
 
         return Response::success($result);
+    }
+
+    private static function parseIds(string $raw): array
+    {
+        if ($raw === '') {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('absint', explode(',', $raw))));
     }
 
     public function store(Request $request)
