@@ -38,3 +38,14 @@ export interface LibrariesResponse {
   code: string;
   data: Library[];
 }
+
+export interface IconType {
+  id: number;
+  type: string;
+}
+
+export interface IconTypesResponse {
+  status: "error" | "success";
+  code: string;
+  data: IconType[];
+}
