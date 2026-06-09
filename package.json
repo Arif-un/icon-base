@@ -27,6 +27,7 @@
     "format:dry": "oxfmt ./frontend/src --check",
     "preview": "vite preview",
     "prod": "vite build",
+    "prod:zip": "node bin/prod-zip.mjs",
     "production": "composer install --no-dev && pnpm install && pnpm i18n && pnpm build",
     "reset": "pnpm clean && pnpm install",
     "test": "vitest --watch=false -c ./vite.config.ts",
