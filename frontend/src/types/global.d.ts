@@ -19,7 +19,6 @@ declare const SERVER_VARIABLES: {
   };
   assetsURL: string;
   dateFormat: string;
-  key?: string;
   loggedInUserName: string;
   nonce: string;
   pluginAdminURL: string;

@@ -21,7 +21,6 @@ interface ConfigType {
   DATE_FORMAT: string;
   FREE_VERSION: string;
   IS_DEV: boolean;
-  KEY?: string;
   NONCE: string;
   PLUGIN_ADMIN_URL: string;
   PLUGIN_SLUG: string;
@@ -44,7 +43,6 @@ const config = {
   DATE_FORMAT: getServerVariable("dateFormat", "F j, Y"),
   FREE_VERSION: getServerVariable("version"),
   IS_DEV: import.meta.env.DEV,
-  KEY: getServerVariable("key"),
   NONCE: getServerVariable("nonce", ""),
   PLUGIN_ADMIN_URL: getServerVariable("pluginAdminURL"),
   PLUGIN_SLUG: getServerVariable("pluginSlug", "wp-starter-kit"),

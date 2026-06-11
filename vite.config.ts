@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import path from "node:path";
 
 import babel from "@rolldown/plugin-babel";
@@ -55,6 +56,14 @@ export default defineConfig(({ mode }) => {
       ...(!isTest && { SERVER_VARIABLES: `window.${SERVER_VARIABLES}` }),
     },
     plugins: [
+      {
+        name: "write-build-code-name",
+        closeBundle() {
+          if (!isDevelopment) {
+            fs.writeFileSync(path.resolve(import.meta.dirname, ASSETS_DIR, "build-code-name.txt"), codeName);
+          }
+        },
+      },
       tanstackRouter({
         routesDirectory: "./src/routes",
         generatedRouteTree: "./src/routeTree.gen.ts",
