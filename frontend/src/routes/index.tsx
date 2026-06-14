@@ -112,13 +112,7 @@ function Icons() {
         <div className="ml-auto flex items-center gap-3">
           <span className="flex items-center gap-1 text-xs text-gray-500">
             Size
-            <Slider
-              min={16}
-              max={64}
-              value={iconSize}
-              onChange={setIconSize}
-              className="w-24!"
-            />
+            <Slider min={16} max={64} value={iconSize} onChange={setIconSize} className="w-24!" />
           </span>
           <span className="flex items-center gap-1 text-xs text-gray-500">
             Stroke

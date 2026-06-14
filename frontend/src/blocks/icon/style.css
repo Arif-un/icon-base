@@ -1,0 +1,10 @@
+.wp-block-icon-base-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.wp-block-icon-base-icon svg {
+  display: block;
+}

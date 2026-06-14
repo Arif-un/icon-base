@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "icon-base/icon",
+  "version": "1.0.0",
+  "title": "Icon Base",
+  "category": "design",
+  "icon": "",
+  "description": "Insert an icon from your icon libraries.",
+  "supports": {
+    "html": false,
+    "align": true
+  },
+  "attributes": {
+    "svgContent": {
+      "type": "string",
+      "default": ""
+    },
+    "iconId": {
+      "type": "number",
+      "default": 0
+    },
+    "iconName": {
+      "type": "string",
+      "default": ""
+    },
+    "iconFilename": {
+      "type": "string",
+      "default": ""
+    },
+    "librarySlug": {
+      "type": "string",
+      "default": ""
+    },
+    "libraryDir": {
+      "type": "string",
+      "default": ""
+    },
+    "size": {
+      "type": "number",
+      "default": 24
+    },
+    "strokeWidth": {
+      "type": "number",
+      "default": 1.5
+    },
+    "color": {
+      "type": "string",
+      "default": ""
+    },
+    "iconWidth": {
+      "type": "number",
+      "default": 24
+    },
+    "iconHeight": {
+      "type": "number",
+      "default": 24
+    }
+  },
+  "textdomain": "icon-base",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style-index.css"
+}
