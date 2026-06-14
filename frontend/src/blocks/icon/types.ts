@@ -1,15 +1,31 @@
-export interface IconBlockAttributes {
+export interface IconBlockAttributes extends Record<string, unknown> {
   svgContent: string;
   iconId: number;
   iconName: string;
   iconFilename: string;
   librarySlug: string;
   libraryDir: string;
-  size: number;
+  width: string;
+  height: string;
   strokeWidth: number;
-  color: string;
+  iconColor: string;
+  customIconColor: string;
+  iconBackgroundColor: string;
+  customIconBackgroundColor: string;
+  gradient: string;
+  customGradient: string;
   iconWidth: number;
   iconHeight: number;
+  rotate: number;
+  flipHorizontal: boolean;
+  flipVertical: boolean;
+  linkUrl: string;
+  linkTarget: string;
+  linkRel: string;
+  label: string;
+  title: string;
+  itemsJustification: string;
+  hoverEffect: string;
 }
 
 export interface SelectedIconData {

@@ -1,32 +1,29 @@
-export default function BlockIconPreview({
-  svgContent,
-  size,
-  color,
-  strokeWidth,
-  iconWidth,
-  iconHeight,
-}: {
-  svgContent: string;
-  size: number;
-  color: string;
-  strokeWidth: number;
-  iconWidth: number;
-  iconHeight: number;
-}) {
+import type { IconBlockAttributes } from "../types";
+import { getContainerClasses, getContainerStyles } from "../utils/blockStyles";
+import { stripSvgColors } from "../utils/svgUtils";
+
+export default function BlockIconPreview({ attributes }: { attributes: IconBlockAttributes }) {
+  const { svgContent, iconWidth, iconHeight, width, height, label } = attributes;
+  const containerClasses = getContainerClasses(attributes);
+  const containerStyles = getContainerStyles(attributes);
+  const strippedSvg = stripSvgColors(svgContent);
+
+  const ariaProps: Record<string, string> = label
+    ? { "aria-label": label }
+    : { "aria-hidden": "true" };
+
   return (
-    <div>
+    <div className={containerClasses} style={containerStyles}>
       <svg
         className="icon-base-preview"
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${String(iconWidth)} ${String(iconHeight)}`}
-        width={size}
-        height={size}
+        width={width || "48px"}
+        height={height || undefined}
         fill="currentColor"
-        style={{
-          color: color || undefined,
-          ["--icon-stroke-width" as string]: strokeWidth,
-        }}
-        dangerouslySetInnerHTML={{ __html: svgContent }}
+        role="img"
+        {...ariaProps}
+        dangerouslySetInnerHTML={{ __html: strippedSvg }}
       />
     </div>
   );

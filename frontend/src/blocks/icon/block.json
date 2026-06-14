@@ -2,14 +2,25 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "icon-base/icon",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Icon Base",
   "category": "design",
   "icon": "",
   "description": "Insert an icon from your icon libraries.",
   "supports": {
     "html": false,
-    "align": true
+    "align": true,
+    "anchor": true,
+    "spacing": {
+      "padding": true,
+      "margin": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
   },
   "attributes": {
     "svgContent": {
@@ -36,15 +47,39 @@
       "type": "string",
       "default": ""
     },
-    "size": {
-      "type": "number",
-      "default": 24
+    "width": {
+      "type": "string",
+      "default": "48px"
+    },
+    "height": {
+      "type": "string",
+      "default": ""
     },
     "strokeWidth": {
       "type": "number",
       "default": 1.5
     },
-    "color": {
+    "iconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "customIconColor": {
+      "type": "string",
+      "default": ""
+    },
+    "iconBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "customIconBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "gradient": {
+      "type": "string",
+      "default": ""
+    },
+    "customGradient": {
       "type": "string",
       "default": ""
     },
@@ -55,6 +90,46 @@
     "iconHeight": {
       "type": "number",
       "default": 24
+    },
+    "rotate": {
+      "type": "number",
+      "default": 0
+    },
+    "flipHorizontal": {
+      "type": "boolean",
+      "default": false
+    },
+    "flipVertical": {
+      "type": "boolean",
+      "default": false
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkTarget": {
+      "type": "string",
+      "default": ""
+    },
+    "linkRel": {
+      "type": "string",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "itemsJustification": {
+      "type": "string",
+      "default": ""
+    },
+    "hoverEffect": {
+      "type": "string",
+      "default": "none"
     }
   },
   "textdomain": "icon-base",

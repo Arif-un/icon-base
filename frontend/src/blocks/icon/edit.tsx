@@ -1,4 +1,5 @@
 import { QueryClientProvider } from "@tanstack/react-query";
+import clsx from "clsx";
 import { useCallback, useState } from "react";
 
 import BlockIconPreview from "./components/BlockIconPreview";
@@ -6,24 +7,30 @@ import CustomSvgModal from "./components/CustomSvgModal";
 import IconPickerModal from "./components/IconPickerModal";
 import IconPickerPopover from "./components/IconPickerPopover";
 import IconPlaceholder from "./components/IconPlaceholder";
-import { queryClient, replaceIcon } from "./constants";
+import InspectorSettings from "./components/InspectorSettings";
+import ToolbarControls from "./components/ToolbarControls";
+import { queryClient } from "./constants";
 import type { IconBlockAttributes, SelectedIconData } from "./types";
+import { getWrapperClasses } from "./utils/blockStyles";
 import { openMediaLibrary } from "./utils/openMediaLibrary";
+import { stripSvgColors } from "./utils/svgUtils";
 
-const { Button, DropdownMenu } = window.wp.components;
+const { Button, DropdownMenu, ToolbarGroup } = window.wp.components;
 const { BlockControls } = window.wp.blockEditor;
 
 function EditInner({
   attributes,
   setAttributes,
+  isSelected,
 }: {
   attributes: IconBlockAttributes;
   setAttributes: (attrs: Partial<IconBlockAttributes>) => void;
+  isSelected: boolean;
 }) {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const anchorRef = useCallback((node: HTMLDivElement | null) => setAnchorEl(node), []);
   const blockProps = window.wp.blockEditor.useBlockProps({
-    className: "cursor-pointer",
+    className: clsx("cursor-pointer", getWrapperClasses(attributes)),
     ref: anchorRef,
   });
   const [showPopover, setShowPopover] = useState(false);
@@ -35,7 +42,7 @@ function EditInner({
 
   function handleSelectIcon(data: SelectedIconData) {
     setAttributes({
-      svgContent: data.svgContent,
+      svgContent: stripSvgColors(data.svgContent),
       iconId: data.iconId,
       iconName: data.iconName,
       iconFilename: data.iconFilename,
@@ -49,7 +56,7 @@ function EditInner({
   function handleMediaSuccess(svgContent: string, width: number, height: number) {
     setMediaError("");
     setAttributes({
-      svgContent,
+      svgContent: stripSvgColors(svgContent),
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -63,7 +70,7 @@ function EditInner({
   function handleCustomSvgInsert(svgContent: string, width: number, height: number) {
     setShowCustomSvgModal(false);
     setAttributes({
-      svgContent,
+      svgContent: stripSvgColors(svgContent),
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -81,40 +88,47 @@ function EditInner({
   return (
     <div {...blockProps}>
       {hasIcon && (
-        <BlockControls>
-          <DropdownMenu
-            icon={replaceIcon}
-            label="Replace Icon"
-            controls={[
-              {
-                title: "Browse Icon",
-                icon: "search",
-                onClick: () => setShowPopover(true),
-              },
-              {
-                title: "Media Library",
-                icon: "admin-media",
-                onClick: handleOpenMediaLibrary,
-              },
-              {
-                title: "Insert Custom SVG",
-                icon: "editor-code",
-                onClick: () => setShowCustomSvgModal(true),
-              },
-            ]}
+        <>
+          <InspectorSettings attributes={attributes} setAttributes={setAttributes} />
+          <ToolbarControls
+            attributes={attributes}
+            setAttributes={setAttributes}
+            isSelected={isSelected}
           />
-        </BlockControls>
+          <BlockControls>
+            <ToolbarGroup>
+              <DropdownMenu
+                toggleProps={{
+                  className: "h-full",
+                  children: "Replace",
+                }}
+                icon={null}
+                label="Replace Icon"
+                controls={[
+                  {
+                    title: "Browse Icon",
+                    icon: "search",
+                    onClick: () => setShowPopover(true),
+                  },
+                  {
+                    title: "Media Library",
+                    icon: "admin-media",
+                    onClick: handleOpenMediaLibrary,
+                  },
+                  {
+                    title: "Insert Custom SVG",
+                    icon: "editor-code",
+                    onClick: () => setShowCustomSvgModal(true),
+                  },
+                ]}
+              />
+            </ToolbarGroup>
+          </BlockControls>
+        </>
       )}
 
       {hasIcon ? (
-        <BlockIconPreview
-          svgContent={attributes.svgContent}
-          size={attributes.size}
-          color={attributes.color}
-          strokeWidth={attributes.strokeWidth}
-          iconWidth={attributes.iconWidth}
-          iconHeight={attributes.iconHeight}
-        />
+        <BlockIconPreview attributes={attributes} />
       ) : (
         <IconPlaceholder
           onBrowseIcon={() => setShowPopover(true)}
@@ -136,13 +150,7 @@ function EditInner({
         <IconPickerPopover
           anchor={anchorEl}
           selectedIconId={attributes.iconId}
-          size={attributes.size}
-          strokeWidth={attributes.strokeWidth}
-          color={attributes.color}
           onSelectIcon={handleSelectIcon}
-          onSizeChange={(size) => setAttributes({ size })}
-          onStrokeWidthChange={(strokeWidth) => setAttributes({ strokeWidth })}
-          onColorChange={(color) => setAttributes({ color })}
           onExpand={() => {
             setShowPopover(false);
             setShowModal(true);
@@ -154,13 +162,7 @@ function EditInner({
       {showModal && (
         <IconPickerModal
           selectedIconId={attributes.iconId}
-          size={attributes.size}
-          strokeWidth={attributes.strokeWidth}
-          color={attributes.color}
           onSelectIcon={handleSelectIcon}
-          onSizeChange={(size) => setAttributes({ size })}
-          onStrokeWidthChange={(strokeWidth) => setAttributes({ strokeWidth })}
-          onColorChange={(color) => setAttributes({ color })}
           onClose={() => setShowModal(false)}
         />
       )}
@@ -178,6 +180,7 @@ function EditInner({
 export function Edit(props: {
   attributes: IconBlockAttributes;
   setAttributes: (attrs: Partial<IconBlockAttributes>) => void;
+  isSelected: boolean;
 }) {
   return (
     <QueryClientProvider client={queryClient}>

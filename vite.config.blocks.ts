@@ -25,7 +25,7 @@ function copyBlockAssets(): Plugin {
       const result = await postcss([tailwindcssPostcss()]).process(raw, { from: editorCssFrom, to: editorCssTo });
       writeFileSync(editorCssTo, result.css);
 
-      const assetPhp = `<?php return array('dependencies' => array('react', 'react-jsx-runtime', 'wp-blocks', 'wp-block-editor', 'wp-element', 'wp-components'), 'version' => '${Date.now()}');`;
+      const assetPhp = `<?php return array('dependencies' => array('react', 'react-jsx-runtime', 'wp-blocks', 'wp-block-editor', 'wp-element', 'wp-components', 'wp-keycodes'), 'version' => '${Date.now()}');`;
       writeFileSync(path.resolve(BLOCK_OUT, 'index.asset.php'), assetPhp);
     },
   };
@@ -56,6 +56,9 @@ export default defineConfig({
   },
   plugins: [react(), copyBlockAssets()],
   resolve: {
+    alias: {
+      '@wordpress/element': 'react',
+    },
     tsconfigPaths: true,
   },
 });

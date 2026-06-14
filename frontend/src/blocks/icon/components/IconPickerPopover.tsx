@@ -14,25 +14,13 @@ const LOGO_PATH =
 export default function IconPickerPopover({
   anchor,
   selectedIconId,
-  size,
-  strokeWidth,
-  color,
   onSelectIcon,
-  onSizeChange,
-  onStrokeWidthChange,
-  onColorChange,
   onExpand,
   onClose,
 }: {
   anchor: Element | null;
   selectedIconId: number;
-  size: number;
-  strokeWidth: number;
-  color: string;
   onSelectIcon: (data: SelectedIconData) => void;
-  onSizeChange: (size: number) => void;
-  onStrokeWidthChange: (strokeWidth: number) => void;
-  onColorChange: (color: string) => void;
   onExpand: () => void;
   onClose: () => void;
 }) {
@@ -41,6 +29,10 @@ export default function IconPickerPopover({
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [libraryIds, setLibraryIds] = useState<string[]>([]);
   const [typeIds, setTypeIds] = useState<string[]>([]);
+
+  const [previewSize, setPreviewSize] = useState(24);
+  const [previewStrokeWidth, setPreviewStrokeWidth] = useState(1.5);
+  const [previewColor, setPreviewColor] = useState("");
 
   const { data: libraries } = useLibraries();
   const { data: iconTypes } = useIconTypes();
@@ -120,6 +112,7 @@ export default function IconPickerPopover({
           <div className="flex flex-col gap-2 border-b border-[#e0e0e0] px-4 py-3">
             <div className="flex gap-2">
               <SelectControl
+                __next40pxDefaultSize
                 label="Library"
                 hideLabelFromVision
                 value={libraryIds.length === 1 ? libraryIds[0] : ""}
@@ -131,6 +124,7 @@ export default function IconPickerPopover({
                 className="ib-select"
               />
               <SelectControl
+                __next40pxDefaultSize
                 label="Type"
                 hideLabelFromVision
                 value={typeIds.length === 1 ? typeIds[0] : ""}
@@ -145,16 +139,16 @@ export default function IconPickerPopover({
             <div className="ib-adjustments flex flex-wrap items-center gap-3">
               <RangeControl
                 label="Size"
-                value={size}
-                onChange={(val) => val !== undefined && onSizeChange(val)}
+                value={previewSize}
+                onChange={(val) => val !== undefined && setPreviewSize(val)}
                 min={16}
                 max={64}
                 withInputField={false}
               />
               <RangeControl
                 label="Stroke"
-                value={strokeWidth}
-                onChange={(val) => val !== undefined && onStrokeWidthChange(val)}
+                value={previewStrokeWidth}
+                onChange={(val) => val !== undefined && setPreviewStrokeWidth(val)}
                 min={0.5}
                 max={4}
                 step={0.25}
@@ -169,19 +163,19 @@ export default function IconPickerPopover({
                 >
                   <span
                     className="mr-1 inline-block h-3.5 w-3.5 rounded-full border border-[#ccc]"
-                    style={{ backgroundColor: color || "#000" }}
+                    style={{ backgroundColor: previewColor || "#000" }}
                   />
                   Color
                 </Button>
-                {color && (
-                  <Button variant="tertiary" onClick={() => onColorChange("")} size="compact">
+                {previewColor && (
+                  <Button variant="tertiary" onClick={() => setPreviewColor("")} size="compact">
                     Clear
                   </Button>
                 )}
               </div>
               {showColorPicker && (
                 <div className="py-2">
-                  <ColorPicker color={color || "#000000"} onChange={onColorChange} />
+                  <ColorPicker color={previewColor || "#000000"} onChange={setPreviewColor} />
                 </div>
               )}
             </div>
@@ -190,13 +184,13 @@ export default function IconPickerPopover({
 
         <IconPickerPanel
           selectedIconId={pendingIcon?.iconId ?? selectedIconId}
-          size={size}
-          strokeWidth={strokeWidth}
-          color={color}
+          size={previewSize}
+          strokeWidth={previewStrokeWidth}
+          color={previewColor}
           onSelectIcon={(data) => setPendingIcon(data)}
-          onSizeChange={onSizeChange}
-          onStrokeWidthChange={onStrokeWidthChange}
-          onColorChange={onColorChange}
+          onSizeChange={setPreviewSize}
+          onStrokeWidthChange={setPreviewStrokeWidth}
+          onColorChange={setPreviewColor}
           compact
           libraryIds={libraryIds}
           onLibraryIdsChange={setLibraryIds}

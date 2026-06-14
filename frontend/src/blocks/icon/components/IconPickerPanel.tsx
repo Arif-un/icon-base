@@ -115,6 +115,7 @@ export default function IconPickerPanel(props: IconPickerPanelProps) {
           <>
             <div className="flex gap-2">
               <SelectControl
+                __next40pxDefaultSize
                 label="Library"
                 hideLabelFromVision
                 value={libraryIds.length === 1 ? libraryIds[0] : ""}
@@ -127,6 +128,7 @@ export default function IconPickerPanel(props: IconPickerPanelProps) {
                 className="ib-select"
               />
               <SelectControl
+                __next40pxDefaultSize
                 label="Type"
                 hideLabelFromVision
                 value={typeIds.length === 1 ? typeIds[0] : ""}

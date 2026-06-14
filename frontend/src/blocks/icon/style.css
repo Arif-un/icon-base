@@ -5,6 +5,54 @@
   line-height: 0;
 }
 
-.wp-block-icon-base-icon svg {
+.wp-block-icon-base-icon.items-justified-left {
+  justify-content: flex-start;
+}
+
+.wp-block-icon-base-icon.items-justified-center {
+  justify-content: center;
+}
+
+.wp-block-icon-base-icon.items-justified-right {
+  justify-content: flex-end;
+}
+
+.wp-block-icon-base-icon .icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(var(--ib-rotate, 0deg)) scaleX(var(--ib-flip-x, 1)) scaleY(var(--ib-flip-y, 1));
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    filter 0.2s ease;
+  line-height: 0;
+}
+
+.wp-block-icon-base-icon .icon-container svg {
   display: block;
+}
+
+.wp-block-icon-base-icon a.icon-container {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wp-block-icon-base-icon a.icon-container.has-hover-scale:hover {
+  transform: rotate(var(--ib-rotate, 0deg)) scaleX(calc(var(--ib-flip-x, 1) * 1.1))
+    scaleY(calc(var(--ib-flip-y, 1) * 1.1));
+}
+
+.wp-block-icon-base-icon a.icon-container.has-hover-color:hover {
+  filter: brightness(1.2);
+}
+
+.wp-block-icon-base-icon a.icon-container.has-hover-opacity:hover {
+  opacity: 0.7;
+}
+
+.wp-block-icon-base-icon .has-icon-background-color {
+  padding: 8px;
+  border-radius: 4px;
 }

@@ -25,17 +25,20 @@ interface BlockSaveProps<T extends BlockAttributes = BlockAttributes> {
   attributes: T;
 }
 
-interface BlockSettings {
+interface BlockSettings<T extends BlockAttributes = BlockAttributes> {
   attributes?: Record<string, unknown>;
   category?: string;
-  edit: ComponentType<BlockEditProps>;
-  save: ComponentType<BlockSaveProps>;
+  edit: ComponentType<BlockEditProps<T>>;
+  save: ComponentType<BlockSaveProps<T>>;
   title?: string;
   [key: string]: unknown;
 }
 
 interface WPBlocks {
-  registerBlockType: (name: string, settings: BlockSettings) => void;
+  registerBlockType: <T extends BlockAttributes = BlockAttributes>(
+    name: string,
+    settings: BlockSettings<T>,
+  ) => void;
 }
 
 interface BlockControlsProps {
@@ -53,6 +56,7 @@ interface ToolbarButtonProps {
   className?: string;
   icon?: ReactNode | string;
   isActive?: boolean;
+  isPressed?: boolean;
   label?: string;
   onClick?: (event: React.MouseEvent) => void;
   title?: string;
@@ -85,8 +89,64 @@ interface TextareaControlProps {
   value: string;
 }
 
+interface TextControlProps {
+  className?: string;
+  help?: string;
+  hideLabelFromVision?: boolean;
+  label?: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  type?: string;
+  value: string;
+}
+
+interface UnitControlProps {
+  className?: string;
+  label?: string;
+  onChange: (value: string) => void;
+  units?: Array<{ value: string; label: string }>;
+  value?: string;
+}
+
+interface LinkControlValue {
+  url?: string;
+  opensInNewTab?: boolean;
+  title?: string;
+}
+
+interface LinkControlProps {
+  onChange?: (value: LinkControlValue) => void;
+  onRemove?: () => void;
+  value?: LinkControlValue;
+}
+
+interface ColorGradientSetting {
+  label: string;
+  colorValue?: string;
+  gradientValue?: string;
+  onColorChange?: (value: string | undefined) => void;
+  onGradientChange?: (value: string | undefined) => void;
+}
+
+interface PanelColorGradientSettingsProps {
+  __experimentalIsRenderedInSidebar?: boolean;
+  children?: ReactNode;
+  initialOpen?: boolean;
+  settings: ColorGradientSetting[];
+  title?: string;
+}
+
+interface InspectorControlsProps {
+  children: ReactNode;
+  group?: string;
+}
+
 interface WPBlockEditor {
   BlockControls: ComponentType<BlockControlsProps>;
+  InspectorControls: ComponentType<InspectorControlsProps>;
+  __experimentalLinkControl: ComponentType<LinkControlProps>;
+  __experimentalPanelColorGradientSettings: ComponentType<PanelColorGradientSettingsProps>;
+  useSetting: (path: string) => unknown;
   useBlockProps: UseBlockProps;
 }
 
@@ -105,6 +165,7 @@ interface PopoverProps {
     | "bottom-end"
     | "left"
     | "right";
+  position?: string;
   resize?: boolean;
   shift?: boolean;
   className?: string;
@@ -155,6 +216,7 @@ interface SelectControlOption {
 }
 
 interface SelectControlProps {
+  __next40pxDefaultSize?: boolean;
   className?: string;
   help?: string;
   hideLabelFromVision?: boolean;
@@ -218,9 +280,11 @@ interface WPComponents {
   SearchControl: ComponentType<SearchControlProps>;
   SelectControl: ComponentType<SelectControlProps>;
   Spinner: ComponentType<SpinnerProps>;
+  TextControl: ComponentType<TextControlProps>;
   TextareaControl: ComponentType<TextareaControlProps>;
   ToolbarButton: ComponentType<ToolbarButtonProps>;
   ToolbarGroup: ComponentType<ToolbarGroupProps>;
+  __experimentalUnitControl: ComponentType<UnitControlProps>;
 }
 
 interface WPMediaAttachment {

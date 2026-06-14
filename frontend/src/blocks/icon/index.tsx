@@ -1,5 +1,6 @@
 import { Edit } from "./edit";
 import { Save } from "./save";
+import type { IconBlockAttributes } from "./types";
 
 import "./style.css";
 
@@ -12,7 +13,7 @@ const iconBaseLogo = (
   </svg>
 );
 
-window.wp.blocks.registerBlockType("icon-base/icon", {
+window.wp.blocks.registerBlockType<IconBlockAttributes>("icon-base/icon", {
   icon: iconBaseLogo,
   edit: Edit,
   save: Save,
