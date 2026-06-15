@@ -33,7 +33,4 @@ build
 gha-creds-*.json
 CLAUDE.local.md
 /.tanstack/tmp
-*.db
-*.db-wal
-*.db-shm
 /.playwright-cli
