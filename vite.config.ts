@@ -64,10 +64,14 @@ export default defineConfig(({ mode }) => {
           }
         },
       },
-      tanstackRouter({
-        routesDirectory: "./src/routes",
-        generatedRouteTree: "./src/routeTree.gen.ts",
-      }),
+      ...(!isTest
+        ? [
+            tanstackRouter({
+              routesDirectory: "./src/routes",
+              generatedRouteTree: "./src/routeTree.gen.ts",
+            }),
+          ]
+        : []),
       tailwindcss(),
       react(),
       babel({
