@@ -1,11 +1,28 @@
 import type { IconBlockAttributes } from "./types";
-import { getContainerClasses, getContainerStyles, getWrapperClasses } from "./utils/blockStyles";
+import {
+  getContainerClasses,
+  getContainerStyles,
+  getSpacingStyles,
+  getWrapperClasses,
+} from "./utils/blockStyles";
 import { isSafeUrl } from "./utils/svgUtils";
 
 export function Save({ attributes }: { attributes: IconBlockAttributes }) {
-  const blockProps = window.wp.blockEditor.useBlockProps.save({
+  const rawBlockProps = window.wp.blockEditor.useBlockProps.save({
     className: getWrapperClasses(attributes),
   });
+  const {
+    paddingTop: _paddingTop,
+    paddingRight: _paddingRight,
+    paddingBottom: _paddingBottom,
+    paddingLeft: _paddingLeft,
+    marginTop: _marginTop,
+    marginRight: _marginRight,
+    marginBottom: _marginBottom,
+    marginLeft: _marginLeft,
+    ...wrapperStyle
+  } = (rawBlockProps.style ?? {}) as Record<string, string>;
+  const blockProps = { ...rawBlockProps, style: wrapperStyle };
 
   const {
     svgContent,
@@ -25,7 +42,7 @@ export function Save({ attributes }: { attributes: IconBlockAttributes }) {
   }
 
   const containerClasses = getContainerClasses(attributes);
-  const containerStyles = getContainerStyles(attributes);
+  const containerStyles = { ...getContainerStyles(attributes), ...getSpacingStyles(attributes) };
 
   const ariaProps: Record<string, string> = label
     ? { "aria-label": label }

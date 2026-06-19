@@ -37,6 +37,44 @@ export function getContainerClasses(attributes: IconBlockAttributes): string {
   });
 }
 
+function convertWpValue(value: string): string {
+  // Convert "var:preset|spacing|80" → "var(--wp--preset--spacing--80)"
+  return value.replace(
+    /^var:(.+)$/,
+    (_, path: string) => `var(--wp--${path.replace(/\|/g, "--")})`,
+  );
+}
+
+type SpacingSides = { top?: string; right?: string; bottom?: string; left?: string };
+type StyleAttribute = { spacing?: { padding?: SpacingSides; margin?: SpacingSides } };
+
+export function getSpacingStyles(
+  attributes: IconBlockAttributes,
+): Record<string, string | undefined> {
+  const spacing = (attributes.style as StyleAttribute | undefined)?.spacing;
+  if (!spacing) return {};
+
+  const styles: Record<string, string | undefined> = {};
+
+  if (spacing.padding) {
+    const { top, right, bottom, left } = spacing.padding;
+    if (top) styles.paddingTop = convertWpValue(top);
+    if (right) styles.paddingRight = convertWpValue(right);
+    if (bottom) styles.paddingBottom = convertWpValue(bottom);
+    if (left) styles.paddingLeft = convertWpValue(left);
+  }
+
+  if (spacing.margin) {
+    const { top, right, bottom, left } = spacing.margin;
+    if (top) styles.marginTop = convertWpValue(top);
+    if (right) styles.marginRight = convertWpValue(right);
+    if (bottom) styles.marginBottom = convertWpValue(bottom);
+    if (left) styles.marginLeft = convertWpValue(left);
+  }
+
+  return styles;
+}
+
 export function getContainerStyles(
   attributes: IconBlockAttributes,
 ): Record<string, string | undefined> {
