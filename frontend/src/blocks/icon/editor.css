@@ -4,58 +4,35 @@
 /* WP component internal overrides — cannot target via Tailwind utility classes */
 
 .ib-svg-modal .components-modal__content {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  @apply flex flex-col overflow-hidden p-0;
 }
 
 .ib-picker-modal {
+  /* min() not expressible via Tailwind */
   width: min(1140px, 96vw) !important;
   max-width: none !important;
 }
 
 .ib-picker-modal .components-modal__content {
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col overflow-hidden p-0;
 }
 
-/* Header search input — no browser default styling */
-.ib-header-search input[type="text"] {
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  min-height: unset;
-}
-.ib-header-search input[type="text"]:focus {
-  box-shadow: none;
-}
-
-/* Strip default input chrome inside sidebar search wrapper */
+/* Strip browser/WP default chrome from sidebar search input */
 .ib-sidebar-search input[type="text"] {
-  border: none;
-  box-shadow: none;
-  padding: 0;
+  @apply border-none p-0 shadow-none;
   min-height: unset;
 }
 .ib-sidebar-search input[type="text"]:focus {
-  border: none;
-  box-shadow: none;
+  @apply border-none shadow-none;
 }
 
 /* Constrain WP color picker to sidebar width */
-.ib-settings-sidebar .components-color-picker {
+.ib-settings-sidebar .components-color-picker,
+.ib-settings-sidebar .react-colorful {
   width: 100% !important;
   max-width: 100% !important;
 }
-.ib-settings-sidebar .components-color-picker__saturation {
-  width: 100% !important;
-}
-.ib-settings-sidebar .react-colorful {
-  width: 100% !important;
-}
+.ib-settings-sidebar .components-color-picker__saturation,
 .ib-settings-sidebar .react-colorful__saturation {
   width: 100% !important;
   height: 170px !important;
@@ -65,43 +42,36 @@
   height: 12px !important;
 }
 
-/* Sidebar controls — reset WP bottom margins */
+/* Reset WP bottom margins on sidebar/range controls */
 .ib-settings-sidebar .components-base-control,
-.ib-settings-sidebar .components-base-control__field {
-  margin-bottom: 0;
-}
-
+.ib-settings-sidebar .components-base-control__field,
 .ib-sidebar-range .components-range-control,
 .ib-sidebar-range .components-base-control__field {
-  margin-bottom: 0;
+  @apply mb-0;
 }
 
-/* Icon btn hover cursor */
 .ib-icon-btn {
-  cursor: pointer;
+  @apply cursor-pointer;
 }
 
 .ib-popover {
-  z-index: 100001;
+  @apply z-[100001];
 }
 
 .ib-select {
-  flex: 1;
-  margin-bottom: 0;
+  @apply mb-0 flex-1;
 }
 .ib-select .components-base-control__field {
-  margin-bottom: 0;
+  @apply mb-0;
 }
 
 .ib-search {
-  margin-bottom: 0;
+  @apply mb-0;
 }
 
 .ib-adjustments .components-range-control {
-  flex: 1;
-  min-width: 100px;
-  margin-bottom: 0;
+  @apply mb-0 min-w-[100px] flex-1;
 }
 .ib-adjustments .components-base-control__field {
-  margin-bottom: 0;
+  @apply mb-0;
 }
