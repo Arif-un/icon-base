@@ -10,8 +10,75 @@
   overflow: hidden;
 }
 
+.ib-picker-modal {
+  width: min(1140px, 96vw) !important;
+  max-width: none !important;
+}
+
 .ib-picker-modal .components-modal__content {
   padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header search input — no browser default styling */
+.ib-header-search input[type="text"] {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  min-height: unset;
+}
+.ib-header-search input[type="text"]:focus {
+  box-shadow: none;
+}
+
+/* Strip default input chrome inside sidebar search wrapper */
+.ib-sidebar-search input[type="text"] {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  min-height: unset;
+}
+.ib-sidebar-search input[type="text"]:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/* Constrain WP color picker to sidebar width */
+.ib-settings-sidebar .components-color-picker {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.ib-settings-sidebar .components-color-picker__saturation {
+  width: 100% !important;
+}
+.ib-settings-sidebar .react-colorful {
+  width: 100% !important;
+}
+.ib-settings-sidebar .react-colorful__saturation {
+  width: 100% !important;
+  height: 170px !important;
+}
+.ib-settings-sidebar .react-colorful__hue {
+  width: 170px !important;
+  height: 12px !important;
+}
+
+/* Sidebar controls — reset WP bottom margins */
+.ib-settings-sidebar .components-base-control,
+.ib-settings-sidebar .components-base-control__field {
+  margin-bottom: 0;
+}
+
+.ib-sidebar-range .components-range-control,
+.ib-sidebar-range .components-base-control__field {
+  margin-bottom: 0;
+}
+
+/* Icon btn hover cursor */
+.ib-icon-btn {
+  cursor: pointer;
 }
 
 .ib-popover {
