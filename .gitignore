@@ -29,8 +29,6 @@ build
 /playwright/.auth
 *.http
 .DS_Store
-*.db-shm
-*.db-wal
 
 gha-creds-*.json
 CLAUDE.local.md
