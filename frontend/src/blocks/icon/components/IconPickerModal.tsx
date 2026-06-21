@@ -1,5 +1,4 @@
-import { close as closeIcon, search as searchIcon } from "@wordpress/icons";
-import clsx from "clsx";
+import { close as closeIcon } from "@wordpress/icons";
 import { useMemo, useState } from "react";
 
 import { useDebounce } from "@/common/hooks/useDebounce";
@@ -11,7 +10,8 @@ import Logo from "@/components/Logo";
 import type { SelectedIconData } from "../types";
 import IconGrid from "./IconGrid";
 
-const { Modal, Button, SelectControl, RangeControl, ColorPicker, Spinner } = window.wp.components;
+const { Modal, Button, SearchControl, SelectControl, RangeControl, ColorPicker, Spinner } =
+  window.wp.components;
 
 const PAGE_SIZE = 100;
 
@@ -27,9 +27,7 @@ export default function IconPickerModal({
   const [previewSize, setPreviewSize] = useState(24);
   const [previewStrokeWidth, setPreviewStrokeWidth] = useState(1.5);
   const [previewColor, setPreviewColor] = useState("");
-  const [showSidebar] = useState(true);
   const [searchInput, setSearchInput] = useState("");
-  const [searchFocused, setSearchFocused] = useState(false);
   const [libraryIds, setLibraryIds] = useState<string[]>([]);
   const [typeIds, setTypeIds] = useState<string[]>([]);
   const [page, setPage] = useState(1);
@@ -140,30 +138,17 @@ export default function IconPickerModal({
           </div>
 
           {/* Settings sidebar */}
-          {showSidebar && (
-            <div className="ib-settings-sidebar w-52 shrink-0 overflow-y-auto border-l border-[#e0e0e0] p-3">
+          <div className="ib-settings-sidebar w-52 shrink-0 overflow-y-auto border-l border-[#e0e0e0] p-3">
               <div className="flex flex-col gap-4">
                 {/* Search */}
-                <label
-                  className={clsx(
-                    "ib-sidebar-search flex cursor-text items-center gap-1.5 rounded border px-2.5 py-1.5 transition-colors duration-150",
-                    searchFocused ? "border-[#3858e9] shadow-[0_0_0_1px_#3858e9]" : "border-[#ddd]",
-                  )}
-                >
-                  <span className="shrink-0 text-[#aaa]">{searchIcon}</span>
-                  <input
-                    type="text"
-                    value={searchInput}
-                    onChange={(e) => {
-                      setSearchInput(e.target.value);
-                      setPage(1);
-                    }}
-                    onFocus={() => setSearchFocused(true)}
-                    onBlur={() => setSearchFocused(false)}
-                    placeholder="Search icons…"
-                    className="w-full bg-transparent text-[12px] text-[#1e1e1e] outline-none placeholder:text-[#bbb]"
-                  />
-                </label>
+                <SearchControl
+                  value={searchInput}
+                  onChange={(value: string) => {
+                    setSearchInput(value);
+                    setPage(1);
+                  }}
+                  placeholder="Search icons…"
+                />
                 <SelectControl
                   __next40pxDefaultSize
                   label="Library"
@@ -243,7 +228,6 @@ export default function IconPickerModal({
                 </div>
               </div>
             </div>
-          )}
         </div>
 
         {/* ── Footer ── */}
