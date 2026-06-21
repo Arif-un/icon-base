@@ -17,7 +17,6 @@
   @apply flex flex-col overflow-hidden p-0;
 }
 
-
 /* Constrain WP color picker to sidebar width */
 .ib-settings-sidebar .components-color-picker,
 .ib-settings-sidebar .react-colorful {

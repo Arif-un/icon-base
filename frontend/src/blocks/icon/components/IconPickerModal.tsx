@@ -139,95 +139,95 @@ export default function IconPickerModal({
 
           {/* Settings sidebar */}
           <div className="ib-settings-sidebar w-52 shrink-0 overflow-y-auto border-l border-[#e0e0e0] p-3">
-              <div className="flex flex-col gap-4">
-                {/* Search */}
-                <SearchControl
-                  value={searchInput}
-                  onChange={(value: string) => {
-                    setSearchInput(value);
-                    setPage(1);
-                  }}
-                  placeholder="Search icons…"
-                />
-                <SelectControl
-                  __next40pxDefaultSize
-                  label="Library"
-                  value={libraryIds.length === 1 ? libraryIds[0] : ""}
-                  onChange={(value: string | string[]) => {
-                    const val = typeof value === "string" ? value : (value[0] ?? "");
-                    setLibraryIds(val ? [val] : []);
-                    setPage(1);
-                  }}
-                  options={libraryOptions}
-                />
-                <SelectControl
-                  __next40pxDefaultSize
-                  label="Type"
-                  value={typeIds.length === 1 ? typeIds[0] : ""}
-                  onChange={(value: string | string[]) => {
-                    const val = typeof value === "string" ? value : (value[0] ?? "");
-                    setTypeIds(val ? [val] : []);
-                    setPage(1);
-                  }}
-                  options={typeOptions}
-                />
+            <div className="flex flex-col gap-4">
+              {/* Search */}
+              <SearchControl
+                value={searchInput}
+                onChange={(value: string) => {
+                  setSearchInput(value);
+                  setPage(1);
+                }}
+                placeholder="Search icons…"
+              />
+              <SelectControl
+                __next40pxDefaultSize
+                label="Library"
+                value={libraryIds.length === 1 ? libraryIds[0] : ""}
+                onChange={(value: string | string[]) => {
+                  const val = typeof value === "string" ? value : (value[0] ?? "");
+                  setLibraryIds(val ? [val] : []);
+                  setPage(1);
+                }}
+                options={libraryOptions}
+              />
+              <SelectControl
+                __next40pxDefaultSize
+                label="Type"
+                value={typeIds.length === 1 ? typeIds[0] : ""}
+                onChange={(value: string | string[]) => {
+                  const val = typeof value === "string" ? value : (value[0] ?? "");
+                  setTypeIds(val ? [val] : []);
+                  setPage(1);
+                }}
+                options={typeOptions}
+              />
 
-                <div className="ib-sidebar-range">
-                  <RangeControl
-                    label="Size"
-                    value={previewSize}
-                    onChange={(val: number | undefined) => val !== undefined && setPreviewSize(val)}
-                    min={16}
-                    max={64}
-                    withInputField={false}
-                  />
-                </div>
-                <div className="ib-sidebar-range">
-                  <RangeControl
-                    label="Stroke"
-                    value={previewStrokeWidth}
-                    onChange={(val: number | undefined) =>
-                      val !== undefined && setPreviewStrokeWidth(val)
-                    }
-                    min={0.5}
-                    max={4}
-                    step={0.25}
-                    withInputField={false}
-                  />
-                </div>
+              <div className="ib-sidebar-range">
+                <RangeControl
+                  label="Size"
+                  value={previewSize}
+                  onChange={(val: number | undefined) => val !== undefined && setPreviewSize(val)}
+                  min={16}
+                  max={64}
+                  withInputField={false}
+                />
+              </div>
+              <div className="ib-sidebar-range">
+                <RangeControl
+                  label="Stroke"
+                  value={previewStrokeWidth}
+                  onChange={(val: number | undefined) =>
+                    val !== undefined && setPreviewStrokeWidth(val)
+                  }
+                  min={0.5}
+                  max={4}
+                  step={0.25}
+                  withInputField={false}
+                />
+              </div>
 
-                <div>
-                  <p className="mb-1.5 text-[11px] font-medium text-[#1e1e1e]">Color</p>
-                  <div className="flex items-center gap-2">
+              <div>
+                <p className="mb-1.5 text-[11px] font-medium text-[#1e1e1e]">Color</p>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowColorPicker((v) => !v)}
+                    className="flex items-center gap-1.5 rounded border border-[#ddd] px-2 py-1 text-[11px] transition-colors hover:border-[#3858e9]"
+                  >
+                    <span
+                      className="h-3.5 w-3.5 rounded-full border border-[#ccc]"
+                      style={{ backgroundColor: previewColor || "#000" }}
+                    />
+                    {previewColor || "Pick color"}
+                  </button>
+                  {previewColor && (
                     <button
                       type="button"
-                      onClick={() => setShowColorPicker((v) => !v)}
-                      className="flex items-center gap-1.5 rounded border border-[#ddd] px-2 py-1 text-[11px] transition-colors hover:border-[#3858e9]"
+                      onClick={() => setPreviewColor("")}
+                      className="text-[11px] text-[#999] transition-colors hover:text-[#cc1818]"
                     >
-                      <span
-                        className="h-3.5 w-3.5 rounded-full border border-[#ccc]"
-                        style={{ backgroundColor: previewColor || "#000" }}
-                      />
-                      {previewColor || "Pick color"}
+                      Clear
                     </button>
-                    {previewColor && (
-                      <button
-                        type="button"
-                        onClick={() => setPreviewColor("")}
-                        className="text-[11px] text-[#999] transition-colors hover:text-[#cc1818]"
-                      >
-                        Clear
-                      </button>
-                    )}
-                  </div>
-                  {showColorPicker && (
-                    <div className="mt-2">
-                      <ColorPicker color={previewColor || "#000000"} onChange={setPreviewColor} />
-                    </div>
                   )}
                 </div>
+                {showColorPicker && (
+                  <div className="mt-2">
+                    <ColorPicker color={previewColor || "#000000"} onChange={setPreviewColor} />
+                  </div>
+                )}
               </div>
             </div>
+          </div>
         </div>
 
         {/* ── Footer ── */}
