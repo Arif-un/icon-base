@@ -14,7 +14,18 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["**/node_modules/**", "**/dist/**", "**/assets/**", "**/build/**", "**/*.min.js"],
+    ignores: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/assets/**",
+      "**/build/**",
+      "**/*.min.js",
+      ".storybook/**",
+      "**/vendor/**",
+      "drizzle.config.ts",
+      "playwright.config.ts",
+      "backend/**",
+    ],
   },
 
   // Base

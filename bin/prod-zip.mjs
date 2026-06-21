@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-
-/* eslint-disable no-console */
 import { execSync } from 'node:child_process'
 import path from 'node:path'
 import process, { exit } from 'node:process'
