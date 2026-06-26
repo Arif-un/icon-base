@@ -107,38 +107,8 @@ export default function IconPickerModal({
 
         {/* ── Body ── */}
         <div className="flex min-h-0 flex-1">
-          {/* Icon grid */}
-          <div className="flex-1 overflow-y-auto p-3">
-            {isLoading && (
-              <div className="flex items-center justify-center p-8">
-                <Spinner />
-              </div>
-            )}
-            {!isLoading && error && (
-              <p className="flex items-center justify-center p-8 text-[13px] text-[#cc1818]">
-                Failed to load icons
-              </p>
-            )}
-            {!isLoading && !error && icons && icons.items.length === 0 && (
-              <p className="flex items-center justify-center p-8 text-[13px] text-[#757575]">
-                No icons found
-              </p>
-            )}
-            {icons && icons.items.length > 0 && (
-              <IconGrid
-                icons={icons.items}
-                libraries={libraries}
-                selectedIconId={displaySelectedId}
-                size={previewSize}
-                strokeWidth={previewStrokeWidth}
-                color={previewColor}
-                onSelectIcon={setPendingIconData}
-              />
-            )}
-          </div>
-
           {/* Settings sidebar */}
-          <div className="ib-settings-sidebar w-52 shrink-0 overflow-y-auto border-l border-[#e0e0e0] p-3">
+          <div className="ib-settings-sidebar w-52 shrink-0 overflow-y-auto border-r border-[#e0e0e0] p-3">
             <div className="flex flex-col gap-4">
               {/* Search */}
               <SearchControl
@@ -227,6 +197,36 @@ export default function IconPickerModal({
                 )}
               </div>
             </div>
+          </div>
+
+          {/* Icon grid */}
+          <div className="flex-1 overflow-y-auto p-3">
+            {isLoading && (
+              <div className="flex items-center justify-center p-8">
+                <Spinner />
+              </div>
+            )}
+            {!isLoading && error && (
+              <p className="flex items-center justify-center p-8 text-[13px] text-[#cc1818]">
+                Failed to load icons
+              </p>
+            )}
+            {!isLoading && !error && icons && icons.items.length === 0 && (
+              <p className="flex items-center justify-center p-8 text-[13px] text-[#757575]">
+                No icons found
+              </p>
+            )}
+            {icons && icons.items.length > 0 && (
+              <IconGrid
+                icons={icons.items}
+                libraries={libraries}
+                selectedIconId={displaySelectedId}
+                size={previewSize}
+                strokeWidth={previewStrokeWidth}
+                color={previewColor}
+                onSelectIcon={setPendingIconData}
+              />
+            )}
           </div>
         </div>
 
