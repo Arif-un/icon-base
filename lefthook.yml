@@ -21,6 +21,6 @@ pre-push:
   parallel: true
   jobs:
     - name: lint
-      run: yarn lint
+      run: pnpm lint
     - name: pest
-      run: composer test
+      run: composer install --no-interaction && composer test

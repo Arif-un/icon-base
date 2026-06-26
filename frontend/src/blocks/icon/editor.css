@@ -1,6 +1,13 @@
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
 
+/* .icon-container has `transform` which always creates a new stacking context,
+   causing it to render on top of Gutenberg's ::before selection indicator.
+   Raise the indicator's z-index so it stays visible above the container. */
+.block-editor-block-list__block.wp-block-icon-base-icon::before {
+  z-index: 1;
+}
+
 /* WP component internal overrides — cannot target via Tailwind utility classes */
 
 .ib-svg-modal .components-modal__content {

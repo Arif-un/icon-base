@@ -1,11 +1,11 @@
 import type { IconBlockAttributes } from "../types";
-import { getContainerClasses, getContainerStyles } from "../utils/blockStyles";
+import { getContainerClasses, getContainerStyles, getSpacingStyles } from "../utils/blockStyles";
 import { stripSvgColors } from "../utils/svgUtils";
 
 export default function BlockIconPreview({ attributes }: { attributes: IconBlockAttributes }) {
   const { svgContent, iconWidth, iconHeight, width, height, label } = attributes;
   const containerClasses = getContainerClasses(attributes);
-  const containerStyles = getContainerStyles(attributes);
+  const containerStyles = { ...getContainerStyles(attributes), ...getSpacingStyles(attributes) };
   const strippedSvg = stripSvgColors(svgContent);
 
   const ariaProps: Record<string, string> = label

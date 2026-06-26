@@ -29,10 +29,22 @@ function EditInner({
 }) {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const anchorRef = useCallback((node: HTMLDivElement | null) => setAnchorEl(node), []);
-  const blockProps = window.wp.blockEditor.useBlockProps({
+  const rawBlockProps = window.wp.blockEditor.useBlockProps({
     className: clsx("cursor-pointer", getWrapperClasses(attributes)),
     ref: anchorRef,
   });
+  const {
+    paddingTop: _paddingTop,
+    paddingRight: _paddingRight,
+    paddingBottom: _paddingBottom,
+    paddingLeft: _paddingLeft,
+    marginTop: _marginTop,
+    marginRight: _marginRight,
+    marginBottom: _marginBottom,
+    marginLeft: _marginLeft,
+    ...wrapperStyle
+  } = (rawBlockProps.style ?? {}) as Record<string, string>;
+  const blockProps = { ...rawBlockProps, style: wrapperStyle };
   const [showPopover, setShowPopover] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showCustomSvgModal, setShowCustomSvgModal] = useState(false);

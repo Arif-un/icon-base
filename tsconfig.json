@@ -52,7 +52,8 @@
   "include": [
     "./frontend",
     "./frontend/src/types",
-    "./scripts"
+    "./scripts",
+    "./.storybook"
   ],
   "exclude": [
     "node_modules"
