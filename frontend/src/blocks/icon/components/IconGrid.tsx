@@ -65,7 +65,7 @@ export default function IconGrid({
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-0.5">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-0.5">
       {icons.map((icon) => {
         const lib = libraryMap[icon.library_id];
         const isSelected = icon.id === selectedIconId;
@@ -75,7 +75,7 @@ export default function IconGrid({
             key={icon.id}
             type="button"
             className={clsx(
-              "flex flex-col items-center justify-center gap-1 p-2 rounded bg-transparent cursor-pointer min-w-18 max-w-24 transition-colors duration-100",
+              "flex flex-col items-center justify-center gap-1 p-2 rounded bg-transparent cursor-pointer transition-colors duration-100",
               isSelected
                 ? "bg-[#e7f5fe] border border-[#007cba]"
                 : "border border-transparent hover:bg-[#f0f0f0] hover:border-[#ccc]",
