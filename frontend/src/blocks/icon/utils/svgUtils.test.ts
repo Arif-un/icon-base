@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isSafeUrl, stripSvgColors, svgHasStrokes } from "./svgUtils";
+import { getUnsupportedSvgReason, isSafeUrl, stripSvgColors, svgHasStrokes } from "./svgUtils";
 
 describe("stripSvgColors", () => {
   it("replaces hardcoded fill color with currentColor", () => {
@@ -49,6 +49,37 @@ describe("svgHasStrokes", () => {
 
   it('returns false when stroke is "none"', () => {
     expect(svgHasStrokes('<path stroke="none" d="M0 0"/>')).toBe(false);
+  });
+});
+
+describe("getUnsupportedSvgReason", () => {
+  it("rejects an SVG containing an <image> tag", () => {
+    const reason = getUnsupportedSvgReason(
+      '<image width="208" height="208" xlink:href="data:image/png;base64,AAAA"/>',
+      "",
+    );
+    expect(reason).toContain("embedded image");
+  });
+
+  it("rejects a base64 PNG wrapped in a pattern (the blank-box case)", () => {
+    const raw =
+      '<defs><pattern id="p"><use xlink:href="#i"/></pattern><image id="i" xlink:href="data:image/png;base64,iVBOR"/></defs>';
+    expect(getUnsupportedSvgReason(raw, "<defs></defs>")).toContain("embedded image");
+  });
+
+  it("rejects a jpeg data URI", () => {
+    expect(getUnsupportedSvgReason("data:image/jpeg;base64,/9j/", "x")).toContain("embedded image");
+  });
+
+  it("rejects an SVG with no usable vector content after sanitization", () => {
+    const reason = getUnsupportedSvgReason("<title>icon</title>", "");
+    expect(reason).toContain("no usable vector content");
+  });
+
+  it("accepts a real vector path SVG", () => {
+    expect(
+      getUnsupportedSvgReason('<path d="M0 0h24v24H0z"/>', '<path d="M0 0h24v24H0z"/>'),
+    ).toBeNull();
   });
 });
 

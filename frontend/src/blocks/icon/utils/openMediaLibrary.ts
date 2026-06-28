@@ -1,5 +1,7 @@
 import { sanitizeSvg } from "@/common/helpers/fetchSvgContent";
 
+import { getUnsupportedSvgReason } from "./svgUtils";
+
 export function openMediaLibrary(
   onSuccess: (svgContent: string, width: number, height: number) => void,
   onError: (message: string) => void,
@@ -46,8 +48,9 @@ export function openMediaLibrary(
         const inner = innerMatch ? innerMatch[1].trim() : text;
         const sanitized = sanitizeSvg(inner);
 
-        if (!sanitized) {
-          throw new Error("SVG content was empty after sanitization.");
+        const unsupportedReason = getUnsupportedSvgReason(text, sanitized);
+        if (unsupportedReason) {
+          throw new Error(unsupportedReason);
         }
 
         onSuccess(sanitized, width, height);

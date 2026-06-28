@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { sanitizeSvg } from "@/common/helpers/fetchSvgContent";
 
+import { getUnsupportedSvgReason } from "../utils/svgUtils";
+
 const { Button, Modal } = window.wp.components;
 
 function extractViewBox(svgMarkup: string): { width: number; height: number } {
@@ -40,7 +42,8 @@ export default function CustomSvgModal({
   const trimmed = rawSvg.trim();
   const sanitized = trimmed ? sanitizeSvg(extractInnerSvg(trimmed)) : "";
   const { width, height } = trimmed ? extractViewBox(trimmed) : { width: 24, height: 24 };
-  const isValid = sanitized.length > 0;
+  const unsupportedReason = trimmed ? getUnsupportedSvgReason(trimmed, sanitized) : null;
+  const isValid = sanitized.length > 0 && !unsupportedReason;
 
   function handleInsert() {
     if (!isValid) return;
@@ -82,12 +85,21 @@ export default function CustomSvgModal({
               />
             ) : (
               <span className="text-[13px] text-[#a0a0a0] italic">
-                {trimmed ? "Invalid SVG" : "Paste SVG markup to preview"}
+                {trimmed
+                  ? unsupportedReason
+                    ? "Unsupported SVG"
+                    : "Invalid SVG"
+                  : "Paste SVG markup to preview"}
               </span>
             )}
           </div>
         </div>
       </div>
+      {unsupportedReason && (
+        <div className="mx-4 mb-1 flex items-start gap-2 rounded-sm border-l-4 border-l-[#cc1818] bg-[#fcf0f1] px-3 py-2 text-[13px] text-[#cc1818]">
+          {unsupportedReason}
+        </div>
+      )}
       <div className="flex justify-end gap-2 border-t border-[#e0e0e0] px-4 py-3">
         <Button variant="secondary" onClick={onClose}>
           Cancel

@@ -42,6 +42,29 @@ export function stripSvgColors(svgContent: string): string {
   return svg.innerHTML;
 }
 
+const EMBEDDED_RASTER = /<image[\s/>]|data:image\/(?:png|jpe?g|gif|bmp|webp|tiff?|x-icon)/i;
+
+/**
+ * Determine whether an SVG can be used as an icon. Returns a human-readable
+ * reason when the SVG is unsupported, or null when it is fine.
+ *
+ * Two cases are rejected:
+ *  - SVGs that embed a raster bitmap (`<image>` / base64 `data:image/...`),
+ *    e.g. a PNG exported as an SVG wrapper. These render as a blank box.
+ *  - SVGs with no usable vector content left after sanitization.
+ */
+export function getUnsupportedSvgReason(rawMarkup: string, sanitizedInner: string): string | null {
+  if (EMBEDDED_RASTER.test(rawMarkup)) {
+    return "This SVG can't be used as an icon because it contains an embedded image (PNG/JPEG). Please use a vector SVG made of paths and shapes.";
+  }
+
+  if (!sanitizedInner.trim()) {
+    return "This SVG has no usable vector content. Please use a vector SVG made of paths and shapes.";
+  }
+
+  return null;
+}
+
 export function svgHasStrokes(svgContent: string): boolean {
   const matches = svgContent.matchAll(/\bstroke\s*=\s*["']([^"']*)["']/gi);
   for (const match of matches) {

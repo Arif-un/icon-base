@@ -311,12 +311,31 @@ interface WPMedia {
   }): WPMediaFrame;
 }
 
+interface WPNoticeOptions {
+  id?: string;
+  type?: "default" | "snackbar";
+  isDismissible?: boolean;
+}
+
+interface WPNoticesActions {
+  createNotice: (
+    status: "success" | "info" | "error" | "warning",
+    content: string,
+    options?: WPNoticeOptions,
+  ) => void;
+}
+
+interface WPData {
+  dispatch: (store: string) => WPNoticesActions;
+}
+
 declare global {
   interface Window {
     wp: {
       blockEditor: WPBlockEditor;
       blocks: WPBlocks;
       components: WPComponents;
+      data: WPData;
       media: WPMedia;
     };
   }

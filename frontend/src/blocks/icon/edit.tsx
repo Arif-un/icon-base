@@ -15,7 +15,7 @@ import { getWrapperClasses } from "./utils/blockStyles";
 import { openMediaLibrary } from "./utils/openMediaLibrary";
 import { stripSvgColors } from "./utils/svgUtils";
 
-const { Button, DropdownMenu, ToolbarGroup } = window.wp.components;
+const { DropdownMenu, ToolbarGroup } = window.wp.components;
 const { BlockControls } = window.wp.blockEditor;
 
 function EditInner({
@@ -48,7 +48,6 @@ function EditInner({
   const [showPopover, setShowPopover] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showCustomSvgModal, setShowCustomSvgModal] = useState(false);
-  const [mediaError, setMediaError] = useState("");
 
   const hasIcon = !!attributes.svgContent;
 
@@ -66,7 +65,6 @@ function EditInner({
   }
 
   function handleMediaSuccess(svgContent: string, width: number, height: number) {
-    setMediaError("");
     setAttributes({
       svgContent: stripSvgColors(svgContent),
       iconId: 0,
@@ -94,7 +92,12 @@ function EditInner({
   }
 
   function handleOpenMediaLibrary() {
-    openMediaLibrary(handleMediaSuccess, (message) => setMediaError(message));
+    openMediaLibrary(handleMediaSuccess, (message) => {
+      window.wp.data.dispatch("core/notices").createNotice("error", message, {
+        type: "snackbar",
+        isDismissible: true,
+      });
+    });
   }
 
   return (
@@ -147,15 +150,6 @@ function EditInner({
           onMediaLibrary={handleOpenMediaLibrary}
           onCustomSvg={() => setShowCustomSvgModal(true)}
         />
-      )}
-
-      {mediaError && (
-        <div className="mt-2 flex items-center gap-2 rounded-sm border-l-4 border-l-[#cc1818] bg-[#fcf0f1] px-3 py-2 text-[13px] text-[#cc1818]">
-          {mediaError}
-          <Button variant="link" onClick={() => setMediaError("")}>
-            Dismiss
-          </Button>
-        </div>
       )}
 
       {showPopover && (
