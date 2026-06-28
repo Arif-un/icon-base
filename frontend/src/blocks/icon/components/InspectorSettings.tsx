@@ -213,7 +213,7 @@ export default function InspectorSettings({
         ]}
       />
 
-      <PanelBody title="Advanced" initialOpen={false}>
+      <PanelBody title="Additional" initialOpen={false}>
         <TextControl
           label="Link Rel"
           help="Relationship attribute for the link (e.g. nofollow)"
