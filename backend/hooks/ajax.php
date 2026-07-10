@@ -12,7 +12,7 @@ if (! headers_sent()) {
     header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
     header('Access-Control-Allow-Origin: *');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         status_header(200);
 
         exit;

@@ -8,6 +8,10 @@ if (!\defined('ABSPATH')) {
 
 use IconBase\Config;
 
+// This plugin ships a bundled SQLite database for static icon data; $wpdb (MySQL-only) cannot be used here.
+// The chmod calls harden the SQLite files (0700/0600) — WP_Filesystem has no equivalent.
+// phpcs:disable WordPress.DB.RestrictedClasses.mysql__PDO, WordPress.WP.AlternativeFunctions.file_system_operations_chmod
+
 class SQLiteDB
 {
     private static $_instance;

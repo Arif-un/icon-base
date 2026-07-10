@@ -8,6 +8,9 @@ if (!\defined('ABSPATH')) {
 
 use IconBase\Services\SQLiteDB;
 
+// This plugin ships a bundled SQLite database for static icon data; $wpdb (MySQL-only) cannot be used here.
+// phpcs:disable WordPress.DB.RestrictedClasses.mysql__PDO
+
 class Icons
 {
     public const TABLE = 'icons';
