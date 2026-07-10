@@ -26,7 +26,7 @@ Browse multiple popular icon sets, search across every icon by name or tag in mi
 * **Powerful Gutenberg icon block** with link, rotation (full 360°), horizontal/vertical flip, alignment, color, gradient, background, border, padding, margin, and hover effects
 * **Inline SVG output** so icons scale cleanly, inherit color, and stay sharp on any screen
 * **Library and style filters** to quickly narrow results by icon set and variant
-* **Add your own icons** — create, update, and remove custom icon entries from the admin app
+* **Add your own icon** — add custom icon by pasting SVG code directly, or by choosing an SVG from the WordPress Media Library
 * **Modern React-based icon browser** for fast preview and selection
 * **Translation ready** with full text domain support
 * **Privacy friendly** — no icon data is sent to or fetched from any external service
@@ -84,9 +84,9 @@ Icons are indexed in a local SQLite database using FTS5 full-text search. You ca
 
 No. Icon Base uses a self-contained SQLite database file that ships inside the plugin. It only requires the PHP PDO SQLite extension, which is enabled on most hosts.
 
-= Can I add my own icons? =
+= Can I add my own icon? =
 
-Yes. The admin app lets you add, update, and delete your own custom icon entries.
+Yes. You can add your own custom icon in two ways: paste the SVG code directly, or select an SVG from the WordPress Media Library.
 
 = Why is my icon not changing color? =
 
