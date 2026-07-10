@@ -1,6 +1,5 @@
 <?php
 
-// use IconBase\IconBase as DB;
 use IconBase\Config;
 use IconBase\Deps\BitApps\WPKit\Migration\Migration;
 
@@ -19,26 +18,8 @@ final class PluginOptions extends Migration
 
     public function down(): void
     {
-        $pluginOptions = [
-            Config::withPrefix('db_version'),
-            Config::withPrefix('installed'),
-            Config::withPrefix('version'),
-        ];
-
-        DB::query(
-            DB::prepare(
-                'DELETE FROM `' . DB::wpPrefix() . 'options` WHERE option_name in ('
-                . implode(
-                    ',',
-                    array_map(
-                        function () {
-                            return '%s';
-                        },
-                        $pluginOptions
-                    )
-                ) . ')',
-                $pluginOptions
-            )
-        );
+        Config::deleteOption('db_version');
+        Config::deleteOption('installed');
+        Config::deleteOption('version');
     }
 }
