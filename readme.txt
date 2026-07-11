@@ -36,10 +36,15 @@ Browse multiple popular icon sets, search across every icon by name or tag in mi
 * **Ant Design Icons** (830 icons) — filled, outlined, and two-tone styles.
 * **Boxicons** (3,768 icons) — regular, solid, and logo variants.
 
-=== Stay connected ===
+=== Contribute & stay connected ===
 
+Icon Base is open source and community driven. Contributions, bug reports, and new icon sets are always welcome.
+
+* [View on GitHub](https://github.com/Arif-un/icon-base) — source code, fork, and star the project
+* [Report a bug or request a feature](https://github.com/Arif-un/icon-base/issues)
+* [Send a pull request](https://github.com/Arif-un/icon-base/pulls)
+* [Join the discussion](https://github.com/Arif-un/icon-base/discussions)
 * [View live demo](DEMO_URL_HERE)
-* [View on GitHub](GITHUB_URL_HERE)
 * [Visit plugin project page](PROJECT_URL_HERE)
 
 == Installation ==
@@ -95,6 +100,22 @@ The icon block includes controls for the icon's color and background. However, i
 = Is Icon Base translation ready? =
 
 Yes. The plugin uses a text domain and is fully ready for localization.
+
+= Is it safe to add my own SVG icons? =
+
+Yes. Every SVG you paste or import from the Media Library is sanitized before it is used. Scripts, event handlers, and unsafe markup are stripped, and SVGs that embed a raster bitmap (PNG/JPEG) or that have no usable vector content are rejected with a clear message. Link URLs on icons are restricted to safe protocols (http, https, mailto, tel, and same-page anchors).
+
+= Where is my data stored? What happens when I uninstall? =
+
+Icon Base stores its data in a self-contained SQLite database that ships inside the plugin, plus a small set of WordPress options. No content is written outside your own site. Custom icons you add are stored locally. Removing the plugin cleans up its data on uninstall.
+
+= Does the plugin make any external or third-party requests? =
+
+No. Icon Base is fully self-hosted. No icon data, usage data, or telemetry is sent to any external service, and no assets are fetched from a third-party CDN.
+
+== Privacy ==
+
+Icon Base does not collect, store, or transmit any personal data. It makes no external HTTP requests and includes no tracking, analytics, or telemetry. All icons and search indexes are bundled with the plugin and served entirely from your own site.
 
 == Screenshots ==
 

@@ -2,6 +2,8 @@
 
 A WordPress plugin with a React frontend, PHP backend, and built-in REST/AJAX routing.
 
+**Repository:** [https://github.com/Arif-un/icon-base](https://github.com/Arif-un/icon-base)
+
 ---
 
 ## Requirements
@@ -194,6 +196,24 @@ pnpm test:e2e       # Playwright E2E tests
 | Backend  | PHP 7.4+, WPKit, Imposter (namespace isolation) |
 | Testing  | Vitest, Playwright |
 | Quality  | ESLint, Stylelint, PHPCS, PHP-CS-Fixer |
+
+---
+
+## Contributing & Community
+
+Icon Base is open source and built for the community — contributions of all kinds are welcome.
+
+**Repository:** [https://github.com/Arif-un/icon-base](https://github.com/Arif-un/icon-base)
+
+Ways to get involved:
+
+- 🐛 **Report a bug** or request a feature via [GitHub Issues](https://github.com/Arif-un/icon-base/issues)
+- 🔧 **Send a pull request** — fork the repo, create a branch, and open a [PR](https://github.com/Arif-un/icon-base/pulls). Run `pnpm lint`, `composer lint`, and `pnpm test` before submitting.
+- 🎨 **Add icon libraries** — help expand the bundled icon sets.
+- 💬 **Ask questions & share ideas** in [GitHub Discussions](https://github.com/Arif-un/icon-base/discussions).
+- ⭐ **Star the repo** to help others discover the project.
+
+If this plugin is useful to you, a star and a shared review go a long way.
 
 ---
 
