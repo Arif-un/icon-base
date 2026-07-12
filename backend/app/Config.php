@@ -88,6 +88,7 @@ class Config
                     return '';
                 }
 
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin file read, not a remote URL.
                 return file_get_contents(self::get('ROOT_DIR') . self::ASSETS_FOLDER . '/build-code-name.txt');
 
             case 'WP_DB_PREFIX':

@@ -82,6 +82,7 @@ final class Dotenv
 
         $envData = implode("\n", $lines);
 
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- CLI-only dev writer for plugin-local .env.
         $isContentUpdated = file_put_contents($envFilePath, $envData);
 
         if ($isContentUpdated === false) {

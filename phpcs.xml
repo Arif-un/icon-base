@@ -28,6 +28,37 @@
     </properties>
   </rule>
 
+  <!-- ==========================================================================
+       WordPress Plugin Check (PCP) - static rules mirror
+       Ref: https://github.com/WordPress/plugin-check phpcs-rulesets
+       PluginCheck.* custom sniffs need the wordpress/plugin-check dev package.
+       Runtime checks are NOT covered here; run `wp plugin check icon-base`.
+       ========================================================================== -->
+  <!-- Security (critical per project policy) -->
+  <rule ref="WordPress.DB.PreparedSQL" />
+  <rule ref="WordPress.DB.PreparedSQLPlaceholders" />
+  <rule ref="WordPress.Security.NonceVerification" />
+  <rule ref="WordPress.Security.ValidatedSanitizedInput" />
+  <rule ref="WordPress.Security.PluginMenuSlug" />
+
+  <!-- Correctness / deprecation -->
+  <rule ref="WordPress.DB.RestrictedClasses" />
+  <rule ref="WordPress.DB.RestrictedFunctions" />
+  <rule ref="WordPress.WP.AlternativeFunctions" />
+  <rule ref="WordPress.WP.DeprecatedClasses" />
+  <rule ref="WordPress.WP.DeprecatedFunctions" />
+  <rule ref="WordPress.WP.DeprecatedParameters" />
+  <rule ref="WordPress.WP.DeprecatedParameterValues" />
+  <rule ref="WordPress.WP.DiscouragedConstants" />
+  <rule ref="WordPress.WP.DiscouragedFunctions" />
+  <rule ref="WordPress.PHP.DevelopmentFunctions" />
+  <rule ref="WordPress.DateTime.RestrictedFunctions" />
+  <rule ref="Generic.PHP.BacktickOperator" />
+  <rule ref="Generic.PHP.DiscourageGoto" />
+  <rule ref="Generic.PHP.DisallowShortOpenTag" />
+  <rule ref="Generic.PHP.DisallowAlternativePHPTags" />
+  <rule ref="Generic.Files.ByteOrderMark" />
+
   <rule ref="PSR12">
     <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
   </rule>
