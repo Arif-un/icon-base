@@ -9,6 +9,7 @@ if (!defined('ABSPATH')) {
 use IconBase\Config;
 use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
 use IconBase\Deps\BitApps\WPKit\Installer;
+use IconBase\Services\SQLiteDB;
 
 final class InstallerProvider
 {
@@ -27,6 +28,7 @@ final class InstallerProvider
         self::$_uninstallHook  = Config::withPrefix('uninstall');
 
         Hooks::addAction($this->_deactivateHook, [$this, 'deactivate']);
+        Hooks::addAction($this->_activateHook, [$this, 'activate']);
         register_uninstall_hook(Config::get('MAIN_FILE'), [self::class, 'registerUninstaller']);
     }
 
@@ -51,6 +53,12 @@ final class InstallerProvider
             ]
         );
         $installer->register();
+    }
+
+    public function activate()
+    {
+        // Write the data-directory access guard up front, before any request can reach ib.db.
+        SQLiteDB::protectDataDir();
     }
 
     public function deactivate()

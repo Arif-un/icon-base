@@ -10,7 +10,9 @@ use IconBase\Config;
 
 // This plugin ships a bundled SQLite database for static icon data; $wpdb (MySQL-only) cannot be used here.
 // The chmod calls harden the SQLite files (0700/0600) — WP_Filesystem has no equivalent.
-// phpcs:disable WordPress.DB.RestrictedClasses.mysql__PDO, WordPress.WP.AlternativeFunctions.file_system_operations_chmod
+// The .htaccess guard is generated at runtime (not shipped) so it is not a hidden file in the plugin package;
+// it blocks direct web download of ib.db on Apache/LiteSpeed. WP_Filesystem offers no gain for this local write.
+// phpcs:disable WordPress.DB.RestrictedClasses.mysql__PDO, WordPress.WP.AlternativeFunctions.file_system_operations_chmod, WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 
 class SQLiteDB
 {
@@ -43,6 +45,7 @@ class SQLiteDB
 
         $this->ensureFTS();
 
+        self::ensureAccessGuard($dataDir);
         self::hardenDirectory($dataDir, $dbPath);
     }
 
@@ -86,6 +89,68 @@ class SQLiteDB
         }
 
         set_transient('icon_base_fts_built', 1, DAY_IN_SECONDS);
+    }
+
+    /**
+     * Ensures the data directory exists and is protected, without opening a PDO connection.
+     *
+     * Called on plugin activation so the access guard and permissions are in place
+     * before any web request can reach ib.db, closing the gap between install and
+     * the first DB-touching request.
+     */
+    public static function protectDataDir(): void
+    {
+        $dataDir = Config::get('BASEDIR') . DIRECTORY_SEPARATOR . 'data';
+
+        if (!is_dir($dataDir)) {
+            wp_mkdir_p($dataDir);
+        }
+
+        self::ensureAccessGuard($dataDir);
+        self::hardenDirectory($dataDir, $dataDir . DIRECTORY_SEPARATOR . 'ib.db');
+    }
+
+    /**
+     * Writes an Apache/LiteSpeed access guard into the data directory.
+     *
+     * Shipping a .htaccess would flag the plugin package for a hidden file, so it is
+     * generated at runtime instead. Without it, ib.db is directly downloadable via URL
+     * on Apache (the sibling index.php does not cover requests to ib.db).
+     */
+    private static function ensureAccessGuard(string $dataDir): void
+    {
+        $htaccess = $dataDir . DIRECTORY_SEPARATOR . '.htaccess';
+
+        if (file_exists($htaccess)) {
+            return;
+        }
+
+        $rules = <<<'HTACCESS'
+# Deny direct access to all files in this directory
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>
+
+# Block specific dangerous extensions as a fallback
+<FilesMatch "\.(db|sqlite|sqlite3|db-wal|db-shm|db-journal)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+HTACCESS;
+
+        if (file_put_contents($htaccess, $rules) === false) {
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- intentional diagnostic logging
+            error_log('icon-base: failed to write data-directory access guard at ' . $htaccess);
+        }
     }
 
     private static function hardenDirectory(string $dataDir, string $dbPath): void
