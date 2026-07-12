@@ -4,6 +4,7 @@ import {
   getContainerStyles,
   getSpacingStyles,
   getWrapperClasses,
+  getWrapperStyles,
 } from "./utils/blockStyles";
 import { isSafeUrl } from "./utils/svgUtils";
 
@@ -22,7 +23,10 @@ export function Save({ attributes }: { attributes: IconBlockAttributes }) {
     marginLeft: _marginLeft,
     ...wrapperStyle
   } = (rawBlockProps.style ?? {}) as Record<string, string>;
-  const blockProps = { ...rawBlockProps, style: wrapperStyle };
+  const blockProps = {
+    ...rawBlockProps,
+    style: { ...getWrapperStyles(attributes), ...wrapperStyle },
+  };
 
   const {
     svgContent,

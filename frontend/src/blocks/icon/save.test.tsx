@@ -76,4 +76,24 @@ describe("Save", () => {
     render(<Save attributes={attrs({ label: "" })} />);
     expect(screen.getByRole("img", { hidden: true })).toHaveAttribute("aria-hidden", "true");
   });
+
+  // Centering must live in the saved markup so it survives plugin deactivation
+  // (when style.css is no longer enqueued). See getWrapperStyles.
+  it("inlines flex centering on the wrapper by default", () => {
+    const { container } = render(<Save attributes={attrs()} />);
+    const wrapper = container.firstChild as HTMLElement;
+    expect(wrapper).toHaveStyle({ display: "flex", justifyContent: "center" });
+  });
+
+  it("inlines justify-content flex-start for left justification", () => {
+    const { container } = render(<Save attributes={attrs({ itemsJustification: "left" })} />);
+    const wrapper = container.firstChild as HTMLElement;
+    expect(wrapper).toHaveStyle({ justifyContent: "flex-start" });
+  });
+
+  it("inlines justify-content flex-end for right justification", () => {
+    const { container } = render(<Save attributes={attrs({ itemsJustification: "right" })} />);
+    const wrapper = container.firstChild as HTMLElement;
+    expect(wrapper).toHaveStyle({ justifyContent: "flex-end" });
+  });
 });

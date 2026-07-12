@@ -12,6 +12,26 @@ export function getWrapperClasses(attributes: IconBlockAttributes): string {
   return clsx(itemsJustification && `items-justified-${itemsJustification}`);
 }
 
+const JUSTIFY_MAP: Record<string, string> = {
+  left: "flex-start",
+  center: "center",
+  right: "flex-end",
+};
+
+// Inline layout so alignment survives even when the plugin (and its style.css) is inactive.
+export function getWrapperStyles(
+  attributes: IconBlockAttributes,
+): Record<string, string | undefined> {
+  const { itemsJustification } = attributes;
+
+  return {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: JUSTIFY_MAP[itemsJustification] ?? "center",
+    lineHeight: "0",
+  };
+}
+
 export function getContainerClasses(attributes: IconBlockAttributes): string {
   const {
     iconColor,
