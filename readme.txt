@@ -111,6 +111,16 @@ Icon Base stores its data in a self-contained SQLite database that ships inside 
 
 No. Icon Base is fully self-hosted. No icon data, usage data, or telemetry is sent to any external service, and no assets are fetched from a third-party CDN.
 
+= Is the bundled SQLite database protected from direct download? =
+
+Yes, on Apache and IIS. The plugin ships `.htaccess` (Apache) and `web.config` (IIS) rules plus an `index.php` guard that block direct web access to the database directory (`backend/data/`).
+
+Nginx does not read `.htaccess`, so if you run Nginx add the following to your server block to deny direct access to the data directory:
+
+`location ~* /wp-content/plugins/icon-base/backend/data/ { deny all; }`
+
+The database is only ever read server-side by PHP, so blocking direct HTTP access has no effect on plugin functionality.
+
 == Privacy ==
 
 Icon Base does not collect, store, or transmit any personal data. It makes no external HTTP requests and includes no tracking, analytics, or telemetry. All icons and search indexes are bundled with the plugin and served entirely from your own site.
