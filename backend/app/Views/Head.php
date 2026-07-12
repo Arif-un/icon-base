@@ -46,6 +46,7 @@ class Head
     public static function createConfigVariable()
     {
         $frontendVars = apply_filters(
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Hook name is prefixed at runtime via Config::withPrefix() (ICON_BASE_).
             Config::withPrefix('localized_script'),
             [
                 'nonce'          => wp_create_nonce(Config::withPrefix('nonce')),
