@@ -15,8 +15,13 @@ const FILES = [
   'backend',
   'icons',
   `${SLUG}.php`,
+  'readme.txt',
+  'LICENSE',
   'composer.json',
 ]
+
+// Files/patterns that must never ship in the distributed plugin.
+const EXCLUDE = /(?:^|[\\/])(?:\.DS_Store|Thumbs\.db|\.git.*|robots\.txt)$/
 
 function commandExistsSync(cmd) {
   try {
@@ -36,7 +41,10 @@ async function copyFiles(files, dest) {
     files.map(async (item) => {
       console.log(`➡️  Copying ${item}`)
 
-      return fse.copy(item, path.join(dest, path.basename(item)), { overwrite: true })
+      return fse.copy(item, path.join(dest, path.basename(item)), {
+        overwrite: true,
+        filter: (src) => !EXCLUDE.test(src),
+      })
     }),
   )
 }
@@ -65,6 +73,6 @@ execSync('composer dump-autoload -o', { cwd: PLUGIN_DIR, stdio: 'inherit' })
 fse.removeSync(`${PLUGIN_DIR}/composer.lock`)
 
 console.log('\n🗜️  Creating zip...')
-execSync(`zip -r ${SLUG}.zip ${SLUG}`, { cwd: OUT_DIR, stdio: 'inherit' })
+execSync(`zip -r ${SLUG}.zip ${SLUG} -x "*.DS_Store" "*/Thumbs.db" "*/robots.txt"`, { cwd: OUT_DIR, stdio: 'inherit' })
 
 console.log(`\n✅ Done → ${ZIP_FILE} + ${PLUGIN_DIR}/`)

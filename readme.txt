@@ -4,7 +4,7 @@ Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.0
 Tested up to:      6.8
 Requires PHP:      7.4
-Stable tag:        1.0.0
+Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,8 +44,6 @@ Icon Base is open source and community driven. Contributions, bug reports, and n
 * [Report a bug or request a feature](https://github.com/Arif-un/icon-base/issues)
 * [Send a pull request](https://github.com/Arif-un/icon-base/pulls)
 * [Join the discussion](https://github.com/Arif-un/icon-base/discussions)
-* [View live demo](DEMO_URL_HERE)
-* [Visit plugin project page](PROJECT_URL_HERE)
 
 == Installation ==
 

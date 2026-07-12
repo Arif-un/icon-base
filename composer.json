@@ -1,6 +1,6 @@
 {
-  "name": "john-doe/icon-base",
-  "description": "Custom WordPress plugin with React frontend",
+  "name": "arif-un/icon-base",
+  "description": "Add 4,500+ self-hosted SVG icons to WordPress with instant full-text search and a Gutenberg icon block.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "require": {
