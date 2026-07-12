@@ -40,7 +40,7 @@
     "type-cov": "pnpx type-coverage -p ./tsconfig.json --strict --details",
     "update-ver": "node scripts/update-version.js",
     "wp-cli": "wp-env run cli wp",
-    "plugin-check": "wp-env run cli wp plugin check icon-base --exclude-directories=build,tests,frontend,scripts,bin,.claude,.fallow,.storybook,.vscode,.playwright-cli,.tanstack --exclude-files=backend/data/.htaccess,.DS_Store,.env,.env.example,.gitattributes,.gitignore,.oxfmtrc.json,.wp-env.json,.php-cs-fixer.php,.php-cs-fixer.cache"
+    "plugin-check": "wp-env run cli wp plugin check /var/www/html/wp-content/plugins/icon-base/build/icon-base"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^2.1.2",

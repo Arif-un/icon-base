@@ -14,6 +14,7 @@ const FILES = [
   'assets',
   'backend',
   'icons',
+  'languages',
   `${SLUG}.php`,
   'readme.txt',
   'LICENSE',
