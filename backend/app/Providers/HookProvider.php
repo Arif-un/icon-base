@@ -30,6 +30,7 @@ class HookProvider
             && RequestType::is(RequestType::API)
         ) {
             $router = new Router(RequestType::API, Config::REST_NAMESPACE, 'v1');
+            $router->setMiddlewares(Plugin::instance()->middlewares());
             include $this->_pluginBackend . 'hooks' . DIRECTORY_SEPARATOR . 'api.php';
             $router->register();
         }
