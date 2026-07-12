@@ -28,11 +28,14 @@ class Head
         wp_enqueue_style($slug . '-font', self::FONT_URL, [], $version);
 
         if (Config::getEnv('DEV')) {
-            wp_enqueue_script($slug . '-vite-client-helper-MODULE', Config::getEnv('DEV_URL') . '/src/config/devHotModule.js', [], null);
-            wp_enqueue_script($slug . '-vite-client-MODULE', Config::getEnv('DEV_URL') . '/@vite/client', [], null);
-            wp_enqueue_script($slug . '-index-MODULE', Config::getEnv('DEV_URL') . '/src/main.tsx', [], null);
+            // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.
+            wp_enqueue_script($slug . '-vite-client-helper-MODULE', Config::getEnv('DEV_URL') . '/src/config/devHotModule.js', [], null, true);
+            // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.
+            wp_enqueue_script($slug . '-vite-client-MODULE', Config::getEnv('DEV_URL') . '/@vite/client', [], null, true);
+            // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.
+            wp_enqueue_script($slug . '-index-MODULE', Config::getEnv('DEV_URL') . '/src/main.tsx', [], null, true);
         } else {
-            wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . "/main-{$codeName}.js", [], $version);
+            wp_enqueue_script($slug . '-index-MODULE', Config::get('ASSET_URI') . "/main-{$codeName}.js", [], $version, true);
             wp_enqueue_style($slug . '-styles', Config::get('ASSET_URI') . "/main-{$slug}-ba-assets-{$codeName}.css", null, $version, 'screen');
         }
 
