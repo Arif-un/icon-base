@@ -39,7 +39,8 @@
     "ts-check": "tsc",
     "type-cov": "pnpx type-coverage -p ./tsconfig.json --strict --details",
     "update-ver": "node scripts/update-version.js",
-    "wp-cli": "wp-env run cli wp"
+    "wp-cli": "wp-env run cli wp",
+    "plugin-check": "wp-env run cli wp plugin check icon-base"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^2.1.2",
