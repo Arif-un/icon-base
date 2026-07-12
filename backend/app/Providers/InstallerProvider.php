@@ -77,7 +77,7 @@ final class InstallerProvider
     {
         return [
             'path'       => Config::get('BASEDIR') . DIRECTORY_SEPARATOR . 'db' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR,
-            'migrations' => ['PluginOptions'],
+            'migrations' => ['IconBasePluginOptions'],
         ];
     }
 
@@ -85,7 +85,7 @@ final class InstallerProvider
     {
         return [
             'path'       => Config::get('BASEDIR') . DIRECTORY_SEPARATOR . 'db' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR,
-            'migrations' => ['PluginOptions'],
+            'migrations' => ['IconBasePluginOptions'],
         ];
     }
 }

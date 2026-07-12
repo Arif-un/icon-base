@@ -7,7 +7,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-final class PluginOptions extends Migration
+final class IconBasePluginOptions extends Migration
 {
     public function up(): void
     {
