@@ -2,7 +2,7 @@
 
 namespace IconBase\Views;
 
-if (!\defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
 

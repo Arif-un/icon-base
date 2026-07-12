@@ -6,7 +6,7 @@ use IconBase\src\Menu;
 use IconBase\Views\Body;
 use IconBase\Views\PluginPageActions;
 
-if (! \defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit;
 }
 

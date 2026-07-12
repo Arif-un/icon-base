@@ -2,7 +2,7 @@
 
 namespace IconBase\src;
 
-if (!\defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
 

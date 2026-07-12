@@ -4,7 +4,7 @@ namespace IconBase;
 
 use WP_CLI;
 
-if (! \defined('ABSPATH')) {
+if (! defined('ABSPATH')) {
     exit;
 }
 

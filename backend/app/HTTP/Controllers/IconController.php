@@ -2,7 +2,7 @@
 
 namespace IconBase\HTTP\Controllers;
 
-if (!\defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
 

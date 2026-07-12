@@ -2,7 +2,7 @@
 
 namespace IconBase\HTTP\Middleware;
 
-if (!\defined('ABSPATH')) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
