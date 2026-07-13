@@ -18,7 +18,7 @@ class PluginPageActions
                 'title' => __('Settings', 'icon-base'),
             ],
             [
-                'url'   => 'https://johndoe.com/support',
+                'url'   => 'https://github.com/Arif-un/icon-base/issues',
                 'title' => __('Support', 'icon-base'),
             ],
         ];
