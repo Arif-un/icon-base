@@ -1,5 +1,5 @@
 === Icon Base ===
-Contributors:      arif25897
+Contributors:      mrknuckles, arif25897
 Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.9
 Tested up to:      7.0
@@ -43,7 +43,6 @@ Icon Base is open source and community driven. Contributions, bug reports, and n
 * [View on GitHub](https://github.com/Arif-un/icon-base) — source code, fork, and star the project
 * [Report a bug or request a feature](https://github.com/Arif-un/icon-base/issues)
 * [Send a pull request](https://github.com/Arif-un/icon-base/pulls)
-* [Join the discussion](https://github.com/Arif-un/icon-base/discussions)
 
 == Installation ==
 
