@@ -9,7 +9,6 @@ if (!defined('ABSPATH')) {
 use IconBase\Config;
 use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
 use IconBase\Deps\BitApps\WPKit\Installer;
-use IconBase\Services\SQLiteDB;
 
 final class InstallerProvider
 {
@@ -57,8 +56,6 @@ final class InstallerProvider
 
     public function activate()
     {
-        // Write the data-directory access guard up front, before any request can reach ib.db.
-        SQLiteDB::protectDataDir();
     }
 
     public function deactivate()
