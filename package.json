@@ -5,7 +5,7 @@
   "author": "ra",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && vite build -c vite.config.blocks.ts",
     "build:blocks": "vite build -c vite.config.blocks.ts",
     "dev:blocks": "vite build -c vite.config.blocks.ts --watch",
     "clean": "rm -rf node_modules",
