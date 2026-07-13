@@ -11,8 +11,6 @@ use IconBase\Deps\BitApps\WPKit\Helpers\DateTimeHelper;
 
 class Head
 {
-    public const FONT_URL = 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap';
-
     public function addHeadScripts($currentScreen)
     {
         if (strpos($currentScreen, Config::SLUG) === false) {
@@ -23,9 +21,7 @@ class Head
         $slug     = Config::SLUG;
         $codeName = Config::get('BUILD_CODE_NAME');
 
-        wp_enqueue_style($slug . '-googleapis-PRECONNECT', 'https://fonts.googleapis.com', [], $version);
-        wp_enqueue_style($slug . '-gstatic-PRECONNECT-CROSSORIGIN', 'https://fonts.gstatic.com', [], $version);
-        wp_enqueue_style($slug . '-font', self::FONT_URL, [], $version);
+        wp_enqueue_style($slug . '-font', Config::get('ASSET_URI') . '/fonts/inter.css', [], $version);
 
         if (Config::getEnv('DEV')) {
             // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.

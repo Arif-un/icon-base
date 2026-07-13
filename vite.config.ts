@@ -3,6 +3,7 @@ import path from "node:path";
 
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
+import fse from "fs-extra";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import react from "@vitejs/plugin-react";
 import { humanId } from "human-id";
@@ -64,6 +65,19 @@ export default defineConfig(({ mode }) => {
           }
         },
       },
+      {
+        // Fonts are the tracked source of truth; assets/ is git-ignored build
+        // output and wiped by emptyOutDir on every build. Copy fonts into
+        // assets/fonts on dev-server start (buildStart) and after each
+        // production build (closeBundle, which runs after emptyOutDir).
+        name: "copy-fonts",
+        buildStart() {
+          if (isDevelopment) copyFonts();
+        },
+        closeBundle() {
+          copyFonts();
+        },
+      },
       ...(!isTest
         ? [
             tanstackRouter({
@@ -108,4 +122,10 @@ export default defineConfig(({ mode }) => {
 
 function hash() {
   return Math.round(Math.random() * (999 - 1) + 1);
+}
+
+function copyFonts() {
+  const src = path.resolve(import.meta.dirname, "frontend/src/resource/fonts");
+  const dest = path.resolve(import.meta.dirname, "assets/fonts");
+  fse.copySync(src, dest, { overwrite: true });
 }

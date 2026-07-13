@@ -1,0 +1,19 @@
+/*
+ * Self-hosted Inter (variable) — bundled locally so the plugin makes no
+ * third-party font requests. Inter is licensed under the SIL Open Font
+ * License 1.1 (GPL-compatible). See LICENSE-Inter.txt in this directory.
+ */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("InterVariable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("InterVariable-Italic.woff2") format("woff2");
+}
