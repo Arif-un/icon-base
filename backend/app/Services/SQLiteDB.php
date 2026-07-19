@@ -67,7 +67,7 @@ class SQLiteDB
         $source = Config::get('DATA_SOURCE');
 
         if (!is_readable($source)) {
-            throw new \RuntimeException('Icon Base: icon dataset not found at ' . $source);
+            throw new \RuntimeException('Icon Base: icon dataset not found at ' . esc_html($source));
         }
 
         $tmpPath = $dbPath . '.' . uniqid('build', true) . '.tmp';
