@@ -1,0 +1,59 @@
+# Files excluded from the distributed plugin archive (wp dist-archive).
+# The runtime SQLite db is generated from backend/data/ib.json — never ship a binary db.
+*.db
+*.db-wal
+*.db-shm
+
+# VCS / OS / editor
+.git
+.gitignore
+.gitattributes
+.github
+.DS_Store
+.vscode
+.idea
+.fallow
+
+# Dev config & tooling
+.claude
+.env
+.env.example
+.wp-env.json
+.storybook
+.tanstack
+.playwright-cli
+.php-cs-fixer.php
+.php-cs-fixer.cache
+.oxfmtrc.json
+phpcs.xml
+phpunit.xml
+playwright.config.ts
+drizzle.config.ts
+cspell.json
+eslint.config.js
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+vite.config.blocks.ts
+lefthook.yml
+
+# Sources / build inputs (compiled output ships in assets/)
+frontend
+node_modules
+tests
+bin
+scripts
+build
+dist
+composer.lock
+package.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+README.md
+
+# Authoring data & migrations source (JSON dataset ships in backend/data/)
+backend/db/schema.ts
+backend/db/seed.ts
+backend/db/*.json
+backend/db/tsconfig.json
+wp-kit

@@ -24,6 +24,10 @@ class Config
 
     public const DB_VERSION = '0.1.0';
 
+    // Bundled icon dataset version. Bump whenever backend/data/ib.json changes so installed
+    // sites rebuild their generated SQLite db from the shipped JSON. See RUNTIME_DB_PATH.
+    public const DATA_VERSION = '1.0.0';
+
     public const REQUIRED_PHP_VERSION = '7.4';
 
     public const REQUIRED_WP_VERSION = '5.0';
@@ -50,6 +54,16 @@ class Config
 
             case 'BASEDIR':
                 return self::get('ROOT_DIR') . 'backend';
+
+            case 'DATA_SOURCE':
+                return self::get('BASEDIR') . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'ib.json';
+
+            case 'RUNTIME_DB_DIR':
+                // Writable location for the generated SQLite db. Never write inside the plugin dir.
+                return self::get('UPLOAD_BASE_DIR') . DIRECTORY_SEPARATOR . self::SLUG;
+
+            case 'RUNTIME_DB_PATH':
+                return self::get('RUNTIME_DB_DIR') . DIRECTORY_SEPARATOR . 'ib.db';
 
             case 'UPLOAD_BASE_URL':
                 return wp_upload_dir()['baseurl'];

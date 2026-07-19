@@ -34,3 +34,9 @@ gha-creds-*.json
 CLAUDE.local.md
 /.tanstack/tmp
 /.playwright-cli
+
+# Generated SQLite db is built at runtime from backend/data/ib.json (the tracked source of
+# truth). The local authoring db + its WAL sidecars are dev artifacts, never committed/shipped.
+backend/data/*.db
+*.db-wal
+*.db-shm

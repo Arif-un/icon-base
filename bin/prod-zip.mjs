@@ -22,7 +22,8 @@ const FILES = [
 ]
 
 // Files/patterns that must never ship in the distributed plugin.
-const EXCLUDE = /(?:^|[\\/])(?:\.DS_Store|Thumbs\.db|\.git.*|robots\.txt)$/
+// Binary SQLite dbs are generated at runtime from backend/data/ib.json — they must not ship.
+const EXCLUDE = /(?:^|[\\/])(?:\.DS_Store|Thumbs\.db|\.git.*|robots\.txt)$|\.(?:db|db-wal|db-shm)$/
 
 function commandExistsSync(cmd) {
   try {

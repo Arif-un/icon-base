@@ -15,65 +15,26 @@ class InMemoryDB
 
         $pdo->exec('PRAGMA foreign_keys=ON;');
 
-        $pdo->exec('
-            CREATE TABLE icon_type (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                type TEXT NOT NULL
-            )
-        ');
-
-        $pdo->exec('
-            CREATE TABLE library (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                slug TEXT NOT NULL,
-                name TEXT NOT NULL,
-                meta TEXT
-            )
-        ');
-
-        $pdo->exec('
-            CREATE TABLE icons (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                name TEXT NOT NULL,
-                type_id INTEGER,
-                tags TEXT,
-                library_id INTEGER NOT NULL,
-                filename TEXT NOT NULL,
-                FOREIGN KEY (type_id) REFERENCES icon_type(id),
-                FOREIGN KEY (library_id) REFERENCES library(id)
-            )
-        ');
-
-        $pdo->exec("
-            CREATE VIRTUAL TABLE icons_fts USING fts5(
-                name, tags, content='icons', content_rowid='id'
-            )
-        ");
-
-        $pdo->exec('
-            CREATE TRIGGER icons_ai AFTER INSERT ON icons BEGIN
-                INSERT INTO icons_fts(rowid, name, tags) VALUES (new.id, new.name, new.tags);
-            END
-        ');
-
-        $pdo->exec('
-            CREATE TRIGGER icons_ad AFTER DELETE ON icons BEGIN
-                INSERT INTO icons_fts(icons_fts, rowid, name, tags)
-                    VALUES(\'delete\', old.id, old.name, old.tags);
-            END
-        ');
-
-        $pdo->exec('
-            CREATE TRIGGER icons_au AFTER UPDATE ON icons BEGIN
-                INSERT INTO icons_fts(icons_fts, rowid, name, tags)
-                    VALUES(\'delete\', old.id, old.name, old.tags);
-                INSERT INTO icons_fts(rowid, name, tags) VALUES (new.id, new.name, new.tags);
-            END
-        ');
+        // Build the schema and FTS objects from the production code so this in-memory mirror can
+        // never drift from what SQLiteDB actually generates at runtime. See SQLiteDBTest.
+        self::invokeBuilder('createSchema', $pdo);
+        self::invokeBuilder('createFts', $pdo);
 
         self::injectIntoSingleton($pdo);
 
         return $pdo;
+    }
+
+    /**
+     * Invoke one of SQLiteDB's private build steps against the given connection.
+     */
+    private static function invokeBuilder(string $method, \PDO $pdo): void
+    {
+        $instance = (new \ReflectionClass(SQLiteDB::class))->newInstanceWithoutConstructor();
+
+        $ref = new \ReflectionMethod(SQLiteDB::class, $method);
+        $ref->setAccessible(true);
+        $ref->invoke($instance, $pdo);
     }
 
     public static function teardown(): void
