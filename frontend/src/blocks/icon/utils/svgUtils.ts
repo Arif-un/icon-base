@@ -6,7 +6,9 @@ export function stripSvgColors(svgContent: string): string {
     USE_PROFILES: { svg: true, svgFilters: true },
   });
   const innerMatch = clean.match(/^<svg[^>]*>([\s\S]*)<\/svg>$/);
-  const sanitized = innerMatch ? innerMatch[1] : svgContent;
+  // Fall back to the sanitized DOMPurify output (`clean`), never the raw input:
+  // returning raw `svgContent` on a regex miss would re-introduce stripped XSS vectors.
+  const sanitized = innerMatch ? innerMatch[1] : clean;
 
   const div = document.createElement("div");
   div.innerHTML = `<svg>${sanitized}</svg>`;
