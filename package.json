@@ -158,7 +158,7 @@
     "incstr": "^1.2.3",
     "msw": "^2.7.3",
     "oxfmt": "^0.52.0",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.18",
     "react-error-boundary": "^6.1.2",
     "rimraf": "^6.0.1",
     "storybook": "^8.6.4",
