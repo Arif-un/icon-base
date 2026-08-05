@@ -126,12 +126,9 @@ Icon Indexa does not collect, store, or transmit any personal data. It makes no 
 
 == Screenshots ==
 
-1. The Icon Indexa library browser with instant full-text search across thousands of icons.
-2. Filtering icons by library and style to quickly find the icon you need.
-3. Inserting and configuring an icon with the Gutenberg icon block.
-4. Icon block controls including color, gradient, rotation, alignment, border, and spacing.
-5. Adding and managing your own custom icons from the admin app.
-6. Icon preview and detail view.
+1. The Icon Indexa admin library browser with instant full-text search, library and type filters, and live size, stroke, and color controls across 4,500+ icons.
+2. The Gutenberg icon block: browse the icon library, pick from the Media Library, or insert a custom SVG, with full block dimension and border controls.
+3. The full-screen icon picker with library and style filters plus live size, stroke, and color adjustment before inserting.
 
 == Changelog ==
 
