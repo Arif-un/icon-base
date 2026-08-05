@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="IconBase/wpp">
+<ruleset name="IconIndexa/wpp">
   <description>Coding standard used for wp plugin dev.</description>
   <file>./backend</file>
   <exclude-pattern>*/tests/*</exclude-pattern>
@@ -23,7 +23,7 @@
   <rule ref="WordPress.WP.I18n">
     <properties>
       <property name="text_domain" type="array">
-        <element value="icon-base" />
+        <element value="icon-indexa" />
       </property>
     </properties>
   </rule>
@@ -32,7 +32,7 @@
        WordPress Plugin Check (PCP) - static rules mirror
        Ref: https://github.com/WordPress/plugin-check phpcs-rulesets
        PluginCheck.* custom sniffs need the wordpress/plugin-check dev package.
-       Runtime checks are NOT covered here; run `wp plugin check icon-base`.
+       Runtime checks are NOT covered here; run `wp plugin check icon-indexa`.
        ========================================================================== -->
   <!-- Security (critical per project policy) -->
   <rule ref="WordPress.DB.PreparedSQL" />

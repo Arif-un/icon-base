@@ -28,12 +28,12 @@ const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => pro
   },
 }
 
-// Minimal ICON_BASE_ global so SERVER_VARIABLES references don't throw at runtime
-;(window as any).ICON_BASE_ = {
+// Minimal ICON_INDEXA_ global so SERVER_VARIABLES references don't throw at runtime
+;(window as any).ICON_INDEXA_ = {
   nonce: 'storybook-nonce',
   restNonce: 'storybook-rest-nonce',
-  apiURL: { base: 'http://localhost:8888/wp-json/IconBase/v1', separator: '?' },
-  rootURL: 'http://localhost:8888/wp-content/plugins/icon-base',
+  apiURL: { base: 'http://localhost:8888/wp-json/IconIndexa/v1', separator: '?' },
+  rootURL: 'http://localhost:8888/wp-content/plugins/icon-indexa',
   siteURL: 'http://localhost:8888',
 }
 

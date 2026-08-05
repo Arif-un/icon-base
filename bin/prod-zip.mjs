@@ -5,7 +5,7 @@ import process, { exit } from 'node:process'
 
 import fse from 'fs-extra'
 
-const SLUG = 'icon-base' 
+const SLUG = 'icon-indexa'
 const OUT_DIR = 'build'
 const PLUGIN_DIR = `${OUT_DIR}/${SLUG}`
 const ZIP_FILE = `${OUT_DIR}/${SLUG}.zip`

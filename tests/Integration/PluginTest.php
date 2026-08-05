@@ -3,12 +3,12 @@
 use Brain\Monkey\Functions;
 use Brain\Monkey\Actions;
 use Brain\Monkey\Filters;
-use IconBase\Config;
+use IconIndexa\Config;
 
 test('getOption calls get_option with prefix', function () {
     Functions\expect('get_option')
         ->once()
-        ->with('ICON_BASE_db_version', false)
+        ->with('ICON_INDEXA_db_version', false)
         ->andReturn('0.1.0');
 
     $result = Config::getOption('db_version');
@@ -30,7 +30,7 @@ test('getOption with wp flag skips prefix', function () {
 test('addOption calls add_option with prefix', function () {
     Functions\expect('add_option')
         ->once()
-        ->with('ICON_BASE_my_option', 'my_value', '', 'no')
+        ->with('ICON_INDEXA_my_option', 'my_value', '', 'no')
         ->andReturn(true);
 
     $result = Config::addOption('my_option', 'my_value');
@@ -41,7 +41,7 @@ test('addOption calls add_option with prefix', function () {
 test('updateOption calls update_option with prefix', function () {
     Functions\expect('update_option')
         ->once()
-        ->with('ICON_BASE_my_option', 'new_value', null)
+        ->with('ICON_INDEXA_my_option', 'new_value', null)
         ->andReturn(true);
 
     $result = Config::updateOption('my_option', 'new_value');
@@ -52,7 +52,7 @@ test('updateOption calls update_option with prefix', function () {
 test('deleteOption calls delete_option with prefix', function () {
     Functions\expect('delete_option')
         ->once()
-        ->with('ICON_BASE_my_option')
+        ->with('ICON_INDEXA_my_option')
         ->andReturn(true);
 
     $result = Config::deleteOption('my_option');
@@ -61,7 +61,7 @@ test('deleteOption calls delete_option with prefix', function () {
 });
 
 test('getEnv returns sanitized env value', function () {
-    $_ENV['ICON_BASE_DEV'] = 'true';
+    $_ENV['ICON_INDEXA_DEV'] = 'true';
 
     Functions\expect('sanitize_text_field')
         ->once()
@@ -72,7 +72,7 @@ test('getEnv returns sanitized env value', function () {
 
     expect($result)->toBe('true');
 
-    unset($_ENV['ICON_BASE_DEV']);
+    unset($_ENV['ICON_INDEXA_DEV']);
 });
 
 test('getEnv returns false when env not set', function () {

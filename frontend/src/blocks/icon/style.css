@@ -1,23 +1,23 @@
-.wp-block-icon-base-icon {
+.wp-block-icon-shelf-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 0;
 }
 
-.wp-block-icon-base-icon.items-justified-left {
+.wp-block-icon-shelf-icon.items-justified-left {
   justify-content: flex-start;
 }
 
-.wp-block-icon-base-icon.items-justified-center {
+.wp-block-icon-shelf-icon.items-justified-center {
   justify-content: center;
 }
 
-.wp-block-icon-base-icon.items-justified-right {
+.wp-block-icon-shelf-icon.items-justified-right {
   justify-content: flex-end;
 }
 
-.wp-block-icon-base-icon .icon-container {
+.wp-block-icon-shelf-icon .icon-container {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -29,30 +29,30 @@
   line-height: 0;
 }
 
-.wp-block-icon-base-icon .icon-container svg {
+.wp-block-icon-shelf-icon .icon-container svg {
   display: block;
 }
 
-.wp-block-icon-base-icon a.icon-container {
+.wp-block-icon-shelf-icon a.icon-container {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
 
-.wp-block-icon-base-icon a.icon-container.has-hover-scale:hover {
+.wp-block-icon-shelf-icon a.icon-container.has-hover-scale:hover {
   transform: rotate(var(--ib-rotate, 0deg)) scaleX(calc(var(--ib-flip-x, 1) * 1.1))
     scaleY(calc(var(--ib-flip-y, 1) * 1.1));
 }
 
-.wp-block-icon-base-icon a.icon-container.has-hover-color:hover {
+.wp-block-icon-shelf-icon a.icon-container.has-hover-color:hover {
   filter: brightness(1.2);
 }
 
-.wp-block-icon-base-icon a.icon-container.has-hover-opacity:hover {
+.wp-block-icon-shelf-icon a.icon-container.has-hover-opacity:hover {
   opacity: 0.7;
 }
 
-.wp-block-icon-base-icon .has-icon-background-color {
+.wp-block-icon-shelf-icon .has-icon-background-color {
   padding: 8px;
   border-radius: 4px;
 }

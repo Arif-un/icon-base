@@ -1,8 +1,8 @@
 <?php
 
 use Brain\Monkey\Functions;
-use IconBase\HTTP\Middleware\AdminCheckerMiddleware;
-use IconBase\Deps\BitApps\WPKit\Http\Response;
+use IconIndexa\HTTP\Middleware\AdminCheckerMiddleware;
+use IconIndexa\Deps\BitApps\WPKit\Http\Response;
 
 describe('AdminCheckerMiddleware::handle', function () {
     test('passes when user has manage_options capability', function () {

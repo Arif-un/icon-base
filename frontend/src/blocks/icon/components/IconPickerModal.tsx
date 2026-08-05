@@ -79,7 +79,7 @@ export default function IconPickerModal({
 
   return (
     <Modal
-      title="Icon Base"
+      title="Icon Indexa"
       onRequestClose={onClose}
       className="ib-picker-modal"
       // @ts-expect-error — experimental WP prop to suppress default header
@@ -91,7 +91,7 @@ export default function IconPickerModal({
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Logo />
-            <span className="text-[13px] font-semibold text-[#1e1e1e]">Icon Base</span>
+            <span className="text-[13px] font-semibold text-[#1e1e1e]">Icon Indexa</span>
           </div>
 
           {/* Close */}

@@ -1,12 +1,12 @@
 <?php
 
-namespace IconBase\Models;
+namespace IconIndexa\Models;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Services\SQLiteDB;
+use IconIndexa\Services\SQLiteDB;
 
 class Library
 {

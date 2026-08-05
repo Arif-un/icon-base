@@ -52,7 +52,7 @@ export default defineConfig({
     },
   },
   define: {
-    SERVER_VARIABLES: 'window.ICON_BASE_',
+    SERVER_VARIABLES: 'window.ICON_INDEXA_',
   },
   plugins: [react(), copyBlockAssets()],
   resolve: {

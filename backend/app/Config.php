@@ -1,10 +1,10 @@
 <?php
 
-namespace IconBase;
+namespace IconIndexa;
 
-use IconBase\src\Menu;
-use IconBase\Views\Body;
-use IconBase\Views\PluginPageActions;
+use IconIndexa\src\Menu;
+use IconIndexa\Views\Body;
+use IconIndexa\Views\PluginPageActions;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -12,17 +12,17 @@ if (! defined('ABSPATH')) {
 
 class Config
 {
-    public const SLUG = 'icon-base';
+    public const SLUG = 'icon-indexa';
 
-    public const REST_NAMESPACE = 'IconBase';
+    public const REST_NAMESPACE = 'IconIndexa';
 
-    public const TITLE = 'Icon Base';
+    public const TITLE = 'Icon Indexa';
 
-    public const VAR_PREFIX = 'ICON_BASE_';
+    public const VAR_PREFIX = 'ICON_INDEXA_';
 
     public const VERSION = '1.0.0';
 
-    public const DB_VERSION = '0.1.0';
+    public const DB_VERSION = '1.0.0';
 
     // Bundled icon dataset version. Bump whenever backend/data/ib.json changes so installed
     // sites rebuild their generated SQLite db from the shipped JSON. See RUNTIME_DB_PATH.
@@ -36,7 +36,7 @@ class Config
 
     public const APP_BASE = '../../' . self::SLUG . '.php';
 
-    public const CLASS_PREFIX = 'IconBase';
+    public const CLASS_PREFIX = 'IconIndexa';
 
     public const ASSETS_FOLDER = 'assets';
 

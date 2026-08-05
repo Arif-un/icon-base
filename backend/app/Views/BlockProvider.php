@@ -1,13 +1,13 @@
 <?php
 
-namespace IconBase\Views;
+namespace IconIndexa\Views;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
 
 final class BlockProvider
 {
@@ -30,7 +30,7 @@ final class BlockProvider
 
     public function enqueueBlockEditorData()
     {
-        $scriptHandle = 'icon-base-icon-editor-script';
+        $scriptHandle = 'icon-shelf-icon-editor-script';
 
         if (!wp_script_is($scriptHandle, 'registered')) {
             return;

@@ -18,12 +18,14 @@ export default defineConfig(({ mode }) => {
 
   const isDevelopment = mode === "development" || mode === "test";
   const isTest = mode === "test";
-  const folderName = path.basename(process.cwd());
   const ASSETS_DIR = "assets";
   const codeName = humanId({ capitalize: false, separator: "-" });
 
   return {
-    base: isDevelopment ? `/wp-content/plugins/${folderName}/frontend/` : "",
+    // Dev base must match the DEV_URL path the PHP side enqueues (Head.php), which is
+    // derived from PLUGIN_SLUG — not the on-disk folder name, since the dev bundle is
+    // served virtually by the Vite dev server, not from wp-content/plugins.
+    base: isDevelopment ? `/wp-content/plugins/${PLUGIN_SLUG}/frontend/` : "",
     build: {
       emptyOutDir: true,
       outDir: `../${ASSETS_DIR}`,

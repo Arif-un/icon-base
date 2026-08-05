@@ -1,24 +1,24 @@
 <?php
 
-namespace IconBase;
+namespace IconIndexa;
 
 // Prevent direct script access
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
-use IconBase\Deps\BitApps\WPKit\Http\RequestType;
-use IconBase\Deps\BitApps\WPKit\Migration\MigrationHelper;
-use IconBase\Deps\BitApps\WPKit\Utils\Capabilities;
-use IconBase\HTTP\Middleware\AdminCheckerMiddleware;
-use IconBase\HTTP\Middleware\NonceCheckerMiddleware;
-use IconBase\Providers\HookProvider;
-use IconBase\Providers\InstallerProvider;
-use IconBase\Views\BlockProvider;
-use IconBase\Views\HtmlTagModifier;
-use IconBase\Views\Layout;
-use IconBase\Views\PluginPageActions;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Deps\BitApps\WPKit\Http\RequestType;
+use IconIndexa\Deps\BitApps\WPKit\Migration\MigrationHelper;
+use IconIndexa\Deps\BitApps\WPKit\Utils\Capabilities;
+use IconIndexa\HTTP\Middleware\AdminCheckerMiddleware;
+use IconIndexa\HTTP\Middleware\NonceCheckerMiddleware;
+use IconIndexa\Providers\HookProvider;
+use IconIndexa\Providers\InstallerProvider;
+use IconIndexa\Views\BlockProvider;
+use IconIndexa\Views\HtmlTagModifier;
+use IconIndexa\Views\Layout;
+use IconIndexa\Views\PluginPageActions;
 
 final class Plugin
 {

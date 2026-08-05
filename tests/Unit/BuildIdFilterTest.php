@@ -1,6 +1,6 @@
 <?php
 
-use IconBase\Models\Icons;
+use IconIndexa\Models\Icons;
 
 function callBuildIdFilter(array &$conditions, array &$binds, string $column, array $ids): void
 {

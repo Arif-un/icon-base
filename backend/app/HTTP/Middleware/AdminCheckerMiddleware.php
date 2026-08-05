@@ -1,13 +1,13 @@
 <?php
 
-namespace IconBase\HTTP\Middleware;
+namespace IconIndexa\HTTP\Middleware;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Deps\BitApps\WPKit\Http\Response;
-use IconBase\Deps\BitApps\WPKit\Utils\Capabilities;
+use IconIndexa\Deps\BitApps\WPKit\Http\Response;
+use IconIndexa\Deps\BitApps\WPKit\Utils\Capabilities;
 
 class AdminCheckerMiddleware
 {

@@ -1,12 +1,12 @@
 <?php
 
 use Brain\Monkey\Functions;
-use IconBase\HTTP\Middleware\NonceCheckerMiddleware;
-use IconBase\Deps\BitApps\WPKit\Http\Request\Request;
-use IconBase\Deps\BitApps\WPKit\Http\Response;
+use IconIndexa\HTTP\Middleware\NonceCheckerMiddleware;
+use IconIndexa\Deps\BitApps\WPKit\Http\Request\Request;
+use IconIndexa\Deps\BitApps\WPKit\Http\Response;
 
 beforeEach(function () {
-    unset($_SERVER['HTTP_X_ICON_BASE_NONCE']);
+    unset($_SERVER['HTTP_X_ICON_INDEXA_NONCE']);
 
     Functions\when('sanitize_text_field')->alias(function ($str) {
         return trim(strip_tags((string) $str));
@@ -17,16 +17,16 @@ beforeEach(function () {
 });
 
 afterEach(function () {
-    unset($_SERVER['HTTP_X_ICON_BASE_NONCE']);
+    unset($_SERVER['HTTP_X_ICON_INDEXA_NONCE']);
 });
 
 describe('NonceCheckerMiddleware::handle', function () {
     test('passes when header nonce is valid', function () {
-        $_SERVER['HTTP_X_ICON_BASE_NONCE'] = 'valid-header-nonce';
+        $_SERVER['HTTP_X_ICON_INDEXA_NONCE'] = 'valid-header-nonce';
 
         Functions\expect('wp_verify_nonce')
             ->once()
-            ->with('valid-header-nonce', 'ICON_BASE_nonce')
+            ->with('valid-header-nonce', 'ICON_INDEXA_nonce')
             ->andReturn(1);
 
         $request = Mockery::mock(Request::class);
@@ -40,7 +40,7 @@ describe('NonceCheckerMiddleware::handle', function () {
     test('falls back to request _nonce when header absent', function () {
         Functions\expect('wp_verify_nonce')
             ->once()
-            ->with('valid-body-nonce', 'ICON_BASE_nonce')
+            ->with('valid-body-nonce', 'ICON_INDEXA_nonce')
             ->andReturn(1);
 
         $request = Mockery::mock(Request::class);
@@ -54,7 +54,7 @@ describe('NonceCheckerMiddleware::handle', function () {
     test('casts null request _nonce to empty string without error', function () {
         Functions\expect('wp_verify_nonce')
             ->once()
-            ->with('', 'ICON_BASE_nonce')
+            ->with('', 'ICON_INDEXA_nonce')
             ->andReturn(false);
 
         $request = Mockery::mock(Request::class);
@@ -68,11 +68,11 @@ describe('NonceCheckerMiddleware::handle', function () {
     });
 
     test('returns error response when nonce is invalid', function () {
-        $_SERVER['HTTP_X_ICON_BASE_NONCE'] = 'bad-nonce';
+        $_SERVER['HTTP_X_ICON_INDEXA_NONCE'] = 'bad-nonce';
 
         Functions\expect('wp_verify_nonce')
             ->once()
-            ->with('bad-nonce', 'ICON_BASE_nonce')
+            ->with('bad-nonce', 'ICON_INDEXA_nonce')
             ->andReturn(false);
 
         $request = Mockery::mock(Request::class);
@@ -86,11 +86,11 @@ describe('NonceCheckerMiddleware::handle', function () {
     });
 
     test('header nonce takes precedence over request _nonce', function () {
-        $_SERVER['HTTP_X_ICON_BASE_NONCE'] = 'header-nonce';
+        $_SERVER['HTTP_X_ICON_INDEXA_NONCE'] = 'header-nonce';
 
         Functions\expect('wp_verify_nonce')
             ->once()
-            ->with('header-nonce', 'ICON_BASE_nonce')
+            ->with('header-nonce', 'ICON_INDEXA_nonce')
             ->andReturn(1);
 
         $request = Mockery::mock(Request::class);

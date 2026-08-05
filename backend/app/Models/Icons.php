@@ -1,12 +1,12 @@
 <?php
 
-namespace IconBase\Models;
+namespace IconIndexa\Models;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Services\SQLiteDB;
+use IconIndexa\Services\SQLiteDB;
 
 // This plugin ships a bundled SQLite database for static icon data; $wpdb (MySQL-only) cannot be used here.
 // phpcs:disable WordPress.DB.RestrictedClasses.mysql__PDO
@@ -107,7 +107,7 @@ class Icons
             $candidates = self::ftsSearch($pdo, $ftsQuery, $libraryIds, $typeIds);
         } catch (\PDOException $e) {
             // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- intentional diagnostic logging
-            error_log('icon-base FTS search failed: ' . $e->getMessage());
+            error_log('icon-indexa FTS search failed: ' . $e->getMessage());
             $candidates = [];
         }
 

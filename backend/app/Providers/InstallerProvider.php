@@ -1,14 +1,14 @@
 <?php
 
-namespace IconBase\Providers;
+namespace IconIndexa\Providers;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
-use IconBase\Deps\BitApps\WPKit\Installer;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Deps\BitApps\WPKit\Installer;
 
 final class InstallerProvider
 {
@@ -82,7 +82,7 @@ final class InstallerProvider
     {
         return [
             'path'       => Config::get('BASEDIR') . DIRECTORY_SEPARATOR . 'db' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR,
-            'migrations' => ['IconBasePluginOptions'],
+            'migrations' => ['IconIndexaPluginOptions'],
         ];
     }
 
@@ -90,7 +90,7 @@ final class InstallerProvider
     {
         return [
             'path'       => Config::get('BASEDIR') . DIRECTORY_SEPARATOR . 'db' . DIRECTORY_SEPARATOR . 'Migrations' . DIRECTORY_SEPARATOR,
-            'migrations' => ['IconBasePluginOptions'],
+            'migrations' => ['IconIndexaPluginOptions'],
         ];
     }
 }

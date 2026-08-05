@@ -1,7 +1,7 @@
 <?php
 
-use IconBase\Dotenv;
-use IconBase\Plugin;
+use IconIndexa\Dotenv;
+use IconIndexa\Plugin;
 
 if (! defined('ABSPATH')) {
     exit;

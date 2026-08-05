@@ -1,13 +1,13 @@
 <?php
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Migration\Migration;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Migration\Migration;
 
 if (! defined('ABSPATH')) {
     exit;
 }
 
-final class IconBasePluginOptions extends Migration
+final class IconIndexaPluginOptions extends Migration
 {
     public function up(): void
     {

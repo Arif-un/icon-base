@@ -13,7 +13,7 @@ const iconBaseLogo = (
   </svg>
 );
 
-window.wp.blocks.registerBlockType<IconBlockAttributes>("icon-base/icon", {
+window.wp.blocks.registerBlockType<IconBlockAttributes>("icon-shelf/icon", {
   icon: iconBaseLogo,
   edit: Edit,
   save: Save,

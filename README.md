@@ -1,4 +1,4 @@
-# Icon Base — WordPress Plugin
+# Icon Indexa — WordPress Plugin
 
 A WordPress plugin with a React frontend, PHP backend, and built-in REST/AJAX routing.
 
@@ -49,7 +49,7 @@ pnpm env:destroy               # remove containers + volumes
 
 ### Option B — Existing WordPress install
 
-Place this repo inside `wp-content/plugins/icon-base/`, then:
+Place this repo inside `wp-content/plugins/icon-indexa/`, then:
 
 ```bash
 composer install
@@ -57,7 +57,7 @@ pnpm install
 pnpm dev:free
 ```
 
-Go to **WordPress Admin → Plugins** and activate **Icon Base**.
+Go to **WordPress Admin → Plugins** and activate **Icon Indexa**.
 
 ---
 
@@ -77,9 +77,9 @@ cp .env.example .env
 Minimum required:
 
 ```env
-PLUGIN_SLUG = icon-base
+PLUGIN_SLUG = icon-indexa
 DEV          = true
-DEV_URL      = http://localhost:3000/wp-content/plugins/icon-base/frontend
+DEV_URL      = http://localhost:3000/wp-content/plugins/icon-indexa/frontend
 ```
 
 Build for production:
@@ -133,7 +133,7 @@ Generators are **strict positional** — name required, must be PascalCase, will
 │       ├── common/helpers/         # i18n, request, tryCatch
 │       └── resource/               # CSS, images
 ├── wp-kit                          # PHP CLI tool
-├── icon-base.php                   # WordPress plugin header
+├── icon-indexa.php                  # WordPress plugin header
 └── composer.json
 ```
 
@@ -144,10 +144,10 @@ Generators are **strict positional** — name required, must be PascalCase, will
 Defined in `backend/hooks/api.php`:
 
 ```php
-use IconBase\Deps\BitApps\WPKit\Http\Router\Router;
+use IconIndexa\Deps\BitApps\WPKit\Http\Router\Router;
 
 $router->get('/hello', function () {
-    return ['message' => 'Hello from Icon Base'];
+    return ['message' => 'Hello from Icon Indexa'];
 });
 
 $router->post('/data', [Controllers\DataController::class, 'store'])
@@ -172,7 +172,7 @@ $router->post('get_settings', [Controllers\SettingsController::class, 'index']);
 php wp-kit make:migration AppConnections
 ```
 
-Produces `backend/db/Migrations/IconBaseAppConnectionsTableMigration.php` with up/down skeleton. Auto-registered in `InstallerProvider` — runs on activation, rolls back on uninstall.
+Produces `backend/db/Migrations/IconIndexaAppConnectionsTableMigration.php` with up/down skeleton. Auto-registered in `InstallerProvider` — runs on activation, rolls back on uninstall.
 
 ---
 
@@ -201,7 +201,7 @@ pnpm test:e2e       # Playwright E2E tests
 
 ## Contributing & Community
 
-Icon Base is open source and built for the community — contributions of all kinds are welcome.
+Icon Indexa is open source and built for the community — contributions of all kinds are welcome.
 
 **Repository:** [https://github.com/Arif-un/icon-base](https://github.com/Arif-un/icon-base)
 

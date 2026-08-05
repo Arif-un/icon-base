@@ -1,6 +1,6 @@
 <?php
 
-use IconBase\Deps\BitApps\WPKit\Http\Router\Route;
+use IconIndexa\Deps\BitApps\WPKit\Http\Router\Route;
 
 if (! defined('ABSPATH')) {
     exit;

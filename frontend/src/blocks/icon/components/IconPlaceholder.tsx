@@ -18,7 +18,7 @@ export default function IconPlaceholder({
           <Logo size={32} />
         </div>
         <div>
-          <div className="text-sm leading-[1.4] font-semibold text-[#1e1e1e]">Icon Base</div>
+          <div className="text-sm leading-[1.4] font-semibold text-[#1e1e1e]">Icon Indexa</div>
           <div className="text-xs leading-[1.4]">
             Choose icon from library or pick from media or insert custom SVG
           </div>

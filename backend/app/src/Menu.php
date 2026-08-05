@@ -1,13 +1,13 @@
 <?php
 
-namespace IconBase\src;
+namespace IconIndexa\src;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Views\Body;
+use IconIndexa\Config;
+use IconIndexa\Views\Body;
 
 final class Menu
 {

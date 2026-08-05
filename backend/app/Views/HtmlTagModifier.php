@@ -1,13 +1,13 @@
 <?php
 
-namespace IconBase\Views;
+namespace IconIndexa\Views;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
 
 final class HtmlTagModifier
 {

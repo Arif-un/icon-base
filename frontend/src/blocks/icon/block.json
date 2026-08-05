@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "icon-base/icon",
-  "version": "0.1.0",
-  "title": "Icon Base",
+  "name": "icon-shelf/icon",
+  "version": "1.0.0",
+  "title": "Icon Indexa",
   "category": "design",
   "icon": "",
   "description": "Insert an icon from your icon libraries.",
@@ -132,7 +132,7 @@
       "default": "none"
     }
   },
-  "textdomain": "icon-base",
+  "textdomain": "icon-indexa",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css",
   "style": "file:./style-index.css"

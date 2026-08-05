@@ -80,7 +80,7 @@ export default function IconPickerPopover({
             >
               <path d={LOGO_PATH} />
             </svg>
-            <span className="text-[13px] font-semibold whitespace-nowrap">Icon Base</span>
+            <span className="text-[13px] font-semibold whitespace-nowrap">Icon Indexa</span>
           </div>
           <div className="flex shrink-0 items-center gap-0.5">
             <Button

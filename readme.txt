@@ -1,10 +1,10 @@
-=== Icon Base ===
+=== Icon Indexa ===
 Contributors:      mrknuckles, arif25897
 Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.9
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Add 4,500+ self-hosted SVG icons to WordPress with instant full-text search and 
 
 == Description ==
 
-Icon Base bundles thousands of crisp, scalable SVG icons directly inside WordPress, so you never have to hunt for, upload, or self-host icon files again.
+Icon Indexa bundles thousands of crisp, scalable SVG icons directly inside WordPress, so you never have to hunt for, upload, or self-host icon files again.
 
 Browse multiple popular icon sets, search across every icon by name or tag in milliseconds, and drop any icon straight into the block editor with a single, easy-to-use block. Every icon ships with the plugin and is served from your own site — nothing is fetched from a third-party CDN.
 
@@ -38,7 +38,7 @@ Browse multiple popular icon sets, search across every icon by name or tag in mi
 
 === Contribute & stay connected ===
 
-Icon Base is open source and community driven. Contributions, bug reports, and new icon sets are always welcome.
+Icon Indexa is open source and community driven. Contributions, bug reports, and new icon sets are always welcome.
 
 * [View on GitHub](https://github.com/Arif-un/icon-base) — source code, fork, and star the project
 * [Report a bug or request a feature](https://github.com/Arif-un/icon-base/issues)
@@ -49,14 +49,14 @@ Icon Base is open source and community driven. Contributions, bug reports, and n
 = Automated installation =
 
 1. In your WordPress dashboard go to **Plugins &rarr; Add New**.
-2. Search for **Icon Base**.
+2. Search for **Icon Indexa**.
 3. Click **Install Now**, then **Activate**.
 
 = Manual installation =
 
-1. Download the plugin and make sure the folder is zipped, then upload it via **Plugins &rarr; Add New &rarr; Upload Plugin**. Alternatively, upload the `icon-base` folder to the `/wp-content/plugins/` directory.
-2. Activate **Icon Base** through the **Plugins** screen in WordPress.
-3. Open the **Icon Base** menu item to start browsing icons, or search for the "Icon Base" block within the Block Editor (Gutenberg).
+1. Download the plugin and make sure the folder is zipped, then upload it via **Plugins &rarr; Add New &rarr; Upload Plugin**. Alternatively, upload the `icon-indexa` folder to the `/wp-content/plugins/` directory.
+2. Activate **Icon Indexa** through the **Plugins** screen in WordPress.
+3. Open the **Icon Indexa** menu item to start browsing icons, or search for the "Icon Indexa" block within the Block Editor (Gutenberg).
 
 = Requirements =
 
@@ -66,9 +66,9 @@ Icon Base is open source and community driven. Contributions, bug reports, and n
 
 == Frequently Asked Questions ==
 
-= What is Icon Base? =
+= What is Icon Indexa? =
 
-Icon Base is a WordPress plugin that bundles thousands of SVG icons with a fast search interface and a Gutenberg block, so you can find and use icons without ever leaving WordPress.
+Icon Indexa is a WordPress plugin that bundles thousands of SVG icons with a fast search interface and a Gutenberg block, so you can find and use icons without ever leaving WordPress.
 
 = Which icon libraries are included? =
 
@@ -84,7 +84,7 @@ Icons are indexed in a local SQLite database using FTS5 full-text search. You ca
 
 = Do I need to configure a database? =
 
-No. Icon Base uses a self-contained SQLite database file that ships inside the plugin. It only requires the PHP PDO SQLite extension, which is enabled on most hosts.
+No. Icon Indexa uses a self-contained SQLite database file that ships inside the plugin. It only requires the PHP PDO SQLite extension, which is enabled on most hosts.
 
 = Can I add my own icon? =
 
@@ -94,7 +94,7 @@ Yes. You can add your own custom icon in two ways: paste the SVG code directly, 
 
 The icon block includes controls for the icon's color and background. However, if your SVG icon has hard-coded color or fill values, the plugin will respect those instead of any applied custom colors.
 
-= Is Icon Base translation ready? =
+= Is Icon Indexa translation ready? =
 
 Yes. The plugin uses a text domain and is fully ready for localization.
 
@@ -104,11 +104,11 @@ Yes. Every SVG you paste or import from the Media Library is sanitized before it
 
 = Where is my data stored? What happens when I uninstall? =
 
-Icon Base stores its data in a self-contained SQLite database that ships inside the plugin, plus a small set of WordPress options. No content is written outside your own site. Custom icons you add are stored locally. Removing the plugin cleans up its data on uninstall.
+Icon Indexa stores its data in a self-contained SQLite database that ships inside the plugin, plus a small set of WordPress options. No content is written outside your own site. Custom icons you add are stored locally. Removing the plugin cleans up its data on uninstall.
 
 = Does the plugin make any external or third-party requests? =
 
-No. Icon Base is fully self-hosted. No icon data, usage data, or telemetry is sent to any external service, and no assets are fetched from a third-party CDN.
+No. Icon Indexa is fully self-hosted. No icon data, usage data, or telemetry is sent to any external service, and no assets are fetched from a third-party CDN.
 
 = Is the bundled SQLite database sensitive? =
 
@@ -116,17 +116,17 @@ No. `backend/data/ib.db` contains only static, public icon metadata (icon names,
 
 If you prefer to also block direct HTTP access to the data directory, add a rule to your server config. For Nginx:
 
-`location ~* /wp-content/plugins/icon-base/backend/data/ { deny all; }`
+`location ~* /wp-content/plugins/icon-indexa/backend/data/ { deny all; }`
 
 Blocking direct HTTP access has no effect on plugin functionality.
 
 == Privacy ==
 
-Icon Base does not collect, store, or transmit any personal data. It makes no external HTTP requests and includes no tracking, analytics, or telemetry. All icons and search indexes are bundled with the plugin and served entirely from your own site.
+Icon Indexa does not collect, store, or transmit any personal data. It makes no external HTTP requests and includes no tracking, analytics, or telemetry. All icons and search indexes are bundled with the plugin and served entirely from your own site.
 
 == Screenshots ==
 
-1. The Icon Base library browser with instant full-text search across thousands of icons.
+1. The Icon Indexa library browser with instant full-text search across thousands of icons.
 2. Filtering icons by library and style to quickly find the icon you need.
 3. Inserting and configuring an icon with the Gutenberg icon block.
 4. Icon block controls including color, gradient, rotation, alignment, border, and spacing.
@@ -149,6 +149,6 @@ Icon Base does not collect, store, or transmit any personal data. It makes no ex
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Icon Base.
+Initial release of Icon Indexa.
 </content>
 </invoke>

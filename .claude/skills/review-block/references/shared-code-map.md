@@ -1,4 +1,4 @@
-# Shared Code Map — icon-base
+# Shared Code Map — icon-indexa
 
 Inventory of all reusable code. Review must check new code against this list for duplication.
 
@@ -17,7 +17,7 @@ Inventory of all reusable code. Review must check new code against this list for
 
 | Function | File | Purpose |
 |----------|------|---------|
-| `restRequest<T>(endpoint, options?)` | `restRequest.ts` | REST API calls with WP nonces (X-WP-Nonce, X-Icon-Base-Nonce) |
+| `restRequest<T>(endpoint, options?)` | `restRequest.ts` | REST API calls with WP nonces (X-WP-Nonce, X-Icon-Indexa-Nonce) |
 | `RestRequestError` | `restRequest.ts` | Custom error class with status/data |
 | `fetchSvgContent(rootUrl, libraryDir, filename, signal?)` | `fetchSvgContent.ts` | Fetch + cache SVG content |
 | `sanitizePathSegment(segment)` | `fetchSvgContent.ts` | Sanitize path segments |

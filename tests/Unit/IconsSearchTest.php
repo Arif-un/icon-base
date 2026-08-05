@@ -1,6 +1,6 @@
 <?php
 
-use IconBase\Models\Icons;
+use IconIndexa\Models\Icons;
 
 function callPrivate(string $method, ...$args): mixed
 {

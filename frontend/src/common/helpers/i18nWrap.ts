@@ -6,7 +6,7 @@ import { __ as i18n_, sprintf as i18nSprintf } from "@wordpress/i18n";
 
 declare let wp: any;
 
-const __ = (text: string, domain = "icon-base"): string => {
+const __ = (text: string, domain = "icon-indexa"): string => {
   if (SERVER_VARIABLES.translations?.[text]) {
     return SERVER_VARIABLES.translations[text];
   }

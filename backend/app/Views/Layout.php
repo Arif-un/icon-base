@@ -1,14 +1,14 @@
 <?php
 
-namespace IconBase\Views;
+namespace IconIndexa\Views;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
-use IconBase\Deps\BitApps\WPKit\Utils\Capabilities;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Deps\BitApps\WPKit\Utils\Capabilities;
 
 final class Layout
 {

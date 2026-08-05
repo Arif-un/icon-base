@@ -1,16 +1,16 @@
 <?php
 
-namespace IconBase\Services;
+namespace IconIndexa\Services;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
+use IconIndexa\Config;
 
 // This plugin ships a static, public icon dataset as backend/data/ib.json (source of truth).
 // At runtime it generates a SQLite database from that JSON into the writable uploads directory
-// (wp-content/uploads/icon-base/ib.db) — it never ships a binary db and never writes inside the
+// (wp-content/uploads/icon-indexa/ib.db) — it never ships a binary db and never writes inside the
 // plugin directory. The db is rebuilt whenever Config::DATA_VERSION is newer than the stored
 // data_version option. The dataset holds only public icon metadata; no user or sensitive data.
 // $wpdb is MySQL-only and cannot read SQLite, hence PDO.
@@ -67,7 +67,7 @@ class SQLiteDB
         $source = Config::get('DATA_SOURCE');
 
         if (!is_readable($source)) {
-            throw new \RuntimeException('Icon Base: icon dataset not found at ' . esc_html($source));
+            throw new \RuntimeException('Icon Indexa: icon dataset not found at ' . esc_html($source));
         }
 
         $tmpPath = $dbPath . '.' . uniqid('build', true) . '.tmp';
@@ -103,7 +103,7 @@ class SQLiteDB
         if (!@rename($tmpPath, $dbPath)) {
             $this->deleteFile($tmpPath);
 
-            throw new \RuntimeException('Icon Base: failed to install generated database.');
+            throw new \RuntimeException('Icon Indexa: failed to install generated database.');
         }
 
         Config::updateOption('data_version', Config::DATA_VERSION, true);
@@ -150,7 +150,7 @@ class SQLiteDB
         $data = json_decode((string) $raw, true);
 
         if (!is_array($data)) {
-            throw new \RuntimeException('Icon Base: icon dataset JSON is invalid.');
+            throw new \RuntimeException('Icon Indexa: icon dataset JSON is invalid.');
         }
 
         $pdo->beginTransaction();

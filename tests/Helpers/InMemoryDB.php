@@ -2,7 +2,7 @@
 
 namespace Tests\Helpers;
 
-use IconBase\Services\SQLiteDB;
+use IconIndexa\Services\SQLiteDB;
 
 class InMemoryDB
 {

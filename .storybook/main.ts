@@ -20,7 +20,7 @@ const config: StorybookConfig = {
       plugins: [tailwindcss()],
       define: {
         // Replace the SERVER_VARIABLES compile-time constant with the WP global
-        SERVER_VARIABLES: 'window.ICON_BASE_',
+        SERVER_VARIABLES: 'window.ICON_INDEXA_',
       },
       resolve: {
         alias: {

@@ -1,13 +1,13 @@
 <?php
 
-namespace IconBase\HTTP\Controllers;
+namespace IconIndexa\HTTP\Controllers;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Deps\BitApps\WPKit\Http\Response;
-use IconBase\Models\IconType;
+use IconIndexa\Deps\BitApps\WPKit\Http\Response;
+use IconIndexa\Models\IconType;
 
 class IconTypeController
 {

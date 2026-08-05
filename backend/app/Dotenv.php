@@ -1,6 +1,6 @@
 <?php
 
-namespace IconBase;
+namespace IconIndexa;
 
 if (! defined('ABSPATH')) {
     exit;

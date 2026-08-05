@@ -2,8 +2,8 @@
 
 use Brain\Monkey\Functions;
 use Tests\Helpers\InMemoryDB;
-use IconBase\HTTP\Controllers\IconController;
-use IconBase\Deps\BitApps\WPKit\Http\Request\Request;
+use IconIndexa\HTTP\Controllers\IconController;
+use IconIndexa\Deps\BitApps\WPKit\Http\Request\Request;
 
 beforeEach(function () {
     $this->pdo = InMemoryDB::setup();

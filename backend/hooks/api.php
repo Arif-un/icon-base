@@ -4,10 +4,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Deps\BitApps\WPKit\Http\Router\Route;
-use IconBase\HTTP\Controllers\IconController;
-use IconBase\HTTP\Controllers\IconTypeController;
-use IconBase\HTTP\Controllers\LibraryController;
+use IconIndexa\Deps\BitApps\WPKit\Http\Router\Route;
+use IconIndexa\HTTP\Controllers\IconController;
+use IconIndexa\HTTP\Controllers\IconTypeController;
+use IconIndexa\HTTP\Controllers\LibraryController;
 
 Route::group(
     static function (): void {

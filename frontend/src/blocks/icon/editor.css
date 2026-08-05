@@ -4,7 +4,7 @@
 /* .icon-container has `transform` which always creates a new stacking context,
    causing it to render on top of Gutenberg's ::before selection indicator.
    Raise the indicator's z-index so it stays visible above the container. */
-.block-editor-block-list__block.wp-block-icon-base-icon::before {
+.block-editor-block-list__block.wp-block-icon-shelf-icon::before {
   z-index: 1;
 }
 

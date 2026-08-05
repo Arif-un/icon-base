@@ -1,8 +1,8 @@
 <?php
 
 use Brain\Monkey\Functions;
-use IconBase\Config;
-use IconBase\Services\SQLiteDB;
+use IconIndexa\Config;
+use IconIndexa\Services\SQLiteDB;
 use Tests\Helpers\InMemoryDB;
 
 /*
@@ -317,7 +317,7 @@ describe('rebuild (end-to-end via instance())', function () {
         $this->pluginRoot = $this->base . DIRECTORY_SEPARATOR . 'plugin' . DIRECTORY_SEPARATOR;
         $this->dataDir    = $this->pluginRoot . 'backend' . DIRECTORY_SEPARATOR . 'data';
         $this->source     = $this->dataDir . DIRECTORY_SEPARATOR . 'ib.json';
-        $this->dbDir      = $this->uploads . DIRECTORY_SEPARATOR . 'icon-base';
+        $this->dbDir      = $this->uploads . DIRECTORY_SEPARATOR . 'icon-indexa';
         $this->dbPath     = $this->dbDir . DIRECTORY_SEPARATOR . 'ib.db';
 
         mkdir($this->uploads, 0777, true);
@@ -357,7 +357,7 @@ describe('rebuild (end-to-end via instance())', function () {
         expect((int) $pdo->query('SELECT COUNT(*) FROM icons')->fetchColumn())->toBe(3);
         expect((int) $pdo->query('SELECT COUNT(*) FROM library')->fetchColumn())->toBe(2);
         expect((int) $pdo->query('SELECT COUNT(*) FROM icon_type')->fetchColumn())->toBe(2);
-        expect($this->stored['ICON_BASE_data_version'])->toBe(Config::DATA_VERSION);
+        expect($this->stored['ICON_INDEXA_data_version'])->toBe(Config::DATA_VERSION);
     });
 
     test('the generated db has a working FTS index', function () {
@@ -382,7 +382,7 @@ describe('rebuild (end-to-end via instance())', function () {
         expect(fn () => SQLiteDB::instance())
             ->toThrow(\RuntimeException::class, 'icon dataset not found');
 
-        expect($this->stored)->not->toHaveKey('ICON_BASE_data_version');
+        expect($this->stored)->not->toHaveKey('ICON_INDEXA_data_version');
         expect(is_file($this->dbPath))->toBeFalse();
     });
 
@@ -392,7 +392,7 @@ describe('rebuild (end-to-end via instance())', function () {
         expect(fn () => SQLiteDB::instance())
             ->toThrow(\RuntimeException::class, 'icon dataset JSON is invalid.');
 
-        expect($this->stored)->not->toHaveKey('ICON_BASE_data_version');
+        expect($this->stored)->not->toHaveKey('ICON_INDEXA_data_version');
         expect(is_file($this->dbPath))->toBeFalse();
         expect(glob($this->dbDir . DIRECTORY_SEPARATOR . '*.tmp'))->toBeEmpty();
     });
@@ -413,7 +413,7 @@ describe('rebuild (end-to-end via instance())', function () {
         InMemoryDB::teardown();
 
         // Simulate a shipped dataset update: an older stored version and different source contents.
-        $this->stored['ICON_BASE_data_version'] = '0.0.1';
+        $this->stored['ICON_INDEXA_data_version'] = '0.0.1';
 
         $smaller             = sampleDataset();
         $smaller['icons']    = [$smaller['icons'][0]];
@@ -422,6 +422,6 @@ describe('rebuild (end-to-end via instance())', function () {
         $pdo = SQLiteDB::instance()->pdo();
 
         expect((int) $pdo->query('SELECT COUNT(*) FROM icons')->fetchColumn())->toBe(1);
-        expect($this->stored['ICON_BASE_data_version'])->toBe(Config::DATA_VERSION);
+        expect($this->stored['ICON_INDEXA_data_version'])->toBe(Config::DATA_VERSION);
     });
 });

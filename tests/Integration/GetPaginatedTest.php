@@ -1,7 +1,7 @@
 <?php
 
 use Tests\Helpers\InMemoryDB;
-use IconBase\Models\Icons;
+use IconIndexa\Models\Icons;
 
 beforeEach(function () {
     $this->pdo = InMemoryDB::setup();

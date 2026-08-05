@@ -31,7 +31,7 @@ export async function restRequest<T>(
     credentials: "same-origin",
     headers: {
       "X-WP-Nonce": REST_NONCE,
-      "X-Icon-Base-Nonce": NONCE,
+      "X-Icon-Indexa-Nonce": NONCE,
     },
     signal: options.signal,
   };

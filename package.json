@@ -1,6 +1,6 @@
 {
-  "name": "icon-base",
-  "version": "0.1.0",
+  "name": "icon-indexa",
+  "version": "1.0.0",
   "license": "ISC",
   "author": "ra",
   "type": "module",
@@ -41,7 +41,7 @@
     "type-cov": "pnpx type-coverage -p ./tsconfig.json --strict --details",
     "update-ver": "node scripts/update-version.js",
     "wp-cli": "wp-env run cli wp",
-    "plugin-check": "wp-env run cli wp plugin check /var/www/html/wp-content/plugins/icon-base/build/icon-base"
+    "plugin-check": "wp-env run cli wp plugin check /var/www/html/wp-content/plugins/icon-indexa/build/icon-indexa"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^2.1.2",

@@ -1,12 +1,12 @@
 <?php
 
-namespace IconBase\Views;
+namespace IconIndexa\Views;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
+use IconIndexa\Config;
 
 class PluginPageActions
 {
@@ -15,11 +15,11 @@ class PluginPageActions
         return [
             [
                 'url'   => admin_url('admin.php?page=' . Config::SLUG),
-                'title' => __('Settings', 'icon-base'),
+                'title' => __('Settings', 'icon-indexa'),
             ],
             [
                 'url'   => 'https://github.com/Arif-un/icon-base/issues',
-                'title' => __('Support', 'icon-base'),
+                'title' => __('Support', 'icon-indexa'),
             ],
         ];
     }

@@ -1,16 +1,16 @@
 <?php
 
-namespace IconBase\Providers;
+namespace IconIndexa\Providers;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-use IconBase\Config;
-use IconBase\Deps\BitApps\WPKit\Hooks\Hooks;
-use IconBase\Deps\BitApps\WPKit\Http\RequestType;
-use IconBase\Deps\BitApps\WPKit\Http\Router\Router;
-use IconBase\Plugin;
+use IconIndexa\Config;
+use IconIndexa\Deps\BitApps\WPKit\Hooks\Hooks;
+use IconIndexa\Deps\BitApps\WPKit\Http\RequestType;
+use IconIndexa\Deps\BitApps\WPKit\Http\Router\Router;
+use IconIndexa\Plugin;
 
 class HookProvider
 {

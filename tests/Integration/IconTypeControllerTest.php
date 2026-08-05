@@ -1,7 +1,7 @@
 <?php
 
 use Tests\Helpers\InMemoryDB;
-use IconBase\HTTP\Controllers\IconTypeController;
+use IconIndexa\HTTP\Controllers\IconTypeController;
 
 beforeEach(function () {
     $this->pdo = InMemoryDB::setup();

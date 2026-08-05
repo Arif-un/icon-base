@@ -1,6 +1,6 @@
 <?php
 
-namespace IconBase\Views;
+namespace IconIndexa\Views;
 
 if (!defined('ABSPATH')) {
     exit;

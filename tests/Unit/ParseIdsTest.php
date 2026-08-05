@@ -1,6 +1,6 @@
 <?php
 
-use IconBase\HTTP\Controllers\IconController;
+use IconIndexa\HTTP\Controllers\IconController;
 
 function callParseIds(string $raw): array
 {
