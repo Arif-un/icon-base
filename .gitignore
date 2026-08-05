@@ -40,3 +40,8 @@ CLAUDE.local.md
 backend/data/*.db
 *.db-wal
 *.db-shm
+
+# SVN working copy of the WordPress.org plugin repo (trunk/tags/assets + .svn metadata).
+# Release artifact, lives outside git history. Anchored so it never matches icon-indexa.php.
+/icon-indexa/
+.svn/
