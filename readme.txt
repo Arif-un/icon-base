@@ -84,7 +84,7 @@ Icons are indexed in a local SQLite database using FTS5 full-text search. You ca
 
 = Do I need to configure a database? =
 
-No. Icon Indexa uses a self-contained SQLite database file that ships inside the plugin. It only requires the PHP PDO SQLite extension, which is enabled on most hosts.
+No. Icon Indexa builds a local SQLite database automatically on first run from the icon data bundled with the plugin, storing it in your uploads directory. It only requires the PHP PDO SQLite extension, which is enabled on most hosts.
 
 = Can I add my own icon? =
 
