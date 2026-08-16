@@ -4,7 +4,7 @@ Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.9
 Tested up to:      7.1
 Requires PHP:      7.4
-Stable tag:        1.0.0
+Stable tag:        1.0.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,10 @@ Icon Indexa does not collect, store, or transmit any personal data. It makes no 
 3. The full-screen icon picker with library and style filters plus live size, stroke, and color adjustment before inserting.
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Internal: automated WordPress.org release workflow and tooling.
 
 = 1.0.0 =
 
