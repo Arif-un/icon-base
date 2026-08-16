@@ -1,0 +1,79 @@
+name: Deploy to WordPress.org
+
+# Two paths, chosen by trigger (the release script picks the right one):
+#   - GitHub release published  -> full plugin deploy (build + trunk + bare SVN tag)
+#   - workflow_dispatch mode=assets -> asset-update only (wp-assets + readme to trunk)
+#
+# Requires repo secrets: SVN_USERNAME, SVN_PASSWORD (WordPress.org plugin committer).
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'assets = update WP.org assets + readme only (no version deploy)'
+        required: true
+        default: assets
+
+jobs:
+  full-deploy:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Strip leading v from tag
+        id: version
+        run: echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install JS deps
+        run: pnpm install --frozen-lockfile
+
+      # Produces a clean shippable plugin tree at build/icon-indexa
+      # (composer --no-dev, compiled assets/, no dev/source files).
+      - name: Build plugin
+        run: pnpm prod:zip
+
+      - name: Deploy to WordPress.org
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: icon-indexa
+          VERSION: ${{ steps.version.outputs.value }}
+          BUILD_DIR: ./build/icon-indexa
+          ASSETS_DIR: ./wp-assets
+        with:
+          generate-zip: true
+
+      - name: Attach built zip to the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ github.workspace }}/*.zip
+
+  asset-update:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'assets'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update WordPress.org assets + readme
+        uses: 10up/action-wordpress-plugin-asset-update@stable
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: icon-indexa
+          ASSETS_DIR: ./wp-assets

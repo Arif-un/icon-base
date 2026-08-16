@@ -29,6 +29,7 @@
     "preview": "vite preview",
     "prod": "vite build && vite build -c vite.config.blocks.ts",
     "prod:zip": "node bin/prod-zip.mjs",
+    "release": "node scripts/release.mjs",
     "production": "composer install --no-dev && pnpm install && pnpm i18n && pnpm build",
     "reset": "pnpm clean && pnpm install",
     "storybook": "storybook dev -p 6006",
