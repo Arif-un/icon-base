@@ -20,6 +20,9 @@ jobs:
   full-deploy:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
+    # Needed so action-gh-release can attach the built zip to the release.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
