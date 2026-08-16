@@ -1,6 +1,7 @@
 {
   "name": "icon-indexa",
   "version": "1.0.1",
+  "packageManager": "pnpm@10.33.0",
   "license": "ISC",
   "author": "ra",
   "type": "module",
