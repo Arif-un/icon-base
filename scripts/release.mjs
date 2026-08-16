@@ -188,7 +188,9 @@ async function main() {
   bumpVersionFiles(newVersion, changelog)
   run('git add -A')
   run(`git commit -m ${JSON.stringify(`release: v${newVersion}`)}`)
-  run(`git tag v${newVersion}`)
+  // Annotated (-a) so `git push --follow-tags` actually pushes it; a lightweight
+  // tag is skipped by --follow-tags, leaving `gh release create` with no remote tag.
+  run(`git tag -a v${newVersion} -m ${JSON.stringify(`release: v${newVersion}`)}`)
   run('git push origin HEAD --follow-tags')
   run(`gh release create v${newVersion} --title ${JSON.stringify(newVersion)} --notes ${JSON.stringify(changelog)}`)
   console.log(`\n✅ Released v${newVersion}. Full WP.org deploy workflow triggered by the GitHub release.`)
