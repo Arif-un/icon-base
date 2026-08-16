@@ -19,6 +19,10 @@ const FILES = [
   'readme.txt',
   'LICENSE',
   'composer.json',
+  // Ship the lock so `composer install --no-dev` installs from it instead of
+  // re-resolving (which drags in require-dev, e.g. pest needing PHP 8.3, and
+  // breaks the PHP 7.4 deploy runner). Removed again after install (below).
+  'composer.lock',
 ]
 
 // Files/patterns that must never ship in the distributed plugin.
