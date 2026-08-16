@@ -41,6 +41,12 @@ function commandExistsSync(cmd) {
 async function copyFiles(files, dest) {
   await Promise.all(
     files.map(async (item) => {
+      if (!fse.existsSync(item)) {
+        console.log(`⏭️  Skipping ${item} (not present)`)
+
+        return
+      }
+
       console.log(`➡️  Copying ${item}`)
 
       return fse.copy(item, path.join(dest, path.basename(item)), {
