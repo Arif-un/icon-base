@@ -10,11 +10,15 @@ import { humanId } from "human-id";
 import { defineConfig, loadEnv } from "vite";
 
 export default defineConfig(({ mode }) => {
-  const { DEV_SSL, DEV_SSL_CERT_PATH, DEV_SSL_KEY_PATH, PLUGIN_SLUG, SERVER_VARIABLES } = loadEnv(
-    mode,
-    process.cwd(),
-    "",
-  );
+  const env = loadEnv(mode, process.cwd(), "");
+  const { DEV_SSL, DEV_SSL_CERT_PATH, DEV_SSL_KEY_PATH } = env;
+  // .env is gitignored, so it is absent on CI / fresh clones. Fall back to the
+  // plugin's own constants (Config::SLUG / Config::VAR_PREFIX on the PHP side) so
+  // the built asset filenames + window var always match what Head.php enqueues.
+  // Without this the CSS ships as `main-undefined-ba-assets-*.css` (404) and the
+  // localized object lands on `window.undefined`.
+  const PLUGIN_SLUG = env.PLUGIN_SLUG || "icon-indexa";
+  const SERVER_VARIABLES = env.SERVER_VARIABLES || "ICON_INDEXA_";
 
   const isDevelopment = mode === "development" || mode === "test";
   const isTest = mode === "test";
