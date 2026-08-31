@@ -261,6 +261,22 @@ interface SpinnerProps {
   className?: string;
 }
 
+interface GuidePage {
+  content: ReactNode;
+  image?: ReactNode;
+}
+
+interface GuideProps {
+  className?: string;
+  /** Used as the modal's accessibility label. Required by core. */
+  contentLabel: string;
+  finishButtonText?: string;
+  nextButtonText?: string;
+  onFinish: () => void;
+  pages?: GuidePage[];
+  previousButtonText?: string;
+}
+
 interface PanelBodyProps {
   children: ReactNode;
   className?: string;
@@ -272,6 +288,7 @@ interface WPComponents {
   Button: ComponentType<ButtonProps>;
   ColorPicker: ComponentType<ColorPickerProps>;
   DropdownMenu: ComponentType<DropdownMenuProps>;
+  Guide: ComponentType<GuideProps>;
   Modal: ComponentType<ModalProps>;
   PanelBody: ComponentType<PanelBodyProps>;
   Placeholder: ComponentType<PlaceholderProps>;
@@ -349,6 +366,8 @@ export type {
   ButtonProps,
   ColorPickerProps,
   DropdownMenuProps,
+  GuidePage,
+  GuideProps,
   ModalProps,
   PlaceholderProps,
   PopoverProps,

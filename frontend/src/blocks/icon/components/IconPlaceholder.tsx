@@ -1,3 +1,4 @@
+import { __ } from "@/common/helpers/i18nWrap";
 import Logo from "@/components/Logo";
 
 const { Button } = window.wp.components;
@@ -6,10 +7,12 @@ export default function IconPlaceholder({
   onBrowseIcon,
   onMediaLibrary,
   onCustomSvg,
+  onShowGuide,
 }: {
   onBrowseIcon: () => void;
   onMediaLibrary: () => void;
   onCustomSvg: () => void;
+  onShowGuide: () => void;
 }) {
   return (
     <div className="box-border flex w-full flex-col items-center gap-2 border px-4 py-3">
@@ -34,6 +37,9 @@ export default function IconPlaceholder({
           </Button>
           <Button variant="secondary" onClick={onCustomSvg}>
             Insert Custom SVG
+          </Button>
+          <Button variant="tertiary" onClick={onShowGuide}>
+            {__("How it works")}
           </Button>
         </div>
       </div>
