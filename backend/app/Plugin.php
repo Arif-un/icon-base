@@ -14,6 +14,7 @@ use IconIndexa\Deps\BitApps\WPKit\Utils\Capabilities;
 use IconIndexa\HTTP\Middleware\AdminCheckerMiddleware;
 use IconIndexa\HTTP\Middleware\NonceCheckerMiddleware;
 use IconIndexa\Providers\HookProvider;
+use IconIndexa\Providers\IconCollectionProvider;
 use IconIndexa\Providers\InstallerProvider;
 use IconIndexa\Views\BlockProvider;
 use IconIndexa\Views\HtmlTagModifier;
@@ -44,6 +45,9 @@ final class Plugin
         Hooks::doAction(Config::withPrefix('loaded'));
 
         Hooks::addAction('init', [$this, 'registerProviders'], 8);
+
+        // Expose bundled libraries to the WP 7.1+ core Icon block. Self-gates on older WP.
+        new IconCollectionProvider();
 
         Hooks::addFilter('plugin_action_links_' . Config::get('BASENAME'), [new PluginPageActions(), 'renderActionLinks']);
 

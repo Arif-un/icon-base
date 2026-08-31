@@ -268,6 +268,15 @@ class Icons
         return $stmt->fetchAll();
     }
 
+    // Lightweight full dump for the WP 7.1 icon-collection bridge: metadata only, no SVG reads.
+    public static function allForRegistry(): array
+    {
+        $pdo = SQLiteDB::instance()->pdo();
+        $stmt = $pdo->query('SELECT id, name, filename, library_id FROM ' . self::TABLE . ' ORDER BY id ASC');
+
+        return $stmt->fetchAll();
+    }
+
     public static function getById(int $id): ?array
     {
         $pdo = SQLiteDB::instance()->pdo();
