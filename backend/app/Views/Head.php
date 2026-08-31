@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 use IconIndexa\Config;
 use IconIndexa\Deps\BitApps\WPKit\Helpers\DateTimeHelper;
+use IconIndexa\Services\Onboarding;
 
 class Head
 {
@@ -67,6 +68,8 @@ class Head
                 'uploadBaseUrl'  => Config::get('UPLOAD_BASE_URL'),
                 'version'        => Config::VERSION,
                 'lang'           => get_locale(),
+                'onboarding'     => Onboarding::stateForCurrentUser(),
+                'newPostURL'     => admin_url('post-new.php'),
             ]
         );
 
