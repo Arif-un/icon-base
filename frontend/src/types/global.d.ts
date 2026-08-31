@@ -20,7 +20,14 @@ declare const SERVER_VARIABLES: {
   assetsURL: string;
   dateFormat: string;
   loggedInUserName: string;
+  newPostURL: string;
   nonce: string;
+  onboarding: {
+    adminTour: boolean;
+    editorGuide: boolean;
+    version: number;
+    wizard: boolean;
+  };
   pluginAdminURL: string;
   pluginSlug: string;
   redirectUri: string;

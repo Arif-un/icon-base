@@ -21,7 +21,9 @@ interface ConfigType {
   DATE_FORMAT: string;
   FREE_VERSION: string;
   IS_DEV: boolean;
+  NEW_POST_URL: string;
   NONCE: string;
+  ONBOARDING: (typeof SERVER_VARIABLES)["onboarding"];
   PLUGIN_ADMIN_URL: string;
   PLUGIN_SLUG: string;
   PRODUCT_NAME: string;
@@ -43,7 +45,14 @@ const config = {
   DATE_FORMAT: getServerVariable("dateFormat", "F j, Y"),
   FREE_VERSION: getServerVariable("version"),
   IS_DEV: import.meta.env.DEV,
+  NEW_POST_URL: getServerVariable("newPostURL", "post-new.php"),
   NONCE: getServerVariable("nonce", ""),
+  ONBOARDING: getServerVariable("onboarding", {
+    adminTour: false,
+    editorGuide: false,
+    version: 0,
+    wizard: false,
+  }),
   PLUGIN_ADMIN_URL: getServerVariable("pluginAdminURL"),
   PLUGIN_SLUG: getServerVariable("pluginSlug", "wp-starter-kit"),
   PRODUCT_NAME: "wp-starter-kit",
