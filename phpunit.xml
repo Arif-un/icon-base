@@ -16,5 +16,10 @@
         <include>
             <directory>backend/app</directory>
         </include>
+        <exclude>
+            <!-- WP REST/AJAX router wiring: the register() path extends WP_REST_Controller and
+                 needs a live WordPress REST stack, so it is covered by the e2e suite, not unit tests. -->
+            <file>backend/app/Providers/HookProvider.php</file>
+        </exclude>
     </source>
 </phpunit>

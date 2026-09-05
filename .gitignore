@@ -45,3 +45,4 @@ backend/data/*.db
 # Release artifact, lives outside git history. Anchored so it never matches icon-indexa.php.
 /icon-indexa/
 .svn/
+/coverage
