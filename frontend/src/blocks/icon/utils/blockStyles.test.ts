@@ -152,8 +152,12 @@ describe("getWrapperStyles", () => {
   });
 
   it("maps justification keywords to flex values", () => {
-    expect(getWrapperStyles(attrs({ itemsJustification: "left" })).justifyContent).toBe("flex-start");
-    expect(getWrapperStyles(attrs({ itemsJustification: "right" })).justifyContent).toBe("flex-end");
+    expect(getWrapperStyles(attrs({ itemsJustification: "left" })).justifyContent).toBe(
+      "flex-start",
+    );
+    expect(getWrapperStyles(attrs({ itemsJustification: "right" })).justifyContent).toBe(
+      "flex-end",
+    );
   });
 });
 

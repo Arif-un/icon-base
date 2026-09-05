@@ -151,13 +151,10 @@ describe("IconPickerPanel", () => {
 
     await act(async () => {
       fireEvent.click(screen.getByTitle("arrow"));
+      await Promise.resolve();
     });
 
-    expect(fetchSvgContent).toHaveBeenCalledWith(
-      expect.any(String),
-      "001-lib-one",
-      "arrow.svg",
-    );
+    expect(fetchSvgContent).toHaveBeenCalledWith(expect.any(String), "001-lib-one", "arrow.svg");
     expect(onSelectIcon).toHaveBeenCalledWith({
       svgContent: "<svg-inner/>",
       iconId: 10,
@@ -210,9 +207,7 @@ describe("IconPickerPanel", () => {
   it("fires size and stroke callbacks and ignores undefined values", () => {
     const onSizeChange = vi.fn();
     const onStrokeWidthChange = vi.fn();
-    render(
-      <IconPickerPanel {...(baseProps({ onSizeChange, onStrokeWidthChange }) as any)} />,
-    );
+    render(<IconPickerPanel {...(baseProps({ onSizeChange, onStrokeWidthChange }) as any)} />);
 
     fireEvent.change(screen.getByLabelText("Size"), { target: { value: "40" } });
     fireEvent.change(screen.getByLabelText("Stroke"), { target: { value: "3" } });
@@ -309,7 +304,7 @@ describe("IconPickerPanel", () => {
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     expect(screen.getByText("2 / 3")).toBeInTheDocument();
 
-    rerender(<IconPickerPanel {...({ ...props, libraryIds: ["1", "3"] } as any)} />);
+    rerender(<IconPickerPanel {...{ ...props, libraryIds: ["1", "3"] }} />);
     expect(screen.getByText("1 / 3")).toBeInTheDocument();
     expect(lastIconsCall().libraryIds).toEqual([1, 3]);
   });

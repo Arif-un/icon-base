@@ -5,6 +5,7 @@ import queryRequest, { RequestError, proxyRequest, request } from "./request";
 function mockFetch(impl: () => Partial<Response>) {
   const fn = vi.fn(() => Promise.resolve(impl() as Response));
   vi.stubGlobal("fetch", fn);
+
   return fn;
 }
 
@@ -62,7 +63,10 @@ describe("queryRequest", () => {
   });
 
   it("wraps a thrown network Error in a RequestError", async () => {
-    vi.stubGlobal("fetch", vi.fn(() => Promise.reject(new Error("offline"))));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new Error("offline"))),
+    );
 
     await expect(queryRequest("act")).rejects.toBeInstanceOf(RequestError);
   });
@@ -77,7 +81,10 @@ describe("request", () => {
   });
 
   it("resolves to the error response when a RequestError is thrown", async () => {
-    vi.stubGlobal("fetch", vi.fn(() => Promise.reject(new Error("offline"))));
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.reject(new Error("offline"))),
+    );
 
     const res = await request("act");
     expect(res.code).toBe("ERROR");

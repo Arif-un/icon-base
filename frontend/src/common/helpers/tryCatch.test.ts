@@ -18,6 +18,7 @@ describe("tryCatch", () => {
   });
 
   it("passes non-Error rejections through as the error value", async () => {
+    // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- intentionally testing non-Error rejection passthrough
     const result = await tryCatch<never, string>(Promise.reject("nope"));
 
     expect(result.error).toBe("nope");

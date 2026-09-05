@@ -242,9 +242,7 @@ describe("Edit — no icon (placeholder branch)", () => {
 
   it("dispatches an error snackbar notice when the media library reports an error", () => {
     const createNotice = vi.fn();
-    const dispatchSpy = vi
-      .spyOn(window.wp.data, "dispatch")
-      .mockReturnValue({ createNotice } as never);
+    const dispatchSpy = vi.spyOn(window.wp.data, "dispatch").mockReturnValue({ createNotice });
 
     renderEdit(NO_ICON);
     fireEvent.click(screen.getByText("Media Library"));
@@ -340,18 +338,15 @@ describe("Edit — has icon (preview + toolbar branch)", () => {
 
 describe("Edit — block wrapper style", () => {
   it("strips padding/margin from the block props style but keeps other styles", () => {
-    vi.spyOn(window.wp.blockEditor, "useBlockProps").mockImplementation(
-      (p: unknown) =>
-        ({
-          ...(p as Record<string, unknown>),
-          className: "cursor-pointer",
-          style: {
-            paddingTop: "5px",
-            marginLeft: "3px",
-            color: "rgb(255, 0, 0)",
-          },
-        }) as unknown as ReturnType<typeof window.wp.blockEditor.useBlockProps>,
-    );
+    vi.spyOn(window.wp.blockEditor, "useBlockProps").mockImplementation((p: unknown) => ({
+      ...(p as Record<string, unknown>),
+      className: "cursor-pointer",
+      style: {
+        paddingTop: "5px",
+        marginLeft: "3px",
+        color: "rgb(255, 0, 0)",
+      },
+    }));
 
     const { container } = renderEdit();
     const wrapper = container.firstChild as HTMLElement;

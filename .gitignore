@@ -46,3 +46,6 @@ backend/data/*.db
 /icon-indexa/
 .svn/
 /coverage
+
+# ServBay per-project PHP pin (machine-specific, requires ServBay + PHP 8.4 installed)
+.servbay.config

@@ -150,6 +150,7 @@ describe("IconPickerPopover", () => {
 
     await act(async () => {
       fireEvent.click(screen.getByTitle("arrow"));
+      await Promise.resolve();
     });
 
     // the pending pick becomes the highlighted icon and enables the Select button

@@ -267,5 +267,4 @@ class Icons
 
         return $stmt->fetchAll();
     }
-
 }

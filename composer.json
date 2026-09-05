@@ -4,7 +4,7 @@
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "require": {
-    "php": ">=7.4",
+    "php": ">=8.4",
     "bitapps/wp-validator": "^1",
     "bitapps/wp-kit": "^2.0",
     "typisttech/imposter-plugin": "^0.6.2"

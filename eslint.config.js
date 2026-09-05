@@ -177,4 +177,16 @@ export default tseslint.config(
     files: ["**/*.js", "**/*.mjs"],
     ...tseslint.configs.disableTypeChecked,
   },
+
+  // Tests: mocks are intentionally `any`-typed, so relax type-aware safety rules
+  {
+    files: ["**/*.test.{ts,tsx}", "**/test.setup.ts"],
+    rules: {
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+    },
+  },
 );

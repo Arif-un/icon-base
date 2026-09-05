@@ -16,7 +16,6 @@ const orig = {
   popover: wp.components.Popover,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let ToolbarControls: (props: any) => any;
 
 beforeAll(async () => {
@@ -104,6 +103,7 @@ function renderToolbar(overrides: Partial<IconBlockAttributes> = {}, isSelected 
       isSelected={isSelected}
     />,
   );
+
   return { setAttributes, ...utils };
 }
 

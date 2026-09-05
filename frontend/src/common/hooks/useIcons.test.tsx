@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook, waitFor } from "@testing-library/react";
-import React from "react";
+import type React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { restRequest } from "@/common/helpers/restRequest";
@@ -14,6 +14,7 @@ const restRequestMock = vi.mocked(restRequest);
 
 function wrapper({ children }: { children: React.ReactNode }) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
 

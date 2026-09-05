@@ -16,11 +16,15 @@ function stubMediaFrame(attachment: Attachment) {
     state: () => ({ get: () => ({ first: () => ({ toJSON: () => attachment }) }) }),
   };
   (window as unknown as { wp: { media: () => unknown } }).wp.media = () => frame;
+
   return () => selectCb?.();
 }
 
 function mockFetch(impl: () => Partial<Response>) {
-  vi.stubGlobal("fetch", vi.fn(() => Promise.resolve(impl() as Response)));
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(() => Promise.resolve(impl() as Response)),
+  );
 }
 
 beforeEach(() => vi.unstubAllGlobals());
@@ -50,7 +54,11 @@ describe("openMediaLibrary", () => {
 
   it("defaults to 24x24 when the svg has no viewBox", async () => {
     const fire = stubMediaFrame({ subtype: "svg+xml", filename: "i.svg", url: "https://x/i.svg" });
-    mockFetch(() => ({ ok: true, status: 200, text: () => Promise.resolve('<svg><path d="M0 0"/></svg>') }));
+    mockFetch(() => ({
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve('<svg><path d="M0 0"/></svg>'),
+    }));
     const onSuccess = vi.fn();
 
     openMediaLibrary(onSuccess, vi.fn());
@@ -113,8 +121,16 @@ describe("openMediaLibrary", () => {
   });
 
   it("accepts a file whose subtype is not svg+xml but whose name ends in .svg", async () => {
-    const fire = stubMediaFrame({ subtype: "octet-stream", filename: "logo.svg", url: "https://x/logo.svg" });
-    mockFetch(() => ({ ok: true, status: 200, text: () => Promise.resolve('<svg><path d="M0 0"/></svg>') }));
+    const fire = stubMediaFrame({
+      subtype: "octet-stream",
+      filename: "logo.svg",
+      url: "https://x/logo.svg",
+    });
+    mockFetch(() => ({
+      ok: true,
+      status: 200,
+      text: () => Promise.resolve('<svg><path d="M0 0"/></svg>'),
+    }));
     const onSuccess = vi.fn();
 
     openMediaLibrary(onSuccess, vi.fn());

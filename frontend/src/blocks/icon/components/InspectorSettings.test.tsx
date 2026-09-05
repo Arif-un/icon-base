@@ -26,16 +26,11 @@ const orig = {
   range: wp.components.RangeControl,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let InspectorSettings: (props: any) => any;
 
 beforeAll(async () => {
   wp.blockEditor.useSetting = (key: string) =>
-    key === "color.palette"
-      ? paletteColors
-      : key === "color.gradients"
-        ? paletteGradients
-        : [];
+    key === "color.palette" ? paletteColors : key === "color.gradients" ? paletteGradients : [];
 
   wp.blockEditor.__experimentalPanelColorGradientSettings = ({
     title,
@@ -185,6 +180,7 @@ function renderInspector(overrides: Partial<IconBlockAttributes> = {}) {
   const utils = render(
     <InspectorSettings attributes={attrs(overrides)} setAttributes={setAttributes} />,
   );
+
   return { setAttributes, ...utils };
 }
 

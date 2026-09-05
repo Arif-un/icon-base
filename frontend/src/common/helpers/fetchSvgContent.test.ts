@@ -1,11 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import {
-  fetchSvgContent,
-  getSvgCache,
-  sanitizePathSegment,
-  sanitizeSvg,
-} from "./fetchSvgContent";
+import { fetchSvgContent, getSvgCache, sanitizePathSegment, sanitizeSvg } from "./fetchSvgContent";
 
 beforeEach(() => vi.unstubAllGlobals());
 afterEach(() => vi.restoreAllMocks());

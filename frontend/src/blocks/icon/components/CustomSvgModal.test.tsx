@@ -15,6 +15,7 @@ function renderModal(overrides: Partial<React.ComponentProps<typeof CustomSvgMod
     onClose: vi.fn(),
     ...overrides,
   };
+
   return { ...render(<CustomSvgModal {...props} />), props };
 }
 
@@ -76,7 +77,7 @@ describe("CustomSvgModal", () => {
     const onInsert = vi.fn();
     renderModal({ onInsert });
 
-    type("<svg><path d=\"M0 0h1\"/></svg>");
+    type('<svg><path d="M0 0h1"/></svg>');
     fireEvent.click(screen.getByText("Insert").closest("button")!);
 
     expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24);
@@ -151,7 +152,7 @@ describe("CustomSvgModal", () => {
       render(<Fresh onInsert={onInsert} onClose={vi.fn()} />);
 
       fireEvent.change(screen.getByLabelText("SVG Markup"), {
-        target: { value: "<svg viewBox=\"0 0 24 24\"></svg>" },
+        target: { value: '<svg viewBox="0 0 24 24"></svg>' },
       });
       fireEvent.click(screen.getByText("Insert"));
 

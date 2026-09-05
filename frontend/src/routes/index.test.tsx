@@ -87,7 +87,11 @@ describe("Icons route — data states", () => {
   });
 
   it("shows the empty state when no icons match and not loading", () => {
-    useIconsMock.mockReturnValue({ data: iconsPage({ items: [], total: 0 }), isLoading: false, error: null });
+    useIconsMock.mockReturnValue({
+      data: iconsPage({ items: [], total: 0 }),
+      isLoading: false,
+      error: null,
+    });
 
     render(<Icons />);
 
@@ -194,6 +198,7 @@ describe("Icons route — display controls", () => {
         ".ant-color-picker-input input, input.ant-color-picker-hex-input",
       );
       if (!input) throw new Error("hex input not ready");
+
       return input as HTMLInputElement;
     });
     fireEvent.change(hexInput, { target: { value: "ff0000" } });

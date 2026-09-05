@@ -2,12 +2,16 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { __, sprintf } from "./i18nWrap";
 
-const serverVars = (globalThis as unknown as { SERVER_VARIABLES: { translations: Record<string, string> } })
-  .SERVER_VARIABLES;
+const serverVars = (
+  globalThis as unknown as { SERVER_VARIABLES: { translations: Record<string, string> } }
+).SERVER_VARIABLES;
 
 afterEach(() => {
   serverVars.translations = {};
-  (window as unknown as { wp: { i18n: unknown } }).wp.i18n = { __: (s: string) => s, sprintf: (s: string) => s };
+  (window as unknown as { wp: { i18n: unknown } }).wp.i18n = {
+    __: (s: string) => s,
+    sprintf: (s: string) => s,
+  };
 });
 
 describe("__", () => {

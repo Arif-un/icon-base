@@ -5,6 +5,7 @@ import { RestRequestError, restRequest } from "./restRequest";
 function mockFetch(impl: () => Partial<Response>) {
   const fn = vi.fn(() => Promise.resolve(impl() as Response));
   vi.stubGlobal("fetch", fn);
+
   return fn;
 }
 
@@ -13,7 +14,11 @@ afterEach(() => vi.restoreAllMocks());
 
 describe("restRequest", () => {
   it("performs a GET by default and returns the parsed JSON", async () => {
-    const fetchFn = mockFetch(() => ({ ok: true, status: 200, json: () => Promise.resolve({ hi: 1 }) }));
+    const fetchFn = mockFetch(() => ({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve({ hi: 1 }),
+    }));
 
     const data = await restRequest<{ hi: number }>("icons");
 

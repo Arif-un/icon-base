@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom";
 import React from "react";
 
@@ -36,7 +36,7 @@ const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => pro
   save: (props: Record<string, unknown> = {}) => props,
 });
 
-const Button = ({ children, onClick, disabled, label, icon, ...rest }: any) =>
+const Button = ({ children, onClick, disabled, label, icon: _icon, ...rest }: any) =>
   el("button", { onClick, disabled, "aria-label": label, ...rest }, children ?? label);
 
 const Modal = ({ children, title, onRequestClose, className }: any) =>
@@ -56,7 +56,8 @@ const SelectControl = ({ label, value, options = [], onChange }: any) =>
     options.map((o: any) => el("option", { key: String(o.value), value: o.value }, o.label)),
   );
 
-const numberControl = (type: string) =>
+const numberControl =
+  (type: string) =>
   ({ label, value, onChange }: any) =>
     el("input", {
       type,
@@ -65,7 +66,8 @@ const numberControl = (type: string) =>
       onChange: (e: any) => onChange?.(Number(e.target.value)),
     });
 
-const textControl = (type: string) =>
+const textControl =
+  (type: string) =>
   ({ label, value, onChange, placeholder }: any) =>
     el("input", {
       type,
@@ -100,9 +102,7 @@ const Popover = ({ children }: any) => el("div", { role: "tooltip" }, children);
 
 const PanelColorGradientSettings = ({ children, settings = [] }: any) =>
   el("div", { "data-color-settings": true }, [
-    ...settings.map((s: any, i: number) =>
-      el("div", { key: i, "data-setting": s.label }, s.label),
-    ),
+    ...settings.map((s: any, i: number) => el("div", { key: i, "data-setting": s.label }, s.label)),
     children,
   ]);
 

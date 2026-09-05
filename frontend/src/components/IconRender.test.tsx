@@ -34,7 +34,15 @@ describe("IconRender", () => {
     fetchSvgContentMock.mockResolvedValue('<path d="M0 0"/>');
 
     const { container } = render(
-      <IconRender fileName="a" libraryDir="lib" size={32} iconWidth={48} iconHeight={48} color="red" strokeWidth={2} />,
+      <IconRender
+        fileName="a"
+        libraryDir="lib"
+        size={32}
+        iconWidth={48}
+        iconHeight={48}
+        color="red"
+        strokeWidth={2}
+      />,
     );
 
     await waitFor(() => expect(container.querySelector("svg.icon-render")).not.toBeNull());
@@ -54,7 +62,7 @@ describe("IconRender", () => {
     expect(fetchSvgContentMock).not.toHaveBeenCalled();
   });
 
-  it("uses default viewBox dimensions when none are supplied", async () => {
+  it("uses default viewBox dimensions when none are supplied", () => {
     getSvgCacheMock.mockReturnValue('<path d="M0 0"/>');
 
     const { container } = render(<IconRender fileName="c" libraryDir="lib" />);
@@ -78,9 +86,7 @@ describe("IconRender", () => {
 
   it("swallows an AbortError from an in-flight fetch", async () => {
     getSvgCacheMock.mockReturnValue(null);
-    fetchSvgContentMock.mockRejectedValue(
-      new DOMException("aborted", "AbortError"),
-    );
+    fetchSvgContentMock.mockRejectedValue(new DOMException("aborted", "AbortError"));
 
     const { container } = render(<IconRender fileName="d" libraryDir="lib" />);
 
