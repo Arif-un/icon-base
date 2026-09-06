@@ -20,7 +20,6 @@ html body #wpcontent {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   font-size: 16px;
-  isolation: isolate;
 }
 
 a:focus {

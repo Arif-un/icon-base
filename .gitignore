@@ -21,6 +21,7 @@ bit-pi.zip
 bit-pi/
 .env
 .vite/
+.vitest/
 build
 /test-results/
 /playwright-report/

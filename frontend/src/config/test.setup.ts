@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import React from "react";
 
 // SERVER_VARIABLES is injected by the PHP side at runtime (see vite.config.ts `define`, which is
