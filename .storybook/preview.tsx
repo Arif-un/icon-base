@@ -25,6 +25,15 @@ const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => pro
         {children}
       </div>
     ),
+    CheckboxControl: ({ label, checked, onChange, disabled }: any) => (
+      <input
+        type="checkbox"
+        aria-label={label}
+        checked={!!checked}
+        disabled={!!disabled}
+        onChange={(e: any) => onChange?.(e.target.checked)}
+      />
+    ),
   },
 }
 

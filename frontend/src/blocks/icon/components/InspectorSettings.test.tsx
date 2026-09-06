@@ -159,6 +159,7 @@ const PLAIN_SVG = '<path d="M12 2L2 22h20L12 2z"/>';
 function attrs(overrides: Partial<IconBlockAttributes> = {}): IconBlockAttributes {
   return {
     svgContent: PLAIN_SVG,
+    svgNormalizeColors: true,
     iconId: 1,
     iconName: "triangle",
     iconFilename: "triangle.svg",

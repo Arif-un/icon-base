@@ -274,8 +274,18 @@ interface PanelBodyProps {
   title?: string;
 }
 
+interface CheckboxControlProps {
+  label?: string;
+  help?: string;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
+  disabled?: boolean;
+  __nextHasNoMarginBottom?: boolean;
+}
+
 interface WPComponents {
   Button: ComponentType<ButtonProps>;
+  CheckboxControl: ComponentType<CheckboxControlProps>;
   ColorPicker: ComponentType<ColorPickerProps>;
   DropdownMenu: ComponentType<DropdownMenuProps>;
   Modal: ComponentType<ModalProps>;

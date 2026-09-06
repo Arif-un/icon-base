@@ -1,12 +1,23 @@
+import { useMemo } from "react";
+
+import { sanitizeSvg } from "@/common/helpers/fetchSvgContent";
+
 import type { IconBlockAttributes } from "../types";
 import { getContainerClasses, getContainerStyles, getSpacingStyles } from "../utils/blockStyles";
 import { stripSvgColors } from "../utils/svgUtils";
 
 export default function BlockIconPreview({ attributes }: { attributes: IconBlockAttributes }) {
-  const { svgContent, iconWidth, iconHeight, width, height, label } = attributes;
+  const { svgContent, svgNormalizeColors, iconWidth, iconHeight, width, height, label } =
+    attributes;
   const containerClasses = getContainerClasses(attributes);
   const containerStyles = { ...getContainerStyles(attributes), ...getSpacingStyles(attributes) };
-  const strippedSvg = stripSvgColors(svgContent);
+  // Mirror edit/save: only recolor to currentColor when the block opted into normalization.
+  // Always re-sanitize at render time (both branches run DOMPurify) so attributes parsed from
+  // stored post content can never inject unsanitized markup into the editor DOM.
+  const previewSvg = useMemo(
+    () => (svgNormalizeColors ? stripSvgColors(svgContent) : sanitizeSvg(svgContent)),
+    [svgContent, svgNormalizeColors],
+  );
 
   const ariaProps: Record<string, string> = label
     ? { "aria-label": label }
@@ -23,7 +34,7 @@ export default function BlockIconPreview({ attributes }: { attributes: IconBlock
         fill="currentColor"
         role="img"
         {...ariaProps}
-        dangerouslySetInnerHTML={{ __html: strippedSvg }}
+        dangerouslySetInnerHTML={{ __html: previewSvg }}
       />
     </div>
   );

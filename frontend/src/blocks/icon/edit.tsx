@@ -15,7 +15,7 @@ import { getWrapperClasses } from "./utils/blockStyles";
 import { openMediaLibrary } from "./utils/openMediaLibrary";
 import { stripSvgColors } from "./utils/svgUtils";
 
-const { DropdownMenu, ToolbarGroup } = window.wp.components;
+const { DropdownMenu, ToolbarButton, ToolbarGroup } = window.wp.components;
 const { BlockControls } = window.wp.blockEditor;
 
 function EditInner({
@@ -48,12 +48,16 @@ function EditInner({
   const [showPopover, setShowPopover] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showCustomSvgModal, setShowCustomSvgModal] = useState(false);
+  // true = reopen the modal pre-filled to edit the current SVG; false = blank modal to insert/replace.
+  const [editingCustomSvg, setEditingCustomSvg] = useState(false);
 
   const hasIcon = !!attributes.svgContent;
+  const isCustomSvg = attributes.iconId === 0 && !!attributes.svgContent;
 
   function handleSelectIcon(data: SelectedIconData) {
     setAttributes({
       svgContent: stripSvgColors(data.svgContent),
+      svgNormalizeColors: true,
       iconId: data.iconId,
       iconName: data.iconName,
       iconFilename: data.iconFilename,
@@ -67,6 +71,7 @@ function EditInner({
   function handleMediaSuccess(svgContent: string, width: number, height: number) {
     setAttributes({
       svgContent: stripSvgColors(svgContent),
+      svgNormalizeColors: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -77,10 +82,19 @@ function EditInner({
     });
   }
 
-  function handleCustomSvgInsert(svgContent: string, width: number, height: number) {
+  function handleCustomSvgInsert(
+    svgContent: string,
+    width: number,
+    height: number,
+    normalize: boolean,
+  ) {
     setShowCustomSvgModal(false);
+    setEditingCustomSvg(false);
     setAttributes({
-      svgContent: stripSvgColors(svgContent),
+      // svgContent is already DOMPurify-sanitized by the modal; stripSvgColors only
+      // normalizes fill/stroke to currentColor, so skipping it keeps the original colors safely.
+      svgContent: normalize ? stripSvgColors(svgContent) : svgContent,
+      svgNormalizeColors: normalize,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -112,6 +126,16 @@ function EditInner({
           />
           <BlockControls>
             <ToolbarGroup>
+              {isCustomSvg && (
+                <ToolbarButton
+                  onClick={() => {
+                    setEditingCustomSvg(true);
+                    setShowCustomSvgModal(true);
+                  }}
+                >
+                  Edit
+                </ToolbarButton>
+              )}
               <DropdownMenu
                 toggleProps={{
                   className: "h-full",
@@ -133,7 +157,10 @@ function EditInner({
                   {
                     title: "Insert Custom SVG",
                     icon: "editor-code",
-                    onClick: () => setShowCustomSvgModal(true),
+                    onClick: () => {
+                      setEditingCustomSvg(false);
+                      setShowCustomSvgModal(true);
+                    },
                   },
                 ]}
               />
@@ -176,7 +203,16 @@ function EditInner({
       {showCustomSvgModal && (
         <CustomSvgModal
           onInsert={handleCustomSvgInsert}
-          onClose={() => setShowCustomSvgModal(false)}
+          onClose={() => {
+            setShowCustomSvgModal(false);
+            setEditingCustomSvg(false);
+          }}
+          initialSvg={
+            editingCustomSvg
+              ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${attributes.iconWidth} ${attributes.iconHeight}">${attributes.svgContent}</svg>`
+              : ""
+          }
+          initialNormalize={editingCustomSvg ? attributes.svgNormalizeColors : true}
         />
       )}
     </div>

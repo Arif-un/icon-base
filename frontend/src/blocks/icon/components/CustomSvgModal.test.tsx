@@ -60,7 +60,7 @@ describe("CustomSvgModal", () => {
     type('<svg viewBox="0 0 0 0" width="10" height="20"><path d="M0 0h1"/></svg>');
     fireEvent.click(screen.getByText("Insert").closest("button")!);
 
-    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 10, 20);
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 10, 20, true);
   });
 
   it("uses width/height attrs when there is no viewBox at all", () => {
@@ -70,7 +70,37 @@ describe("CustomSvgModal", () => {
     type('<svg width="15" height="25"><path d="M0 0h1"/></svg>');
     fireEvent.click(screen.getByText("Insert").closest("button")!);
 
-    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 15, 25);
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 15, 25, true);
+  });
+
+  it("parses width/height with unit suffixes when there is no viewBox", () => {
+    const onInsert = vi.fn();
+    renderModal({ onInsert });
+
+    type('<svg width="500pt" height="600pt"><path d="M0 0h1"/></svg>');
+    fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 500, 600, true);
+  });
+
+  it("ignores a child stroke-width when there is no root viewBox or width/height", () => {
+    const onInsert = vi.fn();
+    renderModal({ onInsert });
+
+    type('<svg><path stroke-width="2" d="M0 0h1"/></svg>');
+    fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
+  });
+
+  it("ignores a child element's width/height when the root svg has neither viewBox nor width/height", () => {
+    const onInsert = vi.fn();
+    renderModal({ onInsert });
+
+    type('<svg><rect width="8" height="8"/><path d="M0 0h1"/></svg>');
+    fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
   });
 
   it("defaults to 24x24 when neither viewBox nor width/height are present", () => {
@@ -80,7 +110,7 @@ describe("CustomSvgModal", () => {
     type('<svg><path d="M0 0h1"/></svg>');
     fireEvent.click(screen.getByText("Insert").closest("button")!);
 
-    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24);
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
   });
 
   it("accepts markup without an <svg> wrapper via the inner-extraction fallback", () => {
@@ -92,7 +122,7 @@ describe("CustomSvgModal", () => {
     expect(insert).not.toBeDisabled();
     fireEvent.click(insert);
 
-    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24);
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
   });
 
   it("rejects an SVG that embeds a raster image", () => {
@@ -135,6 +165,111 @@ describe("CustomSvgModal", () => {
 
     fireEvent.click(screen.getByLabelText("Close"));
     expect(onClose).toHaveBeenCalledOnce();
+  });
+
+  it("defaults to insert mode: 'Insert Custom SVG' title, 'Insert' button, normalize checked", () => {
+    renderModal();
+
+    expect(screen.getByRole("dialog", { name: "Insert Custom SVG" })).toBeInTheDocument();
+    expect(screen.getByText("Insert")).toBeInTheDocument();
+    expect(screen.queryByText("Save")).toBeNull();
+    expect(screen.getByLabelText("Normalize colors to theme color")).toBeChecked();
+  });
+
+  it("enters edit mode when initialSvg is provided: seeds textarea, 'Edit'/'Save' labels", () => {
+    const initialSvg = '<svg viewBox="0 0 10 10"><path d="M0 0h1"/></svg>';
+    renderModal({ initialSvg });
+
+    expect(screen.getByLabelText("SVG Markup")).toHaveValue(initialSvg);
+    expect(screen.getByRole("dialog", { name: "Edit Custom SVG" })).toBeInTheDocument();
+    expect(screen.getByText("Save")).toBeInTheDocument();
+    expect(screen.queryByText("Insert")).toBeNull();
+  });
+
+  it("preview normalizes colors to currentColor while the box is checked (WYSIWYG)", () => {
+    renderModal();
+
+    type('<svg viewBox="0 0 24 24"><path fill="#FF0000" d="M0 0h1"/></svg>');
+
+    const preview = document.querySelector("svg")!;
+    expect(preview.innerHTML).toContain("currentColor");
+    expect(preview.innerHTML).not.toContain("#FF0000");
+  });
+
+  it("preview keeps original colors after unchecking normalize", () => {
+    renderModal();
+
+    type('<svg viewBox="0 0 24 24"><path fill="#FF0000" d="M0 0h1"/></svg>');
+    fireEvent.click(screen.getByLabelText("Normalize colors to theme color"));
+
+    const preview = document.querySelector("svg")!;
+    expect(preview.innerHTML).toContain("#FF0000");
+    expect(preview.innerHTML).not.toContain("currentColor");
+  });
+
+  it("inserts with normalize=false after unchecking the normalize box", () => {
+    const onInsert = vi.fn();
+    renderModal({ onInsert });
+
+    type('<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>');
+    fireEvent.click(screen.getByLabelText("Normalize colors to theme color"));
+    fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, false);
+  });
+
+  it("honors initialNormalize=false: checkbox unchecked and Save forwards normalize=false", () => {
+    const onInsert = vi.fn();
+    renderModal({
+      onInsert,
+      initialSvg: '<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>',
+      initialNormalize: false,
+    });
+
+    expect(screen.getByLabelText("Normalize colors to theme color")).not.toBeChecked();
+    fireEvent.click(screen.getByText("Save").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, false);
+  });
+
+  it("locks the normalize checkbox when editing an already-normalized SVG (colors are gone)", () => {
+    renderModal({
+      initialSvg: '<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>',
+      initialNormalize: true,
+    });
+
+    const checkbox = screen.getByLabelText("Normalize colors to theme color");
+    expect(checkbox).toBeChecked();
+    expect(checkbox).toBeDisabled();
+    expect(checkbox.closest("label")).toHaveAttribute(
+      "data-help",
+      expect.stringContaining("can't be reverted"),
+    );
+  });
+
+  it("keeps the normalize checkbox editable when editing a non-normalized SVG", () => {
+    renderModal({
+      initialSvg: '<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>',
+      initialNormalize: false,
+    });
+
+    expect(screen.getByLabelText("Normalize colors to theme color")).not.toBeDisabled();
+  });
+
+  it("keeps the normalize checkbox editable in insert mode", () => {
+    renderModal();
+
+    expect(screen.getByLabelText("Normalize colors to theme color")).not.toBeDisabled();
+  });
+
+  it("forwards edited markup from the seeded textarea on Save", () => {
+    const onInsert = vi.fn();
+    renderModal({ onInsert, initialSvg: '<svg viewBox="0 0 24 24"><path d="M0 0"/></svg>' });
+
+    type('<svg viewBox="0 0 48 60"><rect x="1" y="1"/></svg>');
+    fireEvent.click(screen.getByText("Save").closest("button")!);
+
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("rect"), 48, 60, true);
   });
 
   // The Insert button is disabled while invalid, so its onClick normally can't fire. Override the

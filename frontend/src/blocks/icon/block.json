@@ -27,6 +27,10 @@
       "type": "string",
       "default": ""
     },
+    "svgNormalizeColors": {
+      "type": "boolean",
+      "default": true
+    },
     "iconId": {
       "type": "number",
       "default": 0

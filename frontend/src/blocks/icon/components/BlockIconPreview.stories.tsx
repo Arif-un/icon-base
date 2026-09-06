@@ -8,6 +8,7 @@ const CIRCLE_SVG = '<circle cx="12" cy="12" r="10"/>';
 
 const BASE_ATTRS: IconBlockAttributes = {
   svgContent: CIRCLE_SVG,
+  svgNormalizeColors: true,
   iconId: 1,
   iconName: "circle",
   iconFilename: "circle.svg",

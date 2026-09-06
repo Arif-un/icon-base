@@ -12,6 +12,7 @@ import {
 function attrs(overrides: Partial<IconBlockAttributes> = {}): IconBlockAttributes {
   return {
     svgContent: "",
+    svgNormalizeColors: true,
     iconId: 0,
     iconName: "",
     iconFilename: "",

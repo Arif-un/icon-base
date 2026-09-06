@@ -100,6 +100,18 @@ const ToolbarButton = ({ children, onClick, label, ...rest }: any) =>
 
 const Popover = ({ children }: any) => el("div", { role: "tooltip" }, children);
 
+const CheckboxControl = ({ label, checked, onChange, disabled, help }: any) =>
+  el("label", { "data-help": help }, [
+    el("input", {
+      key: "input",
+      type: "checkbox",
+      "aria-label": label,
+      checked: !!checked,
+      disabled: !!disabled,
+      onChange: (e: any) => onChange?.(e.target.checked),
+    }),
+  ]);
+
 const PanelColorGradientSettings = ({ children, settings = [] }: any) =>
   el("div", { "data-color-settings": true }, [
     ...settings.map((s: any, i: number) => el("div", { key: i, "data-setting": s.label }, s.label)),
@@ -127,6 +139,7 @@ const LinkControl = ({ value, onChange }: any) =>
   },
   components: {
     Button,
+    CheckboxControl,
     Modal,
     PanelBody,
     SelectControl,

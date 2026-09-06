@@ -69,11 +69,18 @@ vi.mock("./components/IconPickerModal", () => ({
 
 vi.mock("./components/CustomSvgModal", () => ({
   default: (props: {
-    onInsert: (svg: string, w: number, h: number) => void;
+    onInsert: (svg: string, w: number, h: number, normalize: boolean) => void;
     onClose: () => void;
+    initialSvg?: string;
+    initialNormalize?: boolean;
   }) => (
-    <div data-testid="custom-svg-modal">
-      <button onClick={() => props.onInsert("<rect/>", 40, 50)}>custom-insert</button>
+    <div
+      data-testid="custom-svg-modal"
+      data-initial-svg={props.initialSvg ?? ""}
+      data-initial-normalize={String(props.initialNormalize)}
+    >
+      <button onClick={() => props.onInsert("<rect/>", 40, 50, true)}>custom-insert</button>
+      <button onClick={() => props.onInsert("<rect/>", 40, 50, false)}>custom-insert-keep</button>
       <button onClick={props.onClose}>custom-close</button>
     </div>
   ),
@@ -86,6 +93,7 @@ const openMediaLibraryMock = vi.mocked(openMediaLibrary);
 function attrs(overrides: Partial<IconBlockAttributes> = {}): IconBlockAttributes {
   return {
     svgContent: '<path d="M12 2L2 22h20L12 2z"/>',
+    svgNormalizeColors: true,
     iconId: 1,
     iconName: "triangle",
     iconFilename: "triangle.svg",
@@ -159,6 +167,7 @@ describe("Edit — no icon (placeholder branch)", () => {
 
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors(POPOVER_ICON.svgContent),
+      svgNormalizeColors: true,
       iconId: 7,
       iconName: "star",
       iconFilename: "star.svg",
@@ -198,6 +207,7 @@ describe("Edit — no icon (placeholder branch)", () => {
 
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors(MODAL_ICON.svgContent),
+      svgNormalizeColors: true,
       iconId: 9,
       iconName: "heart",
       iconFilename: "heart.svg",
@@ -230,6 +240,7 @@ describe("Edit — no icon (placeholder branch)", () => {
 
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors("<circle/>"),
+      svgNormalizeColors: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -267,6 +278,7 @@ describe("Edit — no icon (placeholder branch)", () => {
 
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors("<rect/>"),
+      svgNormalizeColors: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -277,6 +289,36 @@ describe("Edit — no icon (placeholder branch)", () => {
     });
     // insert closes the modal
     expect(screen.queryByTestId("custom-svg-modal")).toBeNull();
+  });
+
+  it("keeps original colors and records the choice when normalize is unchecked", () => {
+    const { setAttributes } = renderEdit(NO_ICON);
+
+    fireEvent.click(screen.getByText("Insert Custom SVG"));
+    fireEvent.click(screen.getByText("custom-insert-keep"));
+
+    expect(setAttributes).toHaveBeenCalledWith({
+      // not normalized: stored verbatim (already sanitized by the modal), not stripSvgColors'd
+      svgContent: "<rect/>",
+      svgNormalizeColors: false,
+      iconId: 0,
+      iconName: "",
+      iconFilename: "",
+      librarySlug: "",
+      libraryDir: "",
+      iconWidth: 40,
+      iconHeight: 50,
+    });
+  });
+
+  it("opens a blank (unseeded) modal from Insert Custom SVG", () => {
+    renderEdit(NO_ICON);
+
+    fireEvent.click(screen.getByText("Insert Custom SVG"));
+
+    const modal = screen.getByTestId("custom-svg-modal");
+    expect(modal).toHaveAttribute("data-initial-svg", "");
+    expect(modal).toHaveAttribute("data-initial-normalize", "true");
   });
 
   it("closes the custom SVG modal without inserting", () => {
@@ -333,6 +375,37 @@ describe("Edit — has icon (preview + toolbar branch)", () => {
     fireEvent.click(screen.getByRole("button", { name: "Insert Custom SVG" }));
 
     expect(screen.getByTestId("custom-svg-modal")).toBeInTheDocument();
+  });
+
+  it("shows the Edit toolbar button only for a custom SVG (iconId 0)", () => {
+    renderEdit({ iconId: 0 });
+
+    expect(screen.getByRole("button", { name: "Edit" })).toBeInTheDocument();
+  });
+
+  it("hides the Edit toolbar button for a library icon (iconId != 0)", () => {
+    renderEdit({ iconId: 5 });
+
+    expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
+  });
+
+  it("opens the modal pre-seeded with the current SVG and its normalize choice on Edit", () => {
+    renderEdit({
+      iconId: 0,
+      svgContent: '<path d="M3 3"/>',
+      iconWidth: 30,
+      iconHeight: 40,
+      svgNormalizeColors: false,
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+
+    const modal = screen.getByTestId("custom-svg-modal");
+    expect(modal).toHaveAttribute(
+      "data-initial-svg",
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 40"><path d="M3 3"/></svg>',
+    );
+    expect(modal).toHaveAttribute("data-initial-normalize", "false");
   });
 });
 

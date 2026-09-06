@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { sanitizeSvg } from "@/common/helpers/fetchSvgContent";
 
-import { getUnsupportedSvgReason } from "../utils/svgUtils";
+import { getUnsupportedSvgReason, stripSvgColors } from "../utils/svgUtils";
 
-const { Button, Modal } = window.wp.components;
+const { Button, CheckboxControl, Modal } = window.wp.components;
 
 function extractViewBox(svgMarkup: string): { width: number; height: number } {
   const viewBoxMatch = svgMarkup.match(/viewBox=["']([^"']+)["']/);
@@ -15,8 +15,16 @@ function extractViewBox(svgMarkup: string): { width: number; height: number } {
     }
   }
 
-  const wMatch = svgMarkup.match(/\bwidth=["'](\d+(?:\.\d+)?)["']/);
-  const hMatch = svgMarkup.match(/\bheight=["'](\d+(?:\.\d+)?)["']/);
+  // Only read width/height from the root <svg ...> opening tag, never a child element's
+  // (a child rect/path width= would otherwise be picked up and size/clip the icon wrongly).
+  const svgOpenTag = svgMarkup.match(/<svg\b[^>]*>/i)?.[0] ?? "";
+  // Accept a leading number with an optional unit suffix (px, pt, em, %, ...): SVGs often
+  // declare width="500pt" with no viewBox, and a strict digits-only match would miss it and
+  // fall back to 24x24, clipping the artwork out of view.
+  // (?:^|[^-\w]) so "stroke-width"/"data-width" on the root tag can't be mistaken for width.
+  // A consumed boundary char is used instead of a lookbehind so it parses on Safari < 16.4.
+  const wMatch = svgOpenTag.match(/(?:^|[^-\w])width=["'](\d+(?:\.\d+)?)/);
+  const hMatch = svgOpenTag.match(/(?:^|[^-\w])height=["'](\d+(?:\.\d+)?)/);
   if (wMatch && hMatch) {
     return { width: Number(wMatch[1]), height: Number(hMatch[1]) };
   }
@@ -33,25 +41,42 @@ function extractInnerSvg(raw: string): string {
 export default function CustomSvgModal({
   onInsert,
   onClose,
+  initialSvg = "",
+  initialNormalize = true,
 }: {
-  onInsert: (svgContent: string, width: number, height: number) => void;
+  onInsert: (svgContent: string, width: number, height: number, normalize: boolean) => void;
   onClose: () => void;
+  initialSvg?: string;
+  initialNormalize?: boolean;
 }) {
-  const [rawSvg, setRawSvg] = useState("");
+  const isEditing = initialSvg.trim().length > 0;
+  const [rawSvg, setRawSvg] = useState(initialSvg);
+  const [normalize, setNormalize] = useState(initialNormalize);
+  // Editing an already-normalized SVG: its original colors were stripped to currentColor at
+  // insert time and can't be recovered from the stored content, so unchecking here would be a
+  // no-op lie. Lock the toggle on in that case.
+  const normalizeLocked = isEditing && initialNormalize;
 
   const trimmed = rawSvg.trim();
   const sanitized = trimmed ? sanitizeSvg(extractInnerSvg(trimmed)) : "";
   const { width, height } = trimmed ? extractViewBox(trimmed) : { width: 24, height: 24 };
+  // Mirror what insert stores (edit.tsx) so the preview is true WYSIWYG: normalized -> currentColor.
+  const previewSvg = normalize ? stripSvgColors(sanitized) : sanitized;
   const unsupportedReason = trimmed ? getUnsupportedSvgReason(trimmed, sanitized) : null;
   const isValid = sanitized.length > 0 && !unsupportedReason;
 
   function handleInsert() {
     if (!isValid) return;
-    onInsert(sanitized, width, height);
+    onInsert(sanitized, width, height, normalize);
   }
 
   return (
-    <Modal title="Insert Custom SVG" onRequestClose={onClose} className="ib-svg-modal" size="large">
+    <Modal
+      title={isEditing ? "Edit Custom SVG" : "Insert Custom SVG"}
+      onRequestClose={onClose}
+      className="ib-svg-modal"
+      size="large"
+    >
       <div className="flex min-h-100 flex-1 overflow-hidden">
         <div className="flex flex-1 flex-col border-r border-[#e0e0e0] p-4">
           <label
@@ -81,7 +106,7 @@ export default function CustomSvgModal({
                 width={64}
                 height={64}
                 fill="currentColor"
-                dangerouslySetInnerHTML={{ __html: sanitized }}
+                dangerouslySetInnerHTML={{ __html: previewSvg }}
               />
             ) : (
               <span className="text-[13px] text-[#a0a0a0] italic">
@@ -100,13 +125,27 @@ export default function CustomSvgModal({
           {unsupportedReason}
         </div>
       )}
-      <div className="flex justify-end gap-2 border-t border-[#e0e0e0] px-4 py-3">
-        <Button variant="secondary" onClick={onClose}>
-          Cancel
-        </Button>
-        <Button variant="primary" onClick={handleInsert} disabled={!isValid}>
-          Insert
-        </Button>
+      <div className="flex items-center justify-between gap-2 border-t border-[#e0e0e0] px-4 py-3">
+        <CheckboxControl
+          label="Normalize colors to theme color"
+          help={
+            normalizeLocked
+              ? "This icon's colors were already normalized to the theme color and can't be reverted here. Re-insert the SVG to keep its original colors."
+              : "Lets the block's color controls recolor this icon. Uncheck to keep the SVG's original colors."
+          }
+          checked={normalize}
+          onChange={setNormalize}
+          disabled={normalizeLocked}
+          __nextHasNoMarginBottom
+        />
+        <div className="flex gap-2">
+          <Button variant="secondary" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleInsert} disabled={!isValid}>
+            {isEditing ? "Save" : "Insert"}
+          </Button>
+        </div>
       </div>
     </Modal>
   );

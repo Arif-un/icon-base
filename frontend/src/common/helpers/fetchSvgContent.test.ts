@@ -27,6 +27,14 @@ describe("sanitizeSvg", () => {
     expect(result).not.toContain("<script>");
     expect(result).not.toContain("alert");
   });
+
+  // The "keep original colors" path in the custom-SVG modal stores sanitizeSvg output
+  // WITHOUT normalizing colors, so this must both preserve colors and strip XSS.
+  it("preserves original fill/stroke colors", () => {
+    const result = sanitizeSvg('<path fill="#FF0000" stroke="#0000FF" d="M0 0"/>');
+    expect(result).toContain('fill="#FF0000"');
+    expect(result).toContain('stroke="#0000FF"');
+  });
 });
 
 describe("getSvgCache", () => {

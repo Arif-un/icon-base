@@ -1,5 +1,6 @@
 export interface IconBlockAttributes extends Record<string, unknown> {
   svgContent: string;
+  svgNormalizeColors: boolean;
   iconId: number;
   iconName: string;
   iconFilename: string;
