@@ -23,7 +23,9 @@ this is a wordpress plugin for icon called icon-indexa.
 - If a test fails after a feature is modified, DO NOT auto-update the test to match the new behavior.
 - Instead, ask whether the user wants to change the feature's behavior (then update the test) or whether it is a real bug being introduced (then fix the code).
 - make sure everytime 95%+ test coverage also add critical and edge case tests
+- target branch coverage (every if/else both ways), not just line coverage; aim for full path coverage on non-trivial logic (branches, loops, parsers, security/data paths)
 - add test on bug fix and feature add
+- add test case for everytime any function logic updates, all possible inputs/outputs
 
 ## APP
 - using wp-env docker wp app run on http://localhost:8888/wp-admin/admin.php?page=icon-indexa#/
