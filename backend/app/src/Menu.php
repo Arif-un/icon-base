@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use IconIndexa\Config;
+use IconIndexa\HTTP\Controllers\SettingsController;
 use IconIndexa\Views\Body;
 
 final class Menu
@@ -22,8 +23,11 @@ final class Menu
 
     public static function getSideBarMenu(Body $body)
     {
-        return [
-            'Home' => [
+        $menus = [];
+
+        // Dedicated top-level sidebar menu, gated by the user setting (defaults to shown).
+        if (SettingsController::current()['showSidebarMenu']) {
+            $menus['Home'] = [
                 'type'       => 'menu',
                 'title'      => Config::TITLE,
                 'name'       => Config::TITLE,
@@ -32,7 +36,41 @@ final class Menu
                 'callback'   => [$body, 'render'],
                 'icon'       => self::getMenuIcon(),
                 'position'   => '20',
-            ],
+            ];
+
+            // WP points the top-level menu link at the first submenu's URL (menu-header.php).
+            // Register a hash-less submenu first so clicking the top menu lands on the index
+            // page, not Settings. Its visible row is hidden via CSS (Layout::hideHomeSubmenu)
+            // so the top-level "Icon Indexa" item is not shown twice.
+            $menus['HomeLink'] = [
+                'type'       => 'submenu',
+                'parent'     => Config::SLUG,
+                'name'       => Config::TITLE,
+                'capability' => 'manage_options',
+                'slug'       => Config::SLUG,
+            ];
+
+            $menus['Settings'] = [
+                'type'       => 'submenu',
+                'parent'     => Config::SLUG,
+                'name'       => 'Settings',
+                'capability' => 'manage_options',
+                'slug'       => Config::SLUG . '#/settings',
+            ];
+        }
+
+        // Always expose the plugin under Tools. Registers the page callback so the app stays
+        // reachable even when the dedicated sidebar menu is turned off.
+        $menus['Tools'] = [
+            'type'       => 'submenu_page',
+            'parent'     => 'tools.php',
+            'title'      => Config::TITLE,
+            'name'       => Config::TITLE,
+            'capability' => 'manage_options',
+            'slug'       => Config::SLUG,
+            'callback'   => [$body, 'render'],
         ];
+
+        return $menus;
     }
 }

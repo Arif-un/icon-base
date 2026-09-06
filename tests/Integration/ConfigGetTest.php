@@ -142,6 +142,9 @@ describe('Config::get composite values', function () {
     });
 
     test('SIDE_BAR_MENU returns the admin sidebar menu', function () {
+        // Menu reads the settings option; unset defaults to the sidebar being shown.
+        Functions\when('get_option')->justReturn(false);
+
         expect(Config::get('SIDE_BAR_MENU'))->toHaveKey('Home');
     });
 

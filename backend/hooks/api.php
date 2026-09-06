@@ -8,6 +8,7 @@ use IconIndexa\Deps\BitApps\WPKit\Http\Router\Route;
 use IconIndexa\HTTP\Controllers\IconController;
 use IconIndexa\HTTP\Controllers\IconTypeController;
 use IconIndexa\HTTP\Controllers\LibraryController;
+use IconIndexa\HTTP\Controllers\SettingsController;
 
 Route::group(
     static function (): void {
@@ -15,5 +16,8 @@ Route::group(
 
         Route::get('libraries', [LibraryController::class, 'index']);
         Route::get('icon-types', [IconTypeController::class, 'index']);
+
+        Route::get('settings', [SettingsController::class, 'index']);
+        Route::post('settings', [SettingsController::class, 'update']);
     }
 )->middleware('nonce', 'isAdmin');

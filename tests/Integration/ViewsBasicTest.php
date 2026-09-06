@@ -16,6 +16,11 @@ describe('Body::render', function () {
 });
 
 describe('Menu::getSideBarMenu', function () {
+    beforeEach(function () {
+        // Menu now reads the settings option; unset defaults to the sidebar being shown.
+        Functions\when('get_option')->justReturn(false);
+    });
+
     test('returns a Home menu wired to the Body render callback', function () {
         $body = new Body();
 
