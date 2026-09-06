@@ -31,6 +31,27 @@ describe("stripSvgColors", () => {
     expect(result).toContain("opacity");
   });
 
+  it("preserves gradient url() paint references (fill and stroke attributes)", () => {
+    const result = stripSvgColors(
+      '<path fill="url(#grad)" stroke="url(#grad2)" d="M0 0"/>',
+    );
+    expect(result).toContain('fill="url(#grad)"');
+    expect(result).toContain('stroke="url(#grad2)"');
+    expect(result).not.toContain("currentColor");
+  });
+
+  it("preserves gradient url() paint in the style attribute", () => {
+    const result = stripSvgColors('<path style="fill:url(#grad);opacity:0.5" d="M0 0"/>');
+    expect(result).toContain("url(#grad)");
+    expect(result).toContain("opacity");
+  });
+
+  it("preserves gradient url() stroke paint in the style attribute", () => {
+    const result = stripSvgColors('<path style="stroke:url(#grad);opacity:0.5" d="M0 0"/>');
+    expect(result).toContain("url(#grad)");
+    expect(result).toContain("opacity");
+  });
+
   it("removes XSS vectors via sanitization", () => {
     const result = stripSvgColors('<script>alert(1)</script><path d="M0 0"/>');
     expect(result).not.toContain("<script>");

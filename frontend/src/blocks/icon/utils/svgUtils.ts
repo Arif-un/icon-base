@@ -15,23 +15,28 @@ export function stripSvgColors(svgContent: string): string {
   const svg = div.querySelector("svg");
   if (!svg) return sanitized;
 
+  // Keep paint references (gradients/patterns): url(#id) can't be recolored by currentColor,
+  // and blanking it drops the shape to its default black fill.
+  const keepPaint = (value: string) =>
+    value === "none" || value === "currentColor" || /^url\(/i.test(value.trim());
+
   const elements = svg.querySelectorAll("*");
   for (const el of elements) {
     const fill = el.getAttribute("fill");
-    if (fill && fill !== "none" && fill !== "currentColor") {
+    if (fill && !keepPaint(fill)) {
       el.setAttribute("fill", "currentColor");
     }
 
     const stroke = el.getAttribute("stroke");
-    if (stroke && stroke !== "none" && stroke !== "currentColor") {
+    if (stroke && !keepPaint(stroke)) {
       el.setAttribute("stroke", "currentColor");
     }
 
     const style = el.getAttribute("style");
     if (style) {
       const cleaned = style
-        .replace(/fill\s*:\s*(?!none)[^;]+;?/gi, "")
-        .replace(/stroke\s*:\s*(?!none)[^;]+;?/gi, "")
+        .replace(/fill\s*:\s*(?!none|url\()[^;]+;?/gi, "")
+        .replace(/stroke\s*:\s*(?!none|url\()[^;]+;?/gi, "")
         .trim();
       if (cleaned) {
         el.setAttribute("style", cleaned);
