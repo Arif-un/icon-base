@@ -188,8 +188,8 @@ describe("Icons route — display controls", () => {
 
     const { container } = render(<Icons />);
 
-    // no color applied initially
-    expect(screen.getAllByTestId("icon-render")[0]).toHaveAttribute("data-color", "");
+    // black is the default color
+    expect(screen.getAllByTestId("icon-render")[0]).toHaveAttribute("data-color", "#000000");
 
     fireEvent.click(container.querySelector(".ant-color-picker-trigger")!);
 
