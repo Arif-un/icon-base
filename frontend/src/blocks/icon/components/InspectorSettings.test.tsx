@@ -7,6 +7,17 @@ import type { IconBlockAttributes } from "../types";
 
 const el = React.createElement;
 
+// A control's `label` may be a ReactNode (e.g. Stroke Width wraps its text with a help tooltip).
+// Flatten it to plain text so the mocks can expose a matchable aria-label.
+const labelText = (l: any): string =>
+  typeof l === "string"
+    ? l
+    : Array.isArray(l)
+      ? l.map(labelText).join("")
+      : l?.props?.children !== undefined
+        ? labelText(l.props.children)
+        : "";
+
 // The component destructures window.wp.* at module load, so we override the mocks BEFORE the
 // (dynamic) first import. This gives us callbacks the shared setup mock does not surface
 // (PanelColorGradientSettings onColorChange/onGradientChange), a controllable useSetting palette,
@@ -106,21 +117,24 @@ beforeAll(async () => {
 
   // RangeControl: a range input (number) plus a button that fires `undefined`, to hit the
   // `val !== undefined && ...` short-circuit.
-  wp.components.RangeControl = ({ label, value, onChange }: any) =>
-    el("div", { "data-range": label }, [
+  wp.components.RangeControl = ({ label, value, onChange }: any) => {
+    const text = labelText(label);
+
+    return el("div", { "data-range": text }, [
       el("input", {
         key: "r",
         type: "range",
-        "aria-label": label,
+        "aria-label": text,
         value: value ?? "",
         onChange: (e: any) => onChange?.(Number(e.target.value)),
       }),
       el(
         "button",
-        { key: "u", "aria-label": `${label} undefined`, onClick: () => onChange?.(undefined) },
+        { key: "u", "aria-label": `${text} undefined`, onClick: () => onChange?.(undefined) },
         "u",
       ),
     ]);
+  };
 
   ({ default: InspectorSettings } = await import("./InspectorSettings"));
 });

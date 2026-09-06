@@ -22,6 +22,17 @@ vi.mock("@/common/helpers/fetchSvgContent", () => ({
 // import so the component captures these at module-eval time.
 const el = React.createElement;
 
+// A control's `label` may be a ReactNode (e.g. Stroke wraps its text with a help tooltip).
+// Flatten it to plain text so the mock can expose a matchable aria-label.
+const labelText = (l: any): string =>
+  typeof l === "string"
+    ? l
+    : Array.isArray(l)
+      ? l.map(labelText).join("")
+      : l?.props?.children !== undefined
+        ? labelText(l.props.children)
+        : "";
+
 (window as any).wp.components.SelectControl = ({ label, value, options = [], onChange }: any) =>
   el("div", null, [
     el(
@@ -43,22 +54,25 @@ const el = React.createElement;
     }),
   ]);
 
-(window as any).wp.components.RangeControl = ({ label, value, onChange }: any) =>
-  el("div", null, [
+(window as any).wp.components.RangeControl = ({ label, value, onChange }: any) => {
+  const text = labelText(label);
+
+  return el("div", null, [
     el("input", {
       key: "i",
       type: "range",
-      "aria-label": label,
+      "aria-label": text,
       value: value ?? "",
       onChange: (e: any) => onChange?.(Number(e.target.value)),
     }),
     el("button", {
       key: "u",
       type: "button",
-      "aria-label": `${label} emit-undefined`,
+      "aria-label": `${text} emit-undefined`,
       onClick: () => onChange?.(undefined),
     }),
   ]);
+};
 
 const { default: IconPickerPopover } = await import("./IconPickerPopover");
 

@@ -231,13 +231,19 @@ interface SelectControlProps {
 interface RangeControlProps {
   className?: string;
   help?: string;
-  label?: string;
+  label?: ReactNode;
   max?: number;
   min?: number;
   onChange: (value: number | undefined) => void;
   step?: number;
   value?: number;
   withInputField?: boolean;
+}
+
+interface TooltipProps {
+  children: ReactNode;
+  text?: string;
+  position?: string;
 }
 
 interface ColorPickerProps {
@@ -282,6 +288,7 @@ interface WPComponents {
   Spinner: ComponentType<SpinnerProps>;
   TextControl: ComponentType<TextControlProps>;
   TextareaControl: ComponentType<TextareaControlProps>;
+  Tooltip: ComponentType<TooltipProps>;
   ToolbarButton: ComponentType<ToolbarButtonProps>;
   ToolbarGroup: ComponentType<ToolbarGroupProps>;
   __experimentalUnitControl: ComponentType<UnitControlProps>;
