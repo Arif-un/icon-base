@@ -30,6 +30,12 @@ class WpStubs
         Functions\when('wp_create_nonce')->justReturn('nonce-abc');
         Functions\when('get_option')->justReturn('');
 
+        // Head::createConfigVariable localizes the current user's onboarding state, which
+        // reads user meta. No logged-in user under test, so the config falls back to the
+        // "nothing seen yet" defaults.
+        Functions\when('get_current_user_id')->justReturn(0);
+        Functions\when('get_user_meta')->justReturn('');
+
         global $wp_rewrite;
         $wp_rewrite = new class {
             public $permalink_structure = '/%postname%/';

@@ -1,6 +1,8 @@
 import { QueryClientProvider } from "@tanstack/react-query";
 import clsx from "clsx";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+import { markOnboardingSeen } from "@/common/helpers/onboarding";
 
 import BlockIconPreview from "./components/BlockIconPreview";
 import CustomSvgModal from "./components/CustomSvgModal";
@@ -9,11 +11,13 @@ import IconPickerPopover from "./components/IconPickerPopover";
 import IconPlaceholder from "./components/IconPlaceholder";
 import InspectorSettings from "./components/InspectorSettings";
 import ToolbarControls from "./components/ToolbarControls";
+import WelcomeGuide from "./components/WelcomeGuide";
 import { queryClient } from "./constants";
 import type { IconBlockAttributes, SelectedIconData } from "./types";
 import { getWrapperClasses } from "./utils/blockStyles";
 import { openMediaLibrary } from "./utils/openMediaLibrary";
 import { stripSvgColors } from "./utils/svgUtils";
+import { shouldAutoOpenWelcomeGuide } from "./utils/welcomeGuideState";
 
 const { DropdownMenu, ToolbarGroup } = window.wp.components;
 const { BlockControls } = window.wp.blockEditor;
@@ -48,8 +52,26 @@ function EditInner({
   const [showPopover, setShowPopover] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showCustomSvgModal, setShowCustomSvgModal] = useState(false);
+  const [showWelcomeGuide, setShowWelcomeGuide] = useState(false);
 
   const hasIcon = !!attributes.svgContent;
+
+  // Introduce the block the first time a user actually selects one, rather than on page load,
+  // so the guide never interrupts someone who is editing an unrelated post.
+  useEffect(() => {
+    if (isSelected && shouldAutoOpenWelcomeGuide()) {
+      // Selection is owned by the editor, not by us, so there is no event handler to hang
+      // this off. The latch inside shouldAutoOpenWelcomeGuide makes it fire at most once
+      // per session, so this cannot cascade.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowWelcomeGuide(true);
+    }
+  }, [isSelected]);
+
+  function handleFinishWelcomeGuide() {
+    setShowWelcomeGuide(false);
+    void markOnboardingSeen("editorGuide");
+  }
 
   function handleSelectIcon(data: SelectedIconData) {
     setAttributes({
@@ -104,7 +126,13 @@ function EditInner({
     <div {...blockProps}>
       {hasIcon && (
         <>
-          <InspectorSettings attributes={attributes} setAttributes={setAttributes} />
+          <InspectorSettings
+            attributes={attributes}
+            setAttributes={setAttributes}
+            onShowGuide={() => {
+              setShowWelcomeGuide(true);
+            }}
+          />
           <ToolbarControls
             attributes={attributes}
             setAttributes={setAttributes}
@@ -149,6 +177,9 @@ function EditInner({
           onBrowseIcon={() => setShowPopover(true)}
           onMediaLibrary={handleOpenMediaLibrary}
           onCustomSvg={() => setShowCustomSvgModal(true)}
+          onShowGuide={() => {
+            setShowWelcomeGuide(true);
+          }}
         />
       )}
 
@@ -179,6 +210,8 @@ function EditInner({
           onClose={() => setShowCustomSvgModal(false)}
         />
       )}
+
+      {showWelcomeGuide && <WelcomeGuide onFinish={handleFinishWelcomeGuide} />}
     </div>
   );
 }

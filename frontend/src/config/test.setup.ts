@@ -25,6 +25,7 @@ import React from "react";
   version: "1.0.0",
   lang: "en_US",
   translations: {},
+  onboarding: { adminTour: false, editorGuide: false, version: 1, wizard: false },
 };
 
 // Minimal but functional stand-ins for the @wordpress/* UI primitives the block reads off
@@ -44,6 +45,17 @@ const Modal = ({ children, title, onRequestClose, className }: any) =>
     el("button", { key: "close", "aria-label": "Close", onClick: onRequestClose }, "×"),
     children,
   ]);
+
+// core's Guide, as used by the block's welcome guide: a labelled dialog holding every page
+// plus the finish button. Rendered flat rather than paginated — the tests assert on the
+// copy across all pages and on onFinish, not on core's own next/previous behaviour.
+const Guide = ({ contentLabel, className, finishButtonText, onFinish, pages = [] }: any) =>
+  el(
+    "div",
+    { role: "dialog", "aria-label": contentLabel, className },
+    ...pages.map((page: any, index: number) => el("div", { key: index }, page.image, page.content)),
+    el("button", { key: "finish", onClick: onFinish }, finishButtonText ?? "Finish"),
+  );
 
 const PanelBody = ({ children, title }: any) => el("div", { "data-panel": title }, children);
 
@@ -128,6 +140,7 @@ const LinkControl = ({ value, onChange }: any) =>
   components: {
     Button,
     Modal,
+    Guide,
     PanelBody,
     SelectControl,
     TextControl: textControl("text"),

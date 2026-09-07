@@ -29,13 +29,24 @@ const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => pro
 }
 
 // Minimal ICON_INDEXA_ global so SERVER_VARIABLES references don't throw at runtime
-;(window as any).ICON_INDEXA_ = {
+const serverVariables = {
   nonce: 'storybook-nonce',
   restNonce: 'storybook-rest-nonce',
   apiURL: { base: 'http://localhost:8888/wp-json/IconIndexa/v1', separator: '?' },
   rootURL: 'http://localhost:8888/wp-content/plugins/icon-indexa',
   siteURL: 'http://localhost:8888',
+  newPostURL: 'http://localhost:8888/wp-admin/post-new.php',
+  pluginSlug: 'icon-indexa',
+  routePrefix: 'ICON_INDEXA_',
+  onboarding: { adminTour: false, editorGuide: false, version: 1, wizard: false },
 }
+
+;(window as any).ICON_INDEXA_ = serverVariables
+
+// Storybook's builder does not apply the `define` that rewrites SERVER_VARIABLES to
+// window.ICON_INDEXA_, so the identifier survives into the served module and resolves to
+// undefined. Bind it directly too, the same way test.setup.ts does for Vitest.
+;(globalThis as any).SERVER_VARIABLES = serverVariables
 
 const preview: Preview = {
   parameters: {

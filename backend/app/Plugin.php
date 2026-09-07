@@ -12,6 +12,7 @@ use IconIndexa\Deps\BitApps\WPKit\Http\RequestType;
 use IconIndexa\Deps\BitApps\WPKit\Migration\MigrationHelper;
 use IconIndexa\Deps\BitApps\WPKit\Utils\Capabilities;
 use IconIndexa\HTTP\Middleware\AdminCheckerMiddleware;
+use IconIndexa\HTTP\Middleware\EditorCheckerMiddleware;
 use IconIndexa\HTTP\Middleware\NonceCheckerMiddleware;
 use IconIndexa\Providers\HookProvider;
 use IconIndexa\Providers\InstallerProvider;
@@ -53,8 +54,9 @@ final class Plugin
     public function middlewares()
     {
         return [
-            'nonce'   => NonceCheckerMiddleware::class,
-            'isAdmin' => AdminCheckerMiddleware::class,
+            'nonce'    => NonceCheckerMiddleware::class,
+            'isAdmin'  => AdminCheckerMiddleware::class,
+            'isEditor' => EditorCheckerMiddleware::class,
         ];
     }
 

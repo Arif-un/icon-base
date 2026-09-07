@@ -6,7 +6,12 @@ import IconPlaceholder from "./IconPlaceholder";
 describe("IconPlaceholder", () => {
   it("renders Browse Icon, Media Library and Insert Custom SVG buttons", () => {
     render(
-      <IconPlaceholder onBrowseIcon={vi.fn()} onMediaLibrary={vi.fn()} onCustomSvg={vi.fn()} />,
+      <IconPlaceholder
+        onBrowseIcon={vi.fn()}
+        onMediaLibrary={vi.fn()}
+        onCustomSvg={vi.fn()}
+        onShowGuide={vi.fn()}
+      />,
     );
 
     expect(screen.getByText("Browse Icon")).toBeInTheDocument();
@@ -21,6 +26,7 @@ describe("IconPlaceholder", () => {
         onBrowseIcon={onBrowseIcon}
         onMediaLibrary={vi.fn()}
         onCustomSvg={vi.fn()}
+        onShowGuide={vi.fn()}
       />,
     );
 
@@ -36,6 +42,7 @@ describe("IconPlaceholder", () => {
         onBrowseIcon={vi.fn()}
         onMediaLibrary={onMediaLibrary}
         onCustomSvg={vi.fn()}
+        onShowGuide={vi.fn()}
       />,
     );
 
@@ -47,11 +54,32 @@ describe("IconPlaceholder", () => {
   it("calls onCustomSvg when Insert Custom SVG is clicked", () => {
     const onCustomSvg = vi.fn();
     render(
-      <IconPlaceholder onBrowseIcon={vi.fn()} onMediaLibrary={vi.fn()} onCustomSvg={onCustomSvg} />,
+      <IconPlaceholder
+        onBrowseIcon={vi.fn()}
+        onMediaLibrary={vi.fn()}
+        onCustomSvg={onCustomSvg}
+        onShowGuide={vi.fn()}
+      />,
     );
 
     fireEvent.click(screen.getByText("Insert Custom SVG"));
 
     expect(onCustomSvg).toHaveBeenCalledOnce();
+  });
+
+  it("calls onShowGuide when How it works is clicked", () => {
+    const onShowGuide = vi.fn();
+    render(
+      <IconPlaceholder
+        onBrowseIcon={vi.fn()}
+        onMediaLibrary={vi.fn()}
+        onCustomSvg={vi.fn()}
+        onShowGuide={onShowGuide}
+      />,
+    );
+
+    fireEvent.click(screen.getByText("How it works"));
+
+    expect(onShowGuide).toHaveBeenCalledOnce();
   });
 });

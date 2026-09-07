@@ -87,8 +87,15 @@ export default defineConfig(({ mode }) => {
       ...(!isTest
         ? [
             tanstackRouter({
-              routesDirectory: "./src/routes",
-              generatedRouteTree: "./src/routeTree.gen.ts",
+              // Absolute, not root-relative. These resolved only because this config sets
+              // `root: "frontend"`; any other tool that loads this file (Storybook's
+              // react-vite builder does) resolves them against the repo root instead and
+              // fails scanning a non-existent ./src/routes.
+              routesDirectory: path.resolve(import.meta.dirname, "frontend/src/routes"),
+              generatedRouteTree: path.resolve(
+                import.meta.dirname,
+                "frontend/src/routeTree.gen.ts",
+              ),
             }),
           ]
         : []),

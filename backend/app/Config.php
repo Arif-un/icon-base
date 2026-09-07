@@ -28,6 +28,11 @@ class Config
     // sites rebuild their generated SQLite db from the shipped JSON. See RUNTIME_DB_PATH.
     public const DATA_VERSION = '1.0.0';
 
+    // Onboarding/welcome-wizard revision. Bump to re-show the wizard and guides to every user
+    // after a release that adds features worth re-introducing. Deliberately independent of
+    // self::VERSION, which is not bumped by scripts/release.mjs and has drifted from the header.
+    public const ONBOARDING_VERSION = 1;
+
     public const REQUIRED_PHP_VERSION = '7.4';
 
     public const REQUIRED_WP_VERSION = '5.0';
@@ -156,6 +161,30 @@ class Config
     public static function deleteOption($option)
     {
         return delete_option(self::withPrefix($option));
+    }
+
+    public static function getUserMeta($key, $userId = 0, $default = [])
+    {
+        $userId = $userId ?: get_current_user_id();
+
+        if (!$userId) {
+            return $default;
+        }
+
+        $value = get_user_meta($userId, self::withPrefix($key), true);
+
+        return $value === '' ? $default : $value;
+    }
+
+    public static function updateUserMeta($key, $value, $userId = 0)
+    {
+        $userId = $userId ?: get_current_user_id();
+
+        if (!$userId) {
+            return false;
+        }
+
+        return update_user_meta($userId, self::withPrefix($key), $value);
     }
 
     public static function getEnv($keyName)
