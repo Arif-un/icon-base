@@ -23,20 +23,20 @@ export default function IconPlaceholder({
         <div>
           <div className="text-sm leading-[1.4] font-semibold text-[#1e1e1e]">Icon Indexa</div>
           <div className="text-xs leading-[1.4]">
-            Choose icon from library or pick from media or insert custom SVG
+            {__("Choose icon from library or pick from media or insert custom SVG")}
           </div>
         </div>
       </div>
       <div className="flex w-full flex-col gap-2">
         <div className="mt-1 flex flex-wrap gap-2">
           <Button variant="primary" onClick={onBrowseIcon}>
-            Browse Icon
+            {__("Browse Icon")}
           </Button>
           <Button variant="secondary" onClick={onMediaLibrary}>
-            Media Library
+            {__("Media Library")}
           </Button>
           <Button variant="secondary" onClick={onCustomSvg}>
-            Insert Custom SVG
+            {__("Insert Custom SVG")}
           </Button>
           <Button variant="tertiary" onClick={onShowGuide}>
             {__("How it works")}
