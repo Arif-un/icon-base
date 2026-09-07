@@ -4,6 +4,7 @@ use Brain\Monkey\Functions;
 use IconIndexa\Plugin;
 use IconIndexa\HTTP\Middleware\NonceCheckerMiddleware;
 use IconIndexa\HTTP\Middleware\AdminCheckerMiddleware;
+use IconIndexa\HTTP\Middleware\EditorCheckerMiddleware;
 
 beforeEach(function () {
     // Reset the singleton so load()/instance() start clean each test.
@@ -45,12 +46,13 @@ describe('Plugin::load / instance', function () {
 });
 
 describe('Plugin::middlewares / getMiddleware', function () {
-    test('middlewares maps the nonce and isAdmin aliases', function () {
+    test('middlewares maps the nonce, isAdmin and isEditor aliases', function () {
         $middlewares = (new Plugin())->middlewares();
 
         expect($middlewares)->toBe([
-            'nonce'   => NonceCheckerMiddleware::class,
-            'isAdmin' => AdminCheckerMiddleware::class,
+            'nonce'    => NonceCheckerMiddleware::class,
+            'isAdmin'  => AdminCheckerMiddleware::class,
+            'isEditor' => EditorCheckerMiddleware::class,
         ]);
     });
 
@@ -59,6 +61,7 @@ describe('Plugin::middlewares / getMiddleware', function () {
 
         expect($plugin->getMiddleware('nonce'))->toBeInstanceOf(NonceCheckerMiddleware::class);
         expect($plugin->getMiddleware('isAdmin'))->toBeInstanceOf(AdminCheckerMiddleware::class);
+        expect($plugin->getMiddleware('isEditor'))->toBeInstanceOf(EditorCheckerMiddleware::class);
     });
 
     test('getMiddleware caches and returns the same instance', function () {

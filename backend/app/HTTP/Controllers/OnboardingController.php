@@ -15,9 +15,10 @@ class OnboardingController
     /**
      * Persist which onboarding surfaces the current user has seen or dismissed.
      *
-     * Registered inside the guarded route group in backend/hooks/api.php, so nonce
-     * verification (NonceCheckerMiddleware) and the manage_options capability check
-     * (AdminCheckerMiddleware) both run before this method.
+     * Registered in backend/hooks/api.php behind nonce verification
+     * (NonceCheckerMiddleware) and an edit_posts check (EditorCheckerMiddleware) rather
+     * than the admin group: the block editor guide is shown to anyone who can edit posts,
+     * and this only ever writes the calling user's own meta.
      */
     public function update(Request $request)
     {
