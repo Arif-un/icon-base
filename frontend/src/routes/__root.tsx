@@ -3,13 +3,11 @@ import { Tooltip } from "antd";
 import { useEffect } from "react";
 import { FiSettings } from "react-icons/fi";
 
-import { __ } from "../common/helpers/i18nWrap";
 import { syncWpBackground } from "../common/helpers/syncWpBackground";
 import { DevtoolsPortal } from "../components/DevtoolsPortal";
 import Logo from "../components/Logo";
 import AdminTour from "../components/onboarding/AdminTour";
 import { OnboardingProvider } from "../components/onboarding/OnboardingProvider";
-import { TOUR_ANCHOR } from "../components/onboarding/tourSteps";
 import { useOnboarding } from "../components/onboarding/useOnboarding";
 import WelcomeWizard from "../components/onboarding/WelcomeWizard";
 
