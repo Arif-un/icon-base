@@ -9,6 +9,7 @@ import Logo from "@/components/Logo";
 
 import type { SelectedIconData } from "../types";
 import IconGrid from "./IconGrid";
+import { strokeLabel } from "./StrokeLabel";
 
 const { Modal, Button, SearchControl, SelectControl, RangeControl, ColorPicker, Spinner } =
   window.wp.components;
@@ -154,7 +155,7 @@ export default function IconPickerModal({
               </div>
               <div className="ib-sidebar-range">
                 <RangeControl
-                  label="Stroke"
+                  label={strokeLabel()}
                   value={previewStrokeWidth}
                   onChange={(val: number | undefined) =>
                     val !== undefined && setPreviewStrokeWidth(val)

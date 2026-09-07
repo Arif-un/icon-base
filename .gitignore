@@ -21,6 +21,7 @@ bit-pi.zip
 bit-pi/
 .env
 .vite/
+.vitest/
 build
 /test-results/
 /playwright-report/
@@ -45,3 +46,7 @@ backend/data/*.db
 # Release artifact, lives outside git history. Anchored so it never matches icon-indexa.php.
 /icon-indexa/
 .svn/
+/coverage
+
+# ServBay per-project PHP pin (machine-specific, requires ServBay + PHP 8.4 installed)
+.servbay.config

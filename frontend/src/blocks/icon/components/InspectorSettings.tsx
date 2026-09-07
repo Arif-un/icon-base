@@ -4,6 +4,7 @@ import { __ } from "@/common/helpers/i18nWrap";
 
 import type { IconBlockAttributes } from "../types";
 import { svgHasStrokes } from "../utils/svgUtils";
+import { strokeLabel } from "./StrokeLabel";
 
 const {
   PanelBody,
@@ -151,7 +152,7 @@ export default function InspectorSettings({
 
         {hasStrokes && (
           <RangeControl
-            label="Stroke Width"
+            label={strokeLabel("Stroke Width")}
             value={strokeWidth}
             onChange={(val: number | undefined) =>
               val !== undefined && setAttributes({ strokeWidth: val })

@@ -1,7 +1,7 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
-import { Button } from "antd";
+import { Link, Outlet, createRootRoute } from "@tanstack/react-router";
+import { Tooltip } from "antd";
 import { useEffect } from "react";
-import { FiHelpCircle } from "react-icons/fi";
+import { FiSettings } from "react-icons/fi";
 
 import { __ } from "../common/helpers/i18nWrap";
 import { syncWpBackground } from "../common/helpers/syncWpBackground";
@@ -38,15 +38,16 @@ function Shell() {
         <Logo size={28} />
         <h3 className="m-0 text-lg font-semibold">Icon Indexa</h3>
 
-        <Button
-          data-tour={TOUR_ANCHOR.tourButton}
-          className="ml-auto"
-          size="small"
-          icon={<FiHelpCircle />}
-          onClick={startTour}
-        >
-          {__("Take a tour")}
-        </Button>
+        <Tooltip title="Settings">
+          <Link
+            to="/settings"
+            aria-label="Settings"
+            className="ml-auto flex items-center text-gray-500 hover:text-gray-900"
+            activeProps={{ className: "ml-auto flex items-center text-gray-900" }}
+          >
+            <FiSettings size={18} />
+          </Link>
+        </Tooltip>
       </header>
 
       <main className="flex-1">

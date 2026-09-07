@@ -8,6 +8,7 @@ import { useLibraries } from "@/common/hooks/useLibraries";
 
 import type { SelectedIconData } from "../types";
 import IconGrid from "./IconGrid";
+import { strokeLabel } from "./StrokeLabel";
 
 const { SearchControl, SelectControl, RangeControl, ColorPicker, Button, Spinner } =
   window.wp.components;
@@ -152,7 +153,7 @@ export default function IconPickerPanel(props: IconPickerPanelProps) {
                 withInputField={false}
               />
               <RangeControl
-                label="Stroke"
+                label={strokeLabel()}
                 value={strokeWidth}
                 onChange={(val) => val !== undefined && onStrokeWidthChange(val)}
                 min={0.5}

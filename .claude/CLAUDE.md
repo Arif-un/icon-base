@@ -22,3 +22,9 @@ this is a wordpress plugin for icon called icon-indexa.
 - Test cases encode intentional decisions for features and bug fixes.
 - If a test fails after a feature is modified, DO NOT auto-update the test to match the new behavior.
 - Instead, ask whether the user wants to change the feature's behavior (then update the test) or whether it is a real bug being introduced (then fix the code).
+- make sure everytime 95%+ test coverage also add critical and edge case tests
+- add test on bug fix and feature add
+
+## APP
+- using wp-env docker wp app run on http://localhost:8888/wp-admin/admin.php?page=icon-indexa#/
+- user: admin, password: admin

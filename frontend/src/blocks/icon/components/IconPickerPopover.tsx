@@ -5,6 +5,7 @@ import { useLibraries } from "@/common/hooks/useLibraries";
 
 import type { SelectedIconData } from "../types";
 import IconPickerPanel from "./IconPickerPanel";
+import { strokeLabel } from "./StrokeLabel";
 
 const { Button, ColorPicker, Popover, RangeControl, SelectControl } = window.wp.components;
 
@@ -146,7 +147,7 @@ export default function IconPickerPopover({
                 withInputField={false}
               />
               <RangeControl
-                label="Stroke"
+                label={strokeLabel()}
                 value={previewStrokeWidth}
                 onChange={(val) => val !== undefined && setPreviewStrokeWidth(val)}
                 min={0.5}

@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ColorPicker, Input, Pagination, Select, Slider, Spin } from "antd";
+import { ColorPicker, Input, Pagination, Select, Slider, Spin, Tooltip } from "antd";
 import type { Color } from "antd/es/color-picker";
 import { useMemo, useState } from "react";
-import { FiSearch } from "react-icons/fi";
+import { FiInfo, FiSearch } from "react-icons/fi";
 
+import { STROKE_HELP } from "@/blocks/icon/components/StrokeLabel";
 import { useDebounce } from "@/common/hooks/useDebounce";
 import { useIcons } from "@/common/hooks/useIcons";
 import { useIconTypes } from "@/common/hooks/useIconTypes";
@@ -24,7 +25,7 @@ function Icons() {
   const [typeIds, setTypeIds] = useState<number[]>([]);
   const [iconSize, setIconSize] = useState(32);
   const [strokeWidth, setStrokeWidth] = useState(1.5);
-  const [iconColor, setIconColor] = useState<string | undefined>(undefined);
+  const [iconColor, setIconColor] = useState<string | undefined>("#000000");
 
   const debouncedSearch = useDebounce(searchInput, 300);
 
@@ -123,6 +124,9 @@ function Icons() {
           </span>
           <span className="flex items-center gap-1 text-xs text-gray-500">
             Stroke
+            <Tooltip title={STROKE_HELP}>
+              <FiInfo className="cursor-help" aria-label={STROKE_HELP} />
+            </Tooltip>
             <Slider
               min={0.5}
               max={4}
