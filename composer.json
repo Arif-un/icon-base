@@ -42,7 +42,8 @@
     "test": "./vendor/bin/pest",
     "test:unit": "./vendor/bin/pest --testsuite=Unit",
     "test:integration": "./vendor/bin/pest --testsuite=Integration",
-    "test:coverage": "./vendor/bin/pest --coverage"
+    "test:coverage": "./vendor/bin/pest --coverage",
+    "test:tia": "node scripts/test-php-coverage.mjs --tia"
   },
   "config": {
     "allow-plugins": {

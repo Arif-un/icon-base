@@ -108,7 +108,11 @@ if (!hasDriver) {
   }
   phpArgs.unshift("-d", `zend_extension=${so}`);
 }
-phpArgs.push("./vendor/bin/pest", "--coverage", ...process.argv.slice(2));
+// TIA (--tia) needs the coverage driver loaded but not a coverage report, so skip forcing
+// --coverage when the caller drives its own mode; every other run gets coverage as before.
+const passthrough = process.argv.slice(2);
+const forceCoverage = !passthrough.includes("--tia");
+phpArgs.push("./vendor/bin/pest", ...(forceCoverage ? ["--coverage"] : []), ...passthrough);
 
 const result = spawnSync(PHP, phpArgs, {
   stdio: "inherit",
