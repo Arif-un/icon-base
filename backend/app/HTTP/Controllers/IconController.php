@@ -7,7 +7,6 @@ if (!defined('ABSPATH')) {
 }
 
 use IconIndexa\Deps\BitApps\WPKit\Http\Request\Request;
-use IconIndexa\Deps\BitApps\WPKit\Http\Response;
 use IconIndexa\Models\Icons;
 
 class IconController
@@ -21,13 +20,15 @@ class IconController
         $libraryIds = self::parseIds((string) $request->get('library_ids', ''));
         $typeIds = self::parseIds((string) $request->get('type_ids', ''));
 
-        if (mb_strlen($search) >= Icons::MIN_SEARCH_LENGTH) {
-            $result = Icons::search($search, $page, $perPage, $libraryIds, $typeIds);
-        } else {
-            $result = Icons::getPaginated($page, $perPage, $libraryIds, $typeIds);
-        }
+        return DbResponse::guard(
+            static function () use ($search, $page, $perPage, $libraryIds, $typeIds) {
+                if (mb_strlen($search) >= Icons::MIN_SEARCH_LENGTH) {
+                    return Icons::search($search, $page, $perPage, $libraryIds, $typeIds);
+                }
 
-        return Response::success($result);
+                return Icons::getPaginated($page, $perPage, $libraryIds, $typeIds);
+            }
+        );
     }
 
     private static function parseIds(string $raw): array

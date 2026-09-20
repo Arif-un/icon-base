@@ -24,7 +24,7 @@ final class HtmlTagModifier
         $typeAttribute = 'type="module"';
         $keys          = ['-vite-client-helper-MODULE-js', '-vite-client-MODULE-js', '-index-MODULE-js'];
 
-        if (Config::getEnv('DEV')) {
+        if (Config::isDevMode()) {
             foreach ($keys as $key) {
                 $handle = 'id="' . $slug . $key . '"';
                 if (strpos($html, $handle) !== false) {

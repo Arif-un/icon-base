@@ -98,12 +98,16 @@ class Config
                 return Menu::getSideBarMenu(new Body());
 
             case 'BUILD_CODE_NAME':
-                if (self::getEnv('DEV')) {
+                if (self::isDevMode()) {
                     return '';
                 }
 
+                $codeNameFile = self::get('ROOT_DIR') . self::ASSETS_FOLDER . '/build-code-name.txt';
+
+                // Guard + trim: a missing file makes file_get_contents return false (asset URLs
+                // become main-.js/404) and a trailing newline would corrupt the enqueued URL.
                 // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin file read, not a remote URL.
-                return file_get_contents(self::get('ROOT_DIR') . self::ASSETS_FOLDER . '/build-code-name.txt');
+                return is_readable($codeNameFile) ? trim((string) file_get_contents($codeNameFile)) : '';
 
             case 'WP_DB_PREFIX':
                 global $wpdb;
@@ -161,5 +165,18 @@ class Config
     public static function getEnv($keyName)
     {
         return isset($_ENV[Config::VAR_PREFIX . $keyName]) ? sanitize_text_field($_ENV[Config::VAR_PREFIX . $keyName]) : false;
+    }
+
+    /**
+     * Dev mode (Vite HMR from a remote DEV_URL, see Head.php) is honored only on a non-production
+     * environment, so a stray or attacker-written .env on a live site can't flip the plugin into
+     * loading scripts from an attacker-controlled origin. wp_get_environment_type() is WP 5.5+; on
+     * an older floor (or if missing) we fail safe to production and dev mode stays off.
+     */
+    public static function isDevMode(): bool
+    {
+        return (bool) self::getEnv('DEV')
+            && function_exists('wp_get_environment_type')
+            && wp_get_environment_type() !== 'production';
     }
 }

@@ -10,7 +10,7 @@ use IconIndexa\Config;
 
 // This plugin ships a static, public icon dataset as backend/data/ib.json (source of truth).
 // At runtime it generates a SQLite database from that JSON into the writable uploads directory
-// (wp-content/uploads/icon-indexa/ib.db) — it never ships a binary db and never writes inside the
+// (wp-content/uploads/icon-indexa/ib.db) - it never ships a binary db and never writes inside the
 // plugin directory. The db is rebuilt whenever Config::DATA_VERSION is newer than the stored
 // data_version option. The dataset holds only public icon metadata; no user or sensitive data.
 // $wpdb is MySQL-only and cannot read SQLite, hence PDO.
@@ -24,13 +24,20 @@ class SQLiteDB
 
     private function __construct()
     {
+        // WordPress core only requires the mysqli driver, so pdo_sqlite is often absent on
+        // shared/locked-down hosts. Fail with a clear, catchable message instead of a cryptic
+        // "could not find driver" PDOException deep in the constructor.
+        if (!self::isSupported()) {
+            throw new \RuntimeException('Icon Indexa: the PHP pdo_sqlite extension is required but not installed.');
+        }
+
         $dbDir  = Config::get('RUNTIME_DB_DIR');
         $dbPath = Config::get('RUNTIME_DB_PATH');
 
         $this->prepareDir($dbDir);
 
         if ($this->needsRebuild($dbPath)) {
-            $this->rebuild($dbPath);
+            $this->rebuildLocked($dbDir, $dbPath);
         }
 
         $this->pdo = new \PDO(
@@ -59,6 +66,59 @@ class SQLiteDB
     }
 
     /**
+     * Serialize rebuilds across concurrent requests with an exclusive flock, so two workers don't
+     * both delete the live db's -wal/-shm sidecars and rename over it at once (a transient 500, and
+     * on Windows a rename-over-open-file failure). After acquiring the lock the waiter re-checks
+     * needsRebuild (double-checked locking): the holder that just finished has bumped the
+     * data_version option, so the waiter sees the fresh db and does nothing.
+     *
+     * The data_version option is autoloaded, so needsRebuild() reads it from the request's primed `alloptions`
+     * cache. Under the default non-persistent object cache the holder's update_option can't
+     * invalidate a waiter's already-loaded cache, so without the bust below every concurrent waiter
+     * would re-read its stale value and rebuild redundantly over the just-installed db. Drop the
+     * alloptions cache entry inside the lock so the re-check re-queries the db and the double-check
+     * actually short-circuits.
+     *
+     * ponytail: single-host advisory flock; fine for one server. Multi-host NFS flock is
+     * unreliable, but the rename stays atomic there so the worst case is the same transient 500
+     * this path already had - not corruption or data loss (the db regenerates from ib.json).
+     */
+    private function rebuildLocked(string $dbDir, string $dbPath): void
+    {
+        $lockPath = $dbDir . DIRECTORY_SEPARATOR . '.rebuild.lock';
+
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- advisory lock file in the writable uploads dir, not a remote resource.
+        $handle = @fopen($lockPath, 'c');
+
+        if ($handle === false) {
+            // Can't create the lock file (e.g. read-only dir); fall back to an unlocked rebuild
+            // rather than failing outright - no worse than the pre-lock behavior.
+            $this->rebuild($dbPath);
+
+            return;
+        }
+
+        try {
+            flock($handle, LOCK_EX);
+
+            // A concurrent worker may have rebuilt while we waited for the lock. Its bumped
+            // data_version is committed to the db but not to this request's primed alloptions cache
+            // (non-persistent object cache can't invalidate cross-process), so drop that cache entry
+            // and force needsRebuild() to re-read the fresh value; otherwise the double-check never
+            // short-circuits and we rebuild over the live db.
+            wp_cache_delete('alloptions', 'options');
+
+            if ($this->needsRebuild($dbPath)) {
+                $this->rebuild($dbPath);
+            }
+        } finally {
+            flock($handle, LOCK_UN);
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose -- closing the local lock file handle.
+            fclose($handle);
+        }
+    }
+
+    /**
      * Build a fresh SQLite db from the shipped JSON into a temp file, then atomically move it
      * into place. Atomic rename guarantees concurrent readers never see a half-built database.
      */
@@ -84,12 +144,21 @@ class SQLiteDB
         try {
             $this->createSchema($builder);
             $this->importJson($builder, $source);
-            $this->createFts($builder);
         } catch (\Throwable $e) {
             $builder = null;
             $this->deleteFile($tmpPath);
 
             throw $e;
+        }
+
+        // FTS5 is a compile-time SQLite module and is missing on some builds. Treat it as
+        // optional: if the index cannot be created, the db is still valid and Icons::search()
+        // catches the resulting "no such table: icons_fts" and falls back to fuzzy matching.
+        try {
+            $this->createFts($builder);
+        } catch (\Throwable $e) {
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            error_log('Icon Indexa: FTS5 unavailable, search will use fuzzy fallback: ' . $e->getMessage());
         }
 
         // Close the builder handle before renaming/removing files.
@@ -105,6 +174,11 @@ class SQLiteDB
 
             throw new \RuntimeException('Icon Indexa: failed to install generated database.');
         }
+
+        // Tighten perms so the generated db is not world-readable on shared/multi-tenant hosts
+        // (the default umask often leaves it 0644). Best-effort; not fatal if the host rejects it.
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod -- WP_Filesystem has no chmod on a raw path; this tightens perms on a file just written outside the VFS abstraction
+        @chmod($dbPath, 0640);
 
         Config::updateOption('data_version', Config::DATA_VERSION, true);
     }
@@ -242,13 +316,17 @@ class SQLiteDB
         $index = $dir . DIRECTORY_SEPARATOR . 'index.php';
 
         if (!file_exists($index)) {
-            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- writable uploads dir, not the plugin dir.
-            @file_put_contents($index, "<?php\n// Silence is golden.\n");
+            $this->writeGuardFile($index, "<?php\n// Silence is golden.\n");
         }
 
         $htaccess = $dir . DIRECTORY_SEPARATOR . '.htaccess';
 
         if (!file_exists($htaccess)) {
+            // Apache-only: .htaccess is ignored by nginx/Caddy/IIS, so the generated db can be
+            // downloaded directly there. Accepted: the db holds only the public, shipped icon
+            // metadata (name/tags/filename) that also lives in the committed ib.json and the
+            // plugin zip, so no user or secret data is exposed. index.php blocks directory
+            // listing on every stack.
             $rules = <<<'HTACCESS'
                 <IfModule mod_authz_core.c>
                 Require all denied
@@ -258,8 +336,21 @@ class SQLiteDB
                 Deny from all
                 </IfModule>
                 HTACCESS;
-            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- writable uploads dir, not the plugin dir.
-            @file_put_contents($htaccess, $rules);
+            $this->writeGuardFile($htaccess, $rules);
+        }
+    }
+
+    /**
+     * Write a directory-protection file (index.php / .htaccess), surfacing a silent failure. The
+     * db is still served without the guard if this fails, so log it instead of swallowing it so an
+     * unprotected uploads dir is diagnosable rather than invisible.
+     */
+    private function writeGuardFile(string $path, string $contents): void
+    {
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- writable uploads dir, not the plugin dir.
+        if (@file_put_contents($path, $contents) === false) {
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            error_log('Icon Indexa: could not write protection file ' . $path);
         }
     }
 
@@ -268,6 +359,15 @@ class SQLiteDB
         if (file_exists($path)) {
             wp_delete_file($path);
         }
+    }
+
+    /**
+     * Whether this host can run the plugin's data layer. WordPress core only requires mysqli, so
+     * pdo_sqlite is not guaranteed to be present.
+     */
+    public static function isSupported(): bool
+    {
+        return extension_loaded('pdo_sqlite') && \in_array('sqlite', \PDO::getAvailableDrivers(), true);
     }
 
     public static function instance(): self

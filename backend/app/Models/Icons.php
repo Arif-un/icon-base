@@ -193,7 +193,9 @@ class Icons
             return 100;
         }
 
-        if (str_starts_with($token, $query)) {
+        // strncmp, not str_starts_with (PHP 8.0+): the plugin declares Requires PHP 7.4 and ships
+        // composer --no-dev (no symfony/polyfill-php80), so str_starts_with would fatal on 7.x.
+        if (strncmp($token, $query, \strlen($query)) === 0) {
             return 90;
         }
 

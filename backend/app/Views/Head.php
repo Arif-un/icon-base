@@ -23,7 +23,7 @@ class Head
 
         wp_enqueue_style($slug . '-font', Config::get('ASSET_URI') . '/fonts/inter.css', [], $version);
 
-        if (Config::getEnv('DEV')) {
+        if (Config::isDevMode()) {
             // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.
             wp_enqueue_script($slug . '-vite-client-helper-MODULE', Config::getEnv('DEV_URL') . '/src/config/devHotModule.js', [], null, true);
             // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- Dev-only HMR module served by Vite; version query would break the dev server URL.

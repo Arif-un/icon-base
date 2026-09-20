@@ -19,6 +19,7 @@ use IconIndexa\Views\BlockProvider;
 use IconIndexa\Views\HtmlTagModifier;
 use IconIndexa\Views\Layout;
 use IconIndexa\Views\PluginPageActions;
+use IconIndexa\Views\SqliteNotice;
 
 final class Plugin
 {
@@ -80,6 +81,7 @@ final class Plugin
         if (RequestType::is('admin')) {
             new Layout();
             new HtmlTagModifier();
+            new SqliteNotice();
         }
 
         new BlockProvider();
