@@ -30,6 +30,13 @@ this is a wordpress plugin for icon called icon-indexa.
 - add test on bug fix and feature add
 - add test case for everytime any function logic updates, all possible inputs/outputs
 
+### Browser/e2e selectors (Pest browser suite, tests/Browser)
+- target OUR components via `data-testid`, never raw CSS classes, antd/wp.components internals, or visible text. Refactor-safe and pierces the shadow DOM.
+- add the `data-testid` to the source component when a test needs a hook; do not couple tests to styling classes.
+- exceptions (do NOT add data-testid, use the native selector):
+  - WP-core DOM: block inserter, `iframe[name="editor-canvas"]`, wp-login, etc. Not ours to change; targeted by core selectors.
+  - Frontend block output (static-save public HTML in FrontendRenderTest/SanitizerTest): this is shipped post content. NEVER inject test attrs there. Assert its real class/attribute contract (`.wp-block-icon-shelf-icon`, `svg[role="img"]`, `viewBox`, sanitizer output) instead.
+
 
 ## APP
 - using wp-env docker wp app run on http://localhost:8888/wp-admin/admin.php?page=icon-indexa#/

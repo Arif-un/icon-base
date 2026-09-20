@@ -102,15 +102,17 @@ export default function IconPickerPanel(props: IconPickerPanelProps) {
   return (
     <div className={clsx("flex flex-col overflow-hidden", compact && "max-h-110", className)}>
       <div className="flex shrink-0 flex-col gap-2 border-b border-[#e0e0e0] px-4 py-3">
-        <SearchControl
-          value={searchInput}
-          onChange={(value: string) => {
-            setSearchInput(value);
-            setPage(1);
-          }}
-          placeholder="Search icons..."
-          className="ib-search"
-        />
+        <div data-testid="icon-picker-search">
+          <SearchControl
+            value={searchInput}
+            onChange={(value: string) => {
+              setSearchInput(value);
+              setPage(1);
+            }}
+            placeholder="Search icons..."
+            className="ib-search"
+          />
+        </div>
 
         {!hasExternalFilters && (
           <>

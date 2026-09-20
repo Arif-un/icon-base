@@ -75,7 +75,7 @@ function Icons() {
   return (
     <div>
       <div className="mx-4 mb-4 ml-10 flex flex-wrap items-center gap-3">
-        <div data-tour={TOUR_ANCHOR.search}>
+        <div data-tour={TOUR_ANCHOR.search} data-testid="icon-search">
           <Input
             prefix={<FiSearch />}
             placeholder="Search icons..."
@@ -88,7 +88,7 @@ function Icons() {
             className="w-64!"
           />
         </div>
-        <div data-tour={TOUR_ANCHOR.libraryFilter}>
+        <div data-tour={TOUR_ANCHOR.libraryFilter} data-testid="icon-library-filter">
           <Select
             mode="multiple"
             placeholder="All Libraries"
@@ -102,7 +102,7 @@ function Icons() {
             options={libraryOptions}
           />
         </div>
-        <div data-tour={TOUR_ANCHOR.typeFilter}>
+        <div data-tour={TOUR_ANCHOR.typeFilter} data-testid="icon-type-filter">
           <Select
             mode="multiple"
             placeholder="All Types"
@@ -151,7 +151,9 @@ function Icons() {
       {isLoading && <Spin />}
       {error ? <p>Failed to load icons</p> : null}
       {icons?.items.length === 0 && !isLoading ? (
-        <p className="py-8 text-center text-gray-400">No icons found</p>
+        <p data-testid="icon-empty" className="py-8 text-center text-gray-400">
+          No icons found
+        </p>
       ) : (
         <div className="mx-2 flex flex-wrap justify-center gap-1">
           {icons?.items.map(
@@ -163,6 +165,7 @@ function Icons() {
               return (
                 <div
                   key={icon.id}
+                  data-testid="icon-grid-item"
                   className="flex flex-col items-center justify-center gap-1 rounded-md border border-solid border-transparent p-3 hover:border-slate-300 hover:bg-slate-100"
                   style={{ width: Math.max(80, iconSize + 48) }}
                   title={icon.name}
@@ -186,7 +189,7 @@ function Icons() {
         </div>
       )}
       {icons && icons.total > PAGE_SIZE && (
-        <div className="mt-4 flex justify-center">
+        <div data-testid="icon-pagination" className="mt-4 flex justify-center">
           <Pagination
             current={icons.page}
             pageSize={PAGE_SIZE}

@@ -103,6 +103,7 @@ export default function CustomSvgModal({
           </label>
           <textarea
             id="icon-base-svg-input"
+            data-testid="custom-svg-input"
             className="box-border w-full flex-1 resize-none rounded border border-[#e0e0e0] p-3 font-mono text-[13px] leading-normal focus:border-[#007cba] focus:ring-1 focus:ring-[#007cba] focus:outline-none"
             value={rawSvg}
             onChange={(e) => setRawSvg(e.target.value)}
@@ -165,7 +166,12 @@ export default function CustomSvgModal({
           <Button variant="secondary" onClick={onClose}>
             {__("Cancel")}
           </Button>
-          <Button variant="primary" onClick={handleInsert} disabled={!isValid}>
+          <Button
+            data-testid="custom-svg-insert"
+            variant="primary"
+            onClick={handleInsert}
+            disabled={!isValid}
+          >
             {isEditing ? __("Save") : __("Insert")}
           </Button>
         </div>

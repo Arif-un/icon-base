@@ -51,3 +51,13 @@ backend/data/*.db
 # ServBay per-project PHP pin (machine-specific, requires ServBay + PHP 8.4 installed)
 .servbay.config
 /.stryker-tmp
+
+# Pest browser test failure screenshots
+tests/Browser/Screenshots/
+
+# Runtime guard files SQLiteDB writes into the data dir; they leak to the repo root
+# under wp-env (data dir == plugin dir there). Never commit: root .htaccess denies all
+# plugin asset access (403s), and .rebuild.lock is a runtime mutex.
+/.rebuild.lock
+/.htaccess
+/index.php

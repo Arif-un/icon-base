@@ -85,6 +85,7 @@ export default function IconPickerPopover({
           </div>
           <div className="flex shrink-0 items-center gap-0.5">
             <Button
+              data-testid="icon-picker-select"
               variant="primary"
               size="compact"
               disabled={!pendingIcon}

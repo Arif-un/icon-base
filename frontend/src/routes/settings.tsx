@@ -21,11 +21,16 @@ function SettingsPage() {
           const key = "settings-saved";
           notify.success({
             key,
-            message: "Setting saved",
+            title: "Setting saved",
             description: "Reload the page for the sidebar menu to update.",
             duration: 0,
-            btn: (
-              <Button type="primary" size="small" onClick={() => window.location.reload()}>
+            actions: (
+              <Button
+                data-testid="settings-saved-reload"
+                type="primary"
+                size="small"
+                onClick={() => window.location.reload()}
+              >
                 Reload
               </Button>
             ),
@@ -42,7 +47,7 @@ function SettingsPage() {
   if (error || !settings) return <p className="m-10">Failed to load settings</p>;
 
   return (
-    <div className="mx-10 my-6 max-w-2xl">
+    <div data-testid="settings-page" className="mx-10 my-6 max-w-2xl">
       {notifyContext}
       <h2 className="mb-4 text-xl font-semibold">Settings</h2>
 
@@ -55,6 +60,7 @@ function SettingsPage() {
           </p>
         </div>
         <Switch
+          data-testid="settings-sidebar-toggle"
           checked={settings.showSidebarMenu}
           loading={updateSettings.isPending}
           onChange={handleToggle}

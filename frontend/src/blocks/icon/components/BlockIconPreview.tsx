@@ -26,6 +26,7 @@ export default function BlockIconPreview({ attributes }: { attributes: IconBlock
   return (
     <div className={containerClasses} style={containerStyles}>
       <svg
+        data-testid="block-icon-preview"
         className="icon-base-preview"
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${String(iconWidth)} ${String(iconHeight)}`}

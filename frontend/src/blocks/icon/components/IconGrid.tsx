@@ -71,7 +71,10 @@ export default function IconGrid({
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-0.5">
+    <div
+      data-testid="icon-picker-grid"
+      className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-0.5"
+    >
       {icons.map((icon) => {
         const lib = libraryMap[icon.library_id];
         const isSelected = icon.id === selectedIconId;
@@ -79,6 +82,7 @@ export default function IconGrid({
         return (
           <button
             key={icon.id}
+            data-testid="icon-picker-item"
             type="button"
             className={clsx(
               "flex flex-col items-center justify-center gap-1 p-2 rounded bg-transparent cursor-pointer transition-colors duration-100",

@@ -15,7 +15,10 @@ export default function IconPlaceholder({
   onShowGuide: () => void;
 }) {
   return (
-    <div className="box-border flex w-full flex-col items-center gap-2 border px-4 py-3">
+    <div
+      data-testid="block-placeholder"
+      className="box-border flex w-full flex-col items-center gap-2 border px-4 py-3"
+    >
       <div className="flex w-full gap-2">
         <div className="mt-1">
           <Logo size={32} />
@@ -29,13 +32,13 @@ export default function IconPlaceholder({
       </div>
       <div className="flex w-full flex-col gap-2">
         <div className="mt-1 flex flex-wrap gap-2">
-          <Button variant="primary" onClick={onBrowseIcon}>
+          <Button data-testid="block-browse-icon" variant="primary" onClick={onBrowseIcon}>
             Browse Icon
           </Button>
-          <Button variant="secondary" onClick={onMediaLibrary}>
+          <Button data-testid="block-media-library" variant="secondary" onClick={onMediaLibrary}>
             Media Library
           </Button>
-          <Button variant="secondary" onClick={onCustomSvg}>
+          <Button data-testid="block-insert-custom-svg" variant="secondary" onClick={onCustomSvg}>
             Insert Custom SVG
           </Button>
           <Button variant="tertiary" onClick={onShowGuide}>
