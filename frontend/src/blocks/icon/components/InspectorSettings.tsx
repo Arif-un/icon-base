@@ -48,9 +48,11 @@ const ROTATION_OPTIONS = [
 export default function InspectorSettings({
   attributes,
   setAttributes,
+  onShowGuide,
 }: {
   attributes: IconBlockAttributes;
   setAttributes: (attrs: Partial<IconBlockAttributes>) => void;
+  onShowGuide: () => void;
 }) {
   const {
     width,
@@ -262,6 +264,12 @@ export default function InspectorSettings({
           value={title}
           onChange={(val: string) => setAttributes({ title: val })}
         />
+      </PanelBody>
+
+      <PanelBody title={__("Help")} initialOpen={false}>
+        <Button variant="secondary" onClick={onShowGuide}>
+          {__("Show welcome guide")}
+        </Button>
       </PanelBody>
     </InspectorControls>
   );

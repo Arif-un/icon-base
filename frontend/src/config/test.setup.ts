@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
 import "@testing-library/jest-dom/vitest";
 import React from "react";
 
@@ -25,12 +25,17 @@ import React from "react";
   version: "1.0.0",
   lang: "en_US",
   translations: {},
+  loggedInUserName: "admin",
+  newPostURL: "https://example.test/wp-admin/post-new.php",
+  onboarding: { adminTour: false, editorGuide: false, version: 1, wizard: false },
+  settings: "",
 };
 
 // Minimal but functional stand-ins for the @wordpress/* UI primitives the block reads off
 // window.wp at runtime. Each mock forwards the props (onClick/onChange/value/label) that tests
 // interact with, following the WordPress onChange conventions (value-first, not event-first).
 const el = React.createElement;
+
 
 const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => props, {
   save: (props: Record<string, unknown> = {}) => props,
@@ -154,6 +159,15 @@ const LinkControl = ({ value, onChange }: any) =>
     DropdownMenu,
     ToolbarButton,
     ToolbarGroup: passthrough,
+    Guide: ({ contentLabel, className, finishButtonText, onFinish, pages }: any) =>
+      el(
+        "div",
+        { role: "dialog", "aria-label": contentLabel, className },
+        ...(pages ?? []).map((page: any, index: number) =>
+          el("div", { key: index }, page.image, page.content),
+        ),
+        el("button", { onClick: onFinish }, finishButtonText ?? "Finish"),
+      ),
   },
   data: {
     dispatch: () => ({ createNotice: () => undefined }),

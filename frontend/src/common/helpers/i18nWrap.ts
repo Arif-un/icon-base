@@ -6,9 +6,17 @@ import { __ as i18n_, sprintf as i18nSprintf } from "@wordpress/i18n";
 
 declare let wp: any;
 
+// SERVER_VARIABLES is a compile-time constant replaced with the localized WP global. Not
+// every consumer applies that define (Storybook's builder does not, and vite.config.ts skips
+// it in test mode), so read it defensively rather than assuming it resolves to an object.
+const serverVariables = (): typeof SERVER_VARIABLES | undefined =>
+  typeof SERVER_VARIABLES === "undefined" ? undefined : SERVER_VARIABLES;
+
 const __ = (text: string, domain = "icon-indexa"): string => {
-  if (SERVER_VARIABLES.translations?.[text]) {
-    return SERVER_VARIABLES.translations[text];
+  const translated = serverVariables()?.translations?.[text];
+
+  if (translated) {
+    return translated;
   }
 
   if (typeof wp !== "undefined" && !wp?.i18n) {

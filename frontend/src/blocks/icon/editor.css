@@ -73,3 +73,14 @@
 .ib-adjustments .components-base-control__field {
   @apply mb-0;
 }
+
+/* Core's Guide leaves page copy unstyled and full-bleed, so text runs into the modal edge. */
+.ib-welcome-guide .ib-guide-copy {
+  @apply px-8 pb-2;
+}
+.ib-welcome-guide .ib-guide-copy h2 {
+  @apply mt-0 mb-2 text-xl font-semibold;
+}
+.ib-welcome-guide .ib-guide-copy p {
+  @apply mt-0 mb-3 text-sm leading-relaxed;
+}

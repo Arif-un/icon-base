@@ -10,6 +10,7 @@ import { useIcons } from "@/common/hooks/useIcons";
 import { useIconTypes } from "@/common/hooks/useIconTypes";
 import { useLibraries } from "@/common/hooks/useLibraries";
 import IconRender from "@/components/IconRender";
+import { TOUR_ANCHOR } from "@/components/onboarding/tourSteps";
 
 export const Route = createFileRoute("/")({
   component: Icons,
@@ -74,43 +75,49 @@ function Icons() {
   return (
     <div>
       <div className="mx-4 mb-4 ml-10 flex flex-wrap items-center gap-3">
-        <Input
-          prefix={<FiSearch />}
-          placeholder="Search icons..."
-          value={searchInput}
-          onChange={(e) => {
-            setSearchInput(e.target.value);
-            setPage(1);
-          }}
-          allowClear
-          className="w-64!"
-        />
-        <Select
-          mode="multiple"
-          placeholder="All Libraries"
-          value={libraryIds}
-          onChange={(values: number[]) => {
-            setLibraryIds(values);
-            setPage(1);
-          }}
-          allowClear
-          className="min-w-44!"
-          options={libraryOptions}
-        />
-        <Select
-          mode="multiple"
-          placeholder="All Types"
-          value={typeIds}
-          onChange={(values: number[]) => {
-            setTypeIds(values);
-            setPage(1);
-          }}
-          allowClear
-          className="min-w-36! capitalize"
-          options={typeOptions}
-        />
+        <div data-tour={TOUR_ANCHOR.search}>
+          <Input
+            prefix={<FiSearch />}
+            placeholder="Search icons..."
+            value={searchInput}
+            onChange={(e) => {
+              setSearchInput(e.target.value);
+              setPage(1);
+            }}
+            allowClear
+            className="w-64!"
+          />
+        </div>
+        <div data-tour={TOUR_ANCHOR.libraryFilter}>
+          <Select
+            mode="multiple"
+            placeholder="All Libraries"
+            value={libraryIds}
+            onChange={(values: number[]) => {
+              setLibraryIds(values);
+              setPage(1);
+            }}
+            allowClear
+            className="min-w-44!"
+            options={libraryOptions}
+          />
+        </div>
+        <div data-tour={TOUR_ANCHOR.typeFilter}>
+          <Select
+            mode="multiple"
+            placeholder="All Types"
+            value={typeIds}
+            onChange={(values: number[]) => {
+              setTypeIds(values);
+              setPage(1);
+            }}
+            allowClear
+            className="min-w-36! capitalize"
+            options={typeOptions}
+          />
+        </div>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div data-tour={TOUR_ANCHOR.previewControls} className="ml-auto flex items-center gap-3">
           <span className="flex items-center gap-1 text-xs text-gray-500">
             Size
             <Slider min={16} max={64} value={iconSize} onChange={setIconSize} className="w-24!" />

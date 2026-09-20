@@ -10,6 +10,7 @@ const meta: Meta<typeof IconPlaceholder> = {
     onBrowseIcon: fn(),
     onMediaLibrary: fn(),
     onCustomSvg: fn(),
+    onShowGuide: fn(),
   },
 };
 
@@ -42,5 +43,14 @@ export const CustomSvgClick: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByText("Insert Custom SVG"));
     await expect(args.onCustomSvg).toHaveBeenCalledOnce();
+  },
+};
+
+export const ShowGuideClick: Story = {
+  name: "Interaction: How it works click",
+  play: async ({ canvasElement, args }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("How it works"));
+    await expect(args.onShowGuide).toHaveBeenCalledOnce();
   },
 };
