@@ -25,3 +25,42 @@ describe('HookProvider::loadAppApiHooks', function () {
         expect($provider->loadAppApiHooks())->toBeNull();
     });
 });
+
+describe('HookProvider::enforceRestPermission', function () {
+    test('forces a manage_options permission_callback on this plugin\'s routes only', function () {
+        $provider = new HookProvider();
+
+        $endpoints = [
+            '/IconIndexa/v1/settings' => [
+                ['methods' => 'GET', 'permission_callback' => '__return_true'],
+                ['methods' => 'POST', 'permission_callback' => '__return_true'],
+            ],
+            '/wp/v2/posts' => [
+                ['methods' => 'GET', 'permission_callback' => '__return_true'],
+            ],
+        ];
+
+        $result = $provider->enforceRestPermission($endpoints);
+
+        // Foreign namespace is untouched.
+        expect($result['/wp/v2/posts'][0]['permission_callback'])->toBe('__return_true');
+
+        // Our routes get a real capability gate: it returns whatever current_user_can does.
+        Functions\when('current_user_can')->justReturn(true);
+        expect(($result['/IconIndexa/v1/settings'][0]['permission_callback'])())->toBeTrue();
+        expect(($result['/IconIndexa/v1/settings'][1]['permission_callback'])())->toBeTrue();
+
+        Functions\when('current_user_can')->justReturn(false);
+        expect(($result['/IconIndexa/v1/settings'][0]['permission_callback'])())->toBeFalse();
+    });
+
+    test('leaves an endpoint entry without a permission_callback untouched', function () {
+        $provider = new HookProvider();
+
+        $endpoints = ['/IconIndexa/v1/icons' => [['methods' => 'GET']]];
+
+        $result = $provider->enforceRestPermission($endpoints);
+
+        expect($result['/IconIndexa/v1/icons'][0])->not->toHaveKey('permission_callback');
+    });
+});

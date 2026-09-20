@@ -25,6 +25,10 @@ beforeEach(function () {
     Functions\when('wp_create_nonce')->justReturn('nonce-abc');
     Functions\when('get_option')->justReturn('');
 
+    // Default to a production environment; dev-mode tests override this. Guards against a stray
+    // .env DEV flag loading remote HMR scripts on a live site (Config::isDevMode).
+    Functions\when('wp_get_environment_type')->justReturn('production');
+
     // Enqueue side-effect stubs. Counters let us assert branch behaviour without
     // mixing Functions\when() and Functions\expect() on the same function (which conflict).
     $GLOBALS['ib_enqueued_scripts'] = 0;
@@ -62,14 +66,36 @@ describe('Head::addHeadScripts', function () {
         expect($GLOBALS['ib_enqueued_media'])->toBe(0);
     });
 
-    test('enqueues the dev HMR modules when DEV env is set', function () {
+    test('enqueues the dev HMR modules when DEV env is set on a dev environment', function () {
         $_ENV['ICON_INDEXA_DEV']     = 'true';
         $_ENV['ICON_INDEXA_DEV_URL'] = 'http://localhost:3000';
+        Functions\when('wp_get_environment_type')->justReturn('local');
 
         (new Head())->addHeadScripts('toplevel_page_icon-indexa');
 
         // 3 dev module scripts get enqueued.
         expect($GLOBALS['ib_enqueued_scripts'])->toBe(3);
+    });
+
+    test('ignores the DEV env and enqueues the built bundle on a production environment', function () {
+        // Security: a stray/attacker-written .env DEV flag must not pull scripts from a remote
+        // DEV_URL on a live site. Production environment forces the built bundle (1 script).
+        $_ENV['ICON_INDEXA_DEV']     = 'true';
+        $_ENV['ICON_INDEXA_DEV_URL'] = 'http://attacker.example';
+        Functions\when('wp_get_environment_type')->justReturn('production');
+
+        $dir = sys_get_temp_dir() . '/ib_head_' . uniqid();
+        mkdir($dir . '/assets', 0777, true);
+        file_put_contents($dir . '/assets/build-code-name.txt', 'happy-code');
+        Functions\when('plugin_dir_path')->justReturn($dir . '/');
+
+        (new Head())->addHeadScripts('toplevel_page_icon-indexa');
+
+        expect($GLOBALS['ib_enqueued_scripts'])->toBe(1);
+
+        unlink($dir . '/assets/build-code-name.txt');
+        rmdir($dir . '/assets');
+        rmdir($dir);
     });
 
     test('enqueues the built bundle in production mode', function () {
@@ -91,6 +117,7 @@ describe('Head::addHeadScripts', function () {
     test('enqueues the media library when media-upload is not already present', function () {
         $_ENV['ICON_INDEXA_DEV'] = 'true';
         $_ENV['ICON_INDEXA_DEV_URL'] = 'http://localhost:3000';
+        Functions\when('wp_get_environment_type')->justReturn('local');
         Functions\when('wp_script_is')->justReturn(false);
 
         (new Head())->addHeadScripts('toplevel_page_icon-indexa');
@@ -101,6 +128,7 @@ describe('Head::addHeadScripts', function () {
     test('skips the media library when it is already loaded', function () {
         $_ENV['ICON_INDEXA_DEV'] = 'true';
         $_ENV['ICON_INDEXA_DEV_URL'] = 'http://localhost:3000';
+        Functions\when('wp_get_environment_type')->justReturn('local');
         Functions\when('wp_script_is')->justReturn(true);
 
         (new Head())->addHeadScripts('toplevel_page_icon-indexa');

@@ -43,6 +43,7 @@ describe('HtmlTagModifier::updateScriptAttributes', function () {
 
     test('adds type="module" to every dev module handle in dev mode', function () {
         $_ENV['ICON_INDEXA_DEV'] = 'true';
+        Functions\when('wp_get_environment_type')->justReturn('local');
         $modifier = new HtmlTagModifier();
         $html = '<script id="icon-indexa-vite-client-helper-MODULE-js"></script>'
               . '<script id="icon-indexa-vite-client-MODULE-js"></script>'

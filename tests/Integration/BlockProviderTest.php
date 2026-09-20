@@ -11,6 +11,15 @@ describe('BlockProvider::__construct', function () {
         expect(has_action('init'))->toBeTrue();
         expect(has_action('enqueue_block_editor_assets'))->toBeTrue();
     });
+
+    test('wires the server-side SVG sanitizer to the block render_block filter', function () {
+        // Security-critical: this filter is the only server-side sanitize pass on the static
+        // block's frontend output (save() never re-runs). If the wiring is dropped/renamed the
+        // stored-XSS defense silently disappears, so assert it is registered.
+        new BlockProvider();
+
+        expect(has_filter('render_block_' . BlockProvider::BLOCK_NAME))->toBeTrue();
+    });
 });
 
 describe('BlockProvider::registerBlocks', function () {

@@ -306,6 +306,16 @@ describe('prepareDir', function () {
 
         expect(fn () => sqliteDb('prepareDir', [$this->dir]))->not->toThrow(\Throwable::class);
     });
+
+    test('writeGuardFile writes the given contents', function () {
+        mkdir($this->dir, 0777, true);
+        $path = $this->dir . '/index.php';
+
+        sqliteDb('writeGuardFile', [$path, '<?php // guard']);
+
+        expect(file_get_contents($path))->toBe('<?php // guard');
+    });
+
 });
 
 describe('rebuild (end-to-end via instance())', function () {
@@ -343,6 +353,7 @@ describe('rebuild (end-to-end via instance())', function () {
 
             return true;
         });
+        Functions\when('wp_cache_delete')->justReturn(true);
     });
 
     afterEach(function () {
@@ -374,6 +385,13 @@ describe('rebuild (end-to-end via instance())', function () {
         $leftovers = glob($this->dbDir . DIRECTORY_SEPARATOR . '*.tmp');
 
         expect($leftovers)->toBeEmpty();
+    });
+
+    test('tightens the generated db file permissions to 0640', function () {
+        SQLiteDB::instance();
+
+        // Not world/group-writable and not world-readable on shared hosts.
+        expect(fileperms($this->dbPath) & 0777)->toBe(0640);
     });
 
     test('throws and records nothing when the dataset file is missing', function () {
@@ -423,5 +441,73 @@ describe('rebuild (end-to-end via instance())', function () {
 
         expect((int) $pdo->query('SELECT COUNT(*) FROM icons')->fetchColumn())->toBe(1);
         expect($this->stored['ICON_INDEXA_data_version'])->toBe(Config::DATA_VERSION);
+    });
+
+    // Concurrency guard for the risk finding: rebuilds are serialized behind an flock so two workers
+    // don't both delete -wal/-shm and rename over the live db at once.
+    test('creates a rebuild lock file in the db dir', function () {
+        SQLiteDB::instance();
+
+        expect(is_file($this->dbDir . DIRECTORY_SEPARATOR . '.rebuild.lock'))->toBeTrue();
+    });
+
+    test('rebuildLocked re-checks under the lock and skips when the db is already current', function () {
+        SQLiteDB::instance();            // build + record the current version
+        unlink($this->source);           // a rebuild would now fail (source gone)
+
+        // A worker that waited for the lock sees the just-built current db and must NOT rebuild.
+        expect(fn () => sqliteDb('rebuildLocked', [$this->dbDir, $this->dbPath]))
+            ->not->toThrow(\Throwable::class);
+
+        $count = (new \PDO('sqlite:' . $this->dbPath))->query('SELECT COUNT(*) FROM icons')->fetchColumn();
+        expect((int) $count)->toBe(3);
+    });
+
+    test('busts the stale option cache under the lock so a waiter does not rebuild over the current db', function () {
+        SQLiteDB::instance();            // build + record the current version
+        unlink($this->source);           // a redundant rebuild would now fail (source gone)
+
+        // Simulate WP's non-persistent object cache: a concurrent waiter primed data_version to an
+        // older value before the holder committed the new one. get_option keeps returning the stale
+        // version until wp_cache_delete('alloptions', ...) is called under the lock, then reveals the
+        // fresh value. Without that bust the in-lock re-check would see '0.0.1', rebuild, and throw
+        // on the missing source; with it the double-check short-circuits.
+        $fresh    = $this->stored['ICON_INDEXA_data_version'];
+        $revealed = false;
+        Functions\when('get_option')->alias(function ($name, $default = false) use (&$revealed, $fresh) {
+            if ($name === 'ICON_INDEXA_data_version') {
+                return $revealed ? $fresh : '0.0.1';
+            }
+
+            return $default;
+        });
+        Functions\when('wp_cache_delete')->alias(function ($key, $group = '') use (&$revealed) {
+            if ($key === 'alloptions') {
+                $revealed = true;
+            }
+
+            return true;
+        });
+
+        expect(fn () => sqliteDb('rebuildLocked', [$this->dbDir, $this->dbPath]))
+            ->not->toThrow(\Throwable::class);
+
+        expect((int) (new \PDO('sqlite:' . $this->dbPath))->query('SELECT COUNT(*) FROM icons')->fetchColumn())->toBe(3);
+    });
+
+    test('falls back to an unlocked rebuild when the lock file cannot be created', function () {
+        // A missing parent dir makes fopen(lock, 'c') fail; the db dir itself exists so rebuild works.
+        mkdir($this->dbDir, 0777, true);
+        $bogusLockDir = $this->dbDir . DIRECTORY_SEPARATOR . 'does-not-exist';
+
+        // fopen() on the missing dir emits an (already @-suppressed) E_WARNING that the test runner
+        // still surfaces; mute it locally so the fallback assertion stays the focus.
+        set_error_handler(fn () => true);
+        sqliteDb('rebuildLocked', [$bogusLockDir, $this->dbPath]);
+        restore_error_handler();
+
+        expect(is_file($this->dbPath))->toBeTrue();
+        expect((int) (new \PDO('sqlite:' . $this->dbPath))->query('SELECT COUNT(*) FROM icons')->fetchColumn())->toBe(3);
+        expect(is_file($bogusLockDir . DIRECTORY_SEPARATOR . '.rebuild.lock'))->toBeFalse();
     });
 });

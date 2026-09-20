@@ -97,6 +97,41 @@ describe('Config::get REDIRECT_URI', function () {
 describe('Config::get BUILD_CODE_NAME', function () {
     test('returns an empty string in dev mode', function () {
         $_ENV['ICON_INDEXA_DEV'] = 'true';
+        // Genuinely exercise the dev branch: point ROOT_DIR at a real build-code-name file so a
+        // non-dev result would be that file's content, not the accidental '' of a missing file.
+        $dir = sys_get_temp_dir() . '/ib_cfg_' . uniqid();
+        mkdir($dir . '/assets', 0777, true);
+        file_put_contents($dir . '/assets/build-code-name.txt', 'should-not-be-read');
+        Functions\when('plugin_dir_path')->justReturn($dir . '/');
+        Functions\when('wp_get_environment_type')->justReturn('local');
+
+        expect(Config::get('BUILD_CODE_NAME'))->toBe('');
+
+        unlink($dir . '/assets/build-code-name.txt');
+        rmdir($dir . '/assets');
+        rmdir($dir);
+    });
+
+    test('reads the build code name file even with DEV env set on a production environment', function () {
+        // Security gate: DEV env alone must not enable dev mode; a production environment (or a
+        // WP < 5.5 floor where wp_get_environment_type is absent) keeps the built bundle.
+        $_ENV['ICON_INDEXA_DEV'] = 'true';
+        Functions\when('wp_get_environment_type')->justReturn('production');
+
+        $dir = sys_get_temp_dir() . '/ib_cfg_' . uniqid();
+        mkdir($dir . '/assets', 0777, true);
+        file_put_contents($dir . '/assets/build-code-name.txt', 'prod-code');
+        Functions\when('plugin_dir_path')->justReturn($dir . '/');
+
+        expect(Config::get('BUILD_CODE_NAME'))->toBe('prod-code');
+
+        unlink($dir . '/assets/build-code-name.txt');
+        rmdir($dir . '/assets');
+        rmdir($dir);
+    });
+
+    test('returns an empty string when the build code name file is missing', function () {
+        Functions\when('plugin_dir_path')->justReturn('/var/www/plugins/icon-indexa/');
 
         expect(Config::get('BUILD_CODE_NAME'))->toBe('');
     });
@@ -104,14 +139,38 @@ describe('Config::get BUILD_CODE_NAME', function () {
     test('reads the build code name file in production', function () {
         $dir = sys_get_temp_dir() . '/ib_cfg_' . uniqid();
         mkdir($dir . '/assets', 0777, true);
-        file_put_contents($dir . '/assets/build-code-name.txt', 'happy-panda');
+        file_put_contents($dir . '/assets/build-code-name.txt', "happy-panda\n");
         Functions\when('plugin_dir_path')->justReturn($dir . '/');
 
+        // Trailing newline is trimmed so the enqueued asset URL is not corrupted.
         expect(Config::get('BUILD_CODE_NAME'))->toBe('happy-panda');
 
         unlink($dir . '/assets/build-code-name.txt');
         rmdir($dir . '/assets');
         rmdir($dir);
+    });
+});
+
+describe('Config::isDevMode', function () {
+    test('is false without the DEV env even on a local environment', function () {
+        unset($_ENV['ICON_INDEXA_DEV']);
+        Functions\when('wp_get_environment_type')->justReturn('local');
+
+        expect(Config::isDevMode())->toBeFalse();
+    });
+
+    test('is true only when DEV env is set and the environment is not production', function () {
+        $_ENV['ICON_INDEXA_DEV'] = 'true';
+        Functions\when('wp_get_environment_type')->justReturn('development');
+
+        expect(Config::isDevMode())->toBeTrue();
+    });
+
+    test('is false when DEV env is set but the environment is production', function () {
+        $_ENV['ICON_INDEXA_DEV'] = 'true';
+        Functions\when('wp_get_environment_type')->justReturn('production');
+
+        expect(Config::isDevMode())->toBeFalse();
     });
 });
 

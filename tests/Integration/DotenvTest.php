@@ -82,6 +82,17 @@ describe('Dotenv::load', function () {
         unlink($path);
     });
 
+    test('keeps a # that is part of the value (no preceding whitespace)', function () {
+        // A '#' only starts a comment at line start or after whitespace, so a hex color / URL
+        // fragment in the value survives instead of being truncated.
+        $path = writeEnvFixture("DEV=ab#cd\n");
+
+        Dotenv::load($path);
+
+        expect($_ENV['ICON_INDEXA_DEV'])->toBe('ab#cd');
+        unlink($path);
+    });
+
     test('skips a line that becomes empty after the comment is stripped', function () {
         // Leading "#=" -> has '=', but comment strip at position 0 empties the line.
         $path = writeEnvFixture("#=ignored\nDEV=kept\n");
@@ -109,6 +120,38 @@ describe('Dotenv::load', function () {
         Dotenv::load($path);
 
         expect($_ENV['ICON_INDEXA_URL'])->toBe('a=b=c');
+        unlink($path);
+    });
+
+    test('preserves a spaced # inside a quoted value instead of truncating it as a comment', function () {
+        // A '#' after whitespace normally starts a comment, but not inside quotes: KEY="a # b" is a
+        // legitimate value, not "a" plus a comment.
+        $path = writeEnvFixture("DEV=\"a # b\"\n");
+
+        Dotenv::load($path);
+
+        expect($_ENV['ICON_INDEXA_DEV'])->toBe('"a # b"');
+        unlink($path);
+    });
+
+    test('keeps a spaced # after an escaped quote inside a double-quoted value', function () {
+        // An escaped quote (\") must NOT close the double-quoted value, so the following spaced '#'
+        // stays part of the value instead of being mistaken for a comment start. Without escape
+        // handling the \" toggles the quote state off and the value truncates to '"a \'.
+        $path = writeEnvFixture('DEV="a \\" # b"' . "\n");
+
+        Dotenv::load($path);
+
+        expect($_ENV['ICON_INDEXA_DEV'])->toBe('"a \\" # b"');
+        unlink($path);
+    });
+
+    test('still strips an unquoted trailing comment after a value', function () {
+        $path = writeEnvFixture("DEV=value # trailing comment\n");
+
+        Dotenv::load($path);
+
+        expect($_ENV['ICON_INDEXA_DEV'])->toBe('value');
         unlink($path);
     });
 });
