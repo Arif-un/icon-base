@@ -6,12 +6,50 @@ use IconIndexa\Views\Body;
 use IconIndexa\Views\PluginPageActions;
 
 describe('Body::render', function () {
+    afterEach(function () {
+        unset($_ENV['ICON_INDEXA_DEV'], $_ENV['ICON_INDEXA_DEV_URL']);
+    });
+
     test('echoes the react root container', function () {
         ob_start();
         (new Body())->render();
         $html = ob_get_clean();
 
         expect($html)->toBe('<div id="wp-starter-kit-root"></div>');
+    });
+
+    test('renders a dev-server-down notice inside the root when in dev mode', function () {
+        Functions\when('esc_html__')->returnArg(1);
+        Functions\when('esc_html')->returnArg(1);
+        Functions\when('__')->returnArg(1);
+        Functions\when('wp_get_environment_type')->justReturn('development');
+        Functions\when('sanitize_text_field')->returnArg(1);
+        $_ENV['ICON_INDEXA_DEV']     = '1';
+        $_ENV['ICON_INDEXA_DEV_URL'] = 'http://localhost:5173';
+
+        ob_start();
+        (new Body())->render();
+        $html = ob_get_clean();
+
+        expect($html)->toStartWith('<div id="wp-starter-kit-root">');
+        expect($html)->toContain('Dev server not running');
+        expect($html)->toContain('pnpm dev');
+        expect($html)->toContain('http://localhost:5173');
+    });
+
+    test('falls back to a generic label when DEV_URL is unset in dev mode', function () {
+        Functions\when('esc_html__')->returnArg(1);
+        Functions\when('esc_html')->returnArg(1);
+        Functions\when('__')->returnArg(1);
+        Functions\when('wp_get_environment_type')->justReturn('development');
+        Functions\when('sanitize_text_field')->returnArg(1);
+        $_ENV['ICON_INDEXA_DEV'] = '1';
+
+        ob_start();
+        (new Body())->render();
+        $html = ob_get_clean();
+
+        expect($html)->toContain('the Vite dev server');
     });
 });
 
