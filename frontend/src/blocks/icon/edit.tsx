@@ -2,9 +2,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 
-import { markOnboardingSeen } from "@/common/helpers/onboarding";
-
 import { __ } from "@/common/helpers/i18nWrap";
+import { markOnboardingSeen } from "@/common/helpers/onboarding";
 
 import BlockIconPreview from "./components/BlockIconPreview";
 import CustomSvgModal from "./components/CustomSvgModal";

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom/vitest";
 import React from "react";
 
@@ -35,7 +35,6 @@ import React from "react";
 // window.wp at runtime. Each mock forwards the props (onClick/onChange/value/label) that tests
 // interact with, following the WordPress onChange conventions (value-first, not event-first).
 const el = React.createElement;
-
 
 const useBlockProps = Object.assign((props: Record<string, unknown> = {}) => props, {
   save: (props: Record<string, unknown> = {}) => props,
