@@ -44,6 +44,15 @@ describe("Save", () => {
     expect(container.firstChild).toBeNull();
   });
 
+  // save() emits stored svgContent verbatim (matches v1.0.2 serialized output, so existing posts
+  // still pass block validation). Content is sanitized at insert time, not re-sanitized here.
+  it("emits stored svgContent verbatim into the icon", () => {
+    const { container } = render(
+      <Save attributes={attrs({ svgContent: '<path d="M9 9h6v6H9z"/>' })} />,
+    );
+    expect(container.querySelector("path")).toHaveAttribute("d", "M9 9h6v6H9z");
+  });
+
   it("renders SVG wrapped in a div when no linkUrl is provided", () => {
     render(<Save attributes={attrs()} />);
     expect(screen.getByRole("img", { hidden: true })).toBeInTheDocument();
@@ -54,6 +63,33 @@ describe("Save", () => {
     render(<Save attributes={attrs({ linkUrl: "https://example.com" })} />);
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", "https://example.com");
+  });
+
+  it("names the link from label so a linked icon is not announced as a bare 'link'", () => {
+    render(<Save attributes={attrs({ linkUrl: "https://example.com", label: "Home" })} />);
+    expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
+  });
+
+  it("falls back to title for the link accessible name when no label is set", () => {
+    render(<Save attributes={attrs({ linkUrl: "https://example.com", title: "Go home" })} />);
+    expect(screen.getByRole("link", { name: "Go home" })).toBeInTheDocument();
+  });
+
+  it("leaves the link aria-label unset when neither label nor title is provided", () => {
+    render(<Save attributes={attrs({ linkUrl: "https://example.com" })} />);
+    expect(screen.getByRole("link")).not.toHaveAttribute("aria-label");
+  });
+
+  it("hides the SVG from the a11y tree inside a labeled link so the name is not announced twice", () => {
+    // The anchor carries the accessible name (aria-label); its role="img" child must be aria-hidden
+    // so a screen reader does not announce the same name for the link and then again for the image.
+    render(<Save attributes={attrs({ linkUrl: "https://example.com", label: "Home" })} />);
+    const link = screen.getByRole("link", { name: "Home" });
+    const svg = link.querySelector("svg");
+    expect(svg).toHaveAttribute("aria-hidden", "true");
+    expect(svg).not.toHaveAttribute("aria-label");
+    // aria-hidden removes the img role from the accessibility tree entirely.
+    expect(screen.queryByRole("img")).toBeNull();
   });
 
   it("does not render a link for a javascript: URL", () => {

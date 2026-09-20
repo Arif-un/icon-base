@@ -283,12 +283,20 @@ interface CheckboxControlProps {
   __nextHasNoMarginBottom?: boolean;
 }
 
+interface NoticeProps {
+  status?: "warning" | "success" | "error" | "info";
+  isDismissible?: boolean;
+  onRemove?: () => void;
+  children?: ReactNode;
+}
+
 interface WPComponents {
   Button: ComponentType<ButtonProps>;
   CheckboxControl: ComponentType<CheckboxControlProps>;
   ColorPicker: ComponentType<ColorPickerProps>;
   DropdownMenu: ComponentType<DropdownMenuProps>;
   Modal: ComponentType<ModalProps>;
+  Notice: ComponentType<NoticeProps>;
   PanelBody: ComponentType<PanelBodyProps>;
   Placeholder: ComponentType<PlaceholderProps>;
   Popover: ComponentType<PopoverProps>;

@@ -50,7 +50,13 @@ export default function IconGrid({
     const lib = libraryMap[icon.library_id];
     if (!lib) return;
 
-    const svgContent = await fetchSvgContent(config.ROOT_URL, lib.dir, icon.filename);
+    let svgContent: string;
+    try {
+      svgContent = await fetchSvgContent(config.ROOT_URL, lib.dir, icon.filename);
+    } catch {
+      // Fetch/sanitize failed (e.g. the icon file 404s). Don't insert a broken icon.
+      return;
+    }
 
     onSelectIcon({
       svgContent,

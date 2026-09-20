@@ -1,6 +1,11 @@
 export interface IconBlockAttributes extends Record<string, unknown> {
   svgContent: string;
   svgNormalizeColors: boolean;
+  // True only for SVGs authored through the custom-SVG modal - gates the Edit toolbar button so it
+  // is not offered for media-library/library icons, whose original colors are stripped at insert
+  // and can't be recovered by re-inserting (the modal's "keep original colors" advice is false for
+  // them). Optional: blocks saved before this flag existed simply fall back to false.
+  isCustomSvg?: boolean;
   iconId: number;
   iconName: string;
   iconFilename: string;

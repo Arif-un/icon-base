@@ -162,6 +162,18 @@ describe("IconGrid", () => {
     );
   });
 
+  it("does not call onSelectIcon when the svg fetch fails", async () => {
+    const onSelectIcon = vi.fn();
+    fetchMock.mockRejectedValueOnce(new Error("404"));
+    renderGrid({ onSelectIcon });
+
+    fireEvent.click(screen.getByTitle("arrow"));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    // Fetch/sanitize threw -> the catch guard returns, so no broken icon is inserted.
+    expect(onSelectIcon).not.toHaveBeenCalled();
+  });
+
   it("does nothing on click when the icon has no matching library", async () => {
     const onSelectIcon = vi.fn();
     renderGrid({ onSelectIcon });

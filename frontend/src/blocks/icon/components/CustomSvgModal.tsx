@@ -1,36 +1,19 @@
-import { useState } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 
 import { sanitizeSvg } from "@/common/helpers/fetchSvgContent";
+import { __ } from "@/common/helpers/i18nWrap";
 
-import { getUnsupportedSvgReason, stripSvgColors } from "../utils/svgUtils";
+import {
+  applyColorNormalization,
+  computeSvgFrame,
+  getUnsupportedSvgReason,
+  svgHasNormalizableColors,
+  type SvgFrame,
+} from "../utils/svgUtils";
 
 const { Button, CheckboxControl, Modal } = window.wp.components;
 
-function extractViewBox(svgMarkup: string): { width: number; height: number } {
-  const viewBoxMatch = svgMarkup.match(/viewBox=["']([^"']+)["']/);
-  if (viewBoxMatch) {
-    const parts = viewBoxMatch[1].split(/[\s,]+/).map(Number);
-    if (parts.length === 4 && parts[2] > 0 && parts[3] > 0) {
-      return { width: parts[2], height: parts[3] };
-    }
-  }
-
-  // Only read width/height from the root <svg ...> opening tag, never a child element's
-  // (a child rect/path width= would otherwise be picked up and size/clip the icon wrongly).
-  const svgOpenTag = svgMarkup.match(/<svg\b[^>]*>/i)?.[0] ?? "";
-  // Accept a leading number with an optional unit suffix (px, pt, em, %, ...): SVGs often
-  // declare width="500pt" with no viewBox, and a strict digits-only match would miss it and
-  // fall back to 24x24, clipping the artwork out of view.
-  // (?:^|[^-\w]) so "stroke-width"/"data-width" on the root tag can't be mistaken for width.
-  // A consumed boundary char is used instead of a lookbehind so it parses on Safari < 16.4.
-  const wMatch = svgOpenTag.match(/(?:^|[^-\w])width=["'](\d+(?:\.\d+)?)/);
-  const hMatch = svgOpenTag.match(/(?:^|[^-\w])height=["'](\d+(?:\.\d+)?)/);
-  if (wMatch && hMatch) {
-    return { width: Number(wMatch[1]), height: Number(hMatch[1]) };
-  }
-
-  return { width: 24, height: 24 };
-}
+const DEFAULT_FRAME: SvgFrame = { x: 0, y: 0, width: 24, height: 24 };
 
 function extractInnerSvg(raw: string): string {
   const match = raw.match(/<svg[^>]*>([\s\S]*)<\/svg>/i);
@@ -52,27 +35,60 @@ export default function CustomSvgModal({
   const isEditing = initialSvg.trim().length > 0;
   const [rawSvg, setRawSvg] = useState(initialSvg);
   const [normalize, setNormalize] = useState(initialNormalize);
-  // Editing an already-normalized SVG: its original colors were stripped to currentColor at
-  // insert time and can't be recovered from the stored content, so unchecking here would be a
-  // no-op lie. Lock the toggle on in that case.
-  const normalizeLocked = isEditing && initialNormalize;
 
   const trimmed = rawSvg.trim();
-  const sanitized = trimmed ? sanitizeSvg(extractInnerSvg(trimmed)) : "";
-  const { width, height } = trimmed ? extractViewBox(trimmed) : { width: 24, height: 24 };
+  // Memoized so DOMPurify only re-runs when the markup changes, not on every re-render
+  // (e.g. toggling the normalize checkbox).
+  const sanitized = useMemo(
+    () => (trimmed ? sanitizeSvg(extractInnerSvg(trimmed)) : ""),
+    [trimmed],
+  );
+  // Editing an already-normalized SVG: its original colors were stripped to currentColor at insert
+  // time and can't be recovered from the stored content, so unchecking here would be a no-op lie AND
+  // would wrongly store normalize=false on currentColor-only content (hiding the block color control
+  // that currentColor still obeys). Lock the toggle on whenever the current markup has no literal
+  // colors left to preserve - driven by the actual content, not text divergence, so a geometry-only
+  // edit of an already-normalized icon stays locked while pasting a colored SVG unlocks it.
+  const hasNormalizableColors = useMemo(() => svgHasNormalizableColors(sanitized), [sanitized]);
+  const normalizeLocked = isEditing && initialNormalize && !hasNormalizableColors;
+  // While locked, normalize is effectively on regardless of the stored checkbox state, so a stale
+  // false (e.g. left over from an earlier colored edit that was then cleared) can never reach the
+  // preview or onInsert, and the checkbox never shows the contradictory disabled+unchecked state.
+  const effectiveNormalize = normalizeLocked ? true : normalize;
+  // computeSvgFrame may append a hidden probe to document.body to measure geometry (getBBox) - a
+  // DOM side effect that must not run during render. Compute it in a layout effect (synchronously
+  // before paint) and store the result, so render stays pure. Holds the 24x24 default until the
+  // SVG changes and the effect re-measures.
+  const [frame, setFrame] = useState<SvgFrame>(DEFAULT_FRAME);
+  useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- measure-then-store: getBBox needs the DOM, can't run during render
+    setFrame(trimmed ? computeSvgFrame(trimmed, sanitized) : DEFAULT_FRAME);
+  }, [trimmed, sanitized]);
+  const { width, height } = frame;
+  // When the artwork is offset from the origin (measured bbox), shift it back to 0,0 so the
+  // 0 0 width height viewBox convention (used by edit/save/preview) frames it correctly.
+  const framed =
+    frame.x !== 0 || frame.y !== 0
+      ? `<g transform="translate(${-frame.x},${-frame.y})">${sanitized}</g>`
+      : sanitized;
   // Mirror what insert stores (edit.tsx) so the preview is true WYSIWYG: normalized -> currentColor.
-  const previewSvg = normalize ? stripSvgColors(sanitized) : sanitized;
+  // Memoized so stripSvgColors (DOM build + querySelectorAll + attr walk) only re-runs when the
+  // framed markup or the normalize toggle changes, not on every re-render.
+  const previewSvg = useMemo(
+    () => applyColorNormalization(framed, effectiveNormalize),
+    [framed, effectiveNormalize],
+  );
   const unsupportedReason = trimmed ? getUnsupportedSvgReason(trimmed, sanitized) : null;
   const isValid = sanitized.length > 0 && !unsupportedReason;
 
   function handleInsert() {
     if (!isValid) return;
-    onInsert(sanitized, width, height, normalize);
+    onInsert(framed, width, height, effectiveNormalize);
   }
 
   return (
     <Modal
-      title={isEditing ? "Edit Custom SVG" : "Insert Custom SVG"}
+      title={isEditing ? __("Edit Custom SVG") : __("Insert Custom SVG")}
       onRequestClose={onClose}
       className="ib-svg-modal"
       size="large"
@@ -83,7 +99,7 @@ export default function CustomSvgModal({
             htmlFor="icon-base-svg-input"
             className="mb-2 text-[11px] font-medium tracking-[0.5px] text-[#757575] uppercase"
           >
-            SVG Markup
+            {__("SVG Markup")}
           </label>
           <textarea
             id="icon-base-svg-input"
@@ -96,7 +112,7 @@ export default function CustomSvgModal({
         </div>
         <div className="flex flex-1 flex-col p-4">
           <div className="mb-2 text-[11px] font-medium tracking-[0.5px] text-[#757575] uppercase">
-            Preview
+            {__("Preview")}
           </div>
           <div className="flex min-h-50 flex-1 items-center justify-center rounded border border-[#e0e0e0] bg-[#fafafa]">
             {isValid ? (
@@ -106,44 +122,51 @@ export default function CustomSvgModal({
                 width={64}
                 height={64}
                 fill="currentColor"
+                aria-hidden="true"
                 dangerouslySetInnerHTML={{ __html: previewSvg }}
               />
             ) : (
               <span className="text-[13px] text-[#a0a0a0] italic">
-                {trimmed
-                  ? unsupportedReason
-                    ? "Unsupported SVG"
-                    : "Invalid SVG"
-                  : "Paste SVG markup to preview"}
+                {/* Input present but not rendered above is always unsupported: an empty
+                    sanitize result makes getUnsupportedSvgReason return a reason (banner below
+                    shows the specifics). */}
+                {trimmed ? __("Unsupported SVG") : __("Paste SVG markup to preview")}
               </span>
             )}
           </div>
         </div>
       </div>
       {unsupportedReason && (
-        <div className="mx-4 mb-1 flex items-start gap-2 rounded-sm border-l-4 border-l-[#cc1818] bg-[#fcf0f1] px-3 py-2 text-[13px] text-[#cc1818]">
+        <div
+          role="alert"
+          className="mx-4 mb-1 flex items-start gap-2 rounded-sm border-l-4 border-l-[#cc1818] bg-[#fcf0f1] px-3 py-2 text-[13px] text-[#cc1818]"
+        >
           {unsupportedReason}
         </div>
       )}
       <div className="flex items-center justify-between gap-2 border-t border-[#e0e0e0] px-4 py-3">
         <CheckboxControl
-          label="Normalize colors to theme color"
+          label={__("Normalize colors to theme color")}
           help={
             normalizeLocked
-              ? "This icon's colors were already normalized to the theme color and can't be reverted here. Re-insert the SVG to keep its original colors."
-              : "Lets the block's color controls recolor this icon. Uncheck to keep the SVG's original colors."
+              ? __(
+                  "This icon's colors were already normalized to the theme color and can't be reverted here. Re-insert the SVG to keep its original colors.",
+                )
+              : __(
+                  "Lets the block's color controls recolor this icon. Uncheck to keep the SVG's original colors.",
+                )
           }
-          checked={normalize}
+          checked={effectiveNormalize}
           onChange={setNormalize}
           disabled={normalizeLocked}
           __nextHasNoMarginBottom
         />
         <div className="flex gap-2">
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            {__("Cancel")}
           </Button>
           <Button variant="primary" onClick={handleInsert} disabled={!isValid}>
-            {isEditing ? "Save" : "Insert"}
+            {isEditing ? __("Save") : __("Insert")}
           </Button>
         </div>
       </div>

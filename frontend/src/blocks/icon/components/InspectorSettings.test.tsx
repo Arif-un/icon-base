@@ -236,6 +236,53 @@ describe("InspectorSettings - rendering", () => {
     renderInspector({ svgContent: STROKED_SVG });
     expect(screen.getByLabelText("Stroke Width")).toBeInTheDocument();
   });
+
+  it("warns about a missing accessible name when the icon is linked with no label or title", () => {
+    renderInspector({ linkUrl: "https://example.com", label: "", title: "" });
+    expect(
+      screen.getByText(
+        "This icon links somewhere but has no label. Add a Label so screen readers announce the link.",
+      ),
+    ).toBeInTheDocument();
+  });
+
+  it("does not warn when a linked icon has a label", () => {
+    renderInspector({ linkUrl: "https://example.com", label: "Home" });
+    expect(screen.queryByText(/no label/)).toBeNull();
+  });
+
+  it("does not warn when there is no link", () => {
+    renderInspector({ linkUrl: "", label: "", title: "" });
+    expect(screen.queryByText(/no label/)).toBeNull();
+  });
+
+  it("shows the Icon color control when colors are normalized (default)", () => {
+    const { container } = renderInspector({ svgNormalizeColors: true });
+    expect(container.querySelector('[data-setting="Icon"]')).not.toBeNull();
+    expect(container.querySelector('[data-setting="Background"]')).not.toBeNull();
+  });
+
+  it("hides the Icon color control for a non-normalized custom SVG with literal colors (keeps Background)", () => {
+    // The control would silently no-op: literal fills override currentColor, so hide it rather
+    // than show a dead picker. Background still styles the container, so it stays.
+    const { container } = renderInspector({
+      svgNormalizeColors: false,
+      svgContent: '<path fill="#e00" d="M12 2L2 22h20z"/>',
+    });
+    expect(container.querySelector('[data-setting="Icon"]')).toBeNull();
+    expect(container.querySelector('[data-setting="Background"]')).not.toBeNull();
+  });
+
+  it("keeps the Icon color control for a non-normalized colorless SVG (still currentColor-driven)", () => {
+    // A colorless SVG has no literal fills to override currentColor, so it still recolors via
+    // inheritance even with normalize off - the picker is live, not dead. Must stay visible.
+    const { container } = renderInspector({
+      svgNormalizeColors: false,
+      svgContent: PLAIN_SVG,
+    });
+    expect(container.querySelector('[data-setting="Icon"]')).not.toBeNull();
+    expect(container.querySelector('[data-setting="Background"]')).not.toBeNull();
+  });
 });
 
 describe("InspectorSettings - simple control callbacks", () => {

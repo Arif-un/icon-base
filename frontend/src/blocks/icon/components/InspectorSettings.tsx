@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 
+import { __ } from "@/common/helpers/i18nWrap";
+
 import type { IconBlockAttributes } from "../types";
-import { svgHasStrokes } from "../utils/svgUtils";
+import { svgHasNormalizableColors, svgHasStrokes } from "../utils/svgUtils";
 import { strokeLabel } from "./StrokeLabel";
 
 const {
@@ -10,6 +12,7 @@ const {
   TextControl,
   RangeControl,
   Button,
+  Notice,
   __experimentalUnitControl: UnitControl,
 } = window.wp.components;
 
@@ -29,10 +32,10 @@ const SIZE_UNITS = [
 ];
 
 const HOVER_OPTIONS = [
-  { label: "None", value: "none" },
-  { label: "Scale", value: "scale" },
-  { label: "Color Change", value: "color" },
-  { label: "Opacity", value: "opacity" },
+  { label: __("None"), value: "none" },
+  { label: __("Scale"), value: "scale" },
+  { label: __("Color Change"), value: "color" },
+  { label: __("Opacity"), value: "opacity" },
 ];
 
 const ROTATION_OPTIONS = [
@@ -57,6 +60,7 @@ export default function InspectorSettings({
     svgContent,
     label,
     title,
+    linkUrl,
     linkRel,
     hoverEffect,
     iconColor,
@@ -65,7 +69,21 @@ export default function InspectorSettings({
     customIconBackgroundColor,
     gradient,
     customGradient,
+    svgNormalizeColors,
   } = attributes;
+
+  // The Icon color control drives the icon only via the container `color` + fill="currentColor".
+  // A custom SVG inserted with normalize off keeps its literal fills, which override currentColor,
+  // so the control would silently do nothing - hide that one row (Background still applies).
+  // But a colorless SVG (no literal fills to preserve) still recolors via currentColor inheritance
+  // even with normalize off, so keep the control for it. Library/normalized icons already have their
+  // colors stripped to currentColor and carry svgNormalizeColors !== false.
+  // ponytail: we don't further hide it for the rare fully-gradient normalized icon (all paint is
+  // url() refs, no currentColor to drive). A literal svgContent.includes("currentColor") check is
+  // wrong - the root <svg fill="currentColor"> means no-fill shapes recolor by inheritance without
+  // any literal currentColor in the content; detecting the dead case needs a full paint walk. Skip.
+  const hasLiteralColors = useMemo(() => svgHasNormalizableColors(svgContent), [svgContent]);
+  const canRecolorIcon = svgNormalizeColors || !hasLiteralColors;
 
   const hasStrokes = useMemo(() => svgHasStrokes(svgContent), [svgContent]);
   const colors = useSetting("color.palette") as
@@ -113,23 +131,36 @@ export default function InspectorSettings({
 
   return (
     <InspectorControls>
-      <PanelBody title="Settings">
+      <PanelBody title={__("Settings")}>
         <TextControl
-          label="Label"
-          help="Accessible label for screen readers"
+          label={__("Label")}
+          help={__("Accessible label for screen readers")}
           value={label}
           onChange={(val: string) => setAttributes({ label: val })}
         />
 
+        {linkUrl &&
+          !label &&
+          !title && (
+            // A linked icon whose svg is aria-hidden (no label) and has no title is announced as a bare
+            // "link" to screen readers. Nudge the author to name it; the anchor falls back to
+            // label || title in save().
+            <Notice status="warning" isDismissible={false}>
+              {__(
+                "This icon links somewhere but has no label. Add a Label so screen readers announce the link.",
+              )}
+            </Notice>
+          )}
+
         <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
           <UnitControl
-            label="Width"
+            label={__("Width")}
             value={width}
             units={SIZE_UNITS}
             onChange={(val: string) => setAttributes({ width: val || "48px" })}
           />
           <UnitControl
-            label="Height"
+            label={__("Height")}
             value={height}
             units={SIZE_UNITS}
             onChange={(val: string) => setAttributes({ height: val })}
@@ -138,7 +169,7 @@ export default function InspectorSettings({
 
         <SelectControl
           __next40pxDefaultSize
-          label="Rotation"
+          label={__("Rotation")}
           value={String(rotate)}
           options={ROTATION_OPTIONS}
           onChange={(val: string | string[]) =>
@@ -148,7 +179,7 @@ export default function InspectorSettings({
 
         {hasStrokes && (
           <RangeControl
-            label={strokeLabel("Stroke Width")}
+            label={strokeLabel(__("Stroke Width"))}
             value={strokeWidth}
             onChange={(val: number | undefined) =>
               val !== undefined && setAttributes({ strokeWidth: val })
@@ -161,8 +192,8 @@ export default function InspectorSettings({
 
         <SelectControl
           __next40pxDefaultSize
-          label="Hover Effect"
-          help="Applied when icon is wrapped in a link"
+          label={__("Hover Effect")}
+          help={__("Applied when icon is wrapped in a link")}
           value={hoverEffect}
           options={HOVER_OPTIONS}
           onChange={(val: string | string[]) =>
@@ -171,27 +202,31 @@ export default function InspectorSettings({
         />
 
         <Button variant="secondary" onClick={handleResetAll} size="small">
-          Reset All
+          {__("Reset All")}
         </Button>
       </PanelBody>
 
       <PanelColorGradientSettings
-        title="Color"
+        title={__("Color")}
         initialOpen={false}
         settings={[
+          ...(canRecolorIcon
+            ? [
+                {
+                  label: __("Icon"),
+                  colorValue: iconColorValue,
+                  onColorChange: (val: string | undefined) => {
+                    const match = val ? colors?.find((c) => c.color === val) : undefined;
+                    setAttributes({
+                      iconColor: match?.slug ?? "",
+                      customIconColor: match ? "" : (val ?? ""),
+                    });
+                  },
+                },
+              ]
+            : []),
           {
-            label: "Icon",
-            colorValue: iconColorValue,
-            onColorChange: (val: string | undefined) => {
-              const match = val ? colors?.find((c) => c.color === val) : undefined;
-              setAttributes({
-                iconColor: match?.slug ?? "",
-                customIconColor: match ? "" : (val ?? ""),
-              });
-            },
-          },
-          {
-            label: "Background",
+            label: __("Background"),
             colorValue: bgColorValue,
             gradientValue,
             onColorChange: (val: string | undefined) => {
@@ -214,16 +249,16 @@ export default function InspectorSettings({
         ]}
       />
 
-      <PanelBody title="Additional" initialOpen={false}>
+      <PanelBody title={__("Additional")} initialOpen={false}>
         <TextControl
-          label="Link Rel"
-          help="Relationship attribute for the link (e.g. nofollow)"
+          label={__("Link Rel")}
+          help={__("Relationship attribute for the link (e.g. nofollow)")}
           value={linkRel}
           onChange={(val: string) => setAttributes({ linkRel: val })}
         />
         <TextControl
-          label="Title"
-          help="Descriptive title shown as tooltip on hover"
+          label={__("Title")}
+          help={__("Descriptive title shown as tooltip on hover")}
           value={title}
           onChange={(val: string) => setAttributes({ title: val })}
         />

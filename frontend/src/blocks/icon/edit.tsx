@@ -2,6 +2,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import clsx from "clsx";
 import { useCallback, useState } from "react";
 
+import { __ } from "@/common/helpers/i18nWrap";
+
 import BlockIconPreview from "./components/BlockIconPreview";
 import CustomSvgModal from "./components/CustomSvgModal";
 import IconPickerModal from "./components/IconPickerModal";
@@ -13,7 +15,7 @@ import { queryClient } from "./constants";
 import type { IconBlockAttributes, SelectedIconData } from "./types";
 import { getWrapperClasses } from "./utils/blockStyles";
 import { openMediaLibrary } from "./utils/openMediaLibrary";
-import { stripSvgColors } from "./utils/svgUtils";
+import { applyColorNormalization, stripSvgColors } from "./utils/svgUtils";
 
 const { DropdownMenu, ToolbarButton, ToolbarGroup } = window.wp.components;
 const { BlockControls } = window.wp.blockEditor;
@@ -52,12 +54,12 @@ function EditInner({
   const [editingCustomSvg, setEditingCustomSvg] = useState(false);
 
   const hasIcon = !!attributes.svgContent;
-  const isCustomSvg = attributes.iconId === 0 && !!attributes.svgContent;
 
   function handleSelectIcon(data: SelectedIconData) {
     setAttributes({
       svgContent: stripSvgColors(data.svgContent),
       svgNormalizeColors: true,
+      isCustomSvg: false,
       iconId: data.iconId,
       iconName: data.iconName,
       iconFilename: data.iconFilename,
@@ -72,6 +74,9 @@ function EditInner({
     setAttributes({
       svgContent: stripSvgColors(svgContent),
       svgNormalizeColors: true,
+      // A media-library SVG is not modal-authored: its colors are stripped here with no keep option,
+      // so it must not get the Edit button (whose modal falsely offers to keep original colors).
+      isCustomSvg: false,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -93,8 +98,9 @@ function EditInner({
     setAttributes({
       // svgContent is already DOMPurify-sanitized by the modal; stripSvgColors only
       // normalizes fill/stroke to currentColor, so skipping it keeps the original colors safely.
-      svgContent: normalize ? stripSvgColors(svgContent) : svgContent,
+      svgContent: applyColorNormalization(svgContent, normalize),
       svgNormalizeColors: normalize,
+      isCustomSvg: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -126,36 +132,36 @@ function EditInner({
           />
           <BlockControls>
             <ToolbarGroup>
-              {isCustomSvg && (
+              {attributes.isCustomSvg && (
                 <ToolbarButton
                   onClick={() => {
                     setEditingCustomSvg(true);
                     setShowCustomSvgModal(true);
                   }}
                 >
-                  Edit
+                  {__("Edit")}
                 </ToolbarButton>
               )}
               <DropdownMenu
                 toggleProps={{
                   className: "h-full",
-                  children: "Replace",
+                  children: __("Replace"),
                 }}
                 icon={null}
-                label="Replace Icon"
+                label={__("Replace Icon")}
                 controls={[
                   {
-                    title: "Browse Icon",
+                    title: __("Browse Icon"),
                     icon: "search",
                     onClick: () => setShowPopover(true),
                   },
                   {
-                    title: "Media Library",
+                    title: __("Media Library"),
                     icon: "admin-media",
                     onClick: handleOpenMediaLibrary,
                   },
                   {
-                    title: "Insert Custom SVG",
+                    title: __("Insert Custom SVG"),
                     icon: "editor-code",
                     onClick: () => {
                       setEditingCustomSvg(false);

@@ -1,3 +1,4 @@
+import { deprecated } from "./deprecated";
 import { Edit } from "./edit";
 import { Save } from "./save";
 import type { IconBlockAttributes } from "./types";
@@ -17,4 +18,5 @@ window.wp.blocks.registerBlockType<IconBlockAttributes>("icon-shelf/icon", {
   icon: iconBaseLogo,
   edit: Edit,
   save: Save,
+  deprecated,
 });

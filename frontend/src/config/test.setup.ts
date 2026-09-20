@@ -141,6 +141,7 @@ const LinkControl = ({ value, onChange }: any) =>
     Button,
     CheckboxControl,
     Modal,
+    Notice: passthrough,
     PanelBody,
     SelectControl,
     TextControl: textControl("text"),

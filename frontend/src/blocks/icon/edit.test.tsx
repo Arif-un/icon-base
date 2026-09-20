@@ -139,7 +139,7 @@ const NO_ICON: Partial<IconBlockAttributes> = { svgContent: "" };
 beforeEach(() => vi.clearAllMocks());
 afterEach(() => vi.restoreAllMocks());
 
-describe("Edit — no icon (placeholder branch)", () => {
+describe("Edit - no icon (placeholder branch)", () => {
   it("renders the placeholder and hides the icon UI when svgContent is empty", () => {
     renderEdit(NO_ICON);
 
@@ -168,6 +168,7 @@ describe("Edit — no icon (placeholder branch)", () => {
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors(POPOVER_ICON.svgContent),
       svgNormalizeColors: true,
+      isCustomSvg: false,
       iconId: 7,
       iconName: "star",
       iconFilename: "star.svg",
@@ -208,6 +209,7 @@ describe("Edit — no icon (placeholder branch)", () => {
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors(MODAL_ICON.svgContent),
       svgNormalizeColors: true,
+      isCustomSvg: false,
       iconId: 9,
       iconName: "heart",
       iconFilename: "heart.svg",
@@ -241,6 +243,7 @@ describe("Edit — no icon (placeholder branch)", () => {
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors("<circle/>"),
       svgNormalizeColors: true,
+      isCustomSvg: false,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -279,6 +282,7 @@ describe("Edit — no icon (placeholder branch)", () => {
     expect(setAttributes).toHaveBeenCalledWith({
       svgContent: stripSvgColors("<rect/>"),
       svgNormalizeColors: true,
+      isCustomSvg: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -301,6 +305,7 @@ describe("Edit — no icon (placeholder branch)", () => {
       // not normalized: stored verbatim (already sanitized by the modal), not stripSvgColors'd
       svgContent: "<rect/>",
       svgNormalizeColors: false,
+      isCustomSvg: true,
       iconId: 0,
       iconName: "",
       iconFilename: "",
@@ -332,7 +337,7 @@ describe("Edit — no icon (placeholder branch)", () => {
   });
 });
 
-describe("Edit — has icon (preview + toolbar branch)", () => {
+describe("Edit - has icon (preview + toolbar branch)", () => {
   it("renders inspector, toolbar and preview, not the placeholder", () => {
     renderEdit();
 
@@ -377,21 +382,34 @@ describe("Edit — has icon (preview + toolbar branch)", () => {
     expect(screen.getByTestId("custom-svg-modal")).toBeInTheDocument();
   });
 
-  it("shows the Edit toolbar button only for a custom SVG (iconId 0)", () => {
-    renderEdit({ iconId: 0 });
+  it("shows the Edit toolbar button only for a modal-authored custom SVG (isCustomSvg)", () => {
+    renderEdit({ isCustomSvg: true });
 
     expect(screen.getByRole("button", { name: "Edit" })).toBeInTheDocument();
   });
 
-  it("hides the Edit toolbar button for a library icon (iconId != 0)", () => {
-    renderEdit({ iconId: 5 });
+  it("hides the Edit toolbar button for a library icon", () => {
+    renderEdit({ iconId: 5, isCustomSvg: false });
+
+    expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
+  });
+
+  it("hides the Edit toolbar button for a media-library upload (iconId 0 but not modal-authored)", () => {
+    renderEdit({ iconId: 0, isCustomSvg: false });
+
+    expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
+  });
+
+  it("hides the Edit toolbar button for legacy blocks with no isCustomSvg flag", () => {
+    // attrs() omits isCustomSvg, mirroring a block saved before the flag existed.
+    renderEdit();
 
     expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
   });
 
   it("opens the modal pre-seeded with the current SVG and its normalize choice on Edit", () => {
     renderEdit({
-      iconId: 0,
+      isCustomSvg: true,
       svgContent: '<path d="M3 3"/>',
       iconWidth: 30,
       iconHeight: 40,
@@ -409,7 +427,7 @@ describe("Edit — has icon (preview + toolbar branch)", () => {
   });
 });
 
-describe("Edit — block wrapper style", () => {
+describe("Edit - block wrapper style", () => {
   it("strips padding/margin from the block props style but keeps other styles", () => {
     vi.spyOn(window.wp.blockEditor, "useBlockProps").mockImplementation((p: unknown) => ({
       ...(p as Record<string, unknown>),

@@ -53,6 +53,14 @@ describe("CustomSvgModal", () => {
     expect(h).toBe(48);
   });
 
+  it("marks the decorative preview svg aria-hidden so screen readers skip it", () => {
+    renderModal();
+
+    type('<svg viewBox="0 0 32 48"><path d="M0 0h1"/></svg>');
+
+    expect(document.querySelector("svg")!).toHaveAttribute("aria-hidden", "true");
+  });
+
   it("falls back to width/height attrs when the viewBox is degenerate", () => {
     const onInsert = vi.fn();
     renderModal({ onInsert });
@@ -113,6 +121,72 @@ describe("CustomSvgModal", () => {
     expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
   });
 
+  describe("frames to the real content bbox when there is no viewBox (getBBox available)", () => {
+    const proto = window.SVGGraphicsElement.prototype as unknown as {
+      getBBox?: () => { x: number; y: number; width: number; height: number };
+    };
+
+    afterEach(() => {
+      delete proto.getBBox;
+    });
+
+    function stubBBox(box: { x: number; y: number; width: number; height: number }) {
+      proto.getBBox = () => box;
+    }
+
+    it("uses the measured bbox size and re-centers offset artwork to the origin", () => {
+      stubBBox({ x: 334, y: 95, width: 578, height: 688 });
+      const onInsert = vi.fn();
+      renderModal({ onInsert });
+
+      // Canvas is 500x600 but the artwork actually sits at x334..912 / y95..783; the bbox,
+      // not the canvas, must drive the viewBox or the icon shows a cropped empty corner.
+      type(
+        '<svg width="500pt" height="600pt"><path transform="translate(334,95)" d="M0 0h1"/></svg>',
+      );
+
+      const preview = document.querySelector("svg")!;
+      expect(preview).toHaveAttribute("viewBox", "0 0 578 688");
+
+      fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+      const [svg, w, h] = onInsert.mock.calls[0];
+      expect(w).toBe(578);
+      expect(h).toBe(688);
+      // Offset artwork is wrapped in a translate that shifts the bbox origin back to 0,0.
+      expect(svg).toContain("translate(-334,-95)");
+      expect(svg).toContain("path");
+    });
+
+    it("does not wrap in a translate when the bbox is already at the origin", () => {
+      stubBBox({ x: 0, y: 0, width: 40, height: 80 });
+      const onInsert = vi.fn();
+      renderModal({ onInsert });
+
+      type('<svg width="10" height="10"><path d="M0 0h1"/></svg>');
+      fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+      const [svg, w, h] = onInsert.mock.calls[0];
+      expect(w).toBe(40);
+      expect(h).toBe(80);
+      expect(svg).not.toContain("translate");
+    });
+
+    it("still prefers an explicit viewBox over the measured bbox", () => {
+      stubBBox({ x: 5, y: 5, width: 999, height: 999 });
+      const onInsert = vi.fn();
+      renderModal({ onInsert });
+
+      type('<svg viewBox="0 0 32 48"><path d="M0 0h1"/></svg>');
+      fireEvent.click(screen.getByText("Insert").closest("button")!);
+
+      const [svg, w, h] = onInsert.mock.calls[0];
+      expect(w).toBe(32);
+      expect(h).toBe(48);
+      expect(svg).not.toContain("translate");
+    });
+  });
+
   it("accepts markup without an <svg> wrapper via the inner-extraction fallback", () => {
     const onInsert = vi.fn();
     renderModal({ onInsert });
@@ -133,6 +207,8 @@ describe("CustomSvgModal", () => {
 
     expect(screen.getByText("Unsupported SVG")).toBeInTheDocument();
     expect(screen.getByText(/embedded image/i)).toBeInTheDocument();
+    // The reason banner is announced to screen readers (role="alert"), not a silent styled div.
+    expect(screen.getByRole("alert")).toHaveTextContent(/embedded image/i);
 
     const insert = screen.getByText("Insert").closest("button")!;
     expect(insert).toBeDisabled();
@@ -245,6 +321,71 @@ describe("CustomSvgModal", () => {
       "data-help",
       expect.stringContaining("can't be reverted"),
     );
+  });
+
+  it("unlocks the normalize checkbox once the seeded SVG is replaced in edit mode", () => {
+    renderModal({
+      initialSvg: '<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>',
+      initialNormalize: true,
+    });
+
+    const checkbox = screen.getByLabelText("Normalize colors to theme color");
+    // Locked while the seeded (already-normalized) markup is unchanged.
+    expect(checkbox).toBeDisabled();
+
+    // Paste a brand-new colored SVG: its colors are still present, so the user must be able to
+    // uncheck normalize to keep them.
+    type('<svg viewBox="0 0 24 24"><rect fill="#e00" x="1" y="1"/></svg>');
+    expect(checkbox).not.toBeDisabled();
+    fireEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+  });
+
+  it("re-locks to a consistent disabled+checked state when the edited colors are removed again", () => {
+    // The lock is content-driven: markup with no literal colors re-locks the toggle. Restoring a
+    // color-free SVG after unchecking must NOT leave the contradictory disabled+unchecked state the
+    // old text-divergence latch guarded against - effectiveNormalize forces it back to checked.
+    const initialSvg = '<svg viewBox="0 0 24 24"><path d="M0 0h1"/></svg>';
+    renderModal({ initialSvg, initialNormalize: true });
+
+    const checkbox = screen.getByLabelText("Normalize colors to theme color");
+    expect(checkbox).toBeDisabled();
+    expect(checkbox).toBeChecked();
+
+    // Paste a colored SVG: unlocks so the user can choose to keep the colors, then uncheck.
+    type('<svg viewBox="0 0 24 24"><rect fill="#e00" x="1" y="1"/></svg>');
+    expect(checkbox).not.toBeDisabled();
+    fireEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
+
+    // Restore the color-free seed: re-locks AND is forced back to checked, never left unchecked.
+    type(initialSvg);
+    expect(checkbox).toBeDisabled();
+    expect(checkbox).toBeChecked();
+  });
+
+  it("keeps the normalize lock through a geometry-only edit of an already-normalized icon", () => {
+    // Regression: the lock used to release on ANY text change, so tweaking geometry then unchecking
+    // stored normalize=false on all-currentColor content, which hides the block color control that
+    // currentColor still obeys. The content-driven lock keeps it locked (no literal colors) and Save
+    // forwards normalize=true.
+    const onInsert = vi.fn();
+    renderModal({
+      onInsert,
+      initialSvg: '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h1"/></svg>',
+      initialNormalize: true,
+    });
+
+    const checkbox = screen.getByLabelText("Normalize colors to theme color");
+    expect(checkbox).toBeDisabled();
+
+    // Geometry-only tweak: colors are still all currentColor, so the toggle stays locked on.
+    type('<svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h2"/></svg>');
+    expect(checkbox).toBeDisabled();
+    expect(checkbox).toBeChecked();
+
+    fireEvent.click(screen.getByText("Save").closest("button")!);
+    expect(onInsert).toHaveBeenCalledWith(expect.stringContaining("path"), 24, 24, true);
   });
 
   it("keeps the normalize checkbox editable when editing a non-normalized SVG", () => {
