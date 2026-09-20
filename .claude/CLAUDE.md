@@ -18,6 +18,9 @@ this is a wordpress plugin for icon called icon-indexa.
   main-{slug}-ba-assets-{codeName}.css and localizes under VAR_PREFIX. If they diverge the CSS
   404s (shipped as main-undefined-...) and the localized window var is undefined.
 
+## Coding
+- always prefer small reusable utils in separate file
+
 ## Testing
 - Test cases encode intentional decisions for features and bug fixes.
 - If a test fails after a feature is modified, DO NOT auto-update the test to match the new behavior.
@@ -26,6 +29,7 @@ this is a wordpress plugin for icon called icon-indexa.
 - target branch coverage (every if/else both ways), not just line coverage; aim for full path coverage on non-trivial logic (branches, loops, parsers, security/data paths)
 - add test on bug fix and feature add
 - add test case for everytime any function logic updates, all possible inputs/outputs
+
 
 ## APP
 - using wp-env docker wp app run on http://localhost:8888/wp-admin/admin.php?page=icon-indexa#/

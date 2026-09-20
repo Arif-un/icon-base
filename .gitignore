@@ -50,3 +50,4 @@ backend/data/*.db
 
 # ServBay per-project PHP pin (machine-specific, requires ServBay + PHP 8.4 installed)
 .servbay.config
+/.stryker-tmp

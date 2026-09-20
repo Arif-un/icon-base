@@ -132,6 +132,13 @@ Icon Indexa does not collect, store, or transmit any personal data. It makes no 
 
 == Changelog ==
 
+= 1.0.3 =
+
+* New: color-normalization toggle to keep an icon's original colors instead of forcing the theme color.
+* New: edit a custom SVG's markup directly from the block toolbar.
+* Security: added a server-side SVG output sanitizer (SVG-safe wp_kses allowlist plus remote-reference stripping) so stored icon markup cannot phone home or carry stored XSS on the frontend.
+* Note: for security, SMIL animation (animate/set/...), <image> elements, and remote references (external url()/href) are now stripped from custom SVGs. A previously saved icon that used any of these renders without them after this update.
+
 = 1.0.2 =
 
 * Fix broken asset URLs (404 CSS) and undefined localized config on WordPress.org production builds.

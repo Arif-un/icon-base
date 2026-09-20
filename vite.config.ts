@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     // Dev base must match the DEV_URL path the PHP side enqueues (Head.php), which is
-    // derived from PLUGIN_SLUG — not the on-disk folder name, since the dev bundle is
+    // derived from PLUGIN_SLUG - not the on-disk folder name, since the dev bundle is
     // served virtually by the Vite dev server, not from wp-content/plugins.
     base: isDevelopment ? `/wp-content/plugins/${PLUGIN_SLUG}/frontend/` : "",
     build: {
@@ -124,6 +124,7 @@ export default defineConfig(({ mode }) => {
       testTimeout: 10_000,
       coverage: {
         provider: "v8",
+        thresholds: { branches: 95, functions: 95, lines: 95, statements: 95 },
         include: ["frontend/src/**/*.{ts,tsx}"],
         exclude: [
           "**/*.d.ts",

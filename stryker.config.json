@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "command",
+  "commandRunner": {
+    "command": "pnpm exec vitest run -c ./vitest.stryker.config.ts"
+  },
+  "reporters": ["clear-text", "progress"],
+  "concurrency": 4,
+  "coverageAnalysis": "off",
+  "ignorePatterns": [
+    "assets",
+    "build",
+    "coverage",
+    "vendor",
+    "icon-indexa",
+    ".wp-env",
+    "node_modules",
+    ".stryker-tmp"
+  ],
+  "mutate": [
+    "frontend/src/blocks/icon/utils/**/*.ts",
+    "frontend/src/common/**/*.ts",
+    "!**/*.test.{ts,tsx}"
+  ]
+}

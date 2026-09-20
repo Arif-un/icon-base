@@ -33,7 +33,7 @@
     "prod": "vite build && vite build -c vite.config.blocks.ts",
     "prod:zip": "node bin/prod-zip.mjs",
     "release": "node scripts/release.mjs",
-    "release-ready": "pnpm run format:dry && pnpm run lint:check && pnpm run ts-check && vitest run --coverage -c ./vite.config.ts --coverage.thresholds.lines=95 --coverage.thresholds.functions=95 --coverage.thresholds.statements=95 --coverage.thresholds.branches=95 && pnpm run test:php",
+    "release-ready": "pnpm run format:dry && pnpm run lint:check && pnpm run ts-check && pnpm run test:ts && pnpm run test:php",
     "production": "composer install --no-dev && pnpm install && pnpm i18n && pnpm build",
     "reset": "pnpm clean && pnpm install",
     "storybook": "storybook dev -p 6006",
@@ -42,6 +42,7 @@
     "test:ts": "vitest run --coverage -c ./vite.config.ts",
     "test:php": "node scripts/test-php-coverage.mjs",
     "test:cover": "vitest run --coverage -c ./vite.config.ts && pnpm run test:php",
+    "test:mutation": "stryker run",
     "test:e2e": "playwright test",
     "test:watch": "vitest --watch=true --ui=false",
     "ts-check": "tsc",
@@ -111,6 +112,8 @@
     "@storybook/react": "^8.6.4",
     "@storybook/react-vite": "^8.6.4",
     "@storybook/test": "^8.6.4",
+    "@stryker-mutator/core": "^10.0.0",
+    "@stryker-mutator/vitest-runner": "^10.0.0",
     "@stylistic/eslint-plugin": "^2.13.0",
     "@stylistic/eslint-plugin-ts": "^2.13.0",
     "@tailwindcss/postcss": "^4.3.1",
@@ -158,11 +161,10 @@
     "eslint-plugin-unused-imports": "^4.1.4",
     "fs-extra": "^11.3.0",
     "globals": "^17.6.0",
-    "happy-dom": "^20.10.3",
-    "jsdom": "^29.1.1",
-    "lefthook": "^2.1.8",
     "happy-dom": "^20.8.9",
     "incstr": "^1.2.3",
+    "jsdom": "^29.1.1",
+    "lefthook": "^2.1.8",
     "msw": "^2.7.3",
     "oxfmt": "^0.52.0",
     "postcss": "^8.5.15",
@@ -176,6 +178,11 @@
     "typescript-plugin-css-modules": "^5.1.0",
     "vite": "^8.0.16",
     "vitest": "^5.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "jotai-babel>@babel/core": "7.29.7"
+    }
   },
   "engines": {
     "node": ">=24",
