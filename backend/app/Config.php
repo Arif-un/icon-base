@@ -33,7 +33,7 @@ class Config
     // self::VERSION, which is not bumped by scripts/release.mjs and has drifted from the header.
     public const ONBOARDING_VERSION = 1;
 
-    public const REQUIRED_PHP_VERSION = '7.4';
+    public const REQUIRED_PHP_VERSION = '8.0';
 
     public const REQUIRED_WP_VERSION = '5.0';
 

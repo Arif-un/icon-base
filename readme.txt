@@ -3,7 +3,7 @@ Contributors:      mrknuckles
 Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.9
 Tested up to:      7.1
-Requires PHP:      7.4
+Requires PHP:      8.0
 Stable tag:        1.0.2
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -61,7 +61,7 @@ Icon Indexa is open source and community driven. Contributions, bug reports, and
 = Requirements =
 
 * WordPress 5.0 or higher
-* PHP 7.4 or higher
+* PHP 8.0 or higher
 * The PHP SQLite (PDO) extension enabled
 
 == Frequently Asked Questions ==

@@ -199,11 +199,8 @@ final class SvgSanitizer
     /**
      * Shared local-#id-fragment allowlist for the two remote-ref strippers (stripRemoteUrls,
      * stripRemoteHrefs). The value is HTML-entity-decoded and left-trimmed first so an encoded scheme
-     * (&#104;ttps://) or leading whitespace can't slip past the '#' check. strncmp (not
-     * str_starts_with, which is PHP 8.0+): this runs on the public render path and the plugin declares
-     * Requires PHP 7.4 with a composer --no-dev build (no symfony/polyfill-php80), so str_starts_with
-     * would fatal. Kept as one method so the two security paths can't drift apart; mirrors the client
-     * keepLocalRef (fetchSvgContent.ts).
+     * (&#104;ttps://) or leading whitespace can't slip past the '#' check. Kept as one method so the
+     * two security paths can't drift apart; mirrors the client keepLocalRef (fetchSvgContent.ts).
      */
     private static function isLocalRef(string $value): bool
     {
