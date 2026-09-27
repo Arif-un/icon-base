@@ -32,7 +32,10 @@ export async function restRequest<T>(
   const path = qIndex === -1 ? endpoint : endpoint.slice(0, qIndex);
   const query = qIndex === -1 ? "" : endpoint.slice(qIndex + 1);
   const target = `${API_URL.base}/${path}`;
-  const url = new URL(query ? `${target}${API_URL.separator}${query}` : target, window.location.origin);
+  const url = new URL(
+    query ? `${target}${API_URL.separator}${query}` : target,
+    window.location.origin,
+  );
 
   const method = options.method ?? "GET";
 

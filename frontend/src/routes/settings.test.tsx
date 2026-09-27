@@ -62,7 +62,9 @@ describe("Settings route", () => {
   it("gives the toggle an accessible name for screen readers", () => {
     renderPage();
 
-    expect(screen.getByRole("switch", { name: "Show dedicated menu in sidebar" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("switch", { name: "Show dedicated menu in sidebar" }),
+    ).toBeInTheDocument();
   });
 
   it("toggles the setting off and notifies on success", async () => {
