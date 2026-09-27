@@ -4,7 +4,7 @@
  * Plugin Name:       Icon Indexa
  * Plugin URI:        https://github.com/Arif-un/icon-base
  * Description:       Add 4,500+ self-hosted SVG icons to WordPress with instant full-text search and a powerful Gutenberg icon block.
- * Version:           1.0.2
+ * Version:           1.1.0
  * Author:            David Knuckles
  * Author URI:        https://github.com/mrknuckles
  * Text Domain:       icon-indexa

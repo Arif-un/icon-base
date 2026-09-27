@@ -4,7 +4,7 @@ Tags:              icons, svg, icon library, gutenberg block, icon picker
 Requires at least: 5.9
 Tested up to:      7.1
 Requires PHP:      8.0
-Stable tag:        1.0.2
+Stable tag:        1.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,12 +132,18 @@ Icon Indexa does not collect, store, or transmit any personal data. It makes no 
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.1.0 =
 
-* New: color-normalization toggle to keep an icon's original colors instead of forcing the theme color.
-* New: edit a custom SVG's markup directly from the block toolbar.
-* Security: added a server-side SVG output sanitizer (SVG-safe wp_kses allowlist plus remote-reference stripping) so stored icon markup cannot phone home or carry stored XSS on the frontend.
-* Note: for security, SMIL animation (animate/set/...), <image> elements, and remote references (external url()/href) are now stripped from custom SVGs. A previously saved icon that used any of these renders without them after this update.
+* New: Guided onboarding with a welcome wizard, a replayable admin tour, and an in-editor guide for the Icon block.
+* New: Settings page with a toggle to show or hide the admin sidebar menu.
+* New: Custom SVG support: paste and edit an SVG's markup directly from the block toolbar.
+* New: Color-normalization toggle to keep an icon's original colors instead of forcing the theme color.
+* New: Stroke width help tooltip on the icon controls.
+* Improved: Icons now default to black.
+* Fix: Search pagination and REST requests on plain-permalink sites (missing results / 404s).
+* Security: Server-side SVG output sanitizer (SVG-safe wp_kses allowlist plus remote-reference stripping) so stored icon markup cannot phone home or carry stored XSS on the frontend.
+* Changed: Minimum required PHP is now 8.0.
+* Note: For security, SMIL animation (animate/set/...), <image> elements, and remote references (external url()/href) are stripped from custom SVGs. A previously saved icon using any of these renders without them after this update.
 
 = 1.0.2 =
 
