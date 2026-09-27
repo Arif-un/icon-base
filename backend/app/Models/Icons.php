@@ -140,14 +140,16 @@ class Icons
 
         usort($scored, static fn ($a, $b) => $b['_score'] <=> $a['_score']);
 
-        $candidates = \array_slice($scored, 0, 200);
-
-        $total = \count($candidates);
+        // Report and paginate the full ranked set. Do NOT cap it (here or with a LIMIT in ftsSearch):
+        // deriving `total` from a capped set makes the client pager (which gates page fetches on
+        // total / total_pages) hide every match past the cap, and disagrees with getPaginated()'s real
+        // COUNT(*). The set is naturally bounded by the shipped dataset size (see ftsSearch).
+        $total = \count($scored);
         $totalPages = (int) ceil($total / max($perPage, 1));
         $page = max(1, min($page, max(1, $totalPages)));
         $offset = ($page - 1) * $perPage;
 
-        $items = \array_slice($candidates, $offset, $perPage);
+        $items = \array_slice($scored, $offset, $perPage);
 
         foreach ($items as &$item) {
             unset($item['_score']);
@@ -229,11 +231,14 @@ class Icons
             $where = ' AND ' . implode(' AND ', $conditions);
         }
 
+        // No LIMIT: search() derives `total` from this set, so any cap silently hides matches past it
+        // (the old LIMIT 500 did). bm25 order is kept as the tiebreak for equal PHP scores.
+        // ponytail: every FTS hit is scored in PHP, bounded by the shipped dataset (~4.6k icons, the
+        // same order as FUZZY_FALLBACK_LIMIT); move scoring into SQL if ib.json grows ~10x.
         $sql = 'SELECT i.* FROM icons_fts
                 JOIN ' . self::TABLE . ' i ON i.id = icons_fts.rowid
                 WHERE icons_fts MATCH :fts_query' . $where . '
-                ORDER BY bm25(icons_fts, 2.0, 1.0)
-                LIMIT 500';
+                ORDER BY bm25(icons_fts, 2.0, 1.0)';
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':fts_query', $ftsQuery);

@@ -47,7 +47,18 @@ export default function IconRender({
     return () => controller.abort();
   }, [path, libraryDir, fileName]);
 
-  if (!svgContent) return null;
+  // Hold the icon's box while the svg loads (or after a failed fetch) so the grid cell doesn't
+  // grow when it arrives (layout shift).
+  if (!svgContent) {
+    return (
+      <span
+        data-testid="icon-render-placeholder"
+        aria-hidden="true"
+        className="inline-block rounded bg-slate-100"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
 
   return (
     <svg

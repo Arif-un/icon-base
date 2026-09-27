@@ -19,6 +19,11 @@ abstract class WordPressTestCase extends BaseTestCase
         // WordPress output-escaping (required for WP.org security compliance) under test.
         Monkey\Functions\stubEscapeFunctions();
 
+        // Pass-through stubs for the translate(-and-escape) helpers (__, esc_html__, esc_attr__, ...)
+        // so production code using WP i18n renders its literal English under test. Individual tests
+        // may still override these with Functions\when() for assertions on specific calls.
+        Monkey\Functions\stubTranslationFunctions();
+
         // Default no-op user stubs so any test reaching Config::getUserMeta() incidentally
         // (e.g. Head/BlockProvider localizing onboarding state) works without restating them.
         // Tests asserting user-specific behaviour override these with Functions\when() in their

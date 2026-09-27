@@ -85,6 +85,7 @@ class SQLiteDB
      */
     private function rebuildLocked(string $dbDir, string $dbPath): void
     {
+        // @pest-mutate-ignore
         $lockPath = $dbDir . DIRECTORY_SEPARATOR . '.rebuild.lock';
 
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen -- advisory lock file in the writable uploads dir, not a remote resource.
@@ -313,12 +314,17 @@ class SQLiteDB
             wp_mkdir_p($dir);
         }
 
+        // Guard/lock paths are kept out of mutation testing: a mutant that drops the dir operand
+        // leaves a bare relative name, so the run writes the file into its CWD (the plugin root),
+        // and a stray deny-all .htaccess there 403s every plugin asset, icons included.
+        // @pest-mutate-ignore
         $index = $dir . DIRECTORY_SEPARATOR . 'index.php';
 
         if (!file_exists($index)) {
             $this->writeGuardFile($index, "<?php\n// Silence is golden.\n");
         }
 
+        // @pest-mutate-ignore
         $htaccess = $dir . DIRECTORY_SEPARATOR . '.htaccess';
 
         if (!file_exists($htaccess)) {

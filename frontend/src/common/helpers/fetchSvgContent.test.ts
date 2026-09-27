@@ -437,4 +437,20 @@ describe("fetchSvgContent", () => {
     expect(result).toContain("path");
     expect(fetchFn).toHaveBeenCalledTimes(2);
   });
+
+  // force-cache served any stored response without revalidating: a 403 cached while the icons were
+  // briefly forbidden came back on every load (even a hard reload) after the server was fixed.
+  it("uses default http caching so a cached error response can't stick", async () => {
+    const fetchFn = vi.fn(() =>
+      Promise.resolve({ ok: true, text: () => Promise.resolve('<path d="M4 4"/>') } as Response),
+    );
+    vi.stubGlobal("fetch", fetchFn);
+    const controller = new AbortController();
+
+    await fetchSvgContent("https://root", "libD", "iconD", controller.signal);
+
+    const [, init] = fetchFn.mock.calls[0] as unknown as [string, RequestInit];
+    expect(init.signal).toBe(controller.signal);
+    expect(init.cache ?? "default").toBe("default");
+  });
 });

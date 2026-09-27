@@ -55,9 +55,9 @@ backend/data/*.db
 # Pest browser test failure screenshots
 tests/Browser/Screenshots/
 
-# Runtime guard files SQLiteDB writes into the data dir; they leak to the repo root
-# under wp-env (data dir == plugin dir there). Never commit: root .htaccess denies all
-# plugin asset access (403s), and .rebuild.lock is a runtime mutex.
+# SQLiteDB guard/lock files. Pest --mutate concat mutants used to write them into the
+# repo root (the test CWD); those paths are now @pest-mutate-ignore'd, this is a backstop.
+# Never commit: root .htaccess denies all plugin asset access (403s), .rebuild.lock is a mutex.
 /.rebuild.lock
 /.htaccess
 /index.php

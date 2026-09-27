@@ -143,10 +143,10 @@ export async function fetchSvgContent(
     return svgCache[path];
   }
 
-  const res = await fetch(`${rootUrl}/icons/${path}`, {
-    signal,
-    cache: "force-cache",
-  });
+  // Default HTTP caching, NOT force-cache: force-cache serves any stored response without
+  // revalidating, so an error cached once (a transient 403/500) came back on every load, even after
+  // a hard reload. The server's Last-Modified/ETag keep repeat loads cheap (cache hit or 304).
+  const res = await fetch(`${rootUrl}/icons/${path}`, { signal });
   // A non-2xx body (404/500 error page) survives sanitizeSvg as a non-empty string (DOMPurify keeps
   // stripped tags' text), which would be cached under `path` and defeat the caller's `!svgContent`
   // guard, rendering a permanently blank icon with no retry. Fail loud instead of caching garbage.

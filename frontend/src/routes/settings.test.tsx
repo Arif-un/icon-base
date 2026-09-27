@@ -59,6 +59,12 @@ describe("Settings route", () => {
     expect(screen.getByRole("switch")).toBeChecked();
   });
 
+  it("gives the toggle an accessible name for screen readers", () => {
+    renderPage();
+
+    expect(screen.getByRole("switch", { name: "Show dedicated menu in sidebar" })).toBeInTheDocument();
+  });
+
   it("toggles the setting off and notifies on success", async () => {
     const mutate = vi.fn((_vars, opts) => opts.onSuccess?.({ showSidebarMenu: false }));
     useUpdateSettingsMock.mockReturnValue({ mutate, isPending: false });

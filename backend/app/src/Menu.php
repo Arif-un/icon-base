@@ -53,7 +53,7 @@ final class Menu
             $menus['Settings'] = [
                 'type'       => 'submenu',
                 'parent'     => Config::SLUG,
-                'name'       => 'Settings',
+                'name'       => esc_html__('Settings', 'icon-indexa'),
                 'capability' => 'manage_options',
                 'slug'       => Config::SLUG . '#/settings',
             ];

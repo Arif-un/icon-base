@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { App, Button, Spin, Switch, notification } from "antd";
 
+import { __ } from "@/common/helpers/i18nWrap";
 import { useSettings, useUpdateSettings } from "@/common/hooks/useSettings";
 
 export const Route = createFileRoute("/settings")({
@@ -21,8 +22,8 @@ function SettingsPage() {
           const key = "settings-saved";
           notify.success({
             key,
-            title: "Setting saved",
-            description: "Reload the page for the sidebar menu to update.",
+            title: __("Setting saved"),
+            description: __("Reload the page for the sidebar menu to update."),
             duration: 0,
             actions: (
               <Button
@@ -31,36 +32,40 @@ function SettingsPage() {
                 size="small"
                 onClick={() => window.location.reload()}
               >
-                Reload
+                {__("Reload")}
               </Button>
             ),
           });
         },
         onError: () => {
-          message.error("Failed to save setting");
+          message.error(__("Failed to save setting"));
         },
       },
     );
   };
 
   if (isLoading) return <Spin className="m-10" />;
-  if (error || !settings) return <p className="m-10">Failed to load settings</p>;
+  if (error || !settings) return <p className="m-10">{__("Failed to load settings")}</p>;
+
+  const sidebarLabel = __("Show dedicated menu in sidebar");
 
   return (
     <div data-testid="settings-page" className="mx-10 my-6 max-w-2xl">
       {notifyContext}
-      <h2 className="mb-4 text-xl font-semibold">Settings</h2>
+      <h2 className="mb-4 text-xl font-semibold">{__("Settings")}</h2>
 
       <div className="flex items-start justify-between gap-4 rounded-md border border-solid border-gray-200 p-4">
         <div>
-          <p className="m-0 font-medium">Show dedicated menu in sidebar</p>
+          <p className="m-0 font-medium">{sidebarLabel}</p>
           <p className="m-0 mt-1 text-xs text-gray-500">
-            Adds an Icon Indexa item to the WordPress admin sidebar. Icon Indexa is always available
-            under Tools regardless of this setting. Menu updates on next page load.
+            {__(
+              "Adds an Icon Indexa item to the WordPress admin sidebar. Icon Indexa is always available under Tools regardless of this setting. Menu updates on next page load.",
+            )}
           </p>
         </div>
         <Switch
           data-testid="settings-sidebar-toggle"
+          aria-label={sidebarLabel}
           checked={settings.showSidebarMenu}
           loading={updateSettings.isPending}
           onChange={handleToggle}

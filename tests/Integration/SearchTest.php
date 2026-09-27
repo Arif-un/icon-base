@@ -114,4 +114,29 @@ describe('Icons::search', function () {
 
         expect($result['total'])->toBe(6);
     });
+
+    test('reports the true match count and keeps every page reachable past the old 200/500 caps', function () {
+        // Seed enough matches to exceed both removed caps: the 200-item slice in search() and the
+        // LIMIT 500 in ftsSearch(). Either one made total understate and hid results past the cap.
+        // total must now be the real match count and the last page must return its rows.
+        $extra = [];
+        for ($i = 1; $i <= 550; $i++) {
+            $extra[] = [
+                'name'       => 'arrow-' . $i,
+                'type_id'    => 1,
+                'tags'       => 'arrow,generated',
+                'library_id' => 1,
+                'filename'   => 'gen-arrow-' . $i,
+            ];
+        }
+        InMemoryDB::seedIcons($this->pdo, $extra);
+
+        // 550 generated + the 3 seeded arrow-* icons from beforeEach.
+        $result = Icons::search('arrow', 1, 100);
+        expect($result['total'])->toBe(553);
+        expect($result['total_pages'])->toBe(6);
+
+        $lastPage = Icons::search('arrow', 6, 100);
+        expect($lastPage['items'])->toHaveCount(53);
+    });
 });

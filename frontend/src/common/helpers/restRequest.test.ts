@@ -46,6 +46,43 @@ describe("restRequest", () => {
     expect(body.has("skip")).toBe(false);
   });
 
+  it("joins a query-string endpoint with API_URL.separator (pretty permalinks: '?')", async () => {
+    const fetchFn = mockFetch(() => ({ ok: true, status: 200, json: () => Promise.resolve({}) }));
+
+    await restRequest("icons?page=1&per_page=100");
+
+    const [url] = fetchFn.mock.calls[0] as unknown as [URL, RequestInit];
+    // Single "?" between path and params - not a double "?" that WP would misread as rest_route.
+    expect(url.toString()).toContain("/wp-json/IconIndexa/v1/icons?page=1&per_page=100");
+  });
+
+  it("joins with '&' when the base already carries a query (plain permalinks)", async () => {
+    vi.resetModules();
+    vi.doMock("@/config/config", () => ({
+      default: {
+        API_URL: { base: "https://example.test/?rest_route=/IconIndexa/v1", separator: "&" },
+        NONCE: "test-nonce",
+        REST_NONCE: "test-rest-nonce",
+      },
+    }));
+    // finally: a failed assertion must not leave the plain-permalink config mocked for later tests.
+    try {
+      const { restRequest: plainRestRequest } = await import("./restRequest");
+      const fetchFn = mockFetch(() => ({ ok: true, status: 200, json: () => Promise.resolve({}) }));
+
+      await plainRestRequest("icons?page=1&per_page=100");
+
+      const [url] = fetchFn.mock.calls[0] as unknown as [URL, RequestInit];
+      // rest_route stays intact and the icon params are appended with "&", so WP routes to /icons.
+      expect(url.searchParams.get("rest_route")).toBe("/IconIndexa/v1/icons");
+      expect(url.searchParams.get("page")).toBe("1");
+      expect(url.searchParams.get("per_page")).toBe("100");
+    } finally {
+      vi.doUnmock("@/config/config");
+      vi.resetModules();
+    }
+  });
+
   it("does not attach a body to a GET request", async () => {
     const fetchFn = mockFetch(() => ({ ok: true, status: 200, json: () => Promise.resolve({}) }));
 

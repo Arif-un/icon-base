@@ -22,7 +22,17 @@ export async function restRequest<T>(
   options: RestRequestOptions = {},
 ): Promise<T> {
   const { API_URL, NONCE, REST_NONCE } = config;
-  const url = new URL(`${API_URL.base}/${endpoint}`, window.location.origin);
+
+  // An endpoint may carry its own query string (e.g. "icons?page=1&per_page=100"). On sites with
+  // plain permalinks API_URL.base is already a query URL ("…/?rest_route=/IconIndexa/v1"), so the
+  // extra params must join with "&" - the backend hands us the right joiner in API_URL.separator
+  // ("?" for pretty permalinks, "&" for plain). A hard-coded "?" would produce a second "?" that WP
+  // reads as rest_route="/IconIndexa/v1/icons?page=1" -> rest_no_route (404), breaking the grid.
+  const qIndex = endpoint.indexOf("?");
+  const path = qIndex === -1 ? endpoint : endpoint.slice(0, qIndex);
+  const query = qIndex === -1 ? "" : endpoint.slice(qIndex + 1);
+  const target = `${API_URL.base}/${path}`;
+  const url = new URL(query ? `${target}${API_URL.separator}${query}` : target, window.location.origin);
 
   const method = options.method ?? "GET";
 
